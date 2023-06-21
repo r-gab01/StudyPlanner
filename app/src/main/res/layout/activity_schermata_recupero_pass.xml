@@ -90,6 +90,7 @@
             android:hint="@string/risposta"
             android:textSize="18dp"
             android:paddingLeft="15dp"
+            android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@+id/titleDomandaSicurezza" />
 
         <TextView

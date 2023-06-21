@@ -32,7 +32,7 @@
         android:gravity="center_vertical"
         android:hint="@string/nomeUtente"
         android:outlineProvider="none"
-        android:textSize="23dp"
+        android:textSize="21dp"
         android:textStyle="bold"
         android:fontFamily="@font/montserrat_medium"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +52,7 @@
         android:fontFamily="@font/montserrat_medium"
         android:gravity="center_vertical"
         android:hint="@string/Password"
-        android:textSize="23dp"
+        android:textSize="21dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/EditTextNomeUtente"
         app:layout_constraintTop_toBottomOf="@id/EditTextNomeUtente" />
