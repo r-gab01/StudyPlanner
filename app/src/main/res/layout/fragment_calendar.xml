@@ -7,20 +7,20 @@
     tools:context=".CalendarFragment">
 
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="wrap_content"
         android:layout_height="320dp"
+        android:background="@drawable/border_element"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_calendar_fragment"
-        app:layout_constraintVertical_bias="0.06999999"
-        android:background="@drawable/border_element">
+        app:layout_constraintVertical_bias="0.06999999">
 
         <CalendarView
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent" />
     </FrameLayout>
 
     <TextView
@@ -32,8 +32,7 @@
         android:text="@string/title_calendar_fragment"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -47,5 +46,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent" />
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/frameLayout"
+        app:layout_constraintStart_toStartOf="@id/frameLayout"
+        app:layout_constraintTop_toBottomOf="@id/frameLayout"
+        android:background="@drawable/border_element">
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </androidx.fragment.app.FragmentContainerView>
+    </FrameLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

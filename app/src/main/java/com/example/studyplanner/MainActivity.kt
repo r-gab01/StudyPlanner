@@ -22,18 +22,7 @@ class MainActivity : AppCompatActivity() {
         transaction.add(R.id.fragmentContainerView, CalendarFragment())
         transaction.commit()
 
-        binding.calendarButton.setOnClickListener {
 
-        }
-        binding.examsButton.setOnClickListener {
-
-        }
-        binding.statsButton.setOnClickListener {
-
-        }
-        binding.profileButton.setOnClickListener {
-
-        }
     }
 
 

@@ -18,60 +18,16 @@
             android:layout_height="match_parent"
             android:padding="8dp">
         </androidx.fragment.app.FragmentContainerView>
-
     </LinearLayout>
 
-    <LinearLayout
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_bar"
+        android:layout_gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="#A6C9E6"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_height="wrap_content"
+        app:menu="@menu/main_menu">
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-        <!-- Primo pulsante -->
-
-
-        <ImageView
-            android:id="@+id/calendar_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/baseline_calendar_month_24" />
-
-        <!-- Secondo pulsante -->
-        <ImageView
-            android:id="@+id/exams_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/baseline_library_books_24" />
-
-        <!-- Terzo pulsante -->
-        <ImageView
-            android:id="@+id/stats_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/baseline_bar_chart_24" />
-
-        <!-- Quarto pulsante -->
-        <ImageView
-            android:id="@+id/profile_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/baseline_person_24" />
-
-
-    </LinearLayout>
 </LinearLayout>
 
 
