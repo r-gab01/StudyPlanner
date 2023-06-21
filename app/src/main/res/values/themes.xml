@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.StudyPlanner" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#A6C9E6</item>
-        <item name="colorPrimaryVariant">#6CB4F1</item>
+        <item name="colorPrimary">#008BFF</item>
+        <item name="colorPrimaryVariant">#004783</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#6CB4F1</item>

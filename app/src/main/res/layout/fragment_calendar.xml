@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@id/frameLayout"
         android:background="@drawable/border_element">
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment_container_calendar"
+            android:id="@+id/fragment_container_CalendarEvent"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </androidx.fragment.app.FragmentContainerView>

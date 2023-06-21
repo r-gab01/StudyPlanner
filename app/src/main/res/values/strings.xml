@@ -2,4 +2,7 @@
     <string name="app_name">StudyPlanner</string>
 
     <string name="title_calendar_fragment">CALENDARIO DIDATTICO</string>
+
+
+    <string name="tagArgumentsEventFragment">Data</string>
 </resources>
