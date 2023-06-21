@@ -10,4 +10,10 @@
     <string name="textNonAncoraReg">Non sei ancora registrato?</string>
     <string name="textRegistrazione">Registrati subito!</string>
     <string name="nomeApp">Study Planner</string>
+    <string name="title_recupera_pass">RECUPERO PASSWORD</string>
+    <string name="subtitle_recupera_pass">In questo modo puoi dimostrare di essere il proprietario di questo account</string>
+    <string name="title_domanda">Rispondi alla tua domanda di sicurezza</string>
+    <string name="risposta">Inserisci la risposta</string>
+    <string name="button_conferma">CONFERMA</string>
+
 </resources>

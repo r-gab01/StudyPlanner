@@ -93,7 +93,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tastoLogin"
-        android:textStyle="bold"
         android:fontFamily="@font/montserrat_medium"
         android:backgroundTint="#4CAF50"
         android:layout_marginTop="30dp"
@@ -119,7 +118,7 @@
     <TextView
         android:id="@+id/textRegistrazione"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:text="@string/textRegistrazione"
         android:layout_marginTop="5dp"
         android:textSize="18dp"
@@ -133,7 +132,7 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:text="@string/nomeApp"
         android:textSize="23dp"
