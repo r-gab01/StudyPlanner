@@ -2,14 +2,29 @@
     <string name="app_name">StudyPlanner</string>
 
     <string name="title_calendar_fragment">CALENDARIO DIDATTICO</string>
+    <string name="nomeUtente">  | Inserisci Nome Utente</string>
+    <string name="Password">  | Inserisci Password</string>
+    <string name="testoCheckBoxRicordami">Ricordami</string>
+    <string name="testoPassDim"> Hai dimenticato la password?</string>
+    <string name="tastoLogin">Login</string>
+    <string name="textNonAncoraReg">Non sei ancora registrato?</string>
+    <string name="textRegistrazione">Registrati subito!</string>
+    <string name="nomeApp">Study Planner</string>
+    <string name="title_recupera_pass">RECUPERO PASSWORD</string>
+    <string name="subtitle_recupera_pass">In questo modo puoi dimostrare di essere il proprietario di questo account</string>
+    <string name="title_domanda">Rispondi alla tua domanda di sicurezza</string>
+    <string name="risposta">Inserisci la risposta</string>
+    <string name="button_conferma">CONFERMA</string>
+    <string name="title_registrazione">REGISTRA ACCOUNT</string>
+    <string name="compilaCampi">Compila i seguenti campi per creare il tuo account personale</string>
+    <string name="Username">Nome Utente</string>
+    <string name="newPass">Password</string>
+    <string name="confNewPass">Conferma Password</string>
+    <string name="University">Università/Scuola</string>
+    <string name="corso">Corso/Classe</string>
+    <string name="scegliDomSic">Scegli una domanda di sicurezza</string>
+    <string name="CreateAcc">CREA ACCOUNT</string>
 
 
-    <string name="tagArgumentsEventFragment">Data</string>
 
-    <string name="title_exams_fragment">I MIEI ESAMI ED ESERCIZI</string>
-    <string name="description_exams_fragment">Elenco di tutti i miei esami e compiti da svolgere</string>
-
-    <string name="title_study_fragment">SESSIONE DI STUDIO</string>
-    <string name="description_study_fragment">Qui puoi tenere traccia del tempo trascorso nello studio tramite la funzionalità timer.</string>
-    <string name="description_study_fragment2">Alla fine della giornata registra le pagine studiate.</string>
 </resources>
