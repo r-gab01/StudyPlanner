@@ -3,9 +3,9 @@ package com.example.studyplanner
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class SchermataRegistrazione : AppCompatActivity() {
+class AddExamActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_schermata_registrazione)
+        setContentView(R.layout.activity_add_exam)
     }
 }

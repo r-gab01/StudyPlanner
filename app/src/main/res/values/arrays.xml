@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_items">
+        <item>Seleziona una domanda di sicurezza</item>
+        <item>Primo lavoro svolto</item>
+        <item>Quale è il cognome da nubile di tua madre</item>
+        <item>Quale film non ti stancheresti mai di vedere</item>
+        <item>Quale è il nome del tuo animale domestico</item>
+        <item>Città preferita</item>
+    </string-array>
+</resources>

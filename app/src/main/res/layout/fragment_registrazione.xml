@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".SchermataRegistrazione">
+    android:layout_height="match_parent"
+    tools:context=".RegistrazioneFragment">
 
     <TextView
         android:id="@+id/titleRegistrazione"
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="@string/title_registrazione"
         android:textSize="30dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="15dp"
         android:fontFamily="@font/montserrat_medium"
         android:textColor="@color/black"
         android:layout_marginTop="35dp"
@@ -22,18 +22,19 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@drawable/edit_text_border"
         android:orientation="vertical"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:paddingBottom="15dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
         app:layout_constraintTop_toBottomOf="@+id/titleRegistrazione" >
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_medium"
@@ -48,11 +49,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text=""
-             />
+            />
         <!-- Qua metteremo eventuali errori per campi non compilati o compilati non correttamente -->
 
 
         <EditText
+            android:id="@+id/insUtente"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
@@ -64,6 +66,7 @@
             android:textSize="18dp" />
 
         <EditText
+            android:id="@+id/insPass"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
@@ -75,6 +78,7 @@
             android:textSize="18dp" />
 
         <EditText
+            android:id="@+id/ConfPass"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
@@ -111,19 +115,21 @@
             android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/textSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:background="@drawable/edit_text_border"
                 android:hint="@string/scegliDomSic"
                 android:paddingLeft="10dp"
-                android:paddingRight="40dp"
-                android:textSize="18dp" />
+                android:paddingRight="35dp"
+                android:editable="false"
+                android:textSize="13.5dp"
+                tools:ignore="Deprecated" />
 
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="13dp"
                 android:contentDescription="seleziona la domanda di sicurezza"
                 android:textColor="@color/black" />
 

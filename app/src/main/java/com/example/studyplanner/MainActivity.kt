@@ -1,12 +1,13 @@
 package com.example.studyplanner
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.studyplanner.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private var loggedIn: Boolean = true            //variabile che mi permette di verificare se l'utente è loggato o meno
+    private var loggedIn: Boolean = false         //variabile che mi permette di verificare se l'utente è loggato o meno
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun login(){
-
+        val i= Intent(this, LoginActivity:: class.java)
+        startActivity(i)
     }
 }

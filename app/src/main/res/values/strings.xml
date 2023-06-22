@@ -24,7 +24,8 @@
     <string name="corso">Corso/Classe</string>
     <string name="scegliDomSic">Scegli una domanda di sicurezza</string>
     <string name="CreateAcc">CREA ACCOUNT</string>
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
