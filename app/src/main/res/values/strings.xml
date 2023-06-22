@@ -5,4 +5,7 @@
 
 
     <string name="tagArgumentsEventFragment">Data</string>
+
+    <string name="title_exams_fragment">I MIEI ESAMI ED ESERCIZI</string>
+    <string name="description_exams_fragment">Elenco di tutti i miei esami e compiti da svolgere</string>
 </resources>

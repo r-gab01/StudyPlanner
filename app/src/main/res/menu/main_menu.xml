@@ -19,6 +19,12 @@
         android:icon="@drawable/baseline_bar_chart_24"
         android:title="Statistiche"/>
     <item
+        android:id="@+id/studio_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/baseline_watch_later_24"
+        android:title="Studio"/>
+    <item
         android:id="@+id/profile_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
