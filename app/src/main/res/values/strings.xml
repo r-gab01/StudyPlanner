@@ -8,4 +8,8 @@
 
     <string name="title_exams_fragment">I MIEI ESAMI ED ESERCIZI</string>
     <string name="description_exams_fragment">Elenco di tutti i miei esami e compiti da svolgere</string>
+
+    <string name="title_study_fragment">SESSIONE DI STUDIO</string>
+    <string name="description_study_fragment">Qui puoi tenere traccia del tempo trascorso nello studio tramite la funzionalità timer.</string>
+    <string name="description_study_fragment2">Alla fine della giornata registra le pagine studiate.</string>
 </resources>
