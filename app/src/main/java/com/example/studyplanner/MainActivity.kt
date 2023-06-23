@@ -57,9 +57,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.studio_button ->{
                     val fragmentManager = supportFragmentManager
                     val transaction = fragmentManager.beginTransaction()
-                    val studioTag = "studioFragment"
-                    if (!fragmentExist(studioTag)) {  //verifico se già il fragment è stato aperto tramite questa funzione definita sotto
-                        transaction.replace(R.id.fragmentContainerView, CalendarFragment(), studioTag)
+                    val studyTag = "studioFragment"
+                    if (!fragmentExist(studyTag)) {  //verifico se già il fragment è stato aperto tramite questa funzione definita sotto
+                        transaction.replace(R.id.fragmentContainerView, StudyFragment(), studyTag)
                         transaction.commit()
                     }
                     true
