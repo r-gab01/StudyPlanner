@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                     val fragmentManager = supportFragmentManager
                     val transaction = fragmentManager.beginTransaction()
                     val statsTag = "StatsFragment"
-                    if (!fragmentExist(calendarTag)) {  //verifico se già il fragment è stato aperto tramite questa funzione definita sotto
+                    if (!fragmentExist(statsTag)) {  //verifico se già il fragment è stato aperto tramite questa funzione definita sotto
                         transaction.replace(R.id.fragmentContainerView, StatFragment(), statsTag)
                         transaction.commit()
                     }

@@ -1,17 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".StatFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/title_stat_fragment"
-        android:textSize="20sp"
+        android:id="@+id/title_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
         android:fontFamily="@font/montserrat_medium"
+        android:text="@string/title_stat_fragment"
+        android:textSize="24sp"
         android:textColor="@color/black"/>
 
-</ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_border"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textEsamiSuperati"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:text="@string/title_esami_superati"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/numEsamiSuperati"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/montserrat_light"
+            android:paddingLeft="15dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textCompitiSvolti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_compiti_svolti"
+            android:textSize="20sp"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/black"
+            android:paddingLeft="15dp"/>
+
+        <TextView
+            android:id="@+id/numCompitiSvolti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="18sp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/montserrat_light"
+            android:textColor="@color/black"
+            android:paddingLeft="15dp"/>
+
+        <TextView
+            android:id="@+id/mediaAritmetica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_media_aritmetica"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:paddingLeft="15dp"/>
+
+        <TextView
+            android:id="@+id/numMediaAritmetica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="18sp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/montserrat_light"
+            android:textColor="@color/black"
+            android:paddingLeft="15dp"/>
+
+        <TextView
+            android:id="@+id/mediaPonderata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_media_ponderata"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:paddingLeft="15dp"/>
+
+        <TextView
+            android:id="@+id/numMediaPonderata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="18sp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/montserrat_light"
+            android:textColor="@color/black"
+            android:paddingLeft="15dp"/>
+
+        <TextView
+            android:id="@+id/mediaPagineStudiate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_media_pagine_studiate"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:paddingLeft="15dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                android:id="@+id/numMediaPagineStudiateAlGiorno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="18sp"
+                android:fontFamily="@font/montserrat_light"
+                android:textColor="@color/black"
+                android:paddingLeft="15dp"/>
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pagine_al_giorno"
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_light"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingLeft="15dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/numMediaPagineStudiateAlOra"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="18sp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:textColor="@color/black"
+                    android:paddingLeft="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pagine_all_ora"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_light"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:paddingLeft="15dp"
+                    android:paddingBottom="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
