@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import com.example.studyplanner.databinding.FragmentLoginBinding
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(){
 
     private lateinit var binding : FragmentLoginBinding
     private lateinit var sharedPreferences: SharedPreferences
@@ -52,8 +52,10 @@ class LoginFragment : Fragment() {
             if(rememberMeCheckBox.isChecked){ //Solo se la check box è stata checkata
                 saveLoginData()
             }else {
-                val i = Intent(requireContext(), MainActivity::class.java)
-                startActivity(i)
+                //val i = Intent(requireContext(), MainActivity::class.java)
+                //startActivity(i)
+                // Termino l'Activity corrente e ritorna alla MainActivity
+                requireActivity().finish()
             }
         }
 
@@ -64,11 +66,13 @@ class LoginFragment : Fragment() {
         //Recuperiamo i dati scritti dall'utente in fase di Login
         val nomeUtente= binding.EditTextNomeUtente.text.toString()
         val password= binding.EditTextPassword.text.toString()
+        val isLoggedIn= binding.checkBox.isChecked
 
         sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString("Nome Utente", nomeUtente)
         editor.putString("password", password)
+        editor.putBoolean("isLoggedIn", isLoggedIn)
         editor.apply()
     }
 
