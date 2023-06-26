@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">StudyPlanner</string>
 
+    <!-- SALVATORE -->
     <string name="title_calendar_fragment">CALENDARIO DIDATTICO</string>
     <string name="nomeUtente">  | Inserisci Nome Utente</string>
     <string name="Password">  | Inserisci Password</string>
@@ -15,6 +16,7 @@
     <string name="title_domanda">Rispondi alla tua domanda di sicurezza</string>
     <string name="risposta">Inserisci la risposta</string>
     <string name="button_conferma">CONFERMA</string>
+
     <string name="title_registrazione">REGISTRA ACCOUNT</string>
     <string name="compilaCampi">Compila i seguenti campi per creare il tuo account personale</string>
     <string name="Username">Nome Utente</string>
@@ -24,6 +26,7 @@
     <string name="corso">Corso/Classe</string>
     <string name="scegliDomSic">Scegli una domanda di sicurezza</string>
     <string name="CreateAcc">CREA ACCOUNT</string>
+
     <string name="AddExam">Aggiungi</string>
     <string name="Type">Tipo</string>
     <string name="Name">Nome</string>
@@ -37,9 +40,18 @@
     <string name="InsertPage">Inserisci le pagine totali del libro</string>
     <string name="Arguments">Argomenti</string>
 
+    <!-- MICHELE -->
+    <string name="title_stat_fragment">STATISTICHE</string>
+    <string name="title_esami_superati">ESAMI SUPERATI</string>
+    <string name="title_compiti_svolti">COMPITI SVOLTI</string>
+    <string name="title_media_aritmetica">MEDIA ARITMETICA</string>
+    <string name="title_media_ponderata">MEDIA PONDERATA</string>
+    <string name="title_media_pagine_studiate">MEDIA PAGINE STUDIATE</string>
+    <string name="pagine_al_giorno">Al Giorno</string>
+    <string name="pagine_all_ora"> All Ora</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- MICHELE -->
     <string name="tagArgumentsEventFragment">Data</string>
 
     <string name="title_exams_fragment">I MIEI ESAMI ED ESERCIZI</string>
