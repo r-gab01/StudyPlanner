@@ -49,4 +49,14 @@
     <string name="description_study_fragment">Qui puoi tenere traccia del tempo trascorso nello studio tramite la funzionalità timer.</string>
     <string name="description_study_fragment2">Alla fine della giornata registra le pagine studiate.</string>
 
+    <string name="titleTimer">Timer Studio</string>
+    <string name="TerminaSessioneButton">TERMINA SESSIONE</string>
+
+
+    <string name="title_session_fragment">Inserisci quante pagine hai studiato oggi.</string>
+    <string name="description_session_fragment">L\'app provvederà ad aggiornare le statistiche e le previsioni.</string>
+    <string name="buttonConfirm">CONFERMA</string>
+    <string name="buttonAggiungi">AGGIUNGI</string>
+
+
 </resources>

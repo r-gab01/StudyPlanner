@@ -104,7 +104,7 @@ class AddExamActivity : AppCompatActivity() {
                 layout.addView(deleteButton)
 
                 container.addView(layout)
-                elementList.add(layout)
+             //   elementList.add(layout)
 
             }
         }
