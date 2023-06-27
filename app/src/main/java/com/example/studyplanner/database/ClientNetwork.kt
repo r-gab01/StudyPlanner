@@ -23,6 +23,30 @@ object ClientNetwork {
 
     val apiService = retrofit.create(UserAPI::class.java)
 
+    fun selectValue(query: String, callback: (JsonObject?, Throwable?) -> Unit) {
+        apiService.select(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()?.getAsJsonArray("queryset")
+                    if (res != null && res.size() > 0) {
+                        val result = res.get(0).asJsonObject
+                        callback(result, null)
+                    } else {
+                        callback(null, null) // Nessun risultato trovato
+                    }
+                } else {
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(null, error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "error")
+            }
+        })
+    }
+
+
+    /*
     fun select(query: String) {
         apiService.select(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -40,6 +64,8 @@ object ClientNetwork {
             }
         })
     }
+
+     */
 
 
 }

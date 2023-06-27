@@ -4,19 +4,18 @@ import com.google.gson.JsonArray
 
 class MyJsonArray() {
     companion object {
-        private lateinit var array: JsonArray
+        private var array: JsonArray? = null
         private var count: Int = 0
 
-        fun set(d: JsonArray, c: Int) {
+        fun set(d: JsonArray?) {
             array = d
-            count = c
         }
-        fun getBody(): JsonArray {
+        fun getBody(): JsonArray? {
             return array
         }
 
         fun getSize(): Int {
-            return count
+            return array?.size() ?: -1
         }
     }
 }
