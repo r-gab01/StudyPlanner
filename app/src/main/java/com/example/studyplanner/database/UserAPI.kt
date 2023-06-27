@@ -1,21 +1,34 @@
 package com.example.studyplanner.database
 
+import com.example.studyplanner.model.StudentModel
+
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
+
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 interface UserAPI {
 
+
     @POST("postSelect/")
     @FormUrlEncoded
-    fun login(@Field("query") query: String): Call<JsonObject>
+    fun select(@Field("query") query: String): Call<JsonObject>
 
     @POST("postUpdate/")
     @FormUrlEncoded
-    fun modifica(@Field("query") query: String): Call <JsonObject>
+    fun update(@Field("query") query: String): Call<JsonObject>
+
+    @POST("postRemove/")
+    @FormUrlEncoded
+    fun remove(@Field("query") query: String): Call<JsonObject>
+
+    @POST("postInsert/")
+    @FormUrlEncoded
+    fun unsert(@Field("query") query: String): Call<JsonObject>
 
     @GET
-    fun getAvatar(@Url url: String) : Call <ResponseBody>
+    fun image(@Url url: String): Call<ResponseBody>
 
 }
