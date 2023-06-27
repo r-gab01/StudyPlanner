@@ -55,7 +55,7 @@ class LoginFragment : Fragment(){
             val nomeInserito = binding.EditTextNomeUtente.text.toString()
             val pwInserita = binding.EditTextPassword.text.toString()
             val loginDone = BoundaryDBMS.login(nomeInserito, pwInserita)        //Metodo che verifica se i dati sono presenti nel DB
-            /*
+
             if(rememberMeCheckBox.isChecked){ //Solo se la check box è stata checkata
                 saveLoginData()
             }
@@ -64,7 +64,6 @@ class LoginFragment : Fragment(){
                 requireActivity().finish()
             }else
                 Log.e("LOGIN", "Dati errati")
-             */
         }
 
 
@@ -90,10 +89,7 @@ class LoginFragment : Fragment(){
 
     private fun fragmentExists(manager: FragmentManager, tag: String ): Boolean {
         val fragment= manager.findFragmentByTag(tag)
-        if (fragment == null)
-            return false
-        else
-            return true
+        return fragment != null
 
     }
 }
