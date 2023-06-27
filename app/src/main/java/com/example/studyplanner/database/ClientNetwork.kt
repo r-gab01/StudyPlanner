@@ -1,6 +1,7 @@
 package com.example.studyplanner.database
 
 import android.util.Log
+import com.example.studyplanner.model.MyJsonArray
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
@@ -22,16 +23,15 @@ object ClientNetwork {
 
     val apiService = retrofit.create(UserAPI::class.java)
 
-    fun select(query: String) : JsonArray {
-        var jsonResponse = JsonArray()
+    fun select(query: String) {
         apiService.select(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
-                    Log.d("SELECT", response.body()?.get("queryset").toString())
-                    jsonResponse = response.body()?.get("queryset") as JsonArray
-
-                } else {
-                    Log.e("DB","Errore nella risposta: ${response.code()}")
+                    val response = response.body()?.getAsJsonArray("queryset")
+                    if (response != null){
+                        MyJsonArray.set(response, response.size())
+                        Log.d("SELECT", response?.get(0).toString())
+                    }
                 }
             }
 
@@ -39,7 +39,6 @@ object ClientNetwork {
                 Log.e("DB","Errore nella chiamata: ${t.message}")
             }
         })
-        return jsonResponse
     }
 
 
