@@ -127,7 +127,7 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="35dp"
                 android:editable="false"
-                android:textSize="13.5dp"
+                android:textSize="13.5sp"
                 tools:ignore="Deprecated" />
 
             <Spinner

@@ -40,6 +40,13 @@
     <string name="InsertPage">Inserisci le pagine totali del libro</string>
     <string name="Arguments">Argomenti</string>
 
+    <string name="titleProfile">PROFILO</string>
+    <string name="descriptionProfile">Visualizza in questa schermata le informazioni relative al tuo Profilo. L&#39;app ti permetterà, se necessario di modificarle. </string>
+    <string name="cognome">Cognome</string>
+    <string name="universita">Università</string>
+    <string name="corso_studi">Corso di studi</string>
+    <string name="button_logout">LOGOUT</string>
+
     <!-- MICHELE -->
     <string name="title_stat_fragment">STATISTICHE</string>
     <string name="title_esami_superati">ESAMI SUPERATI</string>
@@ -69,6 +76,8 @@
     <string name="description_session_fragment">L\'app provvederà ad aggiornare le statistiche e le previsioni.</string>
     <string name="buttonConfirm">CONFERMA</string>
     <string name="buttonAggiungi">AGGIUNGI</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
