@@ -48,6 +48,20 @@
     <string name="universita">Università</string>
     <string name="corso_studi">Corso di studi</string>
     <string name="button_logout">LOGOUT</string>
+    <string name="Account">Account</string>
+    <string name="textPass">Password</string>
+    <string name="modCredenziali">Modifica Credenziali</string>
+    <string name="titleRoutine">Routine di studio</string>
+    <string name="Monday">Lun</string>
+    <string name="Tuesday">Mar</string>
+    <string name="Wednesday">Mer</string>
+    <string name="Thursday">Gio</string>
+    <string name="Friday">Ven</string>
+    <string name="Saturday">Sab</string>
+    <string name="Sunday">Dom</string>
+    <string name="oraripStudio">8-13</string>
+    <string name="oraripStudio2">15-18</string>
+
 
     <!-- MICHELE -->
     <string name="title_stat_fragment">STATISTICHE</string>
@@ -80,6 +94,5 @@
     <string name="buttonAggiungi">AGGIUNGI</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
 </resources>
