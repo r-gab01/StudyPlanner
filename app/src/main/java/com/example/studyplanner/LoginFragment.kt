@@ -50,35 +50,41 @@ class LoginFragment : Fragment(){
         var tastoLogin= binding.buttonLogin
         var rememberMeCheckBox= binding.checkBox
 
-        tastoLogin.setOnClickListener{
-
-            //QUERY AL DB PER VERIFICARE CREDENZIALI
-            val nomeInserito = binding.EditTextNomeUtente.text.toString()
-            val pwInserita = binding.EditTextPassword.text.toString()
-            val query = "select * from autenticazione where nome_u_ref = '${nomeInserito}' and password = '${pwInserita}';"
-            ClientNetwork.selectValue(query) { result, error ->
-                if (error != null) {
-                    // Gestisci l'errore
-                    Log.e("DB", "Errore nella chiamata: ${error.message}")
-                } else {
-                    // Utilizza il JsonObject risultante
-                    if (result != null) {
-                        // Esegui le operazioni necessarie con il result
-                        if(rememberMeCheckBox.isChecked){ //Solo se la check box è stata checkata
-                            saveLoginData()
-                        }
-                        SharedData.nomeUtente = nomeInserito
-                        SharedData.password = pwInserita
-                        SharedData.correctLogin = true
-                        Log.d("LOGIN", SharedData.nomeUtente)
-                        Log.d("LOGIN", SharedData.password)
-                        requireActivity().finish()
-
+        tastoLogin.setOnClickListener {
+            val nomeInserito = binding.EditTextNomeUtente.text.toString().trim()
+            val pwInserita = binding.EditTextPassword.text.toString().trim()
+            if (nomeInserito.isEmpty())
+                binding.EditTextNomeUtente.setBackgroundResource(R.drawable.error_border_element)
+            if (pwInserita.isEmpty())
+                binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
+            else {
+                //QUERY AL DB PER VERIFICARE CREDENZIALI
+                val query =
+                    "select * from autenticazione where nome_u_ref = '${nomeInserito}' and password = '${pwInserita}';"
+                ClientNetwork.selectValue(query) { result, error ->
+                    if (error != null) {
+                        // Gestisci l'errore
+                        Log.e("DB", "Errore nella chiamata: ${error.message}")
                     } else {
-                        // Nessun result restituito
-                        Log.e("BOUNDARYDB", "Dati Errati")
-                        binding.EditTextNomeUtente.setBackgroundResource(R.drawable.error_border_element)
-                        binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
+                        // Utilizza il JsonObject risultante
+                        if (result != null) {
+                            // Esegui le operazioni necessarie con il result
+                            if (rememberMeCheckBox.isChecked) { //Solo se la check box è stata checkata
+                                saveLoginData()
+                            }
+                            SharedData.nomeUtente = nomeInserito
+                            SharedData.password = pwInserita
+                            SharedData.correctLogin = true
+                            Log.d("LOGIN", SharedData.nomeUtente)
+                            Log.d("LOGIN", SharedData.password)
+                            requireActivity().finish()
+
+                        } else {
+                            // Nessun result restituito
+                            Log.e("BOUNDARYDB", "Dati Errati")
+                            binding.EditTextNomeUtente.setBackgroundResource(R.drawable.error_border_element)
+                            binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
+                        }
                     }
                 }
             }

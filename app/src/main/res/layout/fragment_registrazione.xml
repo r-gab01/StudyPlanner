@@ -26,7 +26,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="510dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/edit_text_border"
         android:orientation="vertical"
@@ -102,40 +102,60 @@
             android:textColor="@color/black"
             android:textSize="18dp" />
 
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:background="@drawable/edit_text_border"
-            android:hint="@string/corso"
-            android:paddingLeft="15dp"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_border"
+                android:hint="@string/corso"
+                android:paddingLeft="15dp"
+                android:textColor="@color/black"
+                tools:ignore="Deprecated"
+                android:editable="false"
+                android:textSize="18dp" />
+
+            <Spinner
+                android:id="@+id/spinnerCorso"
+                android:layout_weight="0"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="seleziona la domanda di sicurezza"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/textSpinner"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/edit_text_border"
                 android:hint="@string/scegliDomSic"
-                android:paddingLeft="10dp"
-                android:paddingRight="35dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp"
                 android:editable="false"
-                android:textSize="13.5sp"
-                tools:ignore="Deprecated" />
+                android:textSize="16dp"
+                tools:ignore="Deprecated"
+                android:layout_weight="1"/>
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/spinnerDomanda"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:contentDescription="seleziona la domanda di sicurezza"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:layout_weight="0"/>
 
         </LinearLayout>
 
