@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileFragment"
     android:orientation="vertical"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
+    android:layout_marginLeft="6dp"
+    android:layout_marginRight="6dp"
     android:layout_marginTop="35dp">
 
 <TextView
@@ -19,6 +20,18 @@
     android:textColor="@color/black"
     android:layout_marginLeft="10dp" />
 
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
     <TextView
         android:id="@+id/descriptionProfile"
         android:layout_width="match_parent"
@@ -27,170 +40,596 @@
         android:fontFamily="@font/montserrat_light"
         android:textColor="@color/black"
         android:layout_marginTop="10dp" />
-    
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:background="@drawable/edit_text_border"
-            >
-
-        <ImageView
-            android:id="@+id/imageProfile"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/background_rounded"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_foreground" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/button_logout"
-                android:fontFamily="@font/montserrat_light"
-                android:textStyle="bold"
-                android:textSize="15sp"/>
-
-
-        </LinearLayout>
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/descriptionProfile">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:background="@drawable/edit_text_border">
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-            <TextView
+            <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/Name"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:fontFamily="@font/montserrat_light"
-                android:textColor="@color/black"
-                android:textSize="16sp"/>
+                android:layout_height="match_parent"
+                android:layout_weight="0.3">
 
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:hint="Salvatore"
-                    android:layout_weight="1"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
+                <ImageView
+                    android:id="@+id/imageProfile"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_rounded"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_foreground"
+                   />
+
+                <ImageView
+                    android:id="@+id/editIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_button"
+                    android:src="@drawable/baseline_edit_24"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="Permette di cambiare l'immagine"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_below="@id/imageProfile"
+                    android:text="@string/button_logout"
                     android:fontFamily="@font/montserrat_light"
-                    android:textColor="@color/black"
-                    android:background="@drawable/transparent_background"
-                    android:textSize="18sp"/>
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="0.8"
+                android:background="@drawable/edit_text_border">
 
-                <TextView
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/cognome"
-                    android:layout_weight="1"
-                    android:paddingLeft="10dp"
-                    android:fontFamily="@font/montserrat_light"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:orientation="horizontal">
 
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:hint="Di Gangi"
-                    android:layout_weight="1"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:fontFamily="@font/montserrat_light"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:background="@drawable/transparent_background"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Name"
+                        android:layout_weight="1"
+                        android:paddingLeft="10dp"
+                        android:fontFamily="@font/montserrat_light"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/editName"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/transparent_background"
+                        android:enabled="false"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="Salvatore"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cognome"
+                        android:layout_weight="1"
+                        android:paddingLeft="10dp"
+                        android:fontFamily="@font/montserrat_light"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/editSurname"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:text="Di Gangi"
+                        android:layout_weight="1"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:fontFamily="@font/montserrat_light"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:enabled="false"
+                        android:background="@drawable/transparent_background" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/universita"
+                        android:layout_weight="1"
+                        android:paddingLeft="10dp"
+                        android:fontFamily="@font/montserrat_light"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/editUniversity"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:text="Università degli studi di Palermo"
+                        android:layout_weight="1"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:fontFamily="@font/montserrat_light"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:enabled="false"
+                        android:background="@drawable/transparent_background" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/corso_studi"
+                        android:layout_weight="1"
+                        android:paddingLeft="10dp"
+                        android:fontFamily="@font/montserrat_light"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/editCorso"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:text="Ingegneria Informatica"
+                        android:layout_weight="1"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:fontFamily="@font/montserrat_light"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:enabled="false"
+                        android:background="@drawable/transparent_background" />
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/universita"
-                    android:layout_weight="1"
-                    android:paddingLeft="10dp"
-                    android:fontFamily="@font/montserrat_light"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"/>
-
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:hint="Università degli studi di Palermo"
-                    android:layout_weight="1"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:fontFamily="@font/montserrat_light"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:background="@drawable/transparent_background"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/corso_studi"
-                    android:layout_weight="1"
-                    android:paddingLeft="10dp"
-                    android:fontFamily="@font/montserrat_light"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"/>
-
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:hint="Ingegneria Informatica"
-                    android:layout_weight="1"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:fontFamily="@font/montserrat_light"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:background="@drawable/transparent_background"/>
-
-            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+        <ImageButton
+            android:id="@+id/editProfileIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_edit_24"
+            android:background="@drawable/rounded_button"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="3dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="Permette di modificare i dati personali"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/titleAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Account"
+        android:fontFamily="@font/montserrat_light"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp" />
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_border"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/montserrat_light"
+                        android:paddingLeft="10dp"
+                        android:text="@string/Username"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/transparent_background"
+                        android:fontFamily="@font/montserrat_light"
+                        android:hint="Saldiga01"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/montserrat_light"
+                        android:paddingLeft="10dp"
+                        android:text="@string/textPass"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/transparent_background"
+                        android:fontFamily="@font/montserrat_light"
+                        android:hint="Halo1234"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+           <Button
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:text="@string/modCredenziali"
+               android:fontFamily="@font/montserrat_light"
+               android:textStyle="bold"
+               android:textSize="15sp"
+               android:drawableRight="@drawable/baseline_edit_24"
+               android:layout_marginBottom="10dp"
+               android:layout_marginTop="10dp"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/titleRoutine"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserrat_light"
+                    android:textStyle="bold"
+                    android:textSize="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_info_24"
+                    android:background="@drawable/transparent_background"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:contentDescription="clicca questo bottone per avere info sulla routine di studip"
+                    />
+
+
+            </LinearLayout>
+
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:background="@drawable/border_element">
+
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1"
+                       android:orientation="vertical"
+                       android:layout_marginLeft="12dp"
+                       android:layout_marginRight="12dp"
+                       android:layout_marginBottom="13dp"
+                       android:layout_marginTop="8dp">
+
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/Monday"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:textSize="15sp"
+                           android:textStyle="bold"/>
+
+                       <ImageView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/baseline_menu_book_24"
+                           android:layout_marginBottom="10dp"
+                           android:layout_marginTop="10dp"
+                           android:clickable="true"
+                           android:focusable="true"
+                           android:contentDescription="icona che indica se si studia oppure no"/>
+
+                       <EditText
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/oraripStudio"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:layout_marginTop="8dp"
+                           android:textSize="16sp"
+                           android:textStyle="bold"
+
+                           />
+
+                       <EditText
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/oraripStudio2"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:layout_marginTop="8dp"
+                           android:textSize="16sp"
+                           android:textStyle="bold"
+
+                           />
+
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1"
+                       android:orientation="vertical"
+                       android:layout_marginLeft="12dp"
+                       android:layout_marginRight="12dp"
+                       android:layout_marginTop="8dp">
+
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/Tuesday"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:textSize="15sp"
+                           android:textStyle="bold"/>
+
+                       <ImageView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/baseline_menu_book_24"
+                           android:layout_marginBottom="10dp"
+                           android:layout_marginTop="10dp"
+                           android:clickable="true"
+                           android:focusable="true"
+                           android:contentDescription="icona che indica se si studia oppure no"/>
+
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1"
+                       android:orientation="vertical"
+                       android:layout_marginLeft="12dp"
+                       android:layout_marginRight="12dp"
+                       android:layout_marginTop="8dp">
+
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/Wednesday"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:textSize="15sp"
+                           android:textStyle="bold"
+                           />
+
+                       <ImageView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/baseline_menu_book_24"
+                           android:layout_marginBottom="10dp"
+                           android:layout_marginTop="10dp"
+                           android:clickable="true"
+                           android:focusable="true"
+                           android:contentDescription="icona che indica se si studia oppure no"/>
+
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1"
+                       android:orientation="vertical"
+                       android:layout_marginLeft="12dp"
+                       android:layout_marginRight="12dp"
+                       android:layout_marginTop="8dp">
+
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/Thursday"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:textSize="15sp"
+                           android:textStyle="bold"/>
+
+                       <ImageView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/baseline_menu_book_24"
+                           android:layout_marginBottom="10dp"
+                           android:layout_marginTop="10dp"
+                           android:clickable="true"
+                           android:focusable="true"
+                           android:contentDescription="icona che indica se si studia oppure no"/>
+
+                   </LinearLayout>
+
+
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1"
+                       android:orientation="vertical"
+                       android:layout_marginLeft="12dp"
+                       android:layout_marginRight="12dp"
+                       android:layout_marginTop="8dp">
+
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/Friday"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:textSize="15sp"
+                           android:textStyle="bold"/>
+
+                       <ImageView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/baseline_menu_book_24"
+                           android:layout_marginBottom="10dp"
+                           android:layout_marginTop="10dp"
+                           android:clickable="true"
+                           android:focusable="true"
+                           android:contentDescription="icona che indica se si studia oppure no"/>
+
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1"
+                       android:orientation="vertical"
+                       android:layout_marginLeft="12dp"
+                       android:layout_marginRight="12dp"
+                       android:layout_marginTop="8dp">
+
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/Saturday"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:textSize="15sp"
+                           android:textStyle="bold"/>
+
+                       <ImageView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/baseline_menu_book_24"
+                           android:layout_marginBottom="10dp"
+                           android:layout_marginTop="10dp"
+                           android:clickable="true"
+                           android:focusable="true"
+                           android:contentDescription="icona che indica se si studia oppure no"/>
+
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1"
+                       android:orientation="vertical"
+                       android:layout_marginLeft="12dp"
+                       android:layout_marginRight="12dp"
+                       android:layout_marginTop="8dp">
+
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/Sunday"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:textSize="15sp"
+                           android:textStyle="bold"/>
+
+                       <ImageView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/baseline_battery_charging_full_24"
+                           android:layout_marginBottom="10dp"
+                           android:layout_marginTop="10dp"
+                           android:clickable="true"
+                           android:focusable="true"
+                           android:contentDescription="icona che indica se si studia oppure no"/>
+
+                   </LinearLayout>
+
+
+               </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
 </LinearLayout>

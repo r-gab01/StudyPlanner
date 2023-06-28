@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                     val transaction = fragmentManager.beginTransaction()
                     val profileTag = "ProfileFragment"
                     if (!fragmentExist(profileTag)) {  //verifico se già il fragment è stato aperto tramite questa funzione definita sotto
-                        transaction.replace(R.id.fragmentContainerView, CalendarFragment(), profileTag)
+                        transaction.replace(R.id.fragmentContainerView, ProfileFragment(), profileTag)
                         transaction.commit()
                     }
                     true
