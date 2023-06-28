@@ -1,5 +1,6 @@
 package com.example.studyplanner
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.studyplanner.databinding.ActivityMainBinding
@@ -13,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (!loggedIn){                 //se l'utente non è loggato, lancio la schermata di login
+        if (!loggedIn){            //se l'utente non è loggato, lancio la schermata di login Usiamo le shared Preferences
             login()
         }
         //Di default avvio il fragment del calendario
@@ -85,7 +86,10 @@ class MainActivity : AppCompatActivity() {
         return (fragmentManager.findFragmentByTag(tag) != null)         //scrittura compatta che restituisce true o false se quella condizione si verifica o meno
     }
 
-    fun login(){
 
-    }
+        private fun login(){
+            val i = Intent(this, LoginActivity:: class.java)
+            startActivity(i)
+        }
+
 }
