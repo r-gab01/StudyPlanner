@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RecuperoPassFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
     <TextView
         android:id="@+id/textTitleRecupero"
@@ -20,6 +26,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,6 +45,7 @@
         app:layout_constraintVertical_bias="0.120000005">
 
 
+
         <TextView
             android:id="@+id/textViewInfoRecupero"
             android:layout_width="match_parent"
@@ -52,20 +60,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/mostraAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <EditText
+            android:id="@+id/nomeUtenteTextEdit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewInfoRecupero" />
+            android:layout_marginRight="20dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/hint_nomeUtente"
+            android:paddingLeft="15dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            app:layout_constraintTop_toBottomOf="@+id/titleDomandaSicurezza" />
 
         <TextView
             android:id="@+id/titleDomandaSicurezza"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/montserrat_medium"
             android:text="@string/title_domanda"
             android:textColor="@color/black"
@@ -73,50 +86,84 @@
             app:layout_constraintStart_toStartOf="@+id/textViewInfoRecupero"
             app:layout_constraintTop_toBottomOf="@+id/mostraAccount" />
 
-        <TextView
-            android:id="@+id/domandaSic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text=""
-            app:layout_constraintStart_toStartOf="@+id/titleDomandaSicurezza"
-            app:layout_constraintTop_toBottomOf="@+id/titleDomandaSicurezza" />
-
-
         <EditText
             android:id="@+id/campoInserisciRisposta"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/edit_text_border"
+            android:hint="@string/domanda"
+            android:paddingLeft="15dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            app:layout_constraintTop_toBottomOf="@+id/titleDomandaSicurezza" />
+
+
+        <EditText
+            android:id="@+id/campoInserisciDomanda"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/edit_text_border"
+
             android:hint="@string/risposta"
             android:paddingLeft="15dp"
             android:textColor="@color/black"
             android:textSize="18dp"
             app:layout_constraintTop_toBottomOf="@+id/titleDomandaSicurezza" />
 
-        <TextView
-            android:id="@+id/mostraPass"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="@+id/campoInserisciRisposta"
-            app:layout_constraintTop_toBottomOf="@+id/campoInserisciRisposta" />
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/mostraPass1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/campoInserisciRisposta"
+                app:layout_constraintTop_toBottomOf="@+id/campoInserisciRisposta" />
+
+            <TextView
+                android:id="@+id/mostraPass2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textSize="18dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="#FF3D00"
+                app:layout_constraintStart_toStartOf="@+id/campoInserisciRisposta"
+                app:layout_constraintTop_toBottomOf="@+id/campoInserisciRisposta" />
+
+        </LinearLayout>
+
+
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/buttonRecupero"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/montserrat_medium"
             android:layout_marginTop="30dp"
-            android:backgroundTint="#4CAF50"
+            android:background="@drawable/rounded_button"
             android:text="@string/button_conferma"
             android:textSize="18dp" />
+
 
 
     </LinearLayout>
 
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

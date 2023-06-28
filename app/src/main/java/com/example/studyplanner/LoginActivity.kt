@@ -14,36 +14,42 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val manager = supportFragmentManager
-        val transaction = manager.beginTransaction()
-        transaction.add(R.id.containerView_login, LoginFragment())
-        transaction.commit()
+        //La condizione if (savedInstanceState == null) controlla se il parametro savedInstanceState è nullo.
+        // Questo parametro contiene lo stato precedentemente salvato dell'Activity durante un'eventuale distruzione e ricreazione,
+        // ad esempio durante una rotazione del dispositivo.
 
+        //Se savedInstanceState è nullo, significa che l'Activity viene creata per la prima volta e non ci sono dati di stato precedenti
+        // da ripristinare. In questo caso, viene eseguito il blocco di codice all'interno delle parentesi graffe.
 
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.containerView_login, LoginFragment(), "LoginFragment")
+                .commit()
+        }
 
-
-   /*     val eyeVisibleDrawable = ContextCompat.getDrawable(this, R.drawable.baseline_remove_red_eye_24)
-        val eyeHiddenDrawable = ContextCompat.getDrawable(this, R.drawable.icons8_eye_24)
-
-
-       passwordEditText.setOnLongClickListener{
-           val isPasswordVisible = passwordEditText.inputType != InputType.TYPE_TEXT_VARIATION_PASSWORD
-           //verifichiamo se il tipo di input della password è TYPE_TEXT_VARIATION_PASSWORD. Se lo è, significa che la password è nascosta. In tal caso, impostiamo il tipo di input sulla combinazione di TYPE_CLASS_TEXT e TYPE_TEXT_VARIATION_PASSWORD per nascondere la password.
-           // Inoltre, impostiamo l'icona dell'occhio nascosto come drawable destro dell'EditText.
-           if (isPasswordVisible) {
-               // Nascondi il testo della password
-               passwordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-               passwordEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, eyeHiddenDrawable, null)
-           } else {
-               //Se il tipo di input della password non è TYPE_TEXT_VARIATION_PASSWORD, significa che la password è già visibile.
-               // In tal caso, impostiamo il tipo di input su TYPE_TEXT_VARIATION_VISIBLE_PASSWORD per mostrare la password. Inoltre, impostiamo l'icona dell'occhio visibile come drawable destro dell'EditText
-               // Mostra il testo della password
-               passwordEditText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-               passwordEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, eyeVisibleDrawable, null)
-           }
-//restituiamo true per indicare che l'evento è stato gestito correttamente.
-           true
-       } */
     }
 
+    //Il metodo onSaveInstanceState viene chiamato prima che l'activity venga distrutta, ad esempio durante un cambiamento di configurazione come la rotazione dello schermo.
+    // È un punto in cui puoi salvare lo stato corrente dell'activity o dei suoi componenti, come i fragment, in un oggetto Bundle.
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState) //Chiamo l'implementazione del metodo nella classe base per eseguire le operazioni di salvataggio dello stato di base.
+        // Salvo lo stato del Fragment corrente
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.containerView_login)
+        if (currentFragment != null) {
+            supportFragmentManager.putFragment(outState, "currentFragment", currentFragment) //Se il fragment corrente non è nullo, utilizza il putFragment del FragmentManager per salvare il fragment nel Bundle
+        }
+    }
+
+    //Il metodo onRestoreInstanceState viene chiamato dopo che l'activity è stata ricreata a seguito di un cambio di configurazione o di un ripristino dello stato.
+    // Questo metodo ti consente di ripristinare lo stato salvato in precedenza.
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState) //ripristino dello stato
+        // Ripristina lo stato del Fragment corrente
+        val currentFragment = supportFragmentManager.getFragment(savedInstanceState, "currentFragment")
+        if (currentFragment != null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.containerView_login, currentFragment) // sostituisco il contenuto del containerView_login con il fragment ripristinato.
+                .commit()
+        }
+    }
 }

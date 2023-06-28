@@ -1,15 +1,17 @@
 package com.example.studyplanner
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
+import com.example.studyplanner.database.ClientNetwork
 import com.example.studyplanner.databinding.FragmentLoginBinding
+import com.example.studyplanner.model.SharedData
 
 class LoginFragment : Fragment(){
 
@@ -44,18 +46,47 @@ class LoginFragment : Fragment(){
         }
 
         //Gestisco il salvataggio dei dati quando premo la checkBox e vado avanti con il bottone Login
-        //Utilizzo un file delle preferenze condivise. Lo gestisco nella funzione sabveLoginData()
+        //Utilizzo un file delle preferenze condivise. Lo gestisco nella funzione saveLoginData()
         var tastoLogin= binding.buttonLogin
         var rememberMeCheckBox= binding.checkBox
 
-        tastoLogin.setOnClickListener{
-            if(rememberMeCheckBox.isChecked){ //Solo se la check box è stata checkata
-                saveLoginData()
-            }else {
-                //val i = Intent(requireContext(), MainActivity::class.java)
-                //startActivity(i)
-                // Termino l'Activity corrente e ritorna alla MainActivity
-                requireActivity().finish()
+        tastoLogin.setOnClickListener {
+            val nomeInserito = binding.EditTextNomeUtente.text.toString().trim()
+            val pwInserita = binding.EditTextPassword.text.toString().trim()
+            if (nomeInserito.isEmpty())
+                binding.EditTextNomeUtente.setBackgroundResource(R.drawable.error_border_element)
+            if (pwInserita.isEmpty())
+                binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
+            else {
+                //QUERY AL DB PER VERIFICARE CREDENZIALI
+                val query =
+                    "select * from autenticazione where nome_u_ref = '${nomeInserito}' and password = '${pwInserita}';"
+                ClientNetwork.selectValue(query) { result, error ->
+                    if (error != null) {
+                        // Gestisci l'errore
+                        Log.e("DB", "Errore nella chiamata: ${error.message}")
+                    } else {
+                        // Utilizza il JsonObject risultante
+                        if (result != null) {
+                            // Esegui le operazioni necessarie con il result
+                            if (rememberMeCheckBox.isChecked) { //Solo se la check box è stata checkata
+                                saveLoginData()
+                            }
+                            SharedData.nomeUtente = nomeInserito
+                            SharedData.password = pwInserita
+                            SharedData.correctLogin = true
+                            Log.d("LOGIN", SharedData.nomeUtente)
+                            Log.d("LOGIN", SharedData.password)
+                            requireActivity().finish()
+
+                        } else {
+                            // Nessun result restituito
+                            Log.e("BOUNDARYDB", "Dati Errati")
+                            binding.EditTextNomeUtente.setBackgroundResource(R.drawable.error_border_element)
+                            binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
+                        }
+                    }
+                }
             }
         }
 
@@ -76,14 +107,10 @@ class LoginFragment : Fragment(){
         editor.apply()
     }
 
-
-
     private fun fragmentExists(manager: FragmentManager, tag: String ): Boolean {
         val fragment= manager.findFragmentByTag(tag)
-        if (fragment == null)
-            return false
-        else
-            return true
+        return fragment != null
 
     }
+
 }

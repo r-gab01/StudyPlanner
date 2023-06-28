@@ -1,6 +1,7 @@
 package com.example.studyplanner
 
 import android.app.DatePickerDialog
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcelable
@@ -42,17 +43,47 @@ class AddExamActivity : AppCompatActivity() {
             var editTextDate = binding.insDate
             editTextDate.isFocusable = false
 
+            // Dichiarazione della variabile globale per memorizzare la data selezionata
+             var dataSelezionata: String? = null
+
             editTextDate.setOnClickListener {
+                // utilizziamo le SharedPreferences per memorizzare e recuperare successivamente la data selezionata.
+               // val sharedPreferences = getSharedPreferences("DatePicker", Context.MODE_PRIVATE)
+               // val dataSelezionata = sharedPreferences.getString("selectedDate", "")
+
+                val year: Int
+                val month: Int
+                val dayOfMonth: Int
+
                 val calendar = Calendar.getInstance()
-                val year = calendar.get(Calendar.YEAR)
-                val month = calendar.get(Calendar.MONTH)
-                val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+
+                if(dataSelezionata.isNullOrEmpty()) {
+                    //Se la data salvata non esiste, utilizziamo la data attuale
+                    year = calendar.get(Calendar.YEAR)
+                    month = calendar.get(Calendar.MONTH)
+                    dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+                } else {
+                    // La data salvata esiste, la convertiamo in valori interi
+                    val selectedDateParts = dataSelezionata!!.split("/") // la stringa dataSelezionata viene suddivisa utilizzando il separatore "/" tramite il metodo split("/"). Questo crea un array di stringhe selectedDateParts, contenente le parti della data (giorno, mese, anno) come elementi separati.
+                    year = selectedDateParts[2].toInt() //assegniamo il valore convertito dell'anno a year
+                    month = selectedDateParts[1].toInt() - 1 // Sottraiamo 1 al mese perché Calendar.MONTH parte da 0
+                    dayOfMonth = selectedDateParts[0].toInt()
+                }
+
 
                 //Mostriamo un date picker che inizialmente è settato alla data attuale
                 val datePickerDialog =
                     DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDayOfMonth ->
-                        val selectedDate = "$selectedDayOfMonth/${selectedMonth + 1}/$selectedYear"
-                        editTextDate.setText(selectedDate)
+                        val newSelectedDate = "$selectedDayOfMonth/${selectedMonth + 1}/$selectedYear"
+                        editTextDate.setText(newSelectedDate)
+
+                        // Salviamo la data selezionata
+                        //val editor = sharedPreferences.edit()
+                        //editor.putString("selectedDate", selectedDate)
+                        //editor.apply()
+
+                        // Memorizziamo la nuova data selezionata
+                        dataSelezionata = newSelectedDate
                     }, year, month, dayOfMonth)
 
                 datePickerDialog.show()

@@ -29,7 +29,7 @@ class RegistrazioneFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val spinner= binding.spinner
+        val spinner= binding.spinnerDomanda
         val textSpinner= binding.textSpinner
 
         // Definisco l'adapter per lo Spinner

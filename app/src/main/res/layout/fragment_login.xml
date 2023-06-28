@@ -38,8 +38,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-
-
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/EditTextPassword"
         android:layout_width="match_parent"
@@ -64,8 +62,6 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/EditTextNomeUtente"
         app:layout_constraintTop_toBottomOf="@id/EditTextNomeUtente" />
-
-
 
     <CheckBox
         android:id="@+id/checkBox"

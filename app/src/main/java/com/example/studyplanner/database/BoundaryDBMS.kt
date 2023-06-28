@@ -1,46 +1,33 @@
 package com.example.studyplanner.database
 
-import android.view.View
-import android.widget.Toast
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import android.util.Log
+import com.example.studyplanner.model.MyJsonArray
+import com.example.studyplanner.model.MyJsonObject
+import com.example.studyplanner.model.SharedData
 
-class BoundaryDBMS {
 
-    private fun loginUtente ( nome: String, password: String ){
+object BoundaryDBMS {
 
-        val query = "select * from persona where username = '${nome}' and password = '${password}';"
+    fun login( nome: String, password: String) {
+        val query = "select * from autenticazione where nome_u_ref = '${nome}' and password = '${password}';"
 
-        ClientNetwork.retrofit.login(query).enqueue(
-            object : Callback<JsonObject> {
-                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                    if (response.isSuccessful) {
-                        if ((response.body()?.get("queryset") as JsonArray).size() == 1) {
-                            response.body()?.get("")
-                            //getImageProfilo((response.body()?.get("queryset") as JsonArray).get(0) as JsonObject)
-                        } else {
-                            //Toast.makeText(
-                              //  this@LoginActivity,
-                               // "credenziali errate",
-                               // Toast.LENGTH_LONG
-                            //).show()
-                            //binding.progressBar.visibility = View.GONE
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                    /*
-                     * gestisci qui il fallimento della richiesta
-                     */
-
+        ClientNetwork.selectValue(query) { result, error ->
+            if (error != null) {
+                // Gestisci l'errore
+                Log.e("DB", "Errore nella chiamata: ${error.message}")
+            } else {
+                // Utilizza il JsonObject risultante
+                if (result != null) {
+                    // Esegui le operazioni necessarie con il result
+                    Log.d("BOUNDARYDB", result.toString())
+                    Log.d("BOUNDARYDB", result.size().toString())
+                } else {
+                    // Nessun result restituito
+                    Log.d("BOUNDARYDB", "Nessun risultato ottenuto.")
                 }
             }
-        )
-
-
+        }
     }
+
 }
+

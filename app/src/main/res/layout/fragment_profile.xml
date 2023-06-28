@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileFragment"
+    android:orientation="vertical"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="35dp">
+
+<TextView
+    android:id="@+id/titleProfilo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/titleProfile"
+    android:fontFamily="@font/montserrat_medium"
+    android:textSize="30dp"
+    android:textColor="@color/black"
+    android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/descriptionProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/descriptionProfile"
+        android:fontFamily="@font/montserrat_light"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:background="@drawable/edit_text_border"
+            >
+
+        <ImageView
+            android:id="@+id/imageProfile"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/background_rounded"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_foreground" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/button_logout"
+                android:fontFamily="@font/montserrat_light"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:background="@drawable/edit_text_border">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/Name"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:fontFamily="@font/montserrat_light"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:hint="Salvatore"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:textColor="@color/black"
+                    android:background="@drawable/transparent_background"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cognome"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:hint="Di Gangi"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:background="@drawable/transparent_background"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/universita"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:hint="Università degli studi di Palermo"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:background="@drawable/transparent_background"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/corso_studi"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:hint="Ingegneria Informatica"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:background="@drawable/transparent_background"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
