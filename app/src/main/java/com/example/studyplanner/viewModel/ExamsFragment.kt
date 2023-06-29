@@ -1,4 +1,4 @@
-package com.example.studyplanner
+package com.example.studyplanner.viewModel
 
 import android.content.Context
 import android.os.Bundle
@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.studyplanner.ExamAdapter
+import com.example.studyplanner.ExamViewModel
 import com.example.studyplanner.databinding.FragmentExamsBinding
 
 class ExamsFragment : Fragment() {

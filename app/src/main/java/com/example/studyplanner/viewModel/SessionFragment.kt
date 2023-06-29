@@ -1,4 +1,4 @@
-package com.example.studyplanner
+package com.example.studyplanner.viewModel
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

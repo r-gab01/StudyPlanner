@@ -15,7 +15,7 @@
         >
 
         <activity
-            android:name=".AddExamActivity"
+            android:name=".viewModel.AddExamActivity"
             android:exported="false" />
         <activity
             android:name=".SchermataRecuperoPass"
@@ -24,10 +24,10 @@
             android:name=".SchermataRegistrazione"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".viewModel.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".viewModel.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

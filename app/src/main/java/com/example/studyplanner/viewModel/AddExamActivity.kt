@@ -1,14 +1,13 @@
-package com.example.studyplanner
+package com.example.studyplanner.viewModel
 
 import android.app.DatePickerDialog
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.res.ResourcesCompat
+import com.example.studyplanner.R
 import com.example.studyplanner.databinding.ActivityAddExamBinding
 import java.util.*
 

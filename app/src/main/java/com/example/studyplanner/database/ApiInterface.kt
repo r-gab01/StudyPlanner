@@ -6,12 +6,14 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
-interface UserAPI {
-
+interface ApiInterface {
 
     @POST("postSelect/")
     @FormUrlEncoded
-    fun select(@Field("query") query: String): Call<JsonObject>
+    fun selectValue(@Field("query") query: String): Call<JsonObject>
+    @POST("postSelect/")
+    @FormUrlEncoded
+    fun login(@Field("query") query: String): Call<JsonObject>
 
     @POST("postUpdate/")
     @FormUrlEncoded

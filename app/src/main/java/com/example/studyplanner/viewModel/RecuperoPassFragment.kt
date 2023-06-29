@@ -1,4 +1,4 @@
-package com.example.studyplanner
+package com.example.studyplanner.viewModel
 
 import android.os.Bundle
 import android.util.Log
@@ -6,7 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.studyplanner.database.ClientNetwork
+import com.example.studyplanner.R
+import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.FragmentRecuperoPassBinding
 import com.example.studyplanner.model.SharedData
 
@@ -34,7 +35,7 @@ class RecuperoPassFragment : Fragment() {
                 binding.campoInserisciRisposta.setBackgroundResource(R.drawable.error_border_element)
             else {
                 val query = "select * from autenticazione where nome_u_ref = '${nomeInserito}' and domanda_s='${domandaInserita}' and risposta_s='${rispostaInserita}';"
-                ClientNetwork.selectValue(query) { result, error ->
+                ApiClient.selectValue(query) { result, error ->
                     if (error != null) {
                         // Gestisci l'errore
                         Log.e("DB", "Errore nella chiamata: ${error.message}")
