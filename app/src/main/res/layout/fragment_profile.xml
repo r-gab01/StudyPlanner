@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileFragment"
-    android:orientation="vertical"
     android:layout_marginLeft="6dp"
     android:layout_marginRight="6dp"
     android:layout_marginTop="35dp">
+
+<LinearLayout
+    android:id="@+id/linearLayoutProfile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+   >
 
 <TextView
     android:id="@+id/titleProfilo"
@@ -32,6 +38,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
+
     <TextView
         android:id="@+id/descriptionProfile"
         android:layout_width="match_parent"
@@ -46,6 +54,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_below="@id/descriptionProfile">
+
+
 
 
         <LinearLayout
@@ -284,12 +294,14 @@
                         android:textSize="18sp" />
 
                     <EditText
+                        android:id="@+id/editUsername"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
                         android:background="@drawable/transparent_background"
                         android:fontFamily="@font/montserrat_light"
-                        android:hint="Saldiga01"
+                        android:enabled="false"
+                        android:text="Saldiga01"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:textColor="@color/black"
@@ -313,20 +325,26 @@
                         android:textSize="18sp" />
 
                     <EditText
+                        android:id="@+id/textPass"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_weight="1"
                         android:background="@drawable/transparent_background"
                         android:fontFamily="@font/montserrat_light"
-                        android:hint="Halo1234"
+                        android:text="Halo1234"
+                        android:enabled="false"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:inputType="textPassword|textVisiblePassword"
+                        android:ellipsize="start"
+                        />
 
                 </LinearLayout>
 
            <Button
+               android:id="@+id/modCred"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:layout_gravity="center"
@@ -359,6 +377,7 @@
                     />
 
                 <ImageButton
+                    android:id="@+id/legendButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/baseline_info_24"
@@ -376,15 +395,17 @@
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:orientation="horizontal"
-                   android:background="@drawable/border_element">
+                   android:background="@drawable/border_element"
+                   android:layout_marginBottom="10dp"
+                   android:layout_marginTop="5dp">
 
                    <LinearLayout
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_weight="1"
                        android:orientation="vertical"
-                       android:layout_marginLeft="12dp"
-                       android:layout_marginRight="12dp"
+                       android:layout_marginLeft="11dp"
+                       android:layout_marginRight="11dp"
                        android:layout_marginBottom="13dp"
                        android:layout_marginTop="8dp">
 
@@ -393,12 +414,14 @@
                            android:layout_height="wrap_content"
                            android:text="@string/Monday"
                            android:layout_gravity="center"
+                           android:layout_marginTop="10dp"
                            android:fontFamily="@font/montserrat_light"
                            android:textColor="@color/black"
                            android:textSize="15sp"
                            android:textStyle="bold"/>
 
                        <ImageView
+                           android:id="@+id/iconMonday"
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_menu_book_24"
@@ -411,28 +434,28 @@
                        <EditText
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:text="@string/oraripStudio"
+                           android:text="@string/orariStudio"
                            android:layout_gravity="center"
                            android:fontFamily="@font/montserrat_light"
                            android:textColor="@color/black"
-                           android:layout_marginTop="8dp"
-                           android:textSize="16sp"
+                           android:layout_marginTop="10dp"
                            android:textStyle="bold"
-
-                           />
+                           android:textSize="13sp"
+                           android:inputType="number"
+                           android:background="@drawable/transparent_background" />
 
                        <EditText
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:text="@string/oraripStudio2"
+                           android:text="@string/orariStudio2"
                            android:layout_gravity="center"
                            android:fontFamily="@font/montserrat_light"
                            android:textColor="@color/black"
-                           android:layout_marginTop="8dp"
-                           android:textSize="16sp"
+                           android:layout_marginTop="10dp"
+                           android:textSize="13sp"
                            android:textStyle="bold"
-
-                           />
+                          android:inputType="number"
+                            android:background="@drawable/transparent_background" />
 
                    </LinearLayout>
 
@@ -441,8 +464,8 @@
                        android:layout_height="wrap_content"
                        android:layout_weight="1"
                        android:orientation="vertical"
-                       android:layout_marginLeft="12dp"
-                       android:layout_marginRight="12dp"
+                       android:layout_marginLeft="11dp"
+                       android:layout_marginRight="11dp"
                        android:layout_marginTop="8dp">
 
                        <TextView
@@ -452,10 +475,12 @@
                            android:layout_gravity="center"
                            android:fontFamily="@font/montserrat_light"
                            android:textColor="@color/black"
+                           android:layout_marginTop="10dp"
                            android:textSize="15sp"
                            android:textStyle="bold"/>
 
                        <ImageView
+                           android:id="@+id/iconTuesday"
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_menu_book_24"
@@ -465,6 +490,32 @@
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
 
+                       <EditText
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/orariStudio"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:layout_marginTop="10dp"
+                           android:textStyle="bold"
+                           android:textSize="13sp"
+                           android:inputType="number"
+                           android:background="@drawable/transparent_background" />
+
+                       <EditText
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/orariStudio2"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:layout_marginTop="10dp"
+                           android:textSize="13sp"
+                           android:textStyle="bold"
+                           android:inputType="number"
+                           android:background="@drawable/transparent_background" />
+
                    </LinearLayout>
 
                    <LinearLayout
@@ -472,8 +523,8 @@
                        android:layout_height="wrap_content"
                        android:layout_weight="1"
                        android:orientation="vertical"
-                       android:layout_marginLeft="12dp"
-                       android:layout_marginRight="12dp"
+                       android:layout_marginLeft="11dp"
+                       android:layout_marginRight="11dp"
                        android:layout_marginTop="8dp">
 
                        <TextView
@@ -483,11 +534,13 @@
                            android:layout_gravity="center"
                            android:fontFamily="@font/montserrat_light"
                            android:textColor="@color/black"
+                           android:layout_marginTop="10dp"
                            android:textSize="15sp"
                            android:textStyle="bold"
                            />
 
                        <ImageView
+                           android:id="@+id/iconWednesday"
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_menu_book_24"
@@ -497,6 +550,32 @@
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
 
+                       <EditText
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/orariStudio"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:layout_marginTop="10dp"
+                           android:textStyle="bold"
+                           android:textSize="13sp"
+                           android:inputType="number"
+                           android:background="@drawable/transparent_background" />
+
+                       <EditText
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/orariStudio2"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:layout_marginTop="10dp"
+                           android:textSize="13sp"
+                           android:textStyle="bold"
+                           android:inputType="number"
+                           android:background="@drawable/transparent_background" />
+
                    </LinearLayout>
 
                    <LinearLayout
@@ -504,8 +583,8 @@
                        android:layout_height="wrap_content"
                        android:layout_weight="1"
                        android:orientation="vertical"
-                       android:layout_marginLeft="12dp"
-                       android:layout_marginRight="12dp"
+                       android:layout_marginLeft="11dp"
+                       android:layout_marginRight="11dp"
                        android:layout_marginTop="8dp">
 
                        <TextView
@@ -516,9 +595,11 @@
                            android:fontFamily="@font/montserrat_light"
                            android:textColor="@color/black"
                            android:textSize="15sp"
+                           android:layout_marginTop="10dp"
                            android:textStyle="bold"/>
 
                        <ImageView
+                           android:id="@+id/iconThursday"
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_menu_book_24"
@@ -528,6 +609,32 @@
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
 
+                       <EditText
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/orariStudio"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:layout_marginTop="10dp"
+                           android:textStyle="bold"
+                           android:textSize="13sp"
+                           android:inputType="number"
+                           android:background="@drawable/transparent_background" />
+
+                       <EditText
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/orariStudio2"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:layout_marginTop="10dp"
+                           android:textSize="13sp"
+                           android:textStyle="bold"
+                           android:inputType="number"
+                           android:background="@drawable/transparent_background" />
+
                    </LinearLayout>
 
 
@@ -536,8 +643,8 @@
                        android:layout_height="wrap_content"
                        android:layout_weight="1"
                        android:orientation="vertical"
-                       android:layout_marginLeft="12dp"
-                       android:layout_marginRight="12dp"
+                       android:layout_marginLeft="11dp"
+                       android:layout_marginRight="11dp"
                        android:layout_marginTop="8dp">
 
                        <TextView
@@ -547,10 +654,12 @@
                            android:layout_gravity="center"
                            android:fontFamily="@font/montserrat_light"
                            android:textColor="@color/black"
+                           android:layout_marginTop="10dp"
                            android:textSize="15sp"
                            android:textStyle="bold"/>
 
                        <ImageView
+                           android:id="@+id/iconFriday"
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_menu_book_24"
@@ -560,6 +669,32 @@
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
 
+                       <EditText
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/orariStudio"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:layout_marginTop="10dp"
+                           android:textStyle="bold"
+                           android:textSize="13sp"
+                           android:inputType="number"
+                           android:background="@drawable/transparent_background" />
+
+                       <EditText
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/orariStudio2"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:layout_marginTop="10dp"
+                           android:textSize="13sp"
+                           android:textStyle="bold"
+                           android:inputType="number"
+                           android:background="@drawable/transparent_background" />
+
                    </LinearLayout>
 
                    <LinearLayout
@@ -567,8 +702,8 @@
                        android:layout_height="wrap_content"
                        android:layout_weight="1"
                        android:orientation="vertical"
-                       android:layout_marginLeft="12dp"
-                       android:layout_marginRight="12dp"
+                       android:layout_marginLeft="11dp"
+                       android:layout_marginRight="11dp"
                        android:layout_marginTop="8dp">
 
                        <TextView
@@ -578,10 +713,12 @@
                            android:layout_gravity="center"
                            android:fontFamily="@font/montserrat_light"
                            android:textColor="@color/black"
+                           android:layout_marginTop="10dp"
                            android:textSize="15sp"
                            android:textStyle="bold"/>
 
                        <ImageView
+                           android:id="@+id/iconSaturday"
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_menu_book_24"
@@ -591,6 +728,32 @@
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
 
+                       <EditText
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/orariStudio"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:layout_marginTop="10dp"
+                           android:textSize="13sp"
+                           android:textStyle="bold"
+                           android:inputType="number"
+                           android:background="@drawable/transparent_background" />
+
+                       <EditText
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/orariStudio2"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:layout_marginTop="10dp"
+                           android:textSize="13sp"
+                           android:textStyle="bold"
+                           android:inputType="number"
+                           android:background="@drawable/transparent_background" />
+
                    </LinearLayout>
 
                    <LinearLayout
@@ -598,8 +761,8 @@
                        android:layout_height="wrap_content"
                        android:layout_weight="1"
                        android:orientation="vertical"
-                       android:layout_marginLeft="12dp"
-                       android:layout_marginRight="12dp"
+                       android:layout_marginLeft="11dp"
+                       android:layout_marginRight="11dp"
                        android:layout_marginTop="8dp">
 
                        <TextView
@@ -609,10 +772,12 @@
                            android:layout_gravity="center"
                            android:fontFamily="@font/montserrat_light"
                            android:textColor="@color/black"
+                           android:layout_marginTop="10dp"
                            android:textSize="15sp"
                            android:textStyle="bold"/>
 
                        <ImageView
+                           android:id="@+id/iconSunday"
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_battery_charging_full_24"
@@ -622,14 +787,38 @@
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
 
+                       <EditText
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/orariStudio"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:layout_marginTop="10dp"
+                           android:textSize="13sp"
+                           android:textStyle="bold"
+                           android:inputType="number"
+                           android:background="@drawable/transparent_background" />
+
+                       <EditText
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="@string/orariStudio2"
+                           android:layout_gravity="center"
+                           android:fontFamily="@font/montserrat_light"
+                           android:textColor="@color/black"
+                           android:layout_marginTop="10dp"
+                           android:textSize="13sp"
+                           android:textStyle="bold"
+                           android:inputType="number"
+                           android:background="@drawable/transparent_background" />
+
                    </LinearLayout>
-
-
                </LinearLayout>
-
 
             </LinearLayout>
         </ScrollView>
 
 
 </LinearLayout>
+</FrameLayout>

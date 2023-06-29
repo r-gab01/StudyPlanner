@@ -93,10 +93,44 @@ class MainActivity : AppCompatActivity() {
         return (fragmentManager.findFragmentByTag(tag) != null)         //scrittura compatta che restituisce true o false se quella condizione si verifica o meno
     }
 
+    override fun onBackPressed() {
+        val manager= supportFragmentManager
+        val numEntryInBackStack = manager.backStackEntryCount //numero di voci nello stack
+        if(numEntryInBackStack>0){
+            for(i in 0 until numEntryInBackStack){
+                manager.popBackStack() //Facciamo il pop di tutte le voci nel back stack
+            }
+        } else {
+            super.onBackPressed(); //Ossia se Se il BackStack è vuoto, viene chiamato il metodo super.onBackPressed()
+            // per eseguire l'azione di default, ovvero uscire dall'Activity.
+        }
+    }
+
 
         private fun login(){
             val i = Intent(this, LoginActivity:: class.java)
             startActivity(i)
         }
 
+
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState) //Chiamo l'implementazione del metodo nella classe base per eseguire le operazioni di salvataggio dello stato di base.
+        // Salvo lo stato del Fragment corrente
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
+        if (currentFragment != null) {
+            supportFragmentManager.putFragment(outState, "currentFragment", currentFragment) //Se il fragment corrente non è nullo, utilizza il putFragment del FragmentManager per salvare il fragment nel Bundle
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState) //ripristino dello stato
+        // Ripristina lo stato del Fragment corrente
+        val currentFragment = supportFragmentManager.getFragment(savedInstanceState, "currentFragment")
+        if (currentFragment != null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, currentFragment) // sostituisco il contenuto del containerView_login con il fragment ripristinato.
+                .commit()
+        }
+    }
 }

@@ -1,16 +1,15 @@
 package com.example.studyplanner
 
-import android.graphics.Color
-import android.icu.util.Calendar
 import android.os.Bundle
-
-import androidx.fragment.app.Fragment
+import android.text.method.ReplacementTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.OneShotPreDrawListener.add
+import android.widget.EditText
+import android.widget.ImageView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.studyplanner.databinding.FragmentProfileBinding
-
 
 
 class ProfileFragment : Fragment() {
@@ -25,7 +24,6 @@ class ProfileFragment : Fragment() {
         binding= FragmentProfileBinding.inflate(inflater)
 
         val editProfile= binding.editProfileIcon
-
         var isEditMode = true
 
         editProfile.setOnClickListener{
@@ -48,13 +46,96 @@ class ProfileFragment : Fragment() {
             }
         }
 
+        val editAccountButton= binding.modCred
+        var isEditAccount = true
+
+        editAccountButton.setOnClickListener{
+            if(isEditAccount){
+                binding.editUsername.isEnabled=true
+                binding.textPass.isEnabled=true
+
+                editAccountButton.text= "Conferma modifiche"
+                isEditAccount=false
+            }else{
+                binding.editUsername.isEnabled=false
+                binding.textPass.isEnabled=false
+
+                editAccountButton.text= "Modifica credenziali"
+                isEditAccount=true
+            }
+        }
+
+        val editTextPass= binding.textPass
+        convertToAsterisks(editTextPass)
 
 
 
+        var buttonLegend= binding.legendButton
 
+        val legendTag = "LegendFragment"
 
+        buttonLegend.setOnClickListener{
+            val manager = parentFragmentManager
+            val transaction = manager.beginTransaction()
+            if (!fragmentExist(legendTag)) {  //verifico se già il fragment è stato aperto tramite questa funzione definita sotto
+                transaction.replace(R.id.fragmentContainerView, LegendFragment(), legendTag)
+                transaction.commit()
+            }
+        }
+
+        var monday= binding.iconMonday
+        setOnClickImageChange(monday)
+
+        var tuesday= binding.iconTuesday
+        setOnClickImageChange(tuesday)
+
+        var wednesday= binding.iconWednesday
+        setOnClickImageChange(wednesday)
+
+        var thursday= binding.iconThursday
+        setOnClickImageChange(thursday)
+
+        var friday= binding.iconFriday
+       setOnClickImageChange(friday)
+
+        var saturday= binding.iconSaturday
+        setOnClickImageChange(saturday)
+
+        var sunday= binding.iconSunday
+        setOnClickImageChange(sunday)
 
         return binding.root
+    }
+
+    fun convertToAsterisks(editText: EditText) {
+        val text = editText.text.toString()
+        val asterisks = StringBuilder()
+
+        for (i in 0 until text.length) {
+            asterisks.append("*")
+        }
+
+        editText.setText(asterisks)
+        editText.setSelection(asterisks.length)
+    }
+
+    fun setOnClickImageChange(imageView: ImageView) {
+        var isStudyMode = true
+
+        imageView.setOnClickListener {
+            if (isStudyMode) {
+                imageView.setImageResource(R.drawable.baseline_battery_charging_full_24)
+                isStudyMode= false
+            } else {
+                imageView.setImageResource(R.drawable.baseline_menu_book_24)
+                isStudyMode=true
+            }
+        }
+    }
+
+    fun fragmentExist(tag: String): Boolean {       //funzione che mi permette di trovare se un fragment è presente tramite il uso tag
+        val fragmentManager = parentFragmentManager
+        return (fragmentManager.findFragmentByTag(tag) != null)         //scrittura compatta che restituisce true o false se quella condizione si verifica o meno
     }
 
 

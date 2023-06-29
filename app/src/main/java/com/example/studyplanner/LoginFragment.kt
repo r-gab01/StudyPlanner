@@ -25,6 +25,9 @@ class LoginFragment : Fragment(){
 
         binding= FragmentLoginBinding.inflate(inflater)
 
+
+
+
         binding.textViewPasswordDimenticata.setOnClickListener{
              val manager=parentFragmentManager
             if(!fragmentExists(manager, "RecuperoFragment")) {

@@ -59,9 +59,14 @@
     <string name="Friday">Ven</string>
     <string name="Saturday">Sab</string>
     <string name="Sunday">Dom</string>
-    <string name="oraripStudio">8-13</string>
-    <string name="oraripStudio2">15-18</string>
+    <string name="orariStudio">8-13</string>
+    <string name="orariStudio2">15-18</string>
 
+    <string name="TitleLegend">Legenda</string>
+    <string name="DescriptionLegend">Nel riquadro sottostante trovi la tua routine di studio, che puoi modificare a seconda delle tue esigenze. Per ogni giorno della settimana puoi impostare l\'icona del libro  altrimenti cliccando su di essa comparirà l\'icona della batteria. Inoltre, al di sotto delle icone trovi dei campi modificabili dove puoi inserire i tuoi orari di studio.  </string>
+    <string name="iconBook">L\'icona del libro indica che è prevista una sessione di studio per quel giorno. Non mollare!</string>
+    <string name="iconBatteryCharging">L\'icona della batteria indica che non è prevista nessuna sessione di studio , ma un giorno libero. Buon riposo!</string>
+    <string name="ButtonBack">CAPITO</string>
 
     <!-- MICHELE -->
     <string name="title_stat_fragment">STATISTICHE</string>
