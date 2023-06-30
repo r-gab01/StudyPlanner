@@ -1,7 +1,7 @@
 package com.example.studyplanner.database
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
+import com.example.studyplanner.model.AccountDBModel
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -11,6 +11,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.reflect.javaType
 import kotlin.reflect.typeOf
+import kotlinx.coroutines.*
+
 
 
 object ApiClient {
@@ -26,14 +28,20 @@ object ApiClient {
     val gson = Gson()
 
     /*
-    fun selectValue(query: String, callback: (JsonObject?, Throwable?) -> Unit) {
+    @OptIn(ExperimentalStdlibApi::class)
+    inline fun <reified T> login(nome: String, password: String, crossinline callback: (T?, Throwable?) -> Unit) {
+        var data: T?
+        val query = "select * from autenticazione where nome_u_ref = '${nome}' and password = '${password}';"
         apiService.select(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
                     val res = response.body()?.getAsJsonArray("queryset")
                     if (res != null && res.size() > 0) {
                         val result = res.get(0).asJsonObject
-                        callback(result, null)
+                        val typeT = typeOf<T>().javaType
+                        data = gson.fromJson(result, typeT)
+                        Log.d("APICLIENT", data.toString())
+                        callback(data, null)
                     } else {
                         callback(null, null) // Nessun risultato trovato
                     }
@@ -43,17 +51,94 @@ object ApiClient {
                 }
             }
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                Log.e("OnFailure", "error")
+                Log.e("OnFailure", "${t.message}")
             }
         })
     }
 
      */
 
-    val data: MutableLiveData<Any> = MutableLiveData()
+    fun login(nome: String, password: String, callback: (AccountDBModel?, Throwable?) -> Unit) {
+        var data: AccountDBModel?
+        val query = "select * from autenticazione where nome_u_ref = '${nome}' and password = '${password}';"
+        apiService.select(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()?.getAsJsonArray("queryset")
+                    if (res != null && res.size() > 0) {
+                        val result = res.get(0).asJsonObject
+                        data = gson.fromJson(result, AccountDBModel::class.java)
+                        Log.d("APICLIENT", data.toString())
+                        callback(data, null)
+                    } else {
+                        callback(null, null) // Nessun risultato trovato
+                    }
+                } else {
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(null, error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+            }
+        })
+    }
+
+    /*
+    fun select(query: String) {
+        apiService.select(query).enqueue(object : Callback<JsonObject> {
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("APICLIENT","Errore nella chiamata: ${t.message}")
+            }
+
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()?.getAsJsonArray("queryset")
+                    if (res != null && res.size()>0 ){
+                        val risultato = res.get(0).asJsonObject
+                        //risultato contiene la prima tupla
+                        Log.e("APICLIENT", risultato.toString())
+
+                    } else{
+                        //La query non restituisce tuple
+                        Log.e("APICLIENT", "Dati errati")
+                    }
+                }
+            }
+        })
+    }
+
+    val accountData: MutableLiveData<AccountDBModel> = MutableLiveData()
+    fun login(query: String) {
+        apiService.login(query).enqueue(object : Callback<JsonObject> {
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("APICLIENT","Errore nella chiamata: ${t.message}")
+            }
+
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()?.getAsJsonArray("queryset")
+                    if (res != null && res.size()>0 ){
+                        val risultato = res.get(0).asJsonObject
+                        accountData.value = gson.fromJson(risultato, AccountDBModel::class.java)
+                        Log.d("APICLIENT", accountData.value.toString())
+
+                    } else{
+                        accountData.value = null
+                        Log.e("APICLIENT", "Dati errati")
+                        Log.e("APICLIENT", accountData.value.toString())
+                    }
+                }
+            }
+        })
+    }
+
     @OptIn(ExperimentalStdlibApi::class)
-    inline fun <reified T> selectValue(query: String) {
-        apiService.selectValue(query).enqueue(object : Callback<JsonObject> {
+    inline fun <reified T> selectValue(query: String) : T? {
+        var data: T? = null
+        apiService.select(query).enqueue(object : Callback<JsonObject> {
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 Log.e("CLIENTNETWORK","Errore nella chiamata: ${t.message}")
@@ -63,20 +148,25 @@ object ApiClient {
                 if (response.isSuccessful) {
                     val res = response.body()?.getAsJsonArray("queryset")
                     if (res != null && res.size()>0 ){
+
                         val risultato = res.get(0).asJsonObject
                         val typeT = typeOf<T>().javaType
-                        data.value = gson.fromJson(risultato, typeT::class.java)
-                        Log.d("CLIENTNETWORK", data.value.toString())
+
+                        data = gson.fromJson(risultato, typeT)
+                        Log.d("APICLIENT", data.toString())
 
                     } else{
-                        data.value = null
-                        Log.e("CLIENTNETWORK", "Opra")
-                        Log.e("CLIENTNETWORK", data.value.toString())
+                        data = null
+                        Log.e("APICLIENT", "Opra")
+                        Log.e("APICLIENT", data.toString())
                     }
                 }
             }
         })
+        Log.d("APICLIENT", data.toString())
+        return data
     }
+     */
 
 
 

@@ -1,4 +1,4 @@
-package com.example.studyplanner.database
+package com.example.studyplanner.model
 
 import com.google.gson.annotations.SerializedName
 

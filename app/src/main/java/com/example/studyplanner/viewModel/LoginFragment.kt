@@ -9,12 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import com.example.studyplanner.R
-import com.example.studyplanner.database.AccountDBModel
+import com.example.studyplanner.model.AccountDBModel
 import com.example.studyplanner.database.ApiClient
-import com.example.studyplanner.database.DBMSviewModel
 import com.example.studyplanner.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment(){
@@ -62,18 +59,51 @@ class LoginFragment : Fragment(){
             if (pwInserita.isEmpty())
                 binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
             else {
+
+                ApiClient.login(nomeInserito,pwInserita) { data, error ->
+                    if (error != null) {
+                        // Gestisci l'errore
+                        Log.e("LOGINFRAGMENT", "Si è verificato un errore: $error")
+                    } else if (data != null) {
+                        // Utilizza i dati restituiti
+                        Log.d("LOGINFRAGMENT", "Dati ricevuti: $data")
+                        if (rememberMeCheckBox.isChecked) { //Solo se la check box è stata checkata
+                            saveLoginData()
+                        }
+                        requireActivity().finish()
+
+                    } else {
+                        // Nessun risultato trovato
+                        Log.e("LOGINFRAGMENT", "Dati Errati")
+                        binding.EditTextNomeUtente.setBackgroundResource(R.drawable.error_border_element)
+                        binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
+                    }
+                }
+            }
+
+
+
+            /*
+            val nomeInserito = binding.EditTextNomeUtente.text.toString().trim()
+            val pwInserita = binding.EditTextPassword.text.toString().trim()
+            if (nomeInserito.isEmpty())
+                binding.EditTextNomeUtente.setBackgroundResource(R.drawable.error_border_element)
+            if (pwInserita.isEmpty())
+                binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
+            else {
                 //VERIFICO LE CREDENZIALI TRAMITE METODO POSTSELECT AL SERVER
+
                 val query = "select * from autenticazione where nome_u_ref = '${nomeInserito}' and password = '${pwInserita}';"
-                DBMSviewModel.login(nomeInserito, pwInserita)
+                ApiClient.login(query)
 
                 //Poichè il metodo postSelect al server è asincrono uso un observer su un LiveData
-                val accountLiveData: LiveData<AccountDBModel> = ApiClient.data
+                val accountLiveData: LiveData<AccountDBModel> = ApiClient.accountData
                 accountLiveData.observe(viewLifecycleOwner, Observer { accountModel ->
                     //Logica per verificare il risultato della query in accordo col metodo login di ApiCLient
                     if(accountModel != null) {
                         if (!accountModel.nomeUtente.isNullOrEmpty()) {
                             //Dati inseriti dall'utente corretti
-                            Log.d("LOGINFRAGMEN", accountModel.nomeUtente.toString())
+                            Log.d("LOGINFRAGMENT", accountModel.nomeUtente.toString())
                             if (rememberMeCheckBox.isChecked) { //Solo se la check box è stata checkata
                                 saveLoginData()
                             }
@@ -81,12 +111,14 @@ class LoginFragment : Fragment(){
                         }
                     }else {
                     // Dati inseriti dall utente errati
-                    Log.e("BOUNDARYDB", "Dati Errati")
+                    Log.e("LOGINFRAGMENT", "Dati Errati")
                     binding.EditTextNomeUtente.setBackgroundResource(R.drawable.error_border_element)
                     binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
                     }
                 })
             }
+
+             */
         }
 
         return binding.root
