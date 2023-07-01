@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/edit_text_border"
         android:drawableLeft="@drawable/baseline_person_24"
@@ -41,13 +41,13 @@
         android:fontFamily="@font/montserrat_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/EditTextPassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:paddingLeft="10dp"
