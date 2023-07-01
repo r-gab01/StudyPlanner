@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.StrictMode
 import com.example.studyplanner.BuildConfig
+import com.example.studyplanner.ProfileFragment
 import com.example.studyplanner.R
 import com.example.studyplanner.databinding.ActivityMainBinding
 
