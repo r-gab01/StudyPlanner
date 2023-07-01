@@ -1,11 +1,13 @@
-package com.example.studyplanner
+package com.example.studyplanner.viewModel
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.studyplanner.model.ExamModel
+import com.example.studyplanner.R
 import com.example.studyplanner.databinding.ExamsCardViewBinding
 
-class ExamAdapter(private val examsList: List<ExamViewModel>) : RecyclerView.Adapter<ExamAdapter.ViewHolder>() {
+class ExamAdapter(private val examsList: List<ExamModel>) : RecyclerView.Adapter<ExamAdapter.ViewHolder>() {
 
     class ViewHolder(binding: ExamsCardViewBinding): RecyclerView.ViewHolder(binding.root) {
         val title = binding.titleCardView

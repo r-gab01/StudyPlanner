@@ -6,10 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.studyplanner.R
 import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.FragmentRecuperoPassBinding
-import com.example.studyplanner.model.SharedData
 
 
 class RecuperoPassFragment : Fragment() {
@@ -24,9 +24,9 @@ class RecuperoPassFragment : Fragment() {
 
         binding.buttonRecupero.setOnClickListener {
 
-            val nomeInserito = binding.nomeUtenteTextEdit.text.trim()
-            val domandaInserita = binding.campoInserisciDomanda.text.trim()
-            val rispostaInserita = binding.campoInserisciRisposta.text.trim()
+            val nomeInserito = binding.nomeUtenteTextEdit.text.trim().toString()
+            val domandaInserita = binding.campoInserisciDomanda.text.trim().toString()
+            val rispostaInserita = binding.campoInserisciRisposta.text.trim().toString()
             if (nomeInserito.isEmpty())
                 binding.nomeUtenteTextEdit.setBackgroundResource(R.drawable.error_border_element)
             if (domandaInserita.isEmpty())
@@ -34,7 +34,26 @@ class RecuperoPassFragment : Fragment() {
             if (rispostaInserita.isEmpty())
                 binding.campoInserisciRisposta.setBackgroundResource(R.drawable.error_border_element)
             else {
-
+                ApiClient.recuperoPW(
+                    nomeInserito,
+                    domandaInserita,
+                    rispostaInserita
+                ) { data, error ->
+                    if (error != null) {
+                        // Gestisci l'errore
+                        Log.e("RECUPEROPW", "Si è verificato un errore: $error")
+                    } else if (data != null) {
+                        // Utilizza i dati restituiti
+                        Log.d("RECUPEROPW", "Dati ricevuti: $data")
+                        binding.mostraPass1.text = "La tua password è:"
+                        binding.mostraPass2.text = data.password.toString()
+                    } else{
+                        Toast.makeText(activity,"Dati errati", Toast.LENGTH_LONG).show()
+                        binding.nomeUtenteTextEdit.setBackgroundResource(R.drawable.error_border_element)
+                        binding.campoInserisciDomanda.setBackgroundResource(R.drawable.error_border_element)
+                        binding.campoInserisciRisposta.setBackgroundResource(R.drawable.error_border_element)
+                    }
+                }
             }
         }
         return binding.root
