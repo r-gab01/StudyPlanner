@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".LegendFragment"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    >
+
+  <TextView
+      android:id="@+id/titleLegend"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/TitleLegend"
+      android:fontFamily="@font/montserrat_medium"
+      android:textSize="25sp"
+      android:textStyle="bold"
+      android:textColor="@color/black"
+      android:layout_marginLeft="15dp"/>
+
+    <TextView
+        android:id="@+id/descriptionLegend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/DescriptionLegend"
+        android:fontFamily="@font/montserrat_light"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_menu_book_24"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="30dp"
+            android:text="@string/iconBook"
+            android:fontFamily="@font/montserrat_light"
+            android:textSize="17sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_battery_charging_full_24"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="30dp"
+            android:text="@string/iconBatteryCharging"
+            android:fontFamily="@font/montserrat_light"
+            android:textSize="17sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonReturn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat_light"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="@string/ButtonBack"/>
+
+
+
+
+</LinearLayout>
