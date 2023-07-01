@@ -1,4 +1,4 @@
-package com.example.studyplanner
+package com.example.studyplanner.viewModel
 
 import android.os.Bundle
 import android.text.Editable
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import com.example.studyplanner.R
 import com.example.studyplanner.databinding.FragmentRegistrazioneBinding
 
 
@@ -33,7 +34,8 @@ class RegistrazioneFragment : Fragment() {
         val textSpinner= binding.textSpinner
 
         // Definisco l'adapter per lo Spinner
-        val adapter = ArrayAdapter.createFromResource(requireContext(), R.array.spinner_items, android.R.layout.simple_spinner_item)
+        val adapter = ArrayAdapter.createFromResource(requireContext(),
+            R.array.spinner_items, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 

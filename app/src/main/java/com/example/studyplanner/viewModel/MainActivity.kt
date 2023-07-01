@@ -1,9 +1,11 @@
-package com.example.studyplanner
+package com.example.studyplanner.viewModel
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.StrictMode
+import com.example.studyplanner.BuildConfig
+import com.example.studyplanner.R
 import com.example.studyplanner.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -108,7 +110,7 @@ class MainActivity : AppCompatActivity() {
 
 
         private fun login(){
-            val i = Intent(this, LoginActivity:: class.java)
+            val i = Intent(this, LoginActivity::class.java)
             startActivity(i)
         }
 

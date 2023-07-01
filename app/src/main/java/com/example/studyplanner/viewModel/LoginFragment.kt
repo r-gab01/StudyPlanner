@@ -1,4 +1,4 @@
-package com.example.studyplanner
+package com.example.studyplanner.viewModel
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -14,9 +14,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
-import com.example.studyplanner.database.ClientNetwork
+import com.example.studyplanner.R
+import com.example.studyplanner.model.AccountDBModel
+import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.FragmentLoginBinding
-import com.example.studyplanner.model.SharedData
 
 class LoginFragment : Fragment(){
 
@@ -93,36 +94,66 @@ class LoginFragment : Fragment(){
             if (pwInserita.isEmpty())
                 binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
             else {
-                //QUERY AL DB PER VERIFICARE CREDENZIALI
-                val query =
-                    "select * from autenticazione where nome_u_ref = '${nomeInserito}' and password = '${pwInserita}';"
-                ClientNetwork.selectValue(query) { result, error ->
+
+                ApiClient.login(nomeInserito,pwInserita) { data, error ->
                     if (error != null) {
                         // Gestisci l'errore
-                        Log.e("DB", "Errore nella chiamata: ${error.message}")
-                    } else {
-                        // Utilizza il JsonObject risultante
-                        if (result != null) {
-                            // Esegui le operazioni necessarie con il result
-                            if (rememberMeCheckBox.isChecked) { //Solo se la check box è stata checkata
-                                saveLoginData()
-                            }
-                            SharedData.nomeUtente = nomeInserito
-                            SharedData.password = pwInserita
-                            SharedData.correctLogin = true
-                            Log.d("LOGIN", SharedData.nomeUtente)
-                            Log.d("LOGIN", SharedData.password)
-                            requireActivity().finish()
-
-                        } else {
-                            // Nessun result restituito
-                            Log.e("BOUNDARYDB", "Dati Errati")
-                            binding.EditTextNomeUtente.setBackgroundResource(R.drawable.error_border_element)
-                            binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
+                        Log.e("LOGINFRAGMENT", "Si è verificato un errore: $error")
+                    } else if (data != null) {
+                        // Utilizza i dati restituiti
+                        Log.d("LOGINFRAGMENT", "Dati ricevuti: $data")
+                        if (rememberMeCheckBox.isChecked) { //Solo se la check box è stata checkata
+                            saveLoginData()
                         }
+                        requireActivity().finish()
+
+                    } else {
+                        // Nessun risultato trovato
+                        Log.e("LOGINFRAGMENT", "Dati Errati")
+                        binding.EditTextNomeUtente.setBackgroundResource(R.drawable.error_border_element)
+                        binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
                     }
                 }
             }
+
+
+
+            /*
+            val nomeInserito = binding.EditTextNomeUtente.text.toString().trim()
+            val pwInserita = binding.EditTextPassword.text.toString().trim()
+            if (nomeInserito.isEmpty())
+                binding.EditTextNomeUtente.setBackgroundResource(R.drawable.error_border_element)
+            if (pwInserita.isEmpty())
+                binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
+            else {
+                //VERIFICO LE CREDENZIALI TRAMITE METODO POSTSELECT AL SERVER
+
+                val query = "select * from autenticazione where nome_u_ref = '${nomeInserito}' and password = '${pwInserita}';"
+                ApiClient.login(query)
+
+                //Poichè il metodo postSelect al server è asincrono uso un observer su un LiveData
+                val accountLiveData: LiveData<AccountDBModel> = ApiClient.accountData
+                accountLiveData.observe(viewLifecycleOwner, Observer { accountModel ->
+                    //Logica per verificare il risultato della query in accordo col metodo login di ApiCLient
+                    if(accountModel != null) {
+                        if (!accountModel.nomeUtente.isNullOrEmpty()) {
+                            //Dati inseriti dall'utente corretti
+                            Log.d("LOGINFRAGMENT", accountModel.nomeUtente.toString())
+                            if (rememberMeCheckBox.isChecked) { //Solo se la check box è stata checkata
+                                saveLoginData()
+                            }
+                            requireActivity().finish()
+                        }
+                    }else {
+                    // Dati inseriti dall utente errati
+                    Log.e("LOGINFRAGMENT", "Dati Errati")
+                    binding.EditTextNomeUtente.setBackgroundResource(R.drawable.error_border_element)
+                    binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
+                    }
+                })
+            }
+
+             */
         }
 
         return binding.root

@@ -1,12 +1,12 @@
-package com.example.studyplanner
+package com.example.studyplanner.viewModel
 
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import cn.iwgang.countdownview.CountdownView
+import com.example.studyplanner.R
 import com.example.studyplanner.databinding.FragmentStudyBinding
 
 

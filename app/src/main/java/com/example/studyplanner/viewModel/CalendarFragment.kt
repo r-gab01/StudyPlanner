@@ -1,4 +1,4 @@
-package com.example.studyplanner
+package com.example.studyplanner.viewModel
 
 import android.content.Intent
 import android.os.Bundle
@@ -27,7 +27,7 @@ class CalendarFragment : Fragment() {
         val ExamButton=binding.addExamButton
 
         ExamButton.setOnClickListener{
-            val i= Intent(requireContext(),AddExamActivity:: class.java)
+            val i= Intent(requireContext(), AddExamActivity:: class.java)
             startActivity(i)
         }
 
