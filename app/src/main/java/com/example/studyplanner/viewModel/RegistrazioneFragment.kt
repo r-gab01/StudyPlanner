@@ -2,13 +2,16 @@ package com.example.studyplanner.viewModel
 
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.example.studyplanner.R
+import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.FragmentRegistrazioneBinding
 
 
@@ -21,6 +24,18 @@ class RegistrazioneFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding= FragmentRegistrazioneBinding.inflate(inflater)
+        ApiClient.selectCorsoStudio { data, error ->
+            if (error != null) {
+                // Gestisci l'errore
+                Log.e("REGISTRAZIONE", "Si è verificato un errore: $error")
+            } else if (data != null) {
+                // Utilizza i dati restituiti
+                Log.d("REGISTRAZIONE", "Dati ricevuti: $data")
+
+            } else{
+                Log.d("REGISTRAZIONE", "Dati ricevuti: $data")
+            }
+        }
 
 
 
@@ -35,7 +50,7 @@ class RegistrazioneFragment : Fragment() {
 
         // Definisco l'adapter per lo Spinner
         val adapter = ArrayAdapter.createFromResource(requireContext(),
-            R.array.spinner_items, android.R.layout.simple_spinner_item)
+            R.array.spinner_domanda_s_items, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 

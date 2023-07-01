@@ -7,8 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.studyplanner.ExamAdapter
-import com.example.studyplanner.ExamViewModel
+import com.example.studyplanner.model.ExamModel
 import com.example.studyplanner.databinding.FragmentExamsBinding
 
 class ExamsFragment : Fragment() {
@@ -27,10 +26,10 @@ class ExamsFragment : Fragment() {
 
         //qua prendo i dati da mandare all'adapter,
         //DOVREI PRENDERLI DAL DB
-        val data = ArrayList<ExamViewModel>()
-        data.add(ExamViewModel("GEOMETRIA", "14 luglio", 15, 0))
-        data.add(ExamViewModel("Analisi", "14 luglio", 15, 0))
-        data.add(ExamViewModel("ESERCIZI DI LATINO", "28 giugno", 7,1))
+        val data = ArrayList<ExamModel>()
+        data.add(ExamModel("GEOMETRIA", "14 luglio", 15, 0))
+        data.add(ExamModel("Analisi", "14 luglio", 15, 0))
+        data.add(ExamModel("ESERCIZI DI LATINO", "28 giugno", 7,1))
 
         val adapter = ExamAdapter(data)
         binding.recyclerview.adapter = adapter

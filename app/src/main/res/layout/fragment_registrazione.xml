@@ -125,6 +125,7 @@
                 android:layout_weight="0"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:gravity="center"
                 android:contentDescription="seleziona la domanda di sicurezza"
                 android:textColor="@color/black" />
 
@@ -141,6 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/edit_text_border"
+                android:layout_gravity="center"
                 android:hint="@string/scegliDomSic"
                 android:paddingLeft="15dp"
                 android:paddingRight="10dp"
@@ -153,6 +155,7 @@
                 android:id="@+id/spinnerDomanda"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:gravity="center"
                 android:contentDescription="seleziona la domanda di sicurezza"
                 android:textColor="@color/black"
                 android:layout_weight="0"/>
