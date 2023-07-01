@@ -2,12 +2,17 @@ package com.example.studyplanner
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import com.example.studyplanner.database.ClientNetwork
 import com.example.studyplanner.databinding.FragmentLoginBinding
@@ -17,6 +22,8 @@ class LoginFragment : Fragment(){
 
     private lateinit var binding : FragmentLoginBinding
     private lateinit var sharedPreferences: SharedPreferences
+    private var passwordVisible = true
+    private lateinit var eyeIcon: Drawable
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,7 +32,32 @@ class LoginFragment : Fragment(){
 
         binding= FragmentLoginBinding.inflate(inflater)
 
+        var passwordVisible=true
+        var eyeIcon = ContextCompat.getDrawable(requireContext(), R.drawable.baseline_remove_red_eye_24)!!
 
+        // Aggiungo il seguente codice per impostare l'OnClickListener sull'icona dell'occhio
+        binding.EditTextPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            ContextCompat.getDrawable(requireContext(), R.drawable.baseline_lock_24),
+            null,
+            eyeIcon,
+            null
+        )
+        binding.EditTextPassword.setOnTouchListener { _, event ->
+            val drawableEnd = 2 // L'indice 2 corrisponde all'icona a destra nella vista.
+            // Verifica se l'area di tocco corrisponde all'icona dell'occhio.
+            val isDrawableClicked =
+                event.x >= (binding.EditTextPassword.width - binding.EditTextPassword.paddingEnd - binding.EditTextPassword.compoundDrawables[drawableEnd].bounds.width()) && event.action == MotionEvent.ACTION_UP
+            //Controllo se la coordinata X dell'evento di tocco è maggiore o uguale alla larghezza dell'EditTextPassword meno il padding a destra meno la larghezza dell'icona dell'occhio.
+            //event.action == MotionEvent.ACTION_UP - In questo modo verifico se l'azione del tocco è un rilascio del dito (evento ACTION_UP).
+            if (isDrawableClicked) {
+                if (event.action == MotionEvent.ACTION_UP) {
+                    PasswordVisibility()
+                }
+                true
+            } else {
+                false
+            }
+        }
 
 
         binding.textViewPasswordDimenticata.setOnClickListener{
@@ -116,4 +148,25 @@ class LoginFragment : Fragment(){
 
     }
 
+
+
+  fun PasswordVisibility() {
+      val passwordEditText= binding.EditTextPassword
+        passwordVisible = !passwordVisible
+
+        if (passwordVisible) {
+            passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            eyeIcon = ContextCompat.getDrawable(requireContext(), R.drawable.icons8_eye_24)!!
+        } else {
+            passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+            eyeIcon = ContextCompat.getDrawable(requireContext(), R.drawable.baseline_remove_red_eye_24)!!
+        }
+
+        passwordEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            ContextCompat.getDrawable(requireContext(), R.drawable.baseline_lock_24),
+            null,
+            eyeIcon,
+            null
+        )
+    }
 }

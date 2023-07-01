@@ -75,8 +75,8 @@
     <string name="title_media_aritmetica">MEDIA ARITMETICA</string>
     <string name="title_media_ponderata">MEDIA PONDERATA</string>
     <string name="title_media_pagine_studiate">MEDIA PAGINE STUDIATE</string>
-    <string name="pagine_al_giorno">Al Giorno</string>
-    <string name="pagine_all_ora"> All Ora</string>
+    <string name="pagine_al_giorno">Al giorno:</string>
+    <string name="pagine_all_ora"> All\'ora:</string>
 
 
     <!-- MICHELE -->

@@ -1,5 +1,8 @@
 package com.example.studyplanner
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.method.ReplacementTransformationMethod
 import android.view.LayoutInflater
@@ -15,6 +18,7 @@ import com.example.studyplanner.databinding.FragmentProfileBinding
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
+    private lateinit var sharedPreferences: SharedPreferences //ci serve per effettuare il logout
 
 
     override fun onCreateView(
@@ -22,6 +26,23 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding= FragmentProfileBinding.inflate(inflater)
+
+        val bottoneLogout= binding.logoutButton
+
+        //Implemento il Logout
+        bottoneLogout.setOnClickListener{
+            sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.remove("Nome Utente")
+            editor.remove("password")
+            editor.remove("isLoggedIn")
+            editor.apply()
+
+            // Reindirizziamo l'utente alla schermata di accesso
+            val i = Intent(requireContext(), MainActivity::class.java)
+            startActivity(i)
+            requireActivity().finish() //Per terminare l'attività ospitante e tornare alla schermata di accesso.
+        }
 
         val editProfile= binding.editProfileIcon
         var isEditMode = true
@@ -67,8 +88,6 @@ class ProfileFragment : Fragment() {
 
         val editTextPass= binding.textPass
         convertToAsterisks(editTextPass)
-
-
 
         var buttonLegend= binding.legendButton
 
