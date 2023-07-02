@@ -2,7 +2,7 @@ package com.example.studyplanner.model
 
 import com.google.gson.annotations.SerializedName
 
-data class CorsoStudioModel(
+data class CorsoStudioDBModel(
     @SerializedName("id_corso")
     var idCorso: Int? = -1,
 

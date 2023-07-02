@@ -2,7 +2,7 @@ package com.example.studyplanner.database
 
 import android.util.Log
 import com.example.studyplanner.model.AccountDBModel
-import com.example.studyplanner.model.CorsoStudioModel
+import com.example.studyplanner.model.CorsoStudioDBModel
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -111,8 +111,8 @@ object ApiClient {
         })
     }
 
-    fun selectCorsoStudio( callback: (List<CorsoStudioModel?>?, Throwable?) -> Unit) {        //sfrutto callback per gestire metodo post asincrono
-        var data = ArrayList<CorsoStudioModel?>() //scelgo la data class con cui voglio restituiti i dati
+    fun selectCorsoStudio( callback: (List<CorsoStudioDBModel?>?, Throwable?) -> Unit) {        //sfrutto callback per gestire metodo post asincrono
+        var data = ArrayList<CorsoStudioDBModel?>() //scelgo la data class con cui voglio restituiti i dati
         val query = "select * from corso_di_studio;"
         apiService.select(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -121,7 +121,7 @@ object ApiClient {
                     if (res != null && res.size() > 0) {
                         for (i in 0 until res.size()) {
                             val result = res.get(i).asJsonObject                            //result è un jsonObject
-                            data.add(gson.fromJson(result, CorsoStudioModel::class.java))        //deserializzo l'oggetto nella classe selezionata
+                            data.add(gson.fromJson(result, CorsoStudioDBModel::class.java))        //deserializzo l'oggetto nella classe selezionata
                         }
                         Log.d("APICLIENT", data.toString())
                         callback(data.toList(), null)
