@@ -86,6 +86,19 @@ class LoginFragment : Fragment(){
         var tastoLogin= binding.buttonLogin
         var rememberMeCheckBox= binding.checkBox
 
+        sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+
+        // Verifico se l'utente ha già effettuato l'accesso in precedenza
+        var isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+        if (isLoggedIn) {
+            val savedUsername = sharedPreferences.getString("Nome Utente", "")
+            val savedPassword = sharedPreferences.getString("password", "")
+
+            binding.EditTextNomeUtente.setText(savedUsername)
+            binding.EditTextPassword.setText(savedPassword)
+            rememberMeCheckBox.isChecked = true
+        }
+
         tastoLogin.setOnClickListener {
             val nomeInserito = binding.EditTextNomeUtente.text.toString().trim()
             val pwInserita = binding.EditTextPassword.text.toString().trim()
@@ -94,7 +107,6 @@ class LoginFragment : Fragment(){
             if (pwInserita.isEmpty())
                 binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
             else {
-
                 ApiClient.login(nomeInserito,pwInserita) { data, error ->
                     if (error != null) {
                         // Gestisci l'errore
@@ -165,7 +177,7 @@ class LoginFragment : Fragment(){
         val password= binding.EditTextPassword.text.toString()
         val isLoggedIn= binding.checkBox.isChecked
 
-        sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+
         val editor = sharedPreferences.edit()
         editor.putString("Nome Utente", nomeUtente)
         editor.putString("password", password)
@@ -178,7 +190,6 @@ class LoginFragment : Fragment(){
         return fragment != null
 
     }
-
 
 
   fun PasswordVisibility() {
