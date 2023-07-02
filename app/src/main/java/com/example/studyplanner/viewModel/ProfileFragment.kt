@@ -73,13 +73,13 @@ class ProfileFragment : Fragment() {
 
         editAccountButton.setOnClickListener{
             if(isEditAccount){
-                binding.editUsername.isEnabled=true
+              //  binding.editUsername.isEnabled=true
                 binding.textPass.isEnabled=true
 
                 editAccountButton.text= "Conferma modifiche"
                 isEditAccount=false
             }else{
-                binding.editUsername.isEnabled=false
+               // binding.editUsername.isEnabled=false
                 binding.textPass.isEnabled=false
 
                 editAccountButton.text= "Modifica credenziali"
