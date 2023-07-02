@@ -13,6 +13,7 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.studyplanner.databinding.FragmentProfileBinding
+import com.example.studyplanner.model.DataSingleton
 import com.example.studyplanner.viewModel.LegendFragment
 import com.example.studyplanner.viewModel.MainActivity
 
@@ -31,9 +32,9 @@ class ProfileFragment : Fragment() {
 
         val bottoneLogout= binding.logoutButton
 
+        sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         //Implemento il Logout
         bottoneLogout.setOnClickListener{
-            sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
             editor.remove("Nome Utente")
             editor.remove("password")
@@ -45,6 +46,27 @@ class ProfileFragment : Fragment() {
             startActivity(i)
             requireActivity().finish() //Per terminare l'attività ospitante e tornare alla schermata di accesso.
         }
+
+        //Se l'utente ha checkato la checkbox allora sfrutto i dati salvati nelle sharedPreferences
+        var loggedIn: Boolean = sharedPreferences.getBoolean("isLoggedIn", false)
+
+        if(!loggedIn){
+            //Mostro nel riquadro nome utente e password dell'utente che ha fatto login. Uso il singleton "DataSingleton". Questo se l'utente non ha checkato la checkboc
+            val singleton= DataSingleton.ottieniIstanza()
+            binding.editUsername.setText(singleton.nomeUtente)
+            binding.textPass.setText(singleton.password)
+        }else{
+            val savedUsername = sharedPreferences.getString("Nome Utente", "")
+            val savedPassword = sharedPreferences.getString("password", "")
+            binding.editUsername.setText(savedUsername)
+            binding.textPass.setText(savedPassword)
+        }
+
+      /*  val savedUsername = sharedPreferences.getString("Nome Utente", "")
+        val savedPassword = sharedPreferences.getString("password", "")
+
+        binding.editUsername.setText(savedUsername)
+        binding.textPass.setText(savedPassword) */
 
         val editProfile= binding.editProfileIcon
         var isEditMode = true
@@ -88,8 +110,8 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        val editTextPass= binding.textPass
-        convertToAsterisks(editTextPass)
+        //val editTextPass= binding.textPass
+        //convertToAsterisks(editTextPass)
 
         var buttonLegend= binding.legendButton
 

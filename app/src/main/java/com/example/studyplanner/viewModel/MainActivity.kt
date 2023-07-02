@@ -1,6 +1,8 @@
 package com.example.studyplanner.viewModel
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.StrictMode
@@ -11,8 +13,9 @@ import com.example.studyplanner.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private var loggedIn: Boolean = false            //variabile che mi permette di verificare se l'utente è loggato o meno
+    //variabile che mi permette di verificare se l'utente è loggato o meno
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         if (BuildConfig.DEBUG) {
             val policy = StrictMode.ThreadPolicy.Builder()
@@ -24,8 +27,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        var sharedPreferences= this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        var loggedIn: Boolean = sharedPreferences.getBoolean("isLoggedIn", false)
+
         if (!loggedIn){                 //se l'utente non è loggato, lancio la schermata di login
-            login()
+            val i = Intent(this, LoginActivity::class.java)
+            startActivity(i)
         }
         //Di default avvio il fragment del calendario
         val manager = supportFragmentManager
@@ -88,7 +95,6 @@ class MainActivity : AppCompatActivity() {
                 else ->false
             }
         }
-
     }
 
     fun fragmentExist(tag: String): Boolean {       //funzione che mi permette di trovare se un fragment è presente tramite il uso tag
@@ -108,14 +114,6 @@ class MainActivity : AppCompatActivity() {
             // per eseguire l'azione di default, ovvero uscire dall'Activity.
         }
     }
-
-
-        private fun login(){
-            val i = Intent(this, LoginActivity::class.java)
-            startActivity(i)
-        }
-
-
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState) //Chiamo l'implementazione del metodo nella classe base per eseguire le operazioni di salvataggio dello stato di base.
