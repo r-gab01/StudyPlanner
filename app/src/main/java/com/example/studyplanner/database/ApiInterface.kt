@@ -8,7 +8,6 @@ import retrofit2.http.*
 
 interface ApiInterface {
 
-
     @POST("postSelect/")
     @FormUrlEncoded
     fun select(@Field("query") query: String): Call<JsonObject>

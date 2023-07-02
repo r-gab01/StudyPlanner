@@ -13,6 +13,7 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.studyplanner.databinding.FragmentProfileBinding
+import com.example.studyplanner.viewModel.LegendFragment
 import com.example.studyplanner.viewModel.MainActivity
 
 

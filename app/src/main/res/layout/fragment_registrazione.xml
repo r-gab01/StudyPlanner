@@ -26,7 +26,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="510dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@drawable/edit_text_border"
         android:orientation="vertical"
@@ -47,13 +47,6 @@
             android:textColor="#2E2E2E"
             android:textSize="19dp" />
 
-        <TextView
-            android:id="@+id/mostraErrori"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text=""
-            />
         <!-- Qua metteremo eventuali errori per campi non compilati o compilati non correttamente -->
 
 
@@ -82,7 +75,7 @@
             android:textSize="18dp" />
 
         <EditText
-            android:id="@+id/ConfPass"
+            android:id="@+id/confPass"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
@@ -93,6 +86,7 @@
             android:textSize="18dp" />
 
         <EditText
+            android:id="@+id/insUni"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
@@ -102,65 +96,66 @@
             android:textColor="@color/black"
             android:textSize="18dp" />
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="9dp"
+            android:gravity="center"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            app:boxCornerRadiusTopEnd="30dp"
+            app:boxCornerRadiusBottomEnd="30dp"
+            app:boxCornerRadiusTopStart="30dp"
+            app:boxCornerRadiusBottomStart="30dp"
+            >
 
-            <EditText
+            <AutoCompleteTextView
+                android:id="@+id/insCorso"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@drawable/edit_text_border"
-                android:hint="@string/corso"
-                android:paddingLeft="15dp"
-                android:textColor="@color/black"
-                tools:ignore="Deprecated"
-                android:editable="false"
-                android:textSize="18dp" />
-
-            <Spinner
-                android:id="@+id/spinnerCorso"
-                android:layout_weight="0"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:gravity="center"
-                android:contentDescription="seleziona la domanda di sicurezza"
-                android:textColor="@color/black" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/textSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/scegliCorso"
                 android:background="@drawable/edit_text_border"
                 android:layout_gravity="center"
-                android:hint="@string/scegliDomSic"
-                android:paddingLeft="15dp"
-                android:paddingRight="10dp"
-                android:editable="false"
-                android:textSize="16dp"
-                tools:ignore="Deprecated"
-                android:layout_weight="1"/>
+                android:inputType="none"
+                />
 
-            <Spinner
-                android:id="@+id/spinnerDomanda"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:gravity="center"
-                android:contentDescription="seleziona la domanda di sicurezza"
-                android:textColor="@color/black"
-                android:layout_weight="0"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:gravity="center"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            app:boxCornerRadiusTopEnd="30dp"
+            app:boxCornerRadiusBottomEnd="30dp"
+            app:boxCornerRadiusTopStart="30dp"
+            app:boxCornerRadiusBottomStart="30dp"
+            >
+
+            <AutoCompleteTextView
+                android:id="@+id/insDomanda"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/scegliDomSic"
+                android:background="@drawable/edit_text_border"
+                android:layout_gravity="center"
+                android:inputType="none"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <TextView
+            android:id="@+id/mostraErrori"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text=""
+            android:textSize="18sp"
+            android:textColor="#FF0000"
+            android:layout_gravity="center"
+            />
 
     </LinearLayout>
 
@@ -172,10 +167,13 @@
         android:layout_marginTop="20dp"
         android:textColor="@color/white"
         android:backgroundTint="#4CAF50"
+        style="@style/Widget.Material3.Button.IconButton"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.core.widget.NestedScrollView>

@@ -33,7 +33,6 @@ class LoginFragment : Fragment(){
 
         binding= FragmentLoginBinding.inflate(inflater)
 
-        var passwordVisible=true
         var eyeIcon = ContextCompat.getDrawable(requireContext(), R.drawable.baseline_remove_red_eye_24)!!
 
         // Aggiungo il seguente codice per impostare l'OnClickListener sull'icona dell'occhio
@@ -60,9 +59,8 @@ class LoginFragment : Fragment(){
             }
         }
 
-
         binding.textViewPasswordDimenticata.setOnClickListener{
-             val manager=parentFragmentManager
+            val manager=parentFragmentManager
             if(!fragmentExists(manager, "RecuperoFragment")) {
                 val transaction = manager.beginTransaction()
                 transaction.replace(R.id.containerView_login, RecuperoPassFragment(), "RecuperoFragment")
@@ -87,17 +85,6 @@ class LoginFragment : Fragment(){
         var rememberMeCheckBox= binding.checkBox
 
         sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-
-        // Verifico se l'utente ha già effettuato l'accesso in precedenza
-        var isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
-        if (isLoggedIn) {
-            val savedUsername = sharedPreferences.getString("Nome Utente", "")
-            val savedPassword = sharedPreferences.getString("password", "")
-
-            binding.EditTextNomeUtente.setText(savedUsername)
-            binding.EditTextPassword.setText(savedPassword)
-            rememberMeCheckBox.isChecked = true
-        }
 
         tastoLogin.setOnClickListener {
             val nomeInserito = binding.EditTextNomeUtente.text.toString().trim()
@@ -127,45 +114,6 @@ class LoginFragment : Fragment(){
                     }
                 }
             }
-
-
-
-            /*
-            val nomeInserito = binding.EditTextNomeUtente.text.toString().trim()
-            val pwInserita = binding.EditTextPassword.text.toString().trim()
-            if (nomeInserito.isEmpty())
-                binding.EditTextNomeUtente.setBackgroundResource(R.drawable.error_border_element)
-            if (pwInserita.isEmpty())
-                binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
-            else {
-                //VERIFICO LE CREDENZIALI TRAMITE METODO POSTSELECT AL SERVER
-
-                val query = "select * from autenticazione where nome_u_ref = '${nomeInserito}' and password = '${pwInserita}';"
-                ApiClient.login(query)
-
-                //Poichè il metodo postSelect al server è asincrono uso un observer su un LiveData
-                val accountLiveData: LiveData<AccountDBModel> = ApiClient.accountData
-                accountLiveData.observe(viewLifecycleOwner, Observer { accountModel ->
-                    //Logica per verificare il risultato della query in accordo col metodo login di ApiCLient
-                    if(accountModel != null) {
-                        if (!accountModel.nomeUtente.isNullOrEmpty()) {
-                            //Dati inseriti dall'utente corretti
-                            Log.d("LOGINFRAGMENT", accountModel.nomeUtente.toString())
-                            if (rememberMeCheckBox.isChecked) { //Solo se la check box è stata checkata
-                                saveLoginData()
-                            }
-                            requireActivity().finish()
-                        }
-                    }else {
-                    // Dati inseriti dall utente errati
-                    Log.e("LOGINFRAGMENT", "Dati Errati")
-                    binding.EditTextNomeUtente.setBackgroundResource(R.drawable.error_border_element)
-                    binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
-                    }
-                })
-            }
-
-             */
         }
 
         return binding.root
@@ -175,13 +123,11 @@ class LoginFragment : Fragment(){
         //Recuperiamo i dati scritti dall'utente in fase di Login
         val nomeUtente= binding.EditTextNomeUtente.text.toString()
         val password= binding.EditTextPassword.text.toString()
-        val isLoggedIn= binding.checkBox.isChecked
-
 
         val editor = sharedPreferences.edit()
         editor.putString("Nome Utente", nomeUtente)
         editor.putString("password", password)
-        editor.putBoolean("isLoggedIn", isLoggedIn)
+        editor.putBoolean("isLoggedIn", true)
         editor.apply()
     }
 
@@ -191,9 +137,8 @@ class LoginFragment : Fragment(){
 
     }
 
-
-  fun PasswordVisibility() {
-      val passwordEditText= binding.EditTextPassword
+    fun PasswordVisibility() {
+        val passwordEditText= binding.EditTextPassword
         passwordVisible = !passwordVisible
 
         if (passwordVisible) {
