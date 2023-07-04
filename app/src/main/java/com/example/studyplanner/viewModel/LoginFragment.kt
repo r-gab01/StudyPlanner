@@ -18,6 +18,7 @@ import com.example.studyplanner.R
 import com.example.studyplanner.model.AccountDBModel
 import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.FragmentLoginBinding
+import com.example.studyplanner.model.DataSingleton
 
 class LoginFragment : Fragment(){
 
@@ -102,8 +103,10 @@ class LoginFragment : Fragment(){
                         // Utilizza i dati restituiti
                         Log.d("LOGINFRAGMENT", "Dati ricevuti: $data")
                         if (rememberMeCheckBox.isChecked) { //Solo se la check box è stata checkata
-                            saveLoginData()
+                            saveLoginData(nomeInserito, pwInserita)
                         }
+                        val singleton = DataSingleton.ottieniIstanza()
+                        singleton.nomeUtente = nomeInserito
                         requireActivity().finish()
 
                     } else {
@@ -119,11 +122,8 @@ class LoginFragment : Fragment(){
         return binding.root
     }
 
-    private fun saveLoginData(){
+    private fun saveLoginData(nomeUtente: String, password:String ){
         //Recuperiamo i dati scritti dall'utente in fase di Login
-        val nomeUtente= binding.EditTextNomeUtente.text.toString()
-        val password= binding.EditTextPassword.text.toString()
-
         val editor = sharedPreferences.edit()
         editor.putString("Nome Utente", nomeUtente)
         editor.putString("password", password)

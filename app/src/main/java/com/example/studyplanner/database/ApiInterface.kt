@@ -22,7 +22,7 @@ interface ApiInterface {
 
     @POST("postInsert/")
     @FormUrlEncoded
-    fun unsert(@Field("query") query: String): Call<JsonObject>
+    fun insert(@Field("query") query: String): Call<JsonObject>
 
     @GET
     fun image(@Url url: String): Call<ResponseBody>
