@@ -6,14 +6,16 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.StrictMode
+import android.util.Log
 import com.example.studyplanner.BuildConfig
 import com.example.studyplanner.ProfileFragment
 import com.example.studyplanner.R
+import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.ActivityMainBinding
+import com.example.studyplanner.model.DataSingleton
 
 class MainActivity : AppCompatActivity() {
 
-    //variabile che mi permette di verificare se l'utente è loggato o meno
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,12 +36,40 @@ class MainActivity : AppCompatActivity() {
             val i = Intent(this, LoginActivity::class.java)
             startActivity(i)
         }
-        //Di default avvio il fragment del calendario
-        val manager = supportFragmentManager
-        val transaction = manager.beginTransaction()
+
+        val nomeU: String? = sharedPreferences.getString("Nome Utente", "")
+        val singleton= DataSingleton.ottieniIstanza()
+
+        ApiClient.selectStudente(nomeU){ data, error ->
+            if (error != null) {
+                // Gestisci l'errore
+                Log.e("MAINACTIVITY", "Si è verificato un errore: $error")
+            }else if (data != null) {
+                // Utilizza i dati restituiti
+                Log.d("MAINACTIVITY", "Dati ricevuti: $data")
+                //salvo i dati dello studente nel Sigleton
+                singleton.nome=data.nome
+                singleton.cognome=data.cognome
+                singleton.universita=data.universita
+                singleton.foto=data.foto
+                singleton.dataNascita=data.dataNascita
+                singleton.idCorso=data.idCorso
+            }else{
+                Log.d("SELECTSTUDENTE", "Dati ricevuti: $data")
+            }
+        }
+
+
         val calendarTag = "CalendarFragment"
-        transaction.add(R.id.fragmentContainerView, CalendarFragment(), calendarTag)
-        transaction.commit()
+        //Di default avvio il fragment del calendario
+        if (savedInstanceState == null) {
+            val manager = supportFragmentManager
+            val transaction = manager.beginTransaction()
+
+            transaction.add(R.id.fragmentContainerView, CalendarFragment(), calendarTag)
+            transaction.commit()
+        }
+
 
         binding.bottomBar.setOnItemSelectedListener { item ->
             when (item.itemId){

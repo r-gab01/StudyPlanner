@@ -12,6 +12,19 @@ class DataSingleton private constructor() {
         }
     }
 
+    fun reset(){
+        nomeUtente=" "
+        password=" "
+        domandaS=""
+        rispostaS=""
+        nome=""
+        cognome=""
+        foto=""
+        dataNascita=""
+        universita=""
+        idCorso=-1
+    }
+
 
         var nomeUtente: String? = ""
         var password: String? = ""

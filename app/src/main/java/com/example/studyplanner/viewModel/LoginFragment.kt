@@ -19,6 +19,7 @@ import com.example.studyplanner.model.AccountDBModel
 import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.FragmentLoginBinding
 import com.example.studyplanner.model.DataSingleton
+import kotlin.math.sin
 
 class LoginFragment : Fragment(){
 
@@ -88,7 +89,7 @@ class LoginFragment : Fragment(){
         sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
         // Verifico se l'utente ha già effettuato l'accesso in precedenza
-     /*   var isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+     /*var isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
         if (isLoggedIn) {
             val savedUsername = sharedPreferences.getString("Nome Utente", "")
             val savedPassword = sharedPreferences.getString("password", "")
@@ -96,7 +97,7 @@ class LoginFragment : Fragment(){
             binding.EditTextNomeUtente.setText(savedUsername)
             binding.EditTextPassword.setText(savedPassword)
             rememberMeCheckBox.isChecked = true
-        } */
+        }*/
 
         tastoLogin.setOnClickListener {
             val nomeInserito = binding.EditTextNomeUtente.text.toString().trim()
@@ -112,7 +113,29 @@ class LoginFragment : Fragment(){
                         Log.e("LOGINFRAGMENT", "Si è verificato un errore: $error")
                     } else if (data != null) {
                         // Utilizza i dati restituiti
+                        //Intanto salvo alcuni dati nel singleton che mi potranno servire dopo
+                        val singleton= DataSingleton.ottieniIstanza()
+                        singleton.domandaS=data.domandaS
+                        singleton.rispostaS=data.rispostaS
                         Log.d("LOGINFRAGMENT", "Dati ricevuti: $data")
+                        ApiClient.selectStudente(nomeInserito){data,error ->
+                            if (error != null) {
+                                // Gestisci l'errore
+                                Log.e("SELECTSTUDENTE", "Si è verificato un errore: $error")
+                            }else if (data != null) {
+                                // Utilizza i dati restituiti
+                                Log.d("SELECTSTUDENTE", "Dati ricevuti: $data")
+                                //salvo i dati dello studente nel Sigleton
+                                singleton.nome=data.nome
+                                singleton.cognome=data.cognome
+                                singleton.universita=data.universita
+                                singleton.foto=data.foto
+                                singleton.dataNascita=data.dataNascita
+                                singleton.idCorso=data.idCorso
+                            }else{
+                                Log.d("SELECTSTUDENTE", "Dati ricevuti: $data")
+                            }
+                        }
                         if (rememberMeCheckBox.isChecked) { //Solo se la check box è stata checkata
                             saveLoginData(nomeInserito,pwInserita)
                         }else{
@@ -168,9 +191,6 @@ class LoginFragment : Fragment(){
     }
 
     private fun saveLoginData(nomeU: String,pass: String){ //funzione che gestisce il salvataggio dei dati nel caso in cui l'utente prema la check box (tramite le sharedPreferences)
-        //Recuperiamo i dati scritti dall'utente in fase di Login
-       // val nomeUtente= binding.EditTextNomeUtente.text.toString()
-      //  val password= binding.EditTextPassword.text.toString()
 
         val editor = sharedPreferences.edit()
         editor.putString("Nome Utente", nomeU)

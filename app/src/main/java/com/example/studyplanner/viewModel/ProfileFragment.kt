@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.method.ReplacementTransformationMethod
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.FragmentProfileBinding
 import com.example.studyplanner.model.DataSingleton
 import com.example.studyplanner.viewModel.LegendFragment
@@ -41,6 +43,8 @@ class ProfileFragment : Fragment() {
             editor.remove("isLoggedIn")
             editor.apply()
 
+            val singleton= DataSingleton.ottieniIstanza()
+            singleton.reset()
             // Reindirizziamo l'utente alla schermata di accesso
             val i = Intent(requireContext(), MainActivity::class.java)
             startActivity(i)
@@ -49,10 +53,10 @@ class ProfileFragment : Fragment() {
 
         //Se l'utente ha checkato la checkbox allora sfrutto i dati salvati nelle sharedPreferences
         var loggedIn: Boolean = sharedPreferences.getBoolean("isLoggedIn", false)
+        val singleton= DataSingleton.ottieniIstanza()
 
         if(!loggedIn){
             //Mostro nel riquadro nome utente e password dell'utente che ha fatto login. Uso il singleton "DataSingleton". Questo se l'utente non ha checkato la checkboc
-            val singleton= DataSingleton.ottieniIstanza()
             binding.editUsername.setText(singleton.nomeUtente)
             binding.textPass.setText(singleton.password)
         }else{
@@ -67,6 +71,11 @@ class ProfileFragment : Fragment() {
 
         binding.editUsername.setText(savedUsername)
         binding.textPass.setText(savedPassword) */
+
+        //Riempio grazie al singleton i riquadri relativi all'utente che ha fatto l'accesso
+        binding.editName.setText(singleton.nome)
+        binding.editSurname.setText(singleton.cognome)
+        binding.editUniversity.setText(singleton.universita)
 
         val editProfile= binding.editProfileIcon
         var isEditMode = true
@@ -104,8 +113,27 @@ class ProfileFragment : Fragment() {
             }else{
                // binding.editUsername.isEnabled=false
                 binding.textPass.isEnabled=false
-
                 editAccountButton.text= "Modifica credenziali"
+
+                val newPassword= binding.textPass.text.toString()
+                val nomeU= binding.editUsername.text.toString()
+                //Facciamo l'update della pass anche nel DB
+                ApiClient.updatePass(nomeU,newPassword){boolean,error ->
+                    if (error != null) {
+                        // Gestisco l'errore
+                        Log.e("UPDATEPASS", "Si è verificato un errore: $error")
+                    }else if (boolean==true) {
+                        // Utilizzo i dati restituiti e aggiorno le sharedPreferences
+                        val editor=sharedPreferences.edit()
+                        editor.putString("password", newPassword)
+                        editor.apply()
+                        //aggiorno anche il singleton
+                        singleton.password= newPassword
+                        Log.d("UPDATEPASS", "Boolean ricevuti: $boolean")
+                    }else{
+                        Log.d("UPDATEPASS", "Dati ricevuti: $boolean")
+                    }
+                }
                 isEditAccount=true
             }
         }
