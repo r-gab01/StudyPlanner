@@ -326,17 +326,17 @@
 
                 </LinearLayout>
 
-           <Button
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center"
-               android:text="@string/modCredenziali"
-               android:fontFamily="@font/montserrat_light"
-               android:textStyle="bold"
-               android:textSize="15sp"
-               android:drawableRight="@drawable/baseline_edit_24"
-               android:layout_marginBottom="10dp"
-               android:layout_marginTop="10dp"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:drawableRight="@drawable/baseline_edit_24"
+                    android:fontFamily="@font/montserrat_light"
+                    android:text="@string/modCredenziali"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
 
             </LinearLayout>

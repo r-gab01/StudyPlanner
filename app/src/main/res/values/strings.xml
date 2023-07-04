@@ -72,9 +72,17 @@
     <string name="title_media_pagine_studiate">MEDIA PAGINE STUDIATE</string>
     <string name="pagine_al_giorno">Al Giorno</string>
     <string name="pagine_all_ora"> All Ora</string>
+    <string name="title_preparazione"> PREPARAZIONE</string>
+    <string name="title_giorno_dell_esame">GIORNO DELL\'ESAME</string>
+    <string name="title_giorni_rimanenti">GIORNI RIMANENTI</string>
+    <string name="title_pagine_totali">PAGINE TOTALI</string>
+    <string name="title_pagine_rimanenti">PAGINE RIMANENTI</string>
+    <string name="title_pagine_consigliate_giornalmente">PAGINE GIORNALIERE CONSIGLIATE</string>
+    <string name="title_chip_Info">INFO GENERALI</string>
+    <string name="title_chip_Materiale">MATERIALE</string>
 
 
-    <!-- MICHELE -->
+    <!-- GABRIELE -->
     <string name="tagArgumentsEventFragment">Data</string>
 
     <string name="title_exams_fragment">I MIEI ESAMI ED ESERCIZI</string>
