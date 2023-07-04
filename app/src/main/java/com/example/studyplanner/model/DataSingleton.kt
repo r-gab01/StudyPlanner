@@ -23,6 +23,7 @@ class DataSingleton private constructor() {
         dataNascita=""
         universita=""
         idCorso=-1
+        corsoStudi=""
     }
 
 
@@ -35,6 +36,7 @@ class DataSingleton private constructor() {
         var foto: String? = ""
         var dataNascita: String? = ""
         var universita: String? = ""
-        var idCorso: Int = -1
+        var idCorso: Int? = -1
+        var corsoStudi: String? = ""
 
 }

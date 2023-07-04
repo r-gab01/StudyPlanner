@@ -131,7 +131,7 @@ class LoginFragment : Fragment(){
                                 singleton.universita=data.universita
                                 singleton.foto=data.foto
                                 singleton.dataNascita=data.dataNascita
-                                singleton.idCorso=data.idCorso
+                                selectCorso(data.idCorso)
                             }else{
                                 Log.d("SELECTSTUDENTE", "Dati ricevuti: $data")
                             }
@@ -231,5 +231,24 @@ class LoginFragment : Fragment(){
             eyeIcon,
             null
         )
+    }
+
+    fun selectCorso(idCorso: Int?){
+        //query per fare la select del corso di studi
+        ApiClient.selectCorso(idCorso){ data, error ->
+            if (error != null) {
+                // Gestisci l'errore
+                Log.e("CORSO", "Si è verificato un errore: $error")
+            }else if (data != null) {
+                // Utilizza i dati restituiti
+                Log.d("CORSO", "Dati ricevuti: $data")
+                //salvo il corso nel Singleton
+                val singleton= DataSingleton.ottieniIstanza()
+                singleton.corsoStudi=data.nomeCorso
+                singleton.idCorso=data.idCorso
+            }else{
+                Log.d("CORSO", "Dati ricevuti: $data")
+            }
+        }
     }
 }

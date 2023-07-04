@@ -76,6 +76,7 @@ class ProfileFragment : Fragment() {
         binding.editName.setText(singleton.nome)
         binding.editSurname.setText(singleton.cognome)
         binding.editUniversity.setText(singleton.universita)
+        binding.editCorso.setText(singleton.corsoStudi)
 
         val editProfile= binding.editProfileIcon
         var isEditMode = true
@@ -94,8 +95,42 @@ class ProfileFragment : Fragment() {
                 binding.editSurname.isEnabled=false
                 binding.editCorso.isEnabled=false
                 binding.editUniversity.isEnabled=false
-
                 editProfile.setImageResource(R.drawable.baseline_edit_24)
+
+                //Prendiamo i nuovi dati scritti dall'utente
+                val newNome= binding.editName.text.toString()
+                val newCognome= binding.editSurname.text.toString()
+                val newUni=binding.editUniversity.text.toString()
+                val newCorso= binding.editCorso.text.toString()
+                //Prendiamo il nome utente che ci serve per fare la query
+                val nomeU= singleton.nomeUtente
+                //Facciamo l'update dei dati anche nel DB
+                ApiClient.updateStudente(newNome,newCognome,newUni,nomeU){boolean,error ->
+                    if (error != null) {
+                        // Gestisco l'errore
+                        Log.e("UPDATESTUD", "Si è verificato un errore: $error")
+                    }else if (boolean==true) {
+                        // Utilizzo i dati restituiti e aggiorno il singleton
+                        singleton.nome= newNome
+                        singleton.cognome= newCognome
+                        singleton.universita= newUni
+                        ApiClient.updateCorso(newCorso,singleton.idCorso){boolean,error ->
+                            if (error != null) {
+                                // Gestisco l'errore
+                                Log.e("UPDATESTUD", "Si è verificato un errore: $error")
+                            }else if (boolean==true) {
+                                // Utilizzo i dati restituiti e aggiorno il singleton
+                                singleton.corsoStudi= newCorso
+                                Log.d("UPDATESTUD", "Boolean ricevuti: $boolean")
+                            }else{
+                                Log.d("UPDATESTUD", "Dati ricevuti: $boolean")
+                            }
+                        }
+                        Log.d("UPDATESTUD", "Boolean ricevuti: $boolean")
+                    }else{
+                        Log.d("UPDATESTUD", "Dati ricevuti: $boolean")
+                    }
+                }
                 isEditMode=true
             }
         }
