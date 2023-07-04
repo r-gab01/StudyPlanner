@@ -1,9 +1,11 @@
 package com.example.studyplanner.viewModel
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import androidx.fragment.app.Fragment
 import cn.iwgang.countdownview.CountdownView
 import com.example.studyplanner.R
@@ -23,8 +25,8 @@ class StudyFragment : Fragment() {
 
         //GESTISCO IL TIMER DELLA LIBRERIA COUNTDOWN VIEW
         val countdownView: CountdownView = binding.countdownView
-        var durata: Int = 45                //questa variabile indica i minuti che l'utente vorrà impostare
-        var tempo: Long = (durata * 60 * 1000).toLong()
+        var durata = 45                //questa variabile indica i minuti che l'utente vorrà impostare
+        var tempo: Long = (durata * 10 * 1000).toLong()
         countdownView.updateShow(tempo)
         binding.playTimerButton.setOnClickListener {        //Da qua Gestisco la logica di quando clicca play e pausa, stoppando il timer e aggiornando la view
             if (!play && !continua) {
@@ -32,14 +34,12 @@ class StudyFragment : Fragment() {
                 binding.playTimerButton.setImageResource(R.drawable.baseline_pause_24)
                 play = true
                 continua = true
-            }
-            else if (play && continua) {
+            } else if (play && continua) {
                 countdownView.stop()
                 binding.playTimerButton.setImageResource(R.drawable.baseline_play_arrow_24)
                 play = false
                 tempo = countdownView.remainTime
-            }
-            else if (!play && continua) {
+            } else if (!play && continua) {
                 countdownView.start(tempo)
                 binding.playTimerButton.setImageResource(R.drawable.baseline_pause_24)
                 play = true
@@ -48,9 +48,27 @@ class StudyFragment : Fragment() {
         }
         binding.stopTimerButton.setOnClickListener {    //Qua gestico la logica del tasto Stop che riavvia il timer
             countdownView.pause()
-            countdownView.updateShow(durata*60*1000.toLong())
+            countdownView.updateShow(durata * 10 * 1000.toLong())
             tempo = countdownView.remainTime
         }
+
+        /*
+        countdownView.setOnCountdownEndListener {
+            val notificationBuilder = NotificationCompat.Builder(requireContext(), resources.getString(R.string.default_notification_channel_id))
+                .setSmallIcon(R.drawable.logoapp)
+                .setContentTitle("Ora della pausa")
+                .setContentText("La tua sessione di studio è terminata")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true)
+
+            // Azione da eseguire quando l'utente tocca la notifica (opzionale)
+            val intent = Intent(context, MainActivity::class.java)
+            val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            notificationBuilder.setContentIntent(pendingIntent)
+
+            val notificationManager = NotificationManagerCompat.from(requireContext())
+            notificationManager.notify(notificationId, notificationBuilder.build())
+            */
 
         //GESTISCO IL BOTTONE TERMINA SESSIONE
         binding.buttonTermina.setOnClickListener {

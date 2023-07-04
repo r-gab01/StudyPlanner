@@ -1,6 +1,5 @@
 package com.example.studyplanner.viewModel
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -47,7 +46,11 @@ class RegistrazioneFragment : Fragment() {
         ApiClient.selectCorsoStudio{ data,error ->
             if (error != null){
                 Log.e("REGISTRAZIONEFRAGMENT", "Si è verificato un errore: $error")
-                Toast.makeText(context,"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                try {
+                    Toast.makeText(requireContext(),"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                } catch (e: Exception){
+
+                }
             }else if (data != null){
                 for (i in data){
                     nomeCorsi.add(i?.nomeCorso)
@@ -58,7 +61,11 @@ class RegistrazioneFragment : Fragment() {
             }
             else{
                 Log.e("REGISTRAZIONEFRAGMENT", "Errore")
-                Toast.makeText(context,"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                try {
+                    Toast.makeText(requireContext(),"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                } catch (e: Exception){
+
+                }
             }
         }
         //riempio il selettore di domande di sicurezza
@@ -108,13 +115,21 @@ class RegistrazioneFragment : Fragment() {
                         ApiClient.registraStudente(nomeIns.toString(),univIns.toString(), idCorsoSelected, pwIns.toString(),domSelected.toString(),rispIns.toString()){ response, error->   //insert nella table Studente
                             if (error!=null){
                                 Log.e("REGISTRAZIONEFRAGMENT", "Si è verificato un errore: $error")
-                                Toast.makeText(context,"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                                try {
+                                    Toast.makeText(requireContext(),"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                                } catch (e: Exception){
+
+                                }
                             }else if (response != null){
                                 errore.setTextColor(Color.GREEN)
                                 errore.text = resources.getString(R.string.confermaRegistrazone)
                             } else{
                                 Log.e("REGISTRAZIONEFRAGMENT", "Errore in registra studente")
-                                Toast.makeText(context,"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                                try {
+                                    Toast.makeText(requireContext(),"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                                } catch (e: Exception){
+
+                                }
                             }
                         }
                     }

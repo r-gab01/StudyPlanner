@@ -4,10 +4,13 @@ import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcelable
+import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.res.ResourcesCompat
 import com.example.studyplanner.R
+import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.ActivityAddExamBinding
 import java.util.*
 
@@ -17,6 +20,9 @@ class AddExamActivity : AppCompatActivity() {
     private val elementList: MutableList<View> = mutableListOf() //Variabile di istanza per memorizzare lo stato degli elementi.
     // Ci serve per mantenere lo stato una volta girato il dispositivo.
     private var lastElementIndex: Int = 0 //variabile di istanza per tenere traccia dell'indice dell'elemento aggiunto più recente
+    val selettoreMateria = binding.selMateria
+    val materiaSel: String? = ""
+    val nomiMaterie = ArrayList<String?>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +43,30 @@ class AddExamActivity : AppCompatActivity() {
             recreateElements()
         }
 
+        ApiClient.selectMaterieCorso(){ data, error ->
+            if (error != null){
+                Log.e("REGISTRAZIONEFRAGMENT", "Si è verificato un errore: $error")
+                try {
+                    Toast.makeText(requireContext(),"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                } catch (e: Exception){
+
+                }
+            }else if (data != null){
+                for (i in data){
+                    nomiMaterie.add(i?.nomeMateria)
+                }
+                val arrayAdapterMaterie = ArrayAdapter(this, R.layout.dropdown_item, nomiMaterie)
+                selettoreMateria.setAdapter(arrayAdapterMaterie)
+            }
+            else{
+                Log.e("REGISTRAZIONEFRAGMENT", "Errore")
+                try {
+                    Toast.makeText(this,"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                } catch (e: Exception){
+
+                }
+            }
+        }
             val addButton = binding.buttonAdd
 
             var editTextDate = binding.insDate
@@ -47,8 +77,8 @@ class AddExamActivity : AppCompatActivity() {
 
             editTextDate.setOnClickListener {
                 // utilizziamo le SharedPreferences per memorizzare e recuperare successivamente la data selezionata.
-               // val sharedPreferences = getSharedPreferences("DatePicker", Context.MODE_PRIVATE)
-               // val dataSelezionata = sharedPreferences.getString("selectedDate", "")
+                // val sharedPreferences = getSharedPreferences("DatePicker", Context.MODE_PRIVATE)
+                // val dataSelezionata = sharedPreferences.getString("selectedDate", "")
 
                 val year: Int
                 val month: Int
@@ -56,16 +86,19 @@ class AddExamActivity : AppCompatActivity() {
 
                 val calendar = Calendar.getInstance()
 
-                if(dataSelezionata.isNullOrEmpty()) {
+                if (dataSelezionata.isNullOrEmpty()) {
                     //Se la data salvata non esiste, utilizziamo la data attuale
                     year = calendar.get(Calendar.YEAR)
                     month = calendar.get(Calendar.MONTH)
                     dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
                 } else {
                     // La data salvata esiste, la convertiamo in valori interi
-                    val selectedDateParts = dataSelezionata!!.split("/") // la stringa dataSelezionata viene suddivisa utilizzando il separatore "/" tramite il metodo split("/"). Questo crea un array di stringhe selectedDateParts, contenente le parti della data (giorno, mese, anno) come elementi separati.
-                    year = selectedDateParts[2].toInt() //assegniamo il valore convertito dell'anno a year
-                    month = selectedDateParts[1].toInt() - 1 // Sottraiamo 1 al mese perché Calendar.MONTH parte da 0
+                    val selectedDateParts =
+                        dataSelezionata!!.split("/") // la stringa dataSelezionata viene suddivisa utilizzando il separatore "/" tramite il metodo split("/"). Questo crea un array di stringhe selectedDateParts, contenente le parti della data (giorno, mese, anno) come elementi separati.
+                    year =
+                        selectedDateParts[2].toInt() //assegniamo il valore convertito dell'anno a year
+                    month =
+                        selectedDateParts[1].toInt() - 1 // Sottraiamo 1 al mese perché Calendar.MONTH parte da 0
                     dayOfMonth = selectedDateParts[0].toInt()
                 }
 
@@ -73,7 +106,8 @@ class AddExamActivity : AppCompatActivity() {
                 //Mostriamo un date picker che inizialmente è settato alla data attuale
                 val datePickerDialog =
                     DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDayOfMonth ->
-                        val newSelectedDate = "$selectedDayOfMonth/${selectedMonth + 1}/$selectedYear"
+                        val newSelectedDate =
+                            "$selectedDayOfMonth/${selectedMonth + 1}/$selectedYear"
                         editTextDate.setText(newSelectedDate)
 
                         // Salviamo la data selezionata
