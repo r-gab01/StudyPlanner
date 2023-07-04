@@ -1,3 +1,5 @@
+<!-- Questo layout definisce la singola riga del pannello che si apre quando si clicca sull'elemento
+     di selezione dropdown -->
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/dropdown_item_TextView"

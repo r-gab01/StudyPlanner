@@ -24,11 +24,12 @@
     <string name="Username">Nome Utente</string>
     <string name="newPass">Password</string>
     <string name="confNewPass">Conferma Password</string>
-    <string name="University">Università/Scuola</string>
+    <string name="University">Università</string>
     <string name="corso">Corso/Classe</string>
     <string name="scegliDomSic">Scegli una domanda di sicurezza</string>
     <string name="CreateAcc">CREA ACCOUNT</string>
     <string name="scegliCorso">Scegli il corso di studi</string>
+    <string name="rispSic">Inserisci la risposta di sicurezza</string>
 
     <string name="AddExam">Aggiungi</string>
     <string name="Type">Tipo</string>
@@ -98,7 +99,11 @@
     <string name="description_session_fragment">L\'app provvederà ad aggiornare le statistiche e le previsioni.</string>
     <string name="buttonConfirm">CONFERMA</string>
     <string name="buttonAggiungi">AGGIUNGI</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="erroreCampo">Inserire tutti i campi</string>
+    <string name="erroreNomeUtente">Nome utente non consentito</string>
+    <string name="errorePassword">Password non consentita</string>
+    <string name="erroreNomeUtentePresente">Nome utente non disponibile</string>
+    <string name="confermaRegistrazone">Account correttamente registrato</string>
+    <string name="erroreConfPassword">Password e conferma password non corrispondono</string>
 </resources>
