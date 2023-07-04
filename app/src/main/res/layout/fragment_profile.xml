@@ -31,7 +31,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="0dp">
+        android:layout_marginBottom="0dp"
+        android:isScrollContainer="false">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -137,7 +138,7 @@
                         android:background="@drawable/transparent_background"
                         android:enabled="false"
                         android:fontFamily="@font/montserrat_light"
-                        android:text="Salvatore"
+                        android:text=""
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:textColor="@color/black"
@@ -164,7 +165,7 @@
                         android:id="@+id/editSurname"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
-                        android:text="Di Gangi"
+                        android:text=""
                         android:layout_weight="1"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
@@ -195,7 +196,7 @@
                         android:id="@+id/editUniversity"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
-                        android:text="Università degli studi di Palermo"
+                        android:text=""
                         android:layout_weight="1"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
@@ -226,7 +227,7 @@
                         android:id="@+id/editCorso"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
-                        android:text="Ingegneria Informatica"
+                        android:text=""
                         android:layout_weight="1"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
@@ -302,12 +303,12 @@
                         android:background="@drawable/transparent_background"
                         android:fontFamily="@font/montserrat_light"
                         android:enabled="false"
-                        android:text="Saldiga01"
+                        android:text=""
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
-
+                        android:textSize="18sp"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -325,22 +326,32 @@
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 
-                    <EditText
-                        android:id="@+id/textPass"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/TextInputLayoutPW"
                         android:layout_width="0dp"
-                        android:layout_height="48dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/transparent_background"
-                        android:fontFamily="@font/montserrat_light"
-                        android:text="Halo1234"
-                        android:enabled="false"
+                        app:passwordToggleEnabled="true"
+                       >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textPass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Ciao1234"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:textColor="@color/black"
+                        android:fontFamily="@font/montserrat_light"
                         android:textSize="18sp"
-                        android:inputType="textPassword|textVisiblePassword"
-                        android:ellipsize="start"
+                        android:inputType="textPassword"
+                        android:enabled="false"
+                        android:background="@drawable/transparent_background"
                         />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
 
                 </LinearLayout>
 
