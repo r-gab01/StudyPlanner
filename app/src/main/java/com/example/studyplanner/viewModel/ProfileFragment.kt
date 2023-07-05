@@ -9,8 +9,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.studyplanner.database.ApiClient
@@ -81,6 +83,36 @@ class ProfileFragment : Fragment() {
         val editProfile= binding.editProfileIcon
         var isEditMode = true
 
+        val nomeCorsi = ArrayList<String?>()
+        val idCorsi = ArrayList<Int?>()
+        var idCorsoSelected: Int? = -1
+        //Query per ottenere i corsi da DB e riempire l'elemento di selezione
+
+        ApiClient.selectCorsoStudio { data, error ->
+            if (error != null) {
+                Log.e("REGISTRAZIONEFRAGMENT", "Si è verificato un errore: $error")
+                Toast.makeText(
+                    context,
+                    "Errore durante la connessione al server",
+                    Toast.LENGTH_LONG
+                ).show()
+            } else if (data != null) {
+                for (i in data) {
+                    nomeCorsi.add(i?.nomeCorso)
+                    idCorsi.add(i?.idCorso)
+                }
+                val arrayAdapterCorso = ArrayAdapter(requireContext(), R.layout.dropdown_item, nomeCorsi)
+                binding.editCorso.setAdapter(arrayAdapterCorso)
+            } else {
+                Log.e("REGISTRAZIONEFRAGMENT", "Errore")
+                Toast.makeText(
+                    context,
+                    "Errore durante la connessione al server",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+
         editProfile.setOnClickListener{
             if(isEditMode){ //Abilitiamo le modifiche
                 binding.editName.isEnabled=true
@@ -97,6 +129,11 @@ class ProfileFragment : Fragment() {
                 binding.editUniversity.isEnabled=false
                 editProfile.setImageResource(R.drawable.baseline_edit_24)
 
+                //ottengo elemento selezionato nei 2 'spinner'
+                binding.editCorso.setOnItemClickListener { _, _, position, _ ->
+                    idCorsoSelected = idCorsi[position]
+                }
+
                 //Prendiamo i nuovi dati scritti dall'utente
                 val newNome= binding.editName.text.toString()
                 val newCognome= binding.editSurname.text.toString()
@@ -105,7 +142,7 @@ class ProfileFragment : Fragment() {
                 //Prendiamo il nome utente che ci serve per fare la query
                 val nomeU= singleton.nomeUtente
                 //Facciamo l'update dei dati anche nel DB
-                ApiClient.updateStudente(newNome,newCognome,newUni,nomeU){boolean,error ->
+                ApiClient.updateStudente(newNome,newCognome,newUni,nomeU,newCorso){boolean,error ->
                     if (error != null) {
                         // Gestisco l'errore
                         Log.e("UPDATESTUD", "Si è verificato un errore: $error")
@@ -114,18 +151,6 @@ class ProfileFragment : Fragment() {
                         singleton.nome= newNome
                         singleton.cognome= newCognome
                         singleton.universita= newUni
-                        ApiClient.updateCorso(newCorso,singleton.idCorso){boolean,error ->
-                            if (error != null) {
-                                // Gestisco l'errore
-                                Log.e("UPDATESTUD", "Si è verificato un errore: $error")
-                            }else if (boolean==true) {
-                                // Utilizzo i dati restituiti e aggiorno il singleton
-                                singleton.corsoStudi= newCorso
-                                Log.d("UPDATESTUD", "Boolean ricevuti: $boolean")
-                            }else{
-                                Log.d("UPDATESTUD", "Dati ricevuti: $boolean")
-                            }
-                        }
                         Log.d("UPDATESTUD", "Boolean ricevuti: $boolean")
                     }else{
                         Log.d("UPDATESTUD", "Dati ricevuti: $boolean")

@@ -210,7 +210,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -218,24 +218,41 @@
                         android:layout_height="wrap_content"
                         android:text="@string/corso_studi"
                         android:layout_weight="1"
+                        android:layout_gravity="center"
                         android:paddingLeft="10dp"
                         android:fontFamily="@font/montserrat_light"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
-                    <EditText
-                        android:id="@+id/editCorso"
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="0dp"
-                        android:layout_height="48dp"
-                        android:text=""
+                        android:layout_height="80dp"
                         android:layout_weight="1"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:fontFamily="@font/montserrat_light"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:enabled="false"
-                        android:background="@drawable/transparent_background" />
+                        android:layout_gravity="center"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:boxCornerRadiusTopEnd="30dp"
+                        app:boxCornerRadiusBottomEnd="30dp"
+                        app:boxCornerRadiusTopStart="30dp"
+                        app:boxCornerRadiusBottomStart="30dp"
+                        >
+
+                        <AutoCompleteTextView
+                            android:id="@+id/editCorso"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:text=""
+                            android:inputType="none"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:fontFamily="@font/montserrat_light"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:enabled="false"
+                            android:maxLines="3"
+                            android:background="@drawable/transparent_background" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
 
@@ -828,7 +845,7 @@
                    </LinearLayout>
                </LinearLayout>
 
-            </LinearLayout>
+        </LinearLayout>
         </ScrollView>
 
 
