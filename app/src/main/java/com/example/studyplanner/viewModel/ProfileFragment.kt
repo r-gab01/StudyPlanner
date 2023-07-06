@@ -27,12 +27,19 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var sharedPreferences: SharedPreferences //ci serve per effettuare il logout
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding= FragmentProfileBinding.inflate(inflater)
+
+
+        return binding.root
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val bottoneLogout= binding.logoutButton
 
@@ -53,6 +60,7 @@ class ProfileFragment : Fragment() {
             requireActivity().finish() //Per terminare l'attività ospitante e tornare alla schermata di accesso.
         }
 
+
         //Se l'utente ha checkato la checkbox allora sfrutto i dati salvati nelle sharedPreferences
         var loggedIn: Boolean = sharedPreferences.getBoolean("isLoggedIn", false)
         val singleton= DataSingleton.ottieniIstanza()
@@ -68,12 +76,6 @@ class ProfileFragment : Fragment() {
             binding.textPass.setText(savedPassword)
         }
 
-      /*  val savedUsername = sharedPreferences.getString("Nome Utente", "")
-        val savedPassword = sharedPreferences.getString("password", "")
-
-        binding.editUsername.setText(savedUsername)
-        binding.textPass.setText(savedPassword) */
-
         //Riempio grazie al singleton i riquadri relativi all'utente che ha fatto l'accesso
         binding.editName.setText(singleton.nome)
         binding.editSurname.setText(singleton.cognome)
@@ -85,12 +87,12 @@ class ProfileFragment : Fragment() {
 
         val nomeCorsi = ArrayList<String?>()
         val idCorsi = ArrayList<Int?>()
-        var idCorsoSelected: Int? = -1
-        //Query per ottenere i corsi da DB e riempire l'elemento di selezione
+        var idCorsoSelected: Int? = singleton.idCorso
 
+        //Query per ottenere i corsi da DB e riempire l'elemento di selezione nella sezione "Corso di studio"
         ApiClient.selectCorsoStudio { data, error ->
             if (error != null) {
-                Log.e("REGISTRAZIONEFRAGMENT", "Si è verificato un errore: $error")
+                Log.e("RECUPEROCORSI", "Si è verificato un errore: $error")
                 Toast.makeText(
                     context,
                     "Errore durante la connessione al server",
@@ -101,10 +103,10 @@ class ProfileFragment : Fragment() {
                     nomeCorsi.add(i?.nomeCorso)
                     idCorsi.add(i?.idCorso)
                 }
-                val arrayAdapterCorso = ArrayAdapter(requireContext(), R.layout.dropdown_item, nomeCorsi)
+                val arrayAdapterCorso = ArrayAdapter(requireContext(), R.layout.dropdown_item_profile, nomeCorsi)
                 binding.editCorso.setAdapter(arrayAdapterCorso)
             } else {
-                Log.e("REGISTRAZIONEFRAGMENT", "Errore")
+                Log.e("RECUPEROCORSI", "Errore")
                 Toast.makeText(
                     context,
                     "Errore durante la connessione al server",
@@ -113,12 +115,19 @@ class ProfileFragment : Fragment() {
             }
         }
 
+        //ottengo elemento selezionato nei 2 'spinner'
+        binding.editCorso.setOnItemClickListener { _, _, position, _ ->
+            idCorsoSelected = idCorsi[position]
+        }
+
+
         editProfile.setOnClickListener{
             if(isEditMode){ //Abilitiamo le modifiche
                 binding.editName.isEnabled=true
                 binding.editSurname.isEnabled=true
                 binding.editCorso.isEnabled=true
                 binding.editUniversity.isEnabled=true
+                binding.container.isEnabled=true
 
                 editProfile.setImageResource(R.drawable.baseline_check_24)
                 isEditMode=false
@@ -127,22 +136,25 @@ class ProfileFragment : Fragment() {
                 binding.editSurname.isEnabled=false
                 binding.editCorso.isEnabled=false
                 binding.editUniversity.isEnabled=false
+                binding.container.isEnabled=false
                 editProfile.setImageResource(R.drawable.baseline_edit_24)
 
+
                 //ottengo elemento selezionato nei 2 'spinner'
-                binding.editCorso.setOnItemClickListener { _, _, position, _ ->
+         /*       binding.editCorso.setOnItemClickListener { _, _, position, _ ->
                     idCorsoSelected = idCorsi[position]
-                }
+                } */
 
                 //Prendiamo i nuovi dati scritti dall'utente
                 val newNome= binding.editName.text.toString()
                 val newCognome= binding.editSurname.text.toString()
                 val newUni=binding.editUniversity.text.toString()
-                val newCorso= binding.editCorso.text.toString()
                 //Prendiamo il nome utente che ci serve per fare la query
-                val nomeU= singleton.nomeUtente
+                val nomeU= binding.editUsername.text.toString()
                 //Facciamo l'update dei dati anche nel DB
-                ApiClient.updateStudente(newNome,newCognome,newUni,nomeU,newCorso){boolean,error ->
+                Log.d("UPDATESTUD", "Utente ricevuto: $newNome")
+                Log.d("UPDATESTUD", "Id ricevuto: $idCorsoSelected")
+                ApiClient.updateStudente(newNome,newCognome,newUni,idCorsoSelected,nomeU){boolean,error ->
                     if (error != null) {
                         // Gestisco l'errore
                         Log.e("UPDATESTUD", "Si è verificato un errore: $error")
@@ -151,7 +163,10 @@ class ProfileFragment : Fragment() {
                         singleton.nome= newNome
                         singleton.cognome= newCognome
                         singleton.universita= newUni
-                        Log.d("UPDATESTUD", "Boolean ricevuti: $boolean")
+                        singleton.idCorso=idCorsoSelected
+                        singleton.corsoStudi=binding.editCorso.text.toString()
+                        Log.d("UPDATESTUD", "Utente ricevuto: $newNome")
+                        Log.d("UPDATESTUD", "Id ricevuto: $idCorsoSelected")
                     }else{
                         Log.d("UPDATESTUD", "Dati ricevuti: $boolean")
                     }
@@ -165,13 +180,13 @@ class ProfileFragment : Fragment() {
 
         editAccountButton.setOnClickListener{
             if(isEditAccount){
-              //  binding.editUsername.isEnabled=true
+                //  binding.editUsername.isEnabled=true
                 binding.textPass.isEnabled=true
 
                 editAccountButton.text= "Conferma modifiche"
                 isEditAccount=false
             }else{
-               // binding.editUsername.isEnabled=false
+                // binding.editUsername.isEnabled=false
                 binding.textPass.isEnabled=false
                 editAccountButton.text= "Modifica credenziali"
 
@@ -197,9 +212,6 @@ class ProfileFragment : Fragment() {
                 isEditAccount=true
             }
         }
-
-        //val editTextPass= binding.textPass
-        //convertToAsterisks(editTextPass)
 
         var buttonLegend= binding.legendButton
 
@@ -227,7 +239,7 @@ class ProfileFragment : Fragment() {
         setOnClickImageChange(thursday)
 
         var friday= binding.iconFriday
-       setOnClickImageChange(friday)
+        setOnClickImageChange(friday)
 
         var saturday= binding.iconSaturday
         setOnClickImageChange(saturday)
@@ -235,7 +247,6 @@ class ProfileFragment : Fragment() {
         var sunday= binding.iconSunday
         setOnClickImageChange(sunday)
 
-        return binding.root
     }
 
     fun convertToAsterisks(editText: EditText) {

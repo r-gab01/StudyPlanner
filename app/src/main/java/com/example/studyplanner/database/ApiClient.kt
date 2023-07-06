@@ -275,8 +275,8 @@ object ApiClient {
         })
     }
 
-    fun updateStudente(newNome: String?,newCognome: String?, newUni: String?, nomeU: String?, newCorso: String, callback: (Boolean?, Throwable?) -> Unit){        //sfrutto callback per gestire metodo post asincrono
-        val query = "update studente s set s.nome= '${newNome}', s.cognome= '${newCognome}', s.universita='${newUni}' , s.id_c_ref= '${newCorso} where s.nome_utente='${nomeU}';"
+    fun updateStudente(newNome: String?,newCognome: String?, newUni: String?, newCorso: Int?, nomeU: String?, callback: (Boolean?, Throwable?) -> Unit){        //sfrutto callback per gestire metodo post asincrono
+        val query = "update studente s set s.nome = '${newNome}', s.cognome= '${newCognome}', s.universita='${newUni}' , s.id_c_ref= '${newCorso}' where s.nome_utente= '${nomeU}';"
         apiService.update(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
@@ -298,29 +298,6 @@ object ApiClient {
         })
     }
 
-
-    fun updateCorso(Corso: String?, idCorso:Int?, callback: (Boolean?, Throwable?) -> Unit){        //sfrutto callback per gestire metodo post asincrono
-        val query = "update corso_di_studio c set c.nome_corso='${Corso}' where c.id_corso='${idCorso}';"
-        apiService.update(query).enqueue(object : Callback<JsonObject> {
-            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                if (response.isSuccessful) {
-                    val res = response.body()
-                    Log.d("APICLIENT", res.toString())
-                    callback(true, null)
-                } else {
-                    Log.e("APLICLIENT", response.message())
-                    Log.e("APLICLIENT", response.body().toString())
-                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
-                    callback(false, error) // Nessun risultato trovato
-                }
-            }
-            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                Log.e("OnFailure", "${t.message}")
-                val error = Exception("La chiamata API non è stata eseguita correttamente.")
-                callback(false, error) // Nessun risultato trovato
-            }
-        })
-    }
 
 
     /*

@@ -138,11 +138,11 @@
                         android:background="@drawable/transparent_background"
                         android:enabled="false"
                         android:fontFamily="@font/montserrat_light"
-                        android:text=""
+                        android:hint="@string/insName"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="14.5dp" />
 
                 </LinearLayout>
 
@@ -165,13 +165,13 @@
                         android:id="@+id/editSurname"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
-                        android:text=""
+                        android:hint="@string/insSurname"
                         android:layout_weight="1"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:fontFamily="@font/montserrat_light"
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="14.5sp"
                         android:enabled="false"
                         android:background="@drawable/transparent_background" />
 
@@ -220,11 +220,13 @@
                         android:layout_weight="1"
                         android:layout_gravity="center"
                         android:paddingLeft="10dp"
+                        android:gravity="center_vertical"
                         android:fontFamily="@font/montserrat_light"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/container"
                         android:layout_width="0dp"
                         android:layout_height="80dp"
                         android:layout_weight="1"
@@ -234,6 +236,7 @@
                         app:boxCornerRadiusBottomEnd="30dp"
                         app:boxCornerRadiusTopStart="30dp"
                         app:boxCornerRadiusBottomStart="30dp"
+                        android:enabled="false"
                         >
 
                         <AutoCompleteTextView
@@ -243,11 +246,12 @@
                             android:text=""
                             android:inputType="none"
                             android:layout_weight="1"
+                            android:gravity="center_vertical"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:fontFamily="@font/montserrat_light"
                             android:textColor="@color/black"
-                            android:textSize="12sp"
+                            android:textSize="11.5sp"
                             android:enabled="false"
                             android:maxLines="3"
                             android:background="@drawable/transparent_background" />
@@ -455,36 +459,11 @@
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_menu_book_24"
                            android:layout_marginBottom="10dp"
-                           android:layout_marginTop="10dp"
+                           android:layout_marginTop="20dp"
                            android:clickable="true"
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
 
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textStyle="bold"
-                           android:textSize="13sp"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
-
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio2"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textSize="13sp"
-                           android:textStyle="bold"
-                          android:inputType="number"
-                            android:background="@drawable/transparent_background" />
 
                    </LinearLayout>
 
@@ -514,36 +493,11 @@
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_menu_book_24"
                            android:layout_marginBottom="10dp"
-                           android:layout_marginTop="10dp"
+                           android:layout_marginTop="20dp"
                            android:clickable="true"
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
 
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textStyle="bold"
-                           android:textSize="13sp"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
-
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio2"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textSize="13sp"
-                           android:textStyle="bold"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
 
                    </LinearLayout>
 
@@ -574,36 +528,11 @@
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_menu_book_24"
                            android:layout_marginBottom="10dp"
-                           android:layout_marginTop="10dp"
+                           android:layout_marginTop="20dp"
                            android:clickable="true"
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
 
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textStyle="bold"
-                           android:textSize="13sp"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
-
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio2"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textSize="13sp"
-                           android:textStyle="bold"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
 
                    </LinearLayout>
 
@@ -633,36 +562,11 @@
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_menu_book_24"
                            android:layout_marginBottom="10dp"
-                           android:layout_marginTop="10dp"
+                           android:layout_marginTop="20dp"
                            android:clickable="true"
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
 
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textStyle="bold"
-                           android:textSize="13sp"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
-
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio2"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textSize="13sp"
-                           android:textStyle="bold"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
 
                    </LinearLayout>
 
@@ -693,36 +597,11 @@
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_menu_book_24"
                            android:layout_marginBottom="10dp"
-                           android:layout_marginTop="10dp"
+                           android:layout_marginTop="20dp"
                            android:clickable="true"
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
 
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textStyle="bold"
-                           android:textSize="13sp"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
-
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio2"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textSize="13sp"
-                           android:textStyle="bold"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
 
                    </LinearLayout>
 
@@ -752,36 +631,11 @@
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_menu_book_24"
                            android:layout_marginBottom="10dp"
-                           android:layout_marginTop="10dp"
+                           android:layout_marginTop="20dp"
                            android:clickable="true"
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
 
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textSize="13sp"
-                           android:textStyle="bold"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
-
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio2"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textSize="13sp"
-                           android:textStyle="bold"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
 
                    </LinearLayout>
 
@@ -811,36 +665,10 @@
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_battery_charging_full_24"
                            android:layout_marginBottom="10dp"
-                           android:layout_marginTop="10dp"
+                           android:layout_marginTop="20dp"
                            android:clickable="true"
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
-
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textSize="13sp"
-                           android:textStyle="bold"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
-
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio2"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textSize="13sp"
-                           android:textStyle="bold"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
 
                    </LinearLayout>
                </LinearLayout>
