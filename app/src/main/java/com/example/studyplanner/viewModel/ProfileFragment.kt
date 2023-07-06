@@ -5,14 +5,19 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.method.ReplacementTransformationMethod
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.FragmentProfileBinding
+import com.example.studyplanner.model.DataSingleton
 import com.example.studyplanner.viewModel.LegendFragment
 import com.example.studyplanner.viewModel.MainActivity
 
@@ -31,23 +36,82 @@ class ProfileFragment : Fragment() {
 
         val bottoneLogout= binding.logoutButton
 
+        sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         //Implemento il Logout
         bottoneLogout.setOnClickListener{
-            sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
             editor.remove("Nome Utente")
             editor.remove("password")
             editor.remove("isLoggedIn")
             editor.apply()
 
+            val singleton= DataSingleton.ottieniIstanza()
+            singleton.reset()
             // Reindirizziamo l'utente alla schermata di accesso
             val i = Intent(requireContext(), MainActivity::class.java)
             startActivity(i)
             requireActivity().finish() //Per terminare l'attività ospitante e tornare alla schermata di accesso.
         }
 
+        //Se l'utente ha checkato la checkbox allora sfrutto i dati salvati nelle sharedPreferences
+        var loggedIn: Boolean = sharedPreferences.getBoolean("isLoggedIn", false)
+        val singleton= DataSingleton.ottieniIstanza()
+
+        if(!loggedIn){
+            //Mostro nel riquadro nome utente e password dell'utente che ha fatto login. Uso il singleton "DataSingleton". Questo se l'utente non ha checkato la checkboc
+            binding.editUsername.setText(singleton.nomeUtente)
+            binding.textPass.setText(singleton.password)
+        }else{
+            val savedUsername = sharedPreferences.getString("Nome Utente", "")
+            val savedPassword = sharedPreferences.getString("password", "")
+            binding.editUsername.setText(savedUsername)
+            binding.textPass.setText(savedPassword)
+        }
+
+      /*  val savedUsername = sharedPreferences.getString("Nome Utente", "")
+        val savedPassword = sharedPreferences.getString("password", "")
+
+        binding.editUsername.setText(savedUsername)
+        binding.textPass.setText(savedPassword) */
+
+        //Riempio grazie al singleton i riquadri relativi all'utente che ha fatto l'accesso
+        binding.editName.setText(singleton.nome)
+        binding.editSurname.setText(singleton.cognome)
+        binding.editUniversity.setText(singleton.universita)
+        binding.editCorso.setText(singleton.corsoStudi)
+
         val editProfile= binding.editProfileIcon
         var isEditMode = true
+
+        val nomeCorsi = ArrayList<String?>()
+        val idCorsi = ArrayList<Int?>()
+        var idCorsoSelected: Int? = -1
+        //Query per ottenere i corsi da DB e riempire l'elemento di selezione
+
+        ApiClient.selectCorsoStudio { data, error ->
+            if (error != null) {
+                Log.e("REGISTRAZIONEFRAGMENT", "Si è verificato un errore: $error")
+                Toast.makeText(
+                    context,
+                    "Errore durante la connessione al server",
+                    Toast.LENGTH_LONG
+                ).show()
+            } else if (data != null) {
+                for (i in data) {
+                    nomeCorsi.add(i?.nomeCorso)
+                    idCorsi.add(i?.idCorso)
+                }
+                val arrayAdapterCorso = ArrayAdapter(requireContext(), R.layout.dropdown_item, nomeCorsi)
+                binding.editCorso.setAdapter(arrayAdapterCorso)
+            } else {
+                Log.e("REGISTRAZIONEFRAGMENT", "Errore")
+                Toast.makeText(
+                    context,
+                    "Errore durante la connessione al server",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
 
         editProfile.setOnClickListener{
             if(isEditMode){ //Abilitiamo le modifiche
@@ -63,8 +127,35 @@ class ProfileFragment : Fragment() {
                 binding.editSurname.isEnabled=false
                 binding.editCorso.isEnabled=false
                 binding.editUniversity.isEnabled=false
-
                 editProfile.setImageResource(R.drawable.baseline_edit_24)
+
+                //ottengo elemento selezionato nei 2 'spinner'
+                binding.editCorso.setOnItemClickListener { _, _, position, _ ->
+                    idCorsoSelected = idCorsi[position]
+                }
+
+                //Prendiamo i nuovi dati scritti dall'utente
+                val newNome= binding.editName.text.toString()
+                val newCognome= binding.editSurname.text.toString()
+                val newUni=binding.editUniversity.text.toString()
+                val newCorso= binding.editCorso.text.toString()
+                //Prendiamo il nome utente che ci serve per fare la query
+                val nomeU= singleton.nomeUtente
+                //Facciamo l'update dei dati anche nel DB
+                ApiClient.updateStudente(newNome,newCognome,newUni,nomeU,newCorso){boolean,error ->
+                    if (error != null) {
+                        // Gestisco l'errore
+                        Log.e("UPDATESTUD", "Si è verificato un errore: $error")
+                    }else if (boolean==true) {
+                        // Utilizzo i dati restituiti e aggiorno il singleton
+                        singleton.nome= newNome
+                        singleton.cognome= newCognome
+                        singleton.universita= newUni
+                        Log.d("UPDATESTUD", "Boolean ricevuti: $boolean")
+                    }else{
+                        Log.d("UPDATESTUD", "Dati ricevuti: $boolean")
+                    }
+                }
                 isEditMode=true
             }
         }
@@ -82,14 +173,33 @@ class ProfileFragment : Fragment() {
             }else{
                // binding.editUsername.isEnabled=false
                 binding.textPass.isEnabled=false
-
                 editAccountButton.text= "Modifica credenziali"
+
+                val newPassword= binding.textPass.text.toString()
+                val nomeU= binding.editUsername.text.toString()
+                //Facciamo l'update della pass anche nel DB
+                ApiClient.updatePass(nomeU,newPassword){boolean,error ->
+                    if (error != null) {
+                        // Gestisco l'errore
+                        Log.e("UPDATEPASS", "Si è verificato un errore: $error")
+                    }else if (boolean==true) {
+                        // Utilizzo i dati restituiti e aggiorno le sharedPreferences
+                        val editor=sharedPreferences.edit()
+                        editor.putString("password", newPassword)
+                        editor.apply()
+                        //aggiorno anche il singleton
+                        singleton.password= newPassword
+                        Log.d("UPDATEPASS", "Boolean ricevuti: $boolean")
+                    }else{
+                        Log.d("UPDATEPASS", "Dati ricevuti: $boolean")
+                    }
+                }
                 isEditAccount=true
             }
         }
 
-        val editTextPass= binding.textPass
-        convertToAsterisks(editTextPass)
+        //val editTextPass= binding.textPass
+        //convertToAsterisks(editTextPass)
 
         var buttonLegend= binding.legendButton
 

@@ -19,6 +19,7 @@ import com.example.studyplanner.model.AccountDBModel
 import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.FragmentLoginBinding
 import com.example.studyplanner.model.DataSingleton
+import kotlin.math.sin
 
 class LoginFragment : Fragment(){
 
@@ -61,7 +62,7 @@ class LoginFragment : Fragment(){
         }
 
         binding.textViewPasswordDimenticata.setOnClickListener{
-            val manager=parentFragmentManager
+             val manager=parentFragmentManager
             if(!fragmentExists(manager, "RecuperoFragment")) {
                 val transaction = manager.beginTransaction()
                 transaction.replace(R.id.containerView_login, RecuperoPassFragment(), "RecuperoFragment")
@@ -87,6 +88,17 @@ class LoginFragment : Fragment(){
 
         sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
+        // Verifico se l'utente ha già effettuato l'accesso in precedenza
+     /*var isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+        if (isLoggedIn) {
+            val savedUsername = sharedPreferences.getString("Nome Utente", "")
+            val savedPassword = sharedPreferences.getString("password", "")
+
+            binding.EditTextNomeUtente.setText(savedUsername)
+            binding.EditTextPassword.setText(savedPassword)
+            rememberMeCheckBox.isChecked = true
+        }*/
+
         tastoLogin.setOnClickListener {
             val nomeInserito = binding.EditTextNomeUtente.text.toString().trim()
             val pwInserita = binding.EditTextPassword.text.toString().trim()
@@ -101,14 +113,35 @@ class LoginFragment : Fragment(){
                         Log.e("LOGINFRAGMENT", "Si è verificato un errore: $error")
                     } else if (data != null) {
                         // Utilizza i dati restituiti
+                        //Intanto salvo alcuni dati nel singleton che mi potranno servire dopo
+                        val singleton= DataSingleton.ottieniIstanza()
+                        singleton.domandaS=data.domandaS
+                        singleton.rispostaS=data.rispostaS
                         Log.d("LOGINFRAGMENT", "Dati ricevuti: $data")
-                        if (rememberMeCheckBox.isChecked) { //Solo se la check box è stata checkata
-                            saveLoginData(nomeInserito, pwInserita)
+                        ApiClient.selectStudente(nomeInserito){data,error ->
+                            if (error != null) {
+                                // Gestisci l'errore
+                                Log.e("SELECTSTUDENTE", "Si è verificato un errore: $error")
+                            }else if (data != null) {
+                                // Utilizza i dati restituiti
+                                Log.d("SELECTSTUDENTE", "Dati ricevuti: $data")
+                                //salvo i dati dello studente nel Sigleton
+                                singleton.nome=data.nome
+                                singleton.cognome=data.cognome
+                                singleton.universita=data.universita
+                                singleton.foto=data.foto
+                                singleton.dataNascita=data.dataNascita
+                                selectCorso(data.idCorso)
+                            }else{
+                                Log.d("SELECTSTUDENTE", "Dati ricevuti: $data")
+                            }
                         }
-                        val singleton = DataSingleton.ottieniIstanza()
-                        singleton.nomeUtente = nomeInserito
+                        if (rememberMeCheckBox.isChecked) { //Solo se la check box è stata checkata
+                            saveLoginData(nomeInserito,pwInserita)
+                        }else{
+                            saveData(nomeInserito,pwInserita)
+                        }
                         requireActivity().finish()
-
                     } else {
                         // Nessun risultato trovato
                         Log.e("LOGINFRAGMENT", "Dati Errati")
@@ -117,28 +150,71 @@ class LoginFragment : Fragment(){
                     }
                 }
             }
+            /*
+            val nomeInserito = binding.EditTextNomeUtente.text.toString().trim()
+            val pwInserita = binding.EditTextPassword.text.toString().trim()
+            if (nomeInserito.isEmpty())
+                binding.EditTextNomeUtente.setBackgroundResource(R.drawable.error_border_element)
+            if (pwInserita.isEmpty())
+                binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
+            else {
+                //VERIFICO LE CREDENZIALI TRAMITE METODO POSTSELECT AL SERVER
+
+                val query = "select * from autenticazione where nome_u_ref = '${nomeInserito}' and password = '${pwInserita}';"
+                ApiClient.login(query)
+
+                //Poichè il metodo postSelect al server è asincrono uso un observer su un LiveData
+                val accountLiveData: LiveData<AccountDBModel> = ApiClient.accountData
+                accountLiveData.observe(viewLifecycleOwner, Observer { accountModel ->
+                    //Logica per verificare il risultato della query in accordo col metodo login di ApiCLient
+                    if(accountModel != null) {
+                        if (!accountModel.nomeUtente.isNullOrEmpty()) {
+                            //Dati inseriti dall'utente corretti
+                            Log.d("LOGINFRAGMENT", accountModel.nomeUtente.toString())
+                            if (rememberMeCheckBox.isChecked) { //Solo se la check box è stata checkata
+                                saveLoginData()
+                            }
+                            requireActivity().finish()
+                        }
+                    }else {
+                    // Dati inseriti dall utente errati
+                    Log.e("LOGINFRAGMENT", "Dati Errati")
+                    binding.EditTextNomeUtente.setBackgroundResource(R.drawable.error_border_element)
+                    binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
+                    }
+                })
+            }
+             */
         }
 
         return binding.root
     }
 
-    private fun saveLoginData(nomeUtente: String, password:String ){
-        //Recuperiamo i dati scritti dall'utente in fase di Login
+    private fun saveLoginData(nomeU: String,pass: String){ //funzione che gestisce il salvataggio dei dati nel caso in cui l'utente prema la check box (tramite le sharedPreferences)
+
         val editor = sharedPreferences.edit()
-        editor.putString("Nome Utente", nomeUtente)
-        editor.putString("password", password)
+        editor.putString("Nome Utente", nomeU)
+        editor.putString("password", pass)
         editor.putBoolean("isLoggedIn", true)
         editor.apply()
+        val singleton= DataSingleton.ottieniIstanza()
+        singleton.nomeUtente= nomeU
+        singleton.password= pass
+    }
+
+    private fun saveData(nomeU: String,pass: String){ //funzione che gestisce il salvataggio dei dati nel caso in cui l'utente NON preme la checkbox
+        val singleton= DataSingleton.ottieniIstanza()
+        singleton.nomeUtente= nomeU
+        singleton.password= pass
     }
 
     private fun fragmentExists(manager: FragmentManager, tag: String ): Boolean {
         val fragment= manager.findFragmentByTag(tag)
         return fragment != null
-
     }
 
-    fun PasswordVisibility() {
-        val passwordEditText= binding.EditTextPassword
+  fun PasswordVisibility() {
+      val passwordEditText= binding.EditTextPassword
         passwordVisible = !passwordVisible
 
         if (passwordVisible) {
@@ -155,5 +231,24 @@ class LoginFragment : Fragment(){
             eyeIcon,
             null
         )
+    }
+
+    fun selectCorso(idCorso: Int?){
+        //query per fare la select del corso di studi
+        ApiClient.selectCorso(idCorso){ data, error ->
+            if (error != null) {
+                // Gestisci l'errore
+                Log.e("CORSO", "Si è verificato un errore: $error")
+            }else if (data != null) {
+                // Utilizza i dati restituiti
+                Log.d("CORSO", "Dati ricevuti: $data")
+                //salvo il corso nel Singleton
+                val singleton= DataSingleton.ottieniIstanza()
+                singleton.corsoStudi=data.nomeCorso
+                singleton.idCorso=data.idCorso
+            }else{
+                Log.d("CORSO", "Dati ricevuti: $data")
+            }
+        }
     }
 }
