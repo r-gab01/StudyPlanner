@@ -3,6 +3,7 @@ package com.example.studyplanner.database
 import android.util.Log
 import com.example.studyplanner.model.AccountDBModel
 import com.example.studyplanner.model.CorsoStudioDBModel
+import com.example.studyplanner.model.MateriaDBModel
 import com.example.studyplanner.model.StudenteDBModel
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -170,6 +171,37 @@ object ApiClient {
             }
         })
     }
+
+    fun selectMaterieCorso(idCorso: String?, callback: (List<MateriaDBModel?>?, Throwable?) -> Unit) {
+        var data = ArrayList<MateriaDBModel?>()
+        val query = "select * from materia where id_c_ref = '$idCorso';"
+        apiService.select(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()?.getAsJsonArray("queryset")
+                    if (res != null && res.size() > 0) {
+                        for (i in 0 until res.size()) {
+                            val result = res.get(i).asJsonObject
+                            data.add(gson.fromJson(result, MateriaDBModel::class.java))
+                        }
+                        Log.d("APICLIENT", data.toString())
+                        callback(data.toList(), null)
+                    } else {
+                        callback(null, null) // Nessun risultato trovato
+                    }
+                } else {
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(null, error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(null, error)
+            }
+        })
+    }
+
     fun registraAccount(nomeUtente: String, pass: String?, domSic: String?, rispSic: String?,
                         callback: (Boolean?, Throwable?) -> Unit) {
         val query = "insert into `autenticazione` values('$nomeUtente', '$pass', '$domSic', '$rispSic');"
@@ -192,6 +224,7 @@ object ApiClient {
             }
         })
     }
+
 
 
     fun selectStudente(nomeU: String?, callback: (StudenteDBModel?, Throwable?) -> Unit){        //sfrutto callback per gestire metodo post asincrono
@@ -297,7 +330,6 @@ object ApiClient {
             }
         })
     }
-
 
 
     /*

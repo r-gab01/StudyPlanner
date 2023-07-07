@@ -24,6 +24,10 @@ class CalendarFragment : Fragment() {
 
         binding= FragmentCalendarBinding.inflate(inflater)
 
+        val calendar= binding.calendarView
+
+
+
         val ExamButton=binding.addExamButton
 
         ExamButton.setOnClickListener{

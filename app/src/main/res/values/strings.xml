@@ -31,17 +31,17 @@
     <string name="scegliCorso">Scegli il corso di studi</string>
     <string name="rispSic">Inserisci la risposta di sicurezza</string>
 
-    <string name="AddExam">Aggiungi</string>
-    <string name="Type">Tipo</string>
+    <string name="AddExam">AGGIUNGI ESAME</string>
+    <string name="NomeEsame">Nome esame</string>
     <string name="Name">Nome</string>
-    <string name="InserisciNome">Inserisci nome </string>
+    <string name="ScegliNome">Scegli il nome della materia</string>
     <string name="Date">Data </string>
     <string name="Cfu">Cfu</string>
     <string name="InserisciDate">Inserisci data esame </string>
     <string name="NameBook">Nome Libro </string>
-    <string name="InserisciNameBook">Inserisci il nome del libro </string>
-    <string name="totPage">Totale pagine </string>
-    <string name="InsertPage">Inserisci le pagine totali del libro</string>
+    <string name="InserisciNameBook">Nome del libro </string>
+    <string name="totPage">Totale pagine</string>
+    <string name="InsertPage">Pagine</string>
     <string name="Arguments">Argomenti</string>
 
     <string name="titleProfile">PROFILO</string>
@@ -82,6 +82,15 @@
     <string name="title_media_pagine_studiate">MEDIA PAGINE STUDIATE</string>
     <string name="pagine_al_giorno">Al giorno:</string>
     <string name="pagine_all_ora"> All\'ora:</string>
+    <string name="title_preparazione"> PREPARAZIONE</string>
+    <string name="title_giorno_dell_esame">GIORNO DELL\'ESAME</string>
+    <string name="title_giorni_rimanenti">GIORNI RIMANENTI</string>
+    <string name="title_pagine_totali">PAGINE TOTALI</string>
+    <string name="title_pagine_rimanenti">PAGINE RIMANENTI</string>
+    <string name="title_pagine_consigliate_giornalmente">PAGINE GIORNALIERE CONSIGLIATE</string>
+    <string name="title_chip_Info">INFO GENERALI</string>
+    <string name="title_chip_Materiale">MATERIALE</string>
+
 
 
     <!-- MICHELE -->
@@ -109,4 +118,6 @@
     <string name="erroreNomeUtentePresente">Nome utente non disponibile</string>
     <string name="confermaRegistrazone">Account correttamente registrato</string>
     <string name="erroreConfPassword">Password e conferma password non corrispondono</string>
+
+    <string name="default_notification_channel_id">channel_id</string>
 </resources>
