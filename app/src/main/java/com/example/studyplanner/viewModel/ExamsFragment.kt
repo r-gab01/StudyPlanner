@@ -1,6 +1,7 @@
 package com.example.studyplanner.viewModel
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -31,7 +32,7 @@ class ExamsFragment : Fragment() {
 
         val adapter = ExamAdapter(esami)
         binding.recyclerview.adapter = adapter
-
         return binding.root
     }
+
 }

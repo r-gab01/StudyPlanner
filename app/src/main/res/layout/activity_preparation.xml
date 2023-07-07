@@ -56,13 +56,16 @@
         android:id="@+id/editEsami"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/rounded_button"
         android:clickable="true"
         android:elevation="10dp"
         android:focusable="true"
         android:src="@drawable/baseline_edit_24"
-        app:layout_constraintBottom_toTopOf="@+id/cardViewTitleExam"
-        app:layout_constraintStart_toEndOf="@+id/cardViewTitleExam" />
+        app:layout_constraintStart_toEndOf="@+id/title_preparation"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.475" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/menuChip"
