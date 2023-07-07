@@ -1,10 +1,8 @@
 package com.example.studyplanner.viewModel
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.studyplanner.PreparationActivity
 import com.example.studyplanner.model.ExamModel
 import com.example.studyplanner.R
 import com.example.studyplanner.databinding.ExamsCardViewBinding
@@ -19,16 +17,7 @@ class ExamAdapter(private val examsList: List<ExamModel>) : RecyclerView.Adapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = ExamsCardViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
-        val viewHolder = ViewHolder(view)
-        view.cardView.setOnClickListener {
-            //viene ottenuto il contesto (context) dalla View su cui è stato effettuato il clic
-            val context = it.context
-            val intent = Intent(context, PreparationActivity::class.java)
-            context.startActivity(intent)
-        }
-
+        val view = ExamsCardViewBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(view)
     }
 
