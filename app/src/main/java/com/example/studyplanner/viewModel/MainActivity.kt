@@ -30,12 +30,41 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         var sharedPreferences= this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        var loggedIn: Boolean = sharedPreferences.getBoolean("isLoggedIn", false)
+
+        if(loggedIn){
+            val nomeU: String? = sharedPreferences.getString("Nome Utente", "")
+            val singleton= DataSingleton.ottieniIstanza()
+            singleton.nomeUtente=nomeU
+            Log.d("CALENDAR", "Dati ricevuti: $nomeU")
+
+            ApiClient.selectStudente(nomeU){ data, error ->
+                if (error != null) {
+                    // Gestisci l'errore
+                    Log.e("MAINACTIVITY", "Si è verificato un errore: $error")
+                }else if (data != null) {
+                    // Utilizza i dati restituiti
+                    Log.d("MAINACTIVITY", "Dati ricevuti: $data")
+                    //salvo i dati dello studente nel Sigleton
+                    val singleton= DataSingleton.ottieniIstanza()
+                    singleton.nome=data.nome
+                    singleton.cognome=data.cognome
+                    singleton.universita=data.universita
+                    singleton.foto=data.foto
+                    singleton.dataNascita=data.dataNascita
+                    selectCorso(data.idCorso)
+                }else{
+                    Log.d("SELECTSTUDENTE", "Dati ricevuti: $data")
+                }
+            }
+        }
+
+     //   val nomeU: String? = sharedPreferences.getString("Nome Utente", "")
+      // val singleton= DataSingleton.ottieniIstanza()
+       // singleton.nomeUtente=nomeU
 
 
-        val nomeU: String? = sharedPreferences.getString("Nome Utente", "")
-        val singleton= DataSingleton.ottieniIstanza()
-
-     /*   ApiClient.selectStudente(nomeU){ data, error ->
+      /*  ApiClient.selectStudente(nomeU){ data, error ->
             if (error != null) {
                 // Gestisci l'errore
                 Log.e("MAINACTIVITY", "Si è verificato un errore: $error")
@@ -162,7 +191,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-  /*  fun selectCorso(idCorso: Int?) {
+    fun selectCorso(idCorso: Int?) {
         //query per fare la select del corso di studi
         ApiClient.selectCorso(idCorso) { data, error ->
             if (error != null) {
@@ -179,5 +208,5 @@ class MainActivity : AppCompatActivity() {
                 Log.d("CORSO", "Dati ricevuti: $data")
             }
         }
-    } */
+    }
 }

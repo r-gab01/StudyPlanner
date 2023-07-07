@@ -41,7 +41,7 @@ class CalendarFragment : Fragment() {
         val calendar= binding.calendarView
 
         val nomeU= DataSingleton.ottieniIstanza().nomeUtente
-        //var sharedPreferences= requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        var sharedPreferences= requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         //   val nomeU: String? = sharedPreferences.getString("Nome Utente", "")
 
         calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
@@ -55,7 +55,7 @@ class CalendarFragment : Fragment() {
             Log.d("CALENDAR", "Dati ricevuti: $formattedDate")
             Log.d("CALENDAR", "Dati ricevuti: $nomeU")
 
-            ApiClient.selectSessioneStudio(nomeU,formattedDate ){ data, error ->
+            ApiClient.selectSessioneStudio(nomeU,formattedDate){ data, error ->
                 if (error != null) {
                     // Gestisci l'errore
                     Log.e("CALENDAR", "Si è verificato un errore: $error")
