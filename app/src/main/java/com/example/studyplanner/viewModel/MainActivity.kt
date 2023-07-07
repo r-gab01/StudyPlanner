@@ -13,6 +13,7 @@ import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.ActivityMainBinding
 import com.example.studyplanner.model.DataSingleton
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
