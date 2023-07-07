@@ -1,5 +1,7 @@
 package com.example.studyplanner.viewModel
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
@@ -24,8 +26,17 @@ class LoginActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.containerView_login, LoginFragment(), "LoginFragment")
+                .add(R.id.containerView_login, LoginFragment(), "LoginFragment")
                 .commit()
+        }
+
+        var sharedPreferences= this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        var loggedIn: Boolean = sharedPreferences.getBoolean("isLoggedIn", false)
+
+        if (loggedIn){                 //se l'utente non è loggato, lancio la schermata di login
+            val i = Intent(this, MainActivity::class.java)
+            startActivity(i)
+            overridePendingTransition(R.anim.scale_in_animation,R.anim.scale_out_animation)
         }
 
     }

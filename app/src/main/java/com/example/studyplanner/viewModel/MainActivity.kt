@@ -30,18 +30,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         var sharedPreferences= this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        var loggedIn: Boolean = sharedPreferences.getBoolean("isLoggedIn", false)
 
-        if (!loggedIn){                 //se l'utente non è loggato, lancio la schermata di login
-            val i = Intent(this, LoginActivity::class.java)
-            startActivity(i)
-        }
 
         val nomeU: String? = sharedPreferences.getString("Nome Utente", "")
         val singleton= DataSingleton.ottieniIstanza()
-        singleton.nomeUtente
 
-        ApiClient.selectStudente(nomeU){ data, error ->
+     /*   ApiClient.selectStudente(nomeU){ data, error ->
             if (error != null) {
                 // Gestisci l'errore
                 Log.e("MAINACTIVITY", "Si è verificato un errore: $error")
@@ -58,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             }else{
                 Log.d("SELECTSTUDENTE", "Dati ricevuti: $data")
             }
-        }
+        } */
 
 
 
@@ -168,7 +162,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun selectCorso(idCorso: Int?) {
+  /*  fun selectCorso(idCorso: Int?) {
         //query per fare la select del corso di studi
         ApiClient.selectCorso(idCorso) { data, error ->
             if (error != null) {
@@ -185,5 +179,5 @@ class MainActivity : AppCompatActivity() {
                 Log.d("CORSO", "Dati ricevuti: $data")
             }
         }
-    }
+    } */
 }

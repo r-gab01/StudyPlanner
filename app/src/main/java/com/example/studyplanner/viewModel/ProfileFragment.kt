@@ -19,6 +19,7 @@ import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.FragmentProfileBinding
 import com.example.studyplanner.model.DataSingleton
 import com.example.studyplanner.viewModel.LegendFragment
+import com.example.studyplanner.viewModel.LoginActivity
 import com.example.studyplanner.viewModel.MainActivity
 
 
@@ -55,7 +56,7 @@ class ProfileFragment : Fragment() {
             val singleton= DataSingleton.ottieniIstanza()
             singleton.reset()
             // Reindirizziamo l'utente alla schermata di accesso
-            val i = Intent(requireContext(), MainActivity::class.java)
+            val i = Intent(requireContext(), LoginActivity::class.java)
             startActivity(i)
             requireActivity().finish() //Per terminare l'attività ospitante e tornare alla schermata di accesso.
         }

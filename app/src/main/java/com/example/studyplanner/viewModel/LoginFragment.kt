@@ -144,6 +144,9 @@ class LoginFragment : Fragment(){
                             saveData(nomeInserito,pwInserita)
                         }
                         requireActivity().finish()
+                        val i = Intent(requireContext(), MainActivity()::class.java)
+                        startActivity(i)
+                        activity?.overridePendingTransition(R.anim.scale_in_animation,R.anim.scale_out_animation)
                     } else {
                         // Nessun risultato trovato
                         Log.e("LOGINFRAGMENT", "Dati Errati")
