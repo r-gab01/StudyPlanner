@@ -1,10 +1,7 @@
 package com.example.studyplanner.database
 
 import android.util.Log
-import com.example.studyplanner.model.AccountDBModel
-import com.example.studyplanner.model.CorsoStudioDBModel
-import com.example.studyplanner.model.MateriaDBModel
-import com.example.studyplanner.model.StudenteDBModel
+import com.example.studyplanner.model.*
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -375,6 +372,64 @@ object ApiClient {
             }
         })
     }
+
+    fun selectEsamiSessione(callback: (List<MateriaDBModel?>?, Throwable?) -> Unit) {
+        val data = ArrayList<MateriaDBModel?>()
+        val query = "select * from `sessione_studio` where nome_u_ref='${DataSingleton.ottieniIstanza().nomeUtente}';"
+        apiService.select(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()?.getAsJsonArray("queryset")
+                    if (res != null && res.size() > 0) {
+                        for (i in 0 until res.size()) {
+                            val result = res.get(i).asJsonObject
+                            data.add(gson.fromJson(result, MateriaDBModel::class.java))
+                        }
+                        Log.d("APICLIENT", data.toString())
+                        callback(data.toList(), null)
+                    } else {
+                        callback(null, null) // Nessun risultato trovato
+                    }
+                } else {
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(null, error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(null, error)
+            }
+        })
+    }
+
+    fun updatePagineStud(pagineStud: Int, idSessioneMateria: Int?,
+                      callback: (Boolean?, Throwable?) -> Unit) {      //sfrutto la callback con un booleano per ottenere conferma sull'inserimento avvenuto
+        val query = "UPDATE `sessione_studio` " +
+                 "SET 'pagine_stud' = 'pagine_stud' + $pagineStud " +
+        "WHERE 'id_sessione' = '${idSessioneMateria}';"
+        Log.d("InsArg",query)
+        apiService.update(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()
+                    Log.d("APICLIENT", res.toString())
+                    callback(true, null)
+                } else{
+                    Log.e("InsArg", response.message())
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(false , error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(false, error)
+            }
+        })
+    }
+
+
 
 
     /*

@@ -27,12 +27,10 @@ class ExamsFragment : Fragment() {
 
         //qua prendo i dati da mandare all'adapter,
         //DOVREI PRENDERLI DAL DB
-        val data = ArrayList<ExamModel>()
-        data.add(ExamModel("GEOMETRIA", "14 luglio", 15, 0))
-        data.add(ExamModel("Analisi", "14 luglio", 15, 0))
-        data.add(ExamModel("ESERCIZI DI LATINO", "28 giugno", 7,1))
+        val esami = ArrayList<ExamModel>()
 
-        val adapter = ExamAdapter(data)
+
+        val adapter = ExamAdapter(esami)
         binding.recyclerview.adapter = adapter
         return binding.root
     }
