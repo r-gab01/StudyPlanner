@@ -15,7 +15,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 
-
 object ApiClient {
 
     val retrofit by lazy {
@@ -89,7 +88,7 @@ object ApiClient {
     }
 
     fun selectCorsoStudio( callback: (List<CorsoStudioDBModel?>?, Throwable?) -> Unit) {
-        var data = ArrayList<CorsoStudioDBModel?>()
+        val data = ArrayList<CorsoStudioDBModel?>()
         val query = "select * from corso_di_studio;"
         apiService.select(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -173,7 +172,7 @@ object ApiClient {
     }
 
     fun selectMaterieCorso(idCorso: Int?, callback: (List<MateriaDBModel?>?, Throwable?) -> Unit) {
-        var data = ArrayList<MateriaDBModel?>()
+        val data = ArrayList<MateriaDBModel?>()
         val query = "select * from `materia` where id_c_ref='$idCorso';"
         apiService.select(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -315,7 +314,6 @@ object ApiClient {
                     callback(true, null)
                 } else {
                     Log.e("APLICLIENT", response.message())
-                    Log.e("APLICLIENT", response.body().toString())
                     val error = Exception("La chiamata API non è stata eseguita correttamente.")
                     callback(false, error) // Nessun risultato trovato
                 }
@@ -324,6 +322,56 @@ object ApiClient {
                 Log.e("OnFailure", "${t.message}")
                 val error = Exception("La chiamata API non è stata eseguita correttamente.")
                 callback(false, error) // Nessun risultato trovato
+            }
+        })
+    }
+
+    fun insInSessione(idSessione: Int?, nomeUtente: String, nomeMateria: String?, idCorso: Int?, dataAppello: String?,
+                      fonteStudio: String?, pagineTot: Int?, pagineStudiate: Int?,
+               callback: (Boolean?, Throwable?) -> Unit) {      //sfrutto la callback con un booleano per ottenere conferma sull'inserimento avvenuto
+        val query =
+            "insert into `sessione_studio` values('$idSessione','$nomeUtente', '$nomeMateria', '$idCorso', '$dataAppello', '$fonteStudio', '$pagineTot', '$pagineStudiate');"
+        Log.d("insSessione", query)
+        apiService.insert(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()
+                    Log.d("APICLIENT", res.toString())
+                    callback(true, null)
+                } else{
+                    Log.e("APICLIENT", response.message())
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(false , error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(false, error)
+            }
+        })
+    }
+
+    fun insArg(idRiferimento: Int, argomento: String?,
+               callback: (Boolean?, Throwable?) -> Unit) {      //sfrutto la callback con un booleano per ottenere conferma sull'inserimento avvenuto
+        val query = "insert into `argomento`(`id_sess_ref`,`argomento`) values('$idRiferimento', '$argomento');"
+        Log.d("InsArg",query)
+        apiService.insert(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()
+                    Log.d("APICLIENT", res.toString())
+                    callback(true, null)
+                } else{
+                    Log.e("InsArg", response.message())
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(false , error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(false, error)
             }
         })
     }
