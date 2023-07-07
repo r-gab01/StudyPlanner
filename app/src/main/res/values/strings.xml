@@ -63,6 +63,9 @@
     <string name="Sunday">Dom</string>
     <string name="orariStudio">8-13</string>
     <string name="orariStudio2">15-18</string>
+    <string name="SubTitle">Pianifica al meglio la tua settimana di studio grazie a StudyPlanner!</string>
+    <string name="insName">Inserisci nome</string>
+    <string name="insSurname">Inserisci cognome</string>
 
     <string name="TitleLegend">Legenda</string>
     <string name="DescriptionLegend">Nel riquadro sottostante trovi la tua routine di studio, che puoi modificare a seconda delle tue esigenze. Per ogni giorno della settimana puoi impostare l\'icona del libro  altrimenti cliccando su di essa comparirà l\'icona della batteria. Inoltre, al di sotto delle icone trovi dei campi modificabili dove puoi inserire i tuoi orari di studio.  </string>

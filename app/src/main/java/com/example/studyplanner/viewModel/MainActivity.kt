@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         val nomeU: String? = sharedPreferences.getString("Nome Utente", "")
         val singleton= DataSingleton.ottieniIstanza()
+        singleton.nomeUtente
 
         ApiClient.selectStudente(nomeU){ data, error ->
             if (error != null) {
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
         val calendarTag = "CalendarFragment"
         //Di default avvio il fragment del calendario
-        if (savedInstanceState == null) {
+       if (savedInstanceState == null) {
             val manager = supportFragmentManager
             val transaction = manager.beginTransaction()
 

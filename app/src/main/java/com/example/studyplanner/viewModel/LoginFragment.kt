@@ -1,9 +1,11 @@
 package com.example.studyplanner.viewModel
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.Handler
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
@@ -251,4 +253,5 @@ class LoginFragment : Fragment(){
             }
         }
     }
+
 }
