@@ -36,7 +36,7 @@
     <string name="ScegliNome">Scegli il nome della materia</string>
     <string name="Date">Data </string>
     <string name="Cfu">Cfu</string>
-    <string name="InserisciDate">Inserisci data esame </string>
+    <string name="InserisciDate">Data esame</string>
     <string name="NameBook">Nome Libro </string>
     <string name="InserisciNameBook">Nome del libro </string>
     <string name="totPage">Totale pagine</string>
@@ -45,6 +45,7 @@
 
     <string name="titleProfile">PROFILO</string>
     <string name="descriptionProfile">Visualizza in questa schermata le informazioni relative al tuo Profilo. L\'app ti permetterà, se necessario di modificarle. </string>
+    <string name="Name">Nome</string>
     <string name="cognome">Cognome</string>
     <string name="universita">Università</string>
     <string name="corso_studi">Corso di studi</string>
