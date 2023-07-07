@@ -33,11 +33,10 @@
 
     <string name="AddExam">AGGIUNGI ESAME</string>
     <string name="NomeEsame">Nome esame</string>
-    <string name="Name">Nome</string>
     <string name="ScegliNome">Scegli il nome della materia</string>
     <string name="Date">Data </string>
     <string name="Cfu">Cfu</string>
-    <string name="InserisciDate">Inserisci data esame </string>
+    <string name="InserisciDate">Data esame</string>
     <string name="NameBook">Nome Libro </string>
     <string name="InserisciNameBook">Nome del libro </string>
     <string name="totPage">Totale pagine</string>
@@ -45,7 +44,8 @@
     <string name="Arguments">Argomenti</string>
 
     <string name="titleProfile">PROFILO</string>
-    <string name="descriptionProfile">Visualizza in questa schermata le informazioni relative al tuo Profilo. L\'app ti permetterà, se necessario di modificarle. In basso trovi anche la tua routine di studio personalizzabile </string>
+    <string name="descriptionProfile">Visualizza in questa schermata le informazioni relative al tuo Profilo. L\'app ti permetterà, se necessario di modificarle. </string>
+    <string name="Name">Nome</string>
     <string name="cognome">Cognome</string>
     <string name="universita">Università</string>
     <string name="corso_studi">Corso di studi</string>
@@ -65,13 +65,10 @@
     <string name="orariStudio2">15-18</string>
 
     <string name="TitleLegend">Legenda</string>
-    <string name="DescriptionLegend">Nel riquadro sottostante trovi la tua routine di studio, che puoi modificare a seconda delle tue esigenze. Per ogni giorno della settimana puoi impostare l\'icona del libro  altrimenti cliccando su di essa comparirà l\'icona della batteria. </string>
+    <string name="DescriptionLegend">Nel riquadro sottostante trovi la tua routine di studio, che puoi modificare a seconda delle tue esigenze. Per ogni giorno della settimana puoi impostare l\'icona del libro  altrimenti cliccando su di essa comparirà l\'icona della batteria. Inoltre, al di sotto delle icone trovi dei campi modificabili dove puoi inserire i tuoi orari di studio.  </string>
     <string name="iconBook">L\'icona del libro indica che è prevista una sessione di studio per quel giorno. Non mollare!</string>
     <string name="iconBatteryCharging">L\'icona della batteria indica che non è prevista nessuna sessione di studio , ma un giorno libero. Buon riposo!</string>
     <string name="ButtonBack">CAPITO</string>
-    <string name="insName">Inserisci nome</string>
-    <string name="insSurname">Inserisci cognome</string>
-    <string name="SubTitle">Pianifica al meglio la tua settimana di studio grazie a StudyPlanner!</string>
 
     <!-- MICHELE -->
     <string name="title_stat_fragment">STATISTICHE</string>

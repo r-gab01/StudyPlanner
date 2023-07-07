@@ -172,9 +172,9 @@ object ApiClient {
         })
     }
 
-    fun selectMaterieCorso(idCorso: String?, callback: (List<MateriaDBModel?>?, Throwable?) -> Unit) {
+    fun selectMaterieCorso(idCorso: Int?, callback: (List<MateriaDBModel?>?, Throwable?) -> Unit) {
         var data = ArrayList<MateriaDBModel?>()
-        val query = "select * from materia where id_c_ref = '$idCorso';"
+        val query = "select * from `materia` where id_c_ref='$idCorso';"
         apiService.select(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
@@ -202,31 +202,6 @@ object ApiClient {
         })
     }
 
-    fun registraAccount(nomeUtente: String, pass: String?, domSic: String?, rispSic: String?,
-                        callback: (Boolean?, Throwable?) -> Unit) {
-        val query = "insert into `autenticazione` values('$nomeUtente', '$pass', '$domSic', '$rispSic');"
-        apiService.insert(query).enqueue(object : Callback<JsonObject> {
-            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                if (response.isSuccessful) {
-                    val res = response.body()
-                    Log.d("APICLIENT", res.toString())
-                    callback(true, null)
-                } else{
-                    Log.e("APICLIENT", response.message())
-                    val error = Exception("Dati non inseriti correttamente nel Database")
-                    callback(false , error)
-                }
-            }
-            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                Log.e("OnFailure", "${t.message}")
-                val error = Exception("La chiamata API non è stata eseguita correttamente.")
-                callback(false, error)
-            }
-        })
-    }
-
-
-
     fun selectStudente(nomeU: String?, callback: (StudenteDBModel?, Throwable?) -> Unit){        //sfrutto callback per gestire metodo post asincrono
         var data: StudenteDBModel?   //scelgo la data class con cui voglio restituiti i dati
         val query = "select * from studente where nome_utente = '${nomeU}';"
@@ -251,31 +226,6 @@ object ApiClient {
                 Log.e("OnFailure", "${t.message}")
                 val error = Exception("La chiamata API non è stata eseguita correttamente.")
                 callback(null, error)
-            }
-        })
-    }
-
-
-    //Funzione per fare l'update della password
-    fun updatePass(nomeU: String?, newPass:String?, callback: (Boolean?, Throwable?) -> Unit){        //sfrutto callback per gestire metodo post asincrono
-        val query = "update autenticazione a set a.password = '${newPass}' where a.nome_u_ref = '${nomeU}';"
-        apiService.update(query).enqueue(object : Callback<JsonObject> {
-            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                if (response.isSuccessful) {
-                    val res = response.body()
-                    Log.d("APICLIENT", res.toString())
-                    callback(true, null)
-                } else {
-                    Log.e("APLICLIENT", response.message())
-                    Log.e("APLICLIENT", response.body().toString())
-                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
-                    callback(false, error) // Nessun risultato trovato
-                }
-            }
-            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                Log.e("OnFailure", "${t.message}")
-                val error = Exception("La chiamata API non è stata eseguita correttamente.")
-                callback(false, error) // Nessun risultato trovato
             }
         })
     }
@@ -308,8 +258,55 @@ object ApiClient {
         })
     }
 
-    fun updateStudente(newNome: String?,newCognome: String?, newUni: String?, newCorso: Int?, nomeU: String?, callback: (Boolean?, Throwable?) -> Unit){        //sfrutto callback per gestire metodo post asincrono
-        val query = "update studente s set s.nome = '${newNome}', s.cognome= '${newCognome}', s.universita='${newUni}' , s.id_c_ref= '${newCorso}' where s.nome_utente= '${nomeU}';"
+    fun updateStudente(newNome: String?,newCognome: String?, newUni: String?, nomeU: String?, callback: (Boolean?, Throwable?) -> Unit){        //sfrutto callback per gestire metodo post asincrono
+        val query = "update studente s set s.nome= '${newNome}', s.cognome= '${newCognome}', s.universita='${newUni}' where s.nome_utente='${nomeU}';"
+        apiService.update(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()
+                    Log.d("APICLIENT", res.toString())
+                    callback(true, null)
+                } else {
+                    Log.e("APLICLIENT", response.message())
+                    Log.e("APLICLIENT", response.body().toString())
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(false, error) // Nessun risultato trovato
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(false, error) // Nessun risultato trovato
+            }
+        })
+    }
+
+
+    fun updateCorso(Corso: String?, idCorso:Int?, callback: (Boolean?, Throwable?) -> Unit){        //sfrutto callback per gestire metodo post asincrono
+        val query = "update corso_di_studio c set c.nome_corso='${Corso}' where c.id_corso='${idCorso}';"
+        apiService.update(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()
+                    Log.d("APICLIENT", res.toString())
+                    callback(true, null)
+                } else {
+                    Log.e("APLICLIENT", response.message())
+                    Log.e("APLICLIENT", response.body().toString())
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(false, error) // Nessun risultato trovato
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(false, error) // Nessun risultato trovato
+            }
+        })
+    }
+
+    fun updatePass(nomeU: String?, newPass:String?, callback: (Boolean?, Throwable?) -> Unit){        //sfrutto callback per gestire metodo post asincrono
+        val query = "update autenticazione a set a.password = '${newPass}' where a.nome_u_ref = '${nomeU}';"
         apiService.update(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".viewModel.AddExamActivity">
 
@@ -25,132 +26,94 @@
         android:layout_height="match_parent"
         android:layout_marginTop="10dp">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
             <TextView
                 android:id="@+id/tipo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="5dp"
                 android:fontFamily="@font/montserrat_light"
-                android:text="@string/Type"
+                android:text="@string/NomeEsame"
                 android:textColor="@color/black"
                 android:textSize="18dp" />
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/insDomanda"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/montserrat_light"
-                    android:background="@drawable/edit_text_border"
-                    android:hint="@string/Type"
-                    android:paddingLeft="10dp"
-                    android:editable="false"
-                    android:textSize="18dp"
-                    android:textColor="@color/black"
-                    tools:ignore="Deprecated" />
-
-                <Spinner
-                    android:id="@+id/spinnerDomanda"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:contentDescription="seleziona il tipo"
-                    android:textColor="@color/black" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/nomeMateria"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:fontFamily="@font/montserrat_light"
-                android:text="@string/Name"
-                android:textColor="@color/black"
-                android:textSize="18dp" />
+                android:gravity="center"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                app:boxCornerRadiusTopEnd="30dp"
+                app:boxCornerRadiusBottomEnd="30dp"
+                app:boxCornerRadiusTopStart="30dp"
+                app:boxCornerRadiusBottomStart="30dp">
 
-            <EditText
-                android:id="@+id/insName"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:fontFamily="@font/montserrat_light"
-                android:background="@drawable/edit_text_border"
-                android:hint="@string/InserisciNome"
-                android:paddingLeft="10dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:textSize="18dp"
-                android:textColor="@color/black"/>
+                <AutoCompleteTextView
+                    android:id="@+id/selMateria"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ScegliNome"
+                    android:background="@drawable/edit_text_border"
+                    android:layout_gravity="center"
+                    android:inputType="none"
+                    android:padding="5dp"
+                    android:textSize="17dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
+                >
 
                 <TextView
                     android:id="@+id/data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/montserrat_light"
                     android:text="@string/Date"
                     android:textColor="@color/black"
-                    android:textSize="18dp" />
+                    android:textSize="18dp"
+                    />
 
                 <TextView
                     android:id="@+id/cfu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    android:gravity="right"
                     android:fontFamily="@font/montserrat_light"
                     android:text="@string/Cfu"
                     android:textColor="@color/black"
                     android:textSize="18dp"
-                    />
-
-
+                    android:layout_weight="1"
+                     />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
+                android:layout_marginTop="5dp"
+                >
 
                 <EditText
                     android:id="@+id/insDate"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_weight="1"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="15dp"
+                    android:layout_marginTop="5dp"
                     android:focusable="false"
                     android:clickable="true"
                     android:hint="@string/InserisciDate"
@@ -158,100 +121,120 @@
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     android:background="@drawable/edit_text_border"
-                    />
-
+                     />
 
 
                 <EditText
                     android:id="@+id/textCfu"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_weight="1"
-                    android:singleLine="true"
-                    android:maxLines="1"
-                    android:paddingLeft="10dp"
+                    android:inputType="none"
+                    android:cursorVisible="false"
+                    android:paddingLeft="15dp"
+                    android:layout_marginTop="5dp"
                     android:fontFamily="@font/montserrat_light"
                     android:hint="@string/Cfu"
+                    android:text=""
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/black"
                     android:textSize="18dp"
-                    android:background="@drawable/edit_text_border"/>
+                    android:background="@drawable/edit_text_border" />
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/nomeLibro"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:fontFamily="@font/montserrat_light"
-                android:text="@string/NameBook"
-                android:textColor="@color/black"
-                android:textSize="18dp" />
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                >
 
-            <EditText
-                android:id="@+id/textNameBook"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:fontFamily="@font/montserrat_light"
-                android:background="@drawable/edit_text_border"
-                android:hint="@string/InserisciNameBook"
-                android:paddingLeft="10dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:textSize="18dp"
-                android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/nomeLibroTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:text="@string/NameBook"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:layout_weight="1"
 
-            <TextView
-                android:id="@+id/totPage"
+                    />
+
+                <TextView
+                    android:id="@+id/totPage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingRight="10dp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:text="@string/totPage"
+                    android:textColor="@color/black"
+                    android:gravity="right"
+                    android:textSize="18dp"
+                    android:layout_weight="1"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:fontFamily="@font/montserrat_light"
-                android:text="@string/totPage"
-                android:textColor="@color/black"
-                android:textSize="18dp" />
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                >
 
-            <EditText
-                android:id="@+id/textPageBook"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:fontFamily="@font/montserrat_light"
-                android:background="@drawable/edit_text_border"
-                android:hint="@string/InsertPage"
-                android:paddingLeft="10dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:textSize="18dp"
-                android:textColor="@color/black"/>
+                <EditText
+                    android:id="@+id/textNameBook"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:background="@drawable/edit_text_border"
+                    android:hint="@string/InserisciNameBook"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+
+                    />
+
+                <EditText
+                    android:id="@+id/textPageBook"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:background="@drawable/edit_text_border"
+                    android:hint="@string/InsertPage"
+                    android:inputType="number"
+                    android:paddingLeft="15dp"
+                    android:textSize="18dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    />
+
+            </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_marginTop="15dp">
 
             <TextView
                 android:id="@+id/arguments"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:layout_marginLeft="5dp"
                 android:gravity="center_vertical"
                 android:fontFamily="@font/montserrat_light"
                 android:text="@string/Arguments"
@@ -279,12 +262,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
             android:background="@drawable/edit_text_border"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"/>
-
 
             </ScrollView>
 
@@ -292,6 +272,11 @@
                 android:id="@+id/buttonConferma"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:backgroundTint="#004783"
+                android:textColor="@color/white"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:layout_gravity="center"
                 android:text="@string/buttonAggiungi"
                 android:fontFamily="@font/montserrat_light"
