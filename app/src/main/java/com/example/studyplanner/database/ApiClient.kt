@@ -13,7 +13,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.sql.Date
 
-
 object ApiClient {
 
     val gson = GsonBuilder()  //per serializzare e deserializzare l'oggetto JSON nella data Class che mi serve
@@ -92,7 +91,7 @@ object ApiClient {
     }
 
     fun selectCorsoStudio( callback: (List<CorsoStudioDBModel?>?, Throwable?) -> Unit) {
-        var data = ArrayList<CorsoStudioDBModel?>()
+        val data = ArrayList<CorsoStudioDBModel?>()
         val query = "select * from corso_di_studio;"
         apiService.select(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -148,6 +147,7 @@ object ApiClient {
             }
         })
     }
+
     //Metodo di INSERT
     fun registraStudente(nomeUtente: String, universita: String, corsoStudi: Int?,
                          pass: String?, domSic: String?, rispSic: String?,
@@ -176,7 +176,7 @@ object ApiClient {
     }
 
     fun selectMaterieCorso(idCorso: Int?, callback: (List<MateriaDBModel?>?, Throwable?) -> Unit) {
-        var data = ArrayList<MateriaDBModel?>()
+        val data = ArrayList<MateriaDBModel?>()
         val query = "select * from `materia` where id_c_ref='$idCorso';"
         apiService.select(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -296,7 +296,6 @@ object ApiClient {
                     callback(true, null)
                 } else {
                     Log.e("APLICLIENT", response.message())
-                    Log.e("APLICLIENT", response.body().toString())
                     val error = Exception("La chiamata API non è stata eseguita correttamente.")
                     callback(false, error) // Nessun risultato trovato
                 }
@@ -308,6 +307,113 @@ object ApiClient {
             }
         })
     }
+
+    fun insInSessione(idSessione: Int?, nomeUtente: String, nomeMateria: String?, idCorso: Int?, dataAppello: String?,
+                      fonteStudio: String?, pagineTot: Int?, pagineStudiate: Int?,
+               callback: (Boolean?, Throwable?) -> Unit) {      //sfrutto la callback con un booleano per ottenere conferma sull'inserimento avvenuto
+        val query =
+            "insert into `sessione_studio` values('$idSessione','$nomeUtente', '$nomeMateria', '$idCorso', '$dataAppello', '$fonteStudio', '$pagineTot', '$pagineStudiate');"
+        Log.d("insSessione", query)
+        apiService.insert(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()
+                    Log.d("APICLIENT", res.toString())
+                    callback(true, null)
+                } else{
+                    Log.e("APICLIENT", response.message())
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(false , error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(false, error)
+            }
+        })
+    }
+
+    fun insArg(idRiferimento: Int, argomento: String?,
+               callback: (Boolean?, Throwable?) -> Unit) {      //sfrutto la callback con un booleano per ottenere conferma sull'inserimento avvenuto
+        val query = "insert into `argomento`(`id_sess_ref`,`argomento`) values('$idRiferimento', '$argomento');"
+        Log.d("InsArg",query)
+        apiService.insert(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()
+                    Log.d("APICLIENT", res.toString())
+                    callback(true, null)
+                } else{
+                    Log.e("InsArg", response.message())
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(false , error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(false, error)
+            }
+        })
+    }
+
+    fun selectEsamiSessione(callback: (List<SessioneStudioDBModel?>?, Throwable?) -> Unit) {
+        val data = ArrayList<SessioneStudioDBModel?>()
+        val query = "select * from `sessione_studio` where nome_u_ref='${DataSingleton.ottieniIstanza().nomeUtente}';"
+        apiService.select(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()?.getAsJsonArray("queryset")
+                    if (res != null && res.size() > 0) {
+                        for (i in 0 until res.size()) {
+                            val result = res.get(i).asJsonObject
+                            data.add(gson.fromJson(result, SessioneStudioDBModel::class.java))
+                        }
+                        Log.d("APICLIENT", data.toString())
+                        callback(data.toList(), null)
+                    } else {
+                        callback(null, null) // Nessun risultato trovato
+                    }
+                } else {
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(null, error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(null, error)
+            }
+        })
+    }
+
+    fun updatePagineStud(pagineStud: Int, idSessioneMateria: Int?,
+                      callback: (Boolean?, Throwable?) -> Unit) {      //sfrutto la callback con un booleano per ottenere conferma sull'inserimento avvenuto
+        val query = "UPDATE `sessione_studio` " +
+                 "SET pagine_stud = pagine_stud + $pagineStud " +
+        "WHERE id_sessione = '${idSessioneMateria}';"
+        Log.d("InsArg",query)
+        apiService.update(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()
+                    Log.d("APICLIENT", res.toString())
+                    callback(true, null)
+                } else{
+                    Log.e("InsArg", response.message())
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(false , error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(false, error)
+            }
+        })
+    }
+
 
 
     fun registraAccount(nomeUtente: String, pass: String?, domSic: String?, rispSic: String?,
@@ -378,6 +484,66 @@ object ApiClient {
                         }
                         Log.d("APICLIENT", data.toString())
                         callback(data.toList(), null)
+                    } else {
+                        callback(null, null) // Nessun risultato trovato
+                    }
+                } else {
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(null, error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(null, error)
+            }
+        })
+    }
+
+    fun selectArgomenti(idSessione:Int?, callback: (List<ArgomentoDBModel?>?, Throwable?) -> Unit) {
+        var data = ArrayList<ArgomentoDBModel?>()
+        val query = "select * from argomento where id_sess_ref='$idSessione';"
+        apiService.select(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()?.getAsJsonArray("queryset")
+                    if (res != null && res.size() > 0) {
+                        for (i in 0 until res.size()) {
+                            val result = res.get(i).asJsonObject
+                            data.add(gson.fromJson(result, ArgomentoDBModel::class.java))
+                        }
+                        Log.d("APICLIENT", data.toString())
+                        callback(data.toList(), null)
+                    } else {
+                        callback(null, null) // Nessun risultato trovato
+                    }
+                } else {
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(null, error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(null, error)
+            }
+        })
+    }
+
+    fun selectMateria(nomeMateria: String?, callback: (MateriaDBModel?, Throwable?) -> Unit) {
+        var data: MateriaDBModel?
+        val query = "select * from materia where id_c_ref= '${DataSingleton.ottieniIstanza().idCorso}' and " +
+                "nome_m = '$nomeMateria';"
+        Log.d("SelectMateria",query)
+        apiService.select(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()?.getAsJsonArray("queryset")
+                    if (res != null && res.size() > 0) {
+                        val result = res.get(0).asJsonObject
+                        data = gson.fromJson(result, MateriaDBModel::class.java)
+                        Log.d("APICLIENT", data.toString())
+                        callback(data, null)
                     } else {
                         callback(null, null) // Nessun risultato trovato
                     }

@@ -2,7 +2,6 @@ package com.example.studyplanner.viewModel
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.StrictMode
@@ -14,6 +13,7 @@ import com.example.studyplanner.R
 import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.ActivityMainBinding
 import com.example.studyplanner.model.DataSingleton
+
 
 class MainActivity : AppCompatActivity() {
 
