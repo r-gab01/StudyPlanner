@@ -5,14 +5,12 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.studyplanner.PreparationActivity
 import com.example.studyplanner.R
 import com.example.studyplanner.databinding.ExamsCardViewBinding
 import com.example.studyplanner.model.SessioneStudioDBModel
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.temporal.ChronoUnit
-
 
 class ExamAdapter(private val examsList: ArrayList<SessioneStudioDBModel>) : RecyclerView.Adapter<ExamAdapter.ViewHolder>() {
 

@@ -467,6 +467,36 @@ object ApiClient {
         })
     }
 
+    fun selectArgomenti(idSessione:Int?, callback: (List<ArgomentoDBModel?>?, Throwable?) -> Unit) {
+        var data = ArrayList<ArgomentoDBModel?>()
+        val query = "select * from argomento where id_sess_ref='$idSessione';"
+        apiService.select(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()?.getAsJsonArray("queryset")
+                    if (res != null && res.size() > 0) {
+                        for (i in 0 until res.size()) {
+                            val result = res.get(i).asJsonObject
+                            data.add(gson.fromJson(result, ArgomentoDBModel::class.java))
+                        }
+                        Log.d("APICLIENT", data.toString())
+                        callback(data.toList(), null)
+                    } else {
+                        callback(null, null) // Nessun risultato trovato
+                    }
+                } else {
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(null, error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(null, error)
+            }
+        })
+    }
+
 
     /*
        val accountData: MutableLiveData<AccountDBModel> = MutableLiveData()

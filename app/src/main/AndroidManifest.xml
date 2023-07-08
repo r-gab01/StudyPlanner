@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PreparationActivity"
+            android:name=".viewModel.PreparationActivity"
             android:exported="false" />
         <activity
             android:name=".viewModel.AddExamActivity"
