@@ -8,10 +8,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.studyplanner.R
 import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.FragmentCalendarBinding
 import com.example.studyplanner.model.DataSingleton
+import com.example.studyplanner.model.ExamModel
 import java.util.*
 
 
@@ -40,6 +45,26 @@ class CalendarFragment : Fragment() {
 
         val calendar= binding.calendarView
 
+        val recyclerView = binding.recyclerViewMostraEsame
+        val esami = ArrayList<ExamModel>()
+
+        // Configura la RecyclerView che ci servirà per mostrare gli esami quando clicchiamo un giorno del calendario
+        val layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = layoutManager
+       // val data = ArrayList<ExamModel>()
+        //val adapter = ExamAdapter(data)
+        //recyclerView.adapter = adapter
+       // calendar.setDateTextAppearance(R.style.CustomCalendarViewStyle)
+        calendar.dateTextAppearance = R.style.CustomCalendarViewStyle
+
+
+        val nomiMaterie = ArrayList<String?>()
+        //per ottenere il giorno attuale
+        val Calendario = Calendar.getInstance()
+        val currentDay = Calendario.get(Calendar.DAY_OF_MONTH)
+
+        val infoSeEsame= binding.infoSeEsame
+
         val nomeU= DataSingleton.ottieniIstanza().nomeUtente
         var sharedPreferences= requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         //   val nomeU: String? = sharedPreferences.getString("Nome Utente", "")
@@ -49,11 +74,19 @@ class CalendarFragment : Fragment() {
             val selectedDate = Calendar.getInstance()
             selectedDate.set(year, month, dayOfMonth)
 
+            // Ottiengo solo il giorno dalla data selezionata che ci serve dopo
+            val day = selectedDate.get(Calendar.DAY_OF_MONTH)
+            Log.d("CALENDAR", "Dati ricevuti: $day")
+
             //trasformiamo la data nel formato corretto
             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val formattedDate = dateFormat.format(selectedDate.time)
             Log.d("CALENDAR", "Dati ricevuti: $formattedDate")
             Log.d("CALENDAR", "Dati ricevuti: $nomeU")
+            val esami = ArrayList<ExamModel>()
+
+
+
 
             ApiClient.selectSessioneStudio(nomeU,formattedDate){ data, error ->
                 if (error != null) {
@@ -62,10 +95,29 @@ class CalendarFragment : Fragment() {
                 }else if (data != null) {
                     // Utilizza i dati restituiti
                     Log.d("CALENDAR", "Dati ricevuti: $data")
-                    //salvo il corso nel Singleton
-                    val singleton= DataSingleton.ottieniIstanza()
+                    val leftPadding = 20
+                    val topPadding = 3
+                    val rightPadding = 20
+                    val bottomPadding = 3
+                   var giorniRimanenti:Int =day - currentDay
+
+
+                    infoSeEsame.text= "Esami a cui sei prenotato:"
+                    infoSeEsame.setTextColor(ContextCompat.getColor(requireContext(), R.color.purple_700))
+                 //   binding.mostraEsame.setPadding(leftPadding, topPadding, rightPadding, bottomPadding)
+                 //   binding.mostraEsame.text=data.dataAppello.toString()
+                    binding.recyclerViewMostraEsame.visibility = View.VISIBLE
+                    for (i in data){
+                        nomiMaterie.add(i?.nomeMateria)
+                        esami.add(ExamModel(i?.nomeMateria,formattedDate,giorniRimanenti,0))
+                    }
+                    val adapter = CalendarAdapter(esami)
+                    recyclerView.adapter = adapter
 
                 }else{
+                    binding.recyclerViewMostraEsame.visibility = View.INVISIBLE
+                    infoSeEsame.text= "Nessun esame fissato in questo giorno!"
+                    infoSeEsame.setTextColor(ContextCompat.getColor(requireContext(), R.color.purple_700))
                     Log.d("CALENDAR", "Dati ricevuti: $data")
                 }
             }
