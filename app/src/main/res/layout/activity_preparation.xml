@@ -25,22 +25,23 @@
         android:id="@+id/horizzontalBarrier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
         android:layout_marginTop="5dp"
-        app:layout_constraintTop_toBottomOf="@id/title_preparation"
-        app:layout_constraintBottom_toTopOf="@id/cardViewTitleExam"
+        app:barrierDirection="bottom"
         app:constraint_referenced_ids="title_preparation"
-        tools:layout_editor_absoluteY="731dp" />
+        app:layout_constraintBottom_toTopOf="@id/cardViewTitleExam"
+        app:layout_constraintTop_toBottomOf="@id/title_preparation" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewTitleExam"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/title_preparation"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_preparation">
 
         <ImageView
@@ -48,7 +49,7 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_margin="10dp"
-            app:srcCompat="@drawable/baseline_menu_book_24" />
+            android:src="@drawable/baseline_menu_book_24" />
 
         <TextView
             android:id="@+id/titleCardView"
@@ -66,69 +67,59 @@
             android:id="@+id/Cfu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Cfu"
-            android:textSize="15sp"
-            android:fontFamily="@font/montserrat_light"
-            android:textColor="@color/black"
             android:layout_marginStart="80dp"
+            android:layout_marginTop="35dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="35dp"/>
+            android:fontFamily="@font/montserrat_light"
+            android:text="@string/Cfu"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/numCfu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="15sp"
-            android:fontFamily="@font/montserrat_light"
-            android:textColor="@color/black"
             android:layout_marginStart="150dp"
+            android:layout_marginTop="35dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="35dp"/>
+            android:fontFamily="@font/montserrat_light"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_gravity="right"/>
 
         <TextView
             android:id="@+id/docente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nameDocente"
-            android:fontFamily="@font/montserrat_light"
-            android:textColor="@color/black"
             android:layout_marginStart="80dp"
+            android:layout_marginTop="58dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="53dp"/>
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/montserrat_light"
+            android:text="@string/nameDocente"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/nomeDocente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:fontFamily="@font/montserrat_light"
-            android:textSize="15sp"
-            android:textColor="@color/black"
             android:layout_marginStart="150dp"
+            android:layout_marginTop="58dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="53dp"/>
+            android:layout_gravity="right"
+            android:fontFamily="@font/montserrat_light"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
     </androidx.cardview.widget.CardView>
-
-    <ImageButton
-        android:id="@+id/editEsami"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="229dp"
-        android:background="@drawable/rounded_button"
-        android:clickable="true"
-        android:elevation="10dp"
-        android:focusable="true"
-        android:src="@drawable/baseline_edit_24"
-        app:layout_constraintStart_toStartOf="@+id/cardViewTitleExam"
-        app:layout_constraintTop_toBottomOf="@id/horizzontalBarrier" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/menuChip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="25dp"
+        android:layout_margin="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
@@ -138,17 +129,19 @@
         <com.google.android.material.chip.Chip
             android:id="@+id/chipInfoGenerali"
             style="@style/CustomChipStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_light"
+            android:textAlignment="center"
             android:text="@string/title_chip_Info" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipMateriale"
             style="@style/CustomChipStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_light"
+            android:textAlignment="center"
             android:text="@string/title_chip_Materiale" />
     </com.google.android.material.chip.ChipGroup>
 

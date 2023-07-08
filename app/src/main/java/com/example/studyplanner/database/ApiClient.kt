@@ -147,6 +147,7 @@ object ApiClient {
             }
         })
     }
+
     //Metodo di INSERT
     fun registraStudente(nomeUtente: String, universita: String, corsoStudi: Int?,
                          pass: String?, domSic: String?, rispSic: String?,
@@ -415,7 +416,6 @@ object ApiClient {
 
 
 
-
     fun registraAccount(nomeUtente: String, pass: String?, domSic: String?, rispSic: String?,
                         callback: (Boolean?, Throwable?) -> Unit) {
         val query = "insert into `autenticazione` values('$nomeUtente', '$pass', '$domSic', '$rispSic');"
@@ -481,6 +481,36 @@ object ApiClient {
                         }
                         Log.d("APICLIENT", data.toString())
                         callback(data.toList(), null)
+                    } else {
+                        callback(null, null) // Nessun risultato trovato
+                    }
+                } else {
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(null, error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(null, error)
+            }
+        })
+    }
+
+    fun selectMateria(nomeMateria: String?, callback: (MateriaDBModel?, Throwable?) -> Unit) {
+        var data: MateriaDBModel?
+        val query = "select * from materia where id_c_ref= '${DataSingleton.ottieniIstanza().idCorso}' and " +
+                "nome_m = '$nomeMateria';"
+        Log.d("SelectMateria",query)
+        apiService.select(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()?.getAsJsonArray("queryset")
+                    if (res != null && res.size() > 0) {
+                        val result = res.get(0).asJsonObject
+                        data = gson.fromJson(result, MateriaDBModel::class.java)
+                        Log.d("APICLIENT", data.toString())
+                        callback(data, null)
                     } else {
                         callback(null, null) // Nessun risultato trovato
                     }
