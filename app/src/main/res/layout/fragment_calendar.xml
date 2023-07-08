@@ -1,27 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".viewModel.CalendarFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/descriptionCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserrat_light"
+        android:text="@string/descriptionCalendar"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintStart_toStartOf="@+id/title_calendar_fragment"
+        app:layout_constraintTop_toBottomOf="@+id/title_calendar_fragment" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="wrap_content"
         android:layout_height="340dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/calendar_style"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_calendar_fragment"
-        app:layout_constraintVertical_bias="0.06999999">
+        app:layout_constraintTop_toBottomOf="@+id/descriptionCalendar">
 
         <CalendarView
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:paddingBottom="10dp"
+            android:paddingBottom="5dp"
+
             />
     </FrameLayout>
 
@@ -29,41 +48,59 @@
         android:id="@+id/title_calendar_fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/montserrat_medium"
         android:text="@string/title_calendar_fragment"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/frameLayout"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addExamButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="30dp"
         android:clickable="true"
         android:src="@drawable/baseline_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="Questo bottone se cliccato permetter di aprire la schermata per l'aggiunta degli esami"/>
 
-
-    <FrameLayout
+    <TextView
+        android:id="@+id/infoSeEsame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toEndOf="@+id/frameLayout"
-        app:layout_constraintStart_toStartOf="@id/frameLayout"
-        app:layout_constraintTop_toBottomOf="@id/frameLayout"
-        android:background="@drawable/border_element">
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment_container_calendar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </androidx.fragment.app.FragmentContainerView>
-    </FrameLayout>
+        android:layout_marginTop="5dp"
+        android:text=""
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:fontFamily="@font/montserrat_light"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintBottom_toTopOf="@id/recyclerViewMostraEsame"
 
+        app:layout_constraintStart_toStartOf="@id/frameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewMostraEsame"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout"
+            app:layout_constraintStart_toStartOf="@id/frameLayout"
+            app:layout_constraintTop_toBottomOf="@id/frameLayout"
+            android:clickable="false"
+            android:focusable="false"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent="0.25"
+           />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
+

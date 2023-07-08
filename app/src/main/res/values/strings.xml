@@ -72,6 +72,8 @@
     <string name="iconBook">L\'icona del libro indica che è prevista una sessione di studio per quel giorno. Non mollare!</string>
     <string name="iconBatteryCharging">L\'icona della batteria indica che non è prevista nessuna sessione di studio , ma un giorno libero. Buon riposo!</string>
     <string name="ButtonBack">CAPITO</string>
+    <string name="descriptionCalendar">Tramite il calendario StudyPlanner puoi tenere d\'occhio in qualsiasi momento i tuoi impegni fissati!</string>
+    <string name="dateExame">Data Esame</string>
 
     <!-- MICHELE -->
     <string name="title_stat_fragment">STATISTICHE</string>
@@ -90,7 +92,6 @@
     <string name="title_pagine_consigliate_giornalmente">PAGINE GIORNALIERE CONSIGLIATE</string>
     <string name="title_chip_Info">INFO GENERALI</string>
     <string name="title_chip_Materiale">MATERIALE</string>
-
 
 
     <!-- MICHELE -->
@@ -120,4 +121,6 @@
     <string name="erroreConfPassword">Password e conferma password non corrispondono</string>
 
     <string name="default_notification_channel_id">channel_id</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

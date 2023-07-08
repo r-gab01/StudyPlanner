@@ -333,18 +333,20 @@ object ApiClient {
         })
     }
 
-    fun selectSessioneStudio(nomeU: String?, dataA: String? , callback: (SessioneStudioDBModel?, Throwable?) -> Unit){        //sfrutto callback per gestire metodo post asincrono
-        var data: SessioneStudioDBModel?   //scelgo la data class con cui voglio restituiti i dati
+    fun selectSessioneStudio(nomeU: String?, dataA: String? , callback: (List<SessioneStudioDBModel?>?, Throwable?) -> Unit){        //sfrutto callback per gestire metodo post asincrono
+        var data= ArrayList<SessioneStudioDBModel?>()   //scelgo la data class con cui voglio restituiti i dati
         val query = "select * from sessione_studio where nome_u_ref = '${nomeU}' and data_appello = '${dataA}';"
         apiService.select(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
                     val res = response.body()?.getAsJsonArray("queryset")
                     if (res != null && res.size() > 0) {
-                        val result = res.get(0).asJsonObject                            //result è un jsonObject
-                        data = gson.fromJson(result, SessioneStudioDBModel::class.java)        //deserializzo l'oggetto nella classe selezionata
+                        for (i in 0 until res.size()) {
+                            val result = res.get(i).asJsonObject
+                            data.add(gson.fromJson(result, SessioneStudioDBModel::class.java))
+                        }
                         Log.d("APICLIENT", data.toString())
-                        callback(data, null)
+                        callback(data.toList(), null)
                     } else {
                         callback(null, null) // Nessun risultato trovato
                     }
