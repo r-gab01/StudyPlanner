@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.studyplanner.R
 import com.example.studyplanner.database.ApiClient
@@ -12,6 +13,7 @@ import com.example.studyplanner.model.SessioneStudioDBModel
 
 class PreparationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPreparationBinding
+    private lateinit var fragmentInfo: PreparationFragmentInfo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding= ActivityPreparationBinding.inflate(layoutInflater)
@@ -41,8 +43,17 @@ class PreparationActivity : AppCompatActivity() {
         //MOSTRA FRAGMENT INFO GENERALI
         val chipInfoGenerali=binding.chipInfoGenerali
         chipInfoGenerali.setOnClickListener {
-            //caricare fragment e passargli come dato:
+            //caricare fragment e passargli come dato: Da activity a fragment
                 //esameSessione
+
+            fragmentInfo = PreparationFragmentInfo()
+            // Creare un Bundle per i dati presi dal database
+            val bundle = Bundle()
+            bundle.putParcelable("EsameCliccato", esameSessione)
+            // Imposta il bundle come argomento del fragment
+            fragmentInfo.arguments = bundle
+            Log.d("PASSAGGIO VALORI","valori inviati")
+
             val manager=supportFragmentManager
             val transaction=manager.beginTransaction()
             transaction.replace(R.id.fragmentContainerView,PreparationFragmentInfo())
@@ -60,4 +71,5 @@ class PreparationActivity : AppCompatActivity() {
             transaction.commit()
         }
     }
+
 }

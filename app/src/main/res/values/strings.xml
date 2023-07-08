@@ -18,7 +18,6 @@
     <string name="button_conferma">CONFERMA</string>
     <string name="hint_nomeUtente">Inserisci il nome utente</string>
     <string name="domanda">Inserisci la domanda di sicurezza</string>
-
     <string name="title_registrazione">REGISTRA ACCOUNT</string>
     <string name="compilaCampi">Compila i seguenti campi per creare il tuo account personale</string>
     <string name="Username">Nome Utente</string>
@@ -45,6 +44,7 @@
     <string name="totPage">Totale pagine</string>
     <string name="InsertPage">Pagine</string>
     <string name="Arguments">Argomenti</string>
+    <string name="descriptionCalendar">Tramite il calendario StudyPlanner puoi tenere d\'occhio in qualsiasi momento i tuoi impegni fissati!</string>
 
     <string name="titleProfile">PROFILO</string>
     <string name="descriptionProfile">Visualizza in questa schermata le informazioni relative al tuo Profilo. L\'app ti permetterà, se necessario di modificarle. </string>
