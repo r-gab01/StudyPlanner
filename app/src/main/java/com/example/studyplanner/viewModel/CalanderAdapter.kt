@@ -37,6 +37,4 @@ class CalendarAdapter(private val examsList: List<ExamModel>) : RecyclerView.Ada
         return examsList.size
     }
 
-
-
 }

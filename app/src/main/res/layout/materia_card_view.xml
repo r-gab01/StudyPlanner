@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:clickable="true"
+    android:focusable="true"
+    android:id="@+id/cardViewMateria"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="2dp"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="1dp"
+    app:cardBackgroundColor="#f0ffff">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
+
+        <TextView
+            android:id="@+id/textCfu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cfu"
+            android:fontFamily="@font/montserrat_light"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/editCfu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="  "
+            android:paddingLeft="5dp"
+            android:gravity="left"
+            android:fontFamily="@font/montserrat_light"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/textNomeMateria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nomeM"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:gravity="center"
+            android:fontFamily="@font/montserrat_light"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+
+
+        <TextView
+            android:id="@+id/editVoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VOTO"
+            android:layout_weight="0.3"
+            android:paddingLeft="5dp"
+            android:fontFamily="@font/montserrat_light"
+            android:textColor="@color/black"
+            android:gravity="right"
+            android:textSize="16sp"
+           />
+    </LinearLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

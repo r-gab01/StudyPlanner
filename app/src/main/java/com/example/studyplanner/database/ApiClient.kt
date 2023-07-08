@@ -363,6 +363,37 @@ object ApiClient {
         })
     }
 
+    fun selectCarriera(nomeU: String?,  callback: (List<CarrieraDBModel?>?, Throwable?) -> Unit){        //sfrutto callback per gestire metodo post asincrono
+        var data= ArrayList<CarrieraDBModel?>()   //scelgo la data class con cui voglio restituiti i dati
+        val query = "select distinct  c.nome_m_ref, c.voto, m.cfu  from carriera c INNER JOIN materia m where c.nome_u_ref = '${nomeU}'and c.nome_m_ref=m.nome_m and c.id_c_ref=m.id_c_ref ; ;"
+        Log.d("APICLIENT", query)
+        apiService.select(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()?.getAsJsonArray("queryset")
+                    if (res != null && res.size() > 0) {
+                        for (i in 0 until res.size()) {
+                            val result = res.get(i).asJsonObject
+                            data.add(gson.fromJson(result, CarrieraDBModel::class.java))
+                        }
+                        Log.d("APICLIENT", data.toString())
+                        callback(data.toList(), null)
+                    } else {
+                        callback(null, null) // Nessun risultato trovato
+                    }
+                } else {
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(null, error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(null, error)
+            }
+        })
+    }
+
 
     /*
        val accountData: MutableLiveData<AccountDBModel> = MutableLiveData()

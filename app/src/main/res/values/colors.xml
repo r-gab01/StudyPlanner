@@ -11,4 +11,6 @@
     <color name="darkGray">#858585</color>
     <color name="colorPrimary">#004783</color>
     <color name="Red">#FF0000</color>
+    <color name="yellow_light">#fdf5e6</color>
+
 </resources>

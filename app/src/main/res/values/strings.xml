@@ -74,10 +74,14 @@
     <string name="ButtonBack">CAPITO</string>
     <string name="descriptionCalendar">Tramite il calendario StudyPlanner puoi tenere d\'occhio in qualsiasi momento i tuoi impegni fissati!</string>
     <string name="dateExame">Data Esame</string>
+    <string name="cfu">Cfu:</string>
+    <string name="nomeM">NOME MATERIA</string>
+    <string name="vote">Voto:</string>
+    <string name="descripionStatistiche">Visualizza il tuo percorso accademico. Dai uno sguardo agli esami superati, la tua media e lo stato di avanzamento verso la laurea </string>
 
     <!-- MICHELE -->
-    <string name="title_stat_fragment">STATISTICHE</string>
-    <string name="title_esami_superati">ESAMI SUPERATI</string>
+    <string name="title_stat_fragment">CARRIERA ACCADEMICA</string>
+    <string name="title_esami_superati">TOTALE CREDITI CONSEGUITI</string>
     <string name="title_compiti_svolti">COMPITI SVOLTI</string>
     <string name="title_media_aritmetica">MEDIA ARITMETICA</string>
     <string name="title_media_ponderata">MEDIA PONDERATA</string>
