@@ -40,7 +40,7 @@ class StatFragment : Fragment() {
 
                     val layoutManager = LinearLayoutManager(requireContext())
                     recyclerMaterie.layoutManager = layoutManager
-
+                    var cfuTotali:Int=0
 
                     //faccio la query che mi serve per riempire la recycler view
                     ApiClient.selectCarriera(DataSingleton.ottieniIstanza().nomeUtente){ data, error ->
@@ -55,8 +55,13 @@ class StatFragment : Fragment() {
                             for (i in data) {
                                 Log.d("STATFRAGMENT", i.toString())
                                 materie.add(MateriaModel(i?.cfu,i?.nomeMateria,i?.voto))
-                                // materie.add(MateriaModel(i?.cfu,i?.nomeMateria,data.voto))
+                                if(i?.voto != -1 ){
+                                    cfuTotali+= i!!.cfu
+                                }
+                                binding.cfuTotali.setText("${cfuTotali}")
                             }
+                            val adapter = MateriaAdapter(materie,requireContext())
+                            recyclerMaterie.adapter = adapter
                         } else {
                             Log.e("STATFRAGMENT", "Errore")
                             try {
@@ -66,8 +71,7 @@ class StatFragment : Fragment() {
                             }
                         }
                     }
-       // val adapter = MateriaAdapter(materie)
-       // recyclerMaterie.adapter = adapter
+
 
                 }
 

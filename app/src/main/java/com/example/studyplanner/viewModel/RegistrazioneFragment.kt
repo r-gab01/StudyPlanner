@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.example.studyplanner.R
 import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.FragmentRegistrazioneBinding
+import com.example.studyplanner.model.DataSingleton
 
 class RegistrazioneFragment : Fragment() {
 
@@ -131,6 +132,45 @@ class RegistrazioneFragment : Fragment() {
 
                                 }
                             }
+                        }
+                    }
+                }
+
+                ApiClient.selectMaterieCorso(idCorsoSelected) { data, error ->
+                    if (error != null) {
+                        Log.e("REGISTRAZIONEFRAGMENT", "Si è verificato un errore: $error")
+                        try {
+                            Toast.makeText(requireContext(), "Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                        } catch (_: Exception) {
+                        }
+                    } else if (data != null) {
+                        for (i in data) {
+                            ApiClient.insCarriera(nomeIns.toString(),i?.nomeMateria, idCorsoSelected, -1, 0){ response, error->   //insert nella table Carriera
+                                if (error!=null){
+                                    Log.e("REGISTRAZIONEFRAGMENT", "Si è verificato un errore: $error")
+                                    try {
+                                        Toast.makeText(requireContext(),"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                                    } catch (_: Exception){
+                                    }
+                                }else if (response != null){
+                                    Log.d("REGISTRAZONEFRAGMENT", "Registrazione effettuata")
+                                } else{
+                                    Log.e("REGISTRAZIONEFRAGMENT", "Errore in registra studente")
+                                    try {
+                                        Toast.makeText(requireContext(),"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                                    } catch (_: Exception){
+
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        Log.e("REGISTRAZIONEFRAGMENT", "Errore")
+                        try {
+                            Toast.makeText(
+                                requireContext(), "Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                        } catch (_: Exception) {
+
                         }
                     }
                 }

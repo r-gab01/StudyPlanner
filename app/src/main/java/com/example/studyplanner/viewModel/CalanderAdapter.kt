@@ -4,7 +4,6 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.studyplanner.PreparationActivity
 import com.example.studyplanner.R
 import com.example.studyplanner.databinding.CalendarCardViewBinding
 import com.example.studyplanner.databinding.ExamsCardViewBinding

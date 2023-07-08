@@ -471,7 +471,7 @@ object ApiClient {
 
     fun selectCarriera(nomeU: String?,  callback: (List<CarrieraDBModel?>?, Throwable?) -> Unit){        //sfrutto callback per gestire metodo post asincrono
         var data= ArrayList<CarrieraDBModel?>()   //scelgo la data class con cui voglio restituiti i dati
-        val query = "select distinct  c.nome_m_ref, c.voto, m.cfu  from carriera c INNER JOIN materia m where c.nome_u_ref = '${nomeU}'and c.nome_m_ref=m.nome_m and c.id_c_ref=m.id_c_ref ; ;"
+        val query = " Select nome_u_ref, nome_m_ref, c.id_c_ref, voto, lode, cfu FROM carriera c, materia m WHERE c.nome_m_ref=nome_m and c.id_c_ref=m.id_c_ref and c.nome_u_ref='${nomeU}';"
         Log.d("APICLIENT", query)
         apiService.select(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -556,6 +556,29 @@ object ApiClient {
                 Log.e("OnFailure", "${t.message}")
                 val error = Exception("La chiamata API non è stata eseguita correttamente.")
                 callback(null, error)
+            }
+        })
+    }
+
+    fun insCarriera(nomeU: String?, nomeM: String?, idCorso: Int?, voto: Int?, lode: Int, callback: (Boolean?, Throwable?) -> Unit) {      //sfrutto la callback con un booleano per ottenere conferma sull'inserimento avvenuto
+        val query = "insert into `carriera` values('$nomeU', '$nomeM' , '${idCorso}', '${voto}', '${lode}');"
+        Log.d("InsCarriera",query)
+        apiService.insert(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()
+                    Log.d("APICLIENT", res.toString())
+                    callback(true, null)
+                } else{
+                    Log.e("APICLIENT", response.message())
+                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                    callback(false , error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(false, error)
             }
         })
     }

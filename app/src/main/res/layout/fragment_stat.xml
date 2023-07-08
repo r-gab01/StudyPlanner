@@ -54,8 +54,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/libretto_border"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginTop="15dp"
         android:orientation="vertical">
 
@@ -74,7 +74,7 @@
             />
 
         <TextView
-            android:id="@+id/numEsamiSuperati"
+            android:id="@+id/cfuTotali"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -126,16 +126,32 @@
             android:fontFamily="@font/montserrat_light"
             android:textColor="@color/black"
             android:paddingLeft="15dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
         
         <ProgressBar
             android:id="@+id/barPercentualeLaurea"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:progressDrawable="@drawable/progress_bar_style"
             android:padding="15dp"
             android:progress="0"
             android:max="100"/>
+
+            <ImageView
+                android:id="@+id/iconImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:foreground="@drawable/education_graduation"
+                android:layout_weight="0.15"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textIncoraggia"

@@ -12,5 +12,6 @@
     <color name="colorPrimary">#004783</color>
     <color name="Red">#FF0000</color>
     <color name="yellow_light">#fdf5e6</color>
+    <color name="grey">#F1F1F1</color>
 
 </resources>
