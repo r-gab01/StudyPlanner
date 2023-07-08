@@ -21,12 +21,33 @@
         android:fontFamily="@font/montserrat_light"
         android:textColor="@color/black" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_marginTop="10dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/selMateriaSession"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ScegliNome"
+            android:background="@drawable/border_element"
+            android:layout_gravity="center"
+            android:inputType="none"
+            android:padding="5dp"
+            android:textSize="17sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <EditText
         android:id="@+id/editTextNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:layout_marginTop="5dp"/>
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="10dp"/>
     <Button
         android:id="@+id/confirmPageButton"
         android:layout_width="wrap_content"

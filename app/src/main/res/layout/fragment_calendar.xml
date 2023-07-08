@@ -10,7 +10,7 @@
         android:id="@+id/frameLayout"
         android:layout_width="wrap_content"
         android:layout_height="340dp"
-        android:background="@drawable/border_element"
+        android:background="@drawable/calendar_style"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,8 @@
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:paddingBottom="10dp"/>
+            android:paddingBottom="10dp"
+            />
     </FrameLayout>
 
     <TextView
@@ -63,9 +64,6 @@
             android:layout_height="match_parent">
         </androidx.fragment.app.FragmentContainerView>
     </FrameLayout>
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

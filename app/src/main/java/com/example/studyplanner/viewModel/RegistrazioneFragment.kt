@@ -48,7 +48,7 @@ class RegistrazioneFragment : Fragment() {
                 Log.e("REGISTRAZIONEFRAGMENT", "Si è verificato un errore: $error")
                 try {
                     Toast.makeText(requireContext(),"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
-                } catch (e: Exception){
+                } catch (_: Exception){
 
                 }
             }else if (data != null){
@@ -63,7 +63,7 @@ class RegistrazioneFragment : Fragment() {
                 Log.e("REGISTRAZIONEFRAGMENT", "Errore")
                 try {
                     Toast.makeText(requireContext(),"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
-                } catch (e: Exception){
+                } catch (_: Exception){
 
                 }
             }
@@ -117,7 +117,7 @@ class RegistrazioneFragment : Fragment() {
                                 Log.e("REGISTRAZIONEFRAGMENT", "Si è verificato un errore: $error")
                                 try {
                                     Toast.makeText(requireContext(),"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
-                                } catch (e: Exception){
+                                } catch (_: Exception){
 
                                 }
                             }else if (response != null){
@@ -127,7 +127,7 @@ class RegistrazioneFragment : Fragment() {
                                 Log.e("REGISTRAZIONEFRAGMENT", "Errore in registra studente")
                                 try {
                                     Toast.makeText(requireContext(),"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
-                                } catch (e: Exception){
+                                } catch (_: Exception){
 
                                 }
                             }

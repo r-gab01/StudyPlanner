@@ -18,7 +18,7 @@
         android:text="@string/AddExam"
         android:fontFamily="@font/montserrat_medium"
         android:textColor="@color/black"
-        android:textSize="24dp"/>
+        android:textSize="24sp"/>
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -42,7 +42,7 @@
                 android:fontFamily="@font/montserrat_light"
                 android:text="@string/NomeEsame"
                 android:textColor="@color/black"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -63,17 +63,15 @@
                     android:layout_gravity="center"
                     android:inputType="none"
                     android:padding="5dp"
-                    android:textSize="17dp" />
+                    android:textSize="17sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
-            <GridLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:columnCount="2"
-                android:rowCount="2"
+                android:layout_marginTop="15dp"
                 >
 
                 <TextView
@@ -85,31 +83,36 @@
                     android:fontFamily="@font/montserrat_light"
                     android:text="@string/Date"
                     android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:layout_columnWeight="3"
+                    android:textSize="18sp"
                     />
 
                 <TextView
                     android:id="@+id/cfu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="20dp"
-                    android:gravity="left"
+                    android:paddingRight="10dp"
+                    android:gravity="right"
                     android:fontFamily="@font/montserrat_light"
                     android:text="@string/Cfu"
                     android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:layout_columnWeight="2"
+                    android:textSize="18sp"
+                    android:layout_weight="1"
+                     />
+            </LinearLayout>
 
-                    />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
 
                 <EditText
                     android:id="@+id/insDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:layout_weight="1"
                     android:paddingLeft="15dp"
-                    android:paddingRight="10dp"
                     android:layout_marginTop="5dp"
                     android:focusable="false"
                     android:clickable="true"
@@ -118,95 +121,111 @@
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     android:background="@drawable/edit_text_border"
-                    android:layout_columnWeight="2"
-
-                    />
+                     />
 
 
                 <EditText
                     android:id="@+id/textCfu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:layout_weight="1"
-                    android:singleLine="true"
-                    android:maxLines="1"
-                    android:paddingLeft="15dp"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:longClickable="false"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:paddingStart="15dp"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/montserrat_light"
                     android:hint="@string/Cfu"
-                    android:layout_marginLeft="10dp"
+                    android:text=""
+                    android:layout_marginStart="10dp"
                     android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:background="@drawable/edit_text_border"
-                    android:layout_columnWeight="2"
-                    />
+                    android:textSize="18sp"
+                    android:background="@drawable/edit_text_border" />
 
-            </GridLayout>
+            </LinearLayout>
 
-            <GridLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:columnCount="2"
-                android:rowCount="2">
+                android:layout_marginTop="15dp"
+                >
 
                 <TextView
-                    android:id="@+id/nomeLibro"
+                    android:id="@+id/nomeLibroTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+
                     android:layout_marginLeft="5dp"
                     android:fontFamily="@font/montserrat_light"
                     android:text="@string/NameBook"
                     android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:layout_columnWeight="3"
+                    android:textSize="18sp"
+                    android:layout_weight="1"
+
                     />
 
                 <TextView
                     android:id="@+id/totPage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:paddingStart="20dp"
+                    android:paddingRight="10dp"
                     android:fontFamily="@font/montserrat_light"
                     android:text="@string/totPage"
                     android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:layout_columnWeight="2"
+                    android:gravity="right"
+                    android:textSize="18sp"
+                    android:layout_weight="1"
+
                     />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
 
                 <EditText
                     android:id="@+id/textNameBook"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/montserrat_light"
                     android:background="@drawable/edit_text_border"
                     android:hint="@string/InserisciNameBook"
+                    android:layout_gravity="top"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:textSize="18dp"
                     android:textColor="@color/black"
-                    android:layout_columnWeight="3"
+                    android:layout_weight="1"
+
                     />
 
                 <EditText
                     android:id="@+id/textPageBook"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/montserrat_light"
                     android:background="@drawable/edit_text_border"
                     android:hint="@string/InsertPage"
-                    android:paddingLeft="15dp"
-                    android:textSize="18dp"
+                    android:inputType="number"
+                    android:paddingStart="15dp"
+                    android:layout_gravity="top"
+                    android:textSize="18sp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/black"
-                    android:layout_columnWeight="2"/>
+                    android:layout_weight="1"
+                    />
 
-            </GridLayout>
+            </LinearLayout>
 
 
 
@@ -242,7 +261,7 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="2dp">
 
         <LinearLayout
             android:id="@+id/linear_layout"

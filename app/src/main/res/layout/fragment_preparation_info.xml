@@ -1,138 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PreparationFragment">
-
+    tools:context=".viewModel.PreparationFragmentInfo">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_text_border"
-        android:orientation="vertical"
         android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginTop="40dp">
+        android:background="@drawable/edit_text_border"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textGiornoEsame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="15dp"
+            android:fontFamily="@font/montserrat_light"
+            android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:text="@string/title_giorno_dell_esame"
-            android:textSize="20sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/montserrat_light"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/giornoEsame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="14 Lu"
-            android:textSize="18sp"
-            android:fontFamily="@font/montserrat_light"
-            android:textColor="@color/black"
             android:layout_marginBottom="10dp"
-            android:paddingLeft="15dp"/>
+            android:fontFamily="@font/montserrat_light"
+            android:paddingLeft="20dp"
+            android:text="14 Luglio"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textGiorniRimanenti"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
+            android:fontFamily="@font/montserrat_light"
+            android:paddingLeft="20dp"
+            android:paddingTop="7dp"
             android:text="@string/title_giorni_rimanenti"
-            android:textSize="20sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/montserrat_light"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/numGiorniRimanenti"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="12"
-            android:textSize="18sp"
-            android:fontFamily="@font/montserrat_light"
-            android:textColor="@color/black"
             android:layout_marginBottom="10dp"
-            android:paddingLeft="15dp"/>
+            android:fontFamily="@font/montserrat_light"
+            android:paddingLeft="20dp"
+            android:text="12"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textPagineTotali"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
+            android:fontFamily="@font/montserrat_light"
+            android:paddingLeft="20dp"
+            android:paddingTop="7dp"
             android:text="@string/title_pagine_totali"
-            android:textSize="20sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/montserrat_light"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/numPagineTotali"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="200"
-            android:textSize="18sp"
-            android:fontFamily="@font/montserrat_light"
-            android:textColor="@color/black"
             android:layout_marginBottom="10dp"
-            android:paddingLeft="15dp"/>
+            android:fontFamily="@font/montserrat_light"
+            android:paddingLeft="20dp"
+            android:text="200"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/textPagineRimanenti"
+            android:id="@+id/textPagineStudiate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:text="@string/title_pagine_rimanenti"
+            android:fontFamily="@font/montserrat_light"
+            android:paddingLeft="20dp"
+            android:paddingTop="7dp"
+            android:text="@string/title_pagine_studiate"
+            android:textColor="@color/black"
             android:textSize="20sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/montserrat_light"/>
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/numPagineRimanenti"
+            android:id="@+id/numPagineStudiate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="200"
-            android:textSize="18sp"
-            android:fontFamily="@font/montserrat_light"
-            android:textColor="@color/black"
             android:layout_marginBottom="10dp"
-            android:paddingLeft="15dp"/>
+            android:fontFamily="@font/montserrat_light"
+            android:paddingLeft="20dp"
+            android:text="125"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textPagineConsigliate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
+            android:fontFamily="@font/montserrat_light"
+            android:paddingLeft="20dp"
+            android:paddingTop="7dp"
             android:text="@string/title_pagine_consigliate_giornalmente"
-            android:textSize="20sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/montserrat_light"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/numPagineConsigliate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="200"
             android:layout_gravity="center"
-            android:textSize="18sp"
-            android:fontFamily="@font/montserrat_light"
-            android:textColor="@color/black"
             android:layout_marginBottom="10dp"
-            android:paddingLeft="15dp"/>
+            android:fontFamily="@font/montserrat_light"
+            android:paddingLeft="20dp"
+            android:text="200"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/progressoPagine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:fontFamily="@font/montserrat_light"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
+            android:layout_height="20dp"
+            android:paddingLeft="20dp"
+            android:paddingBottom="10dp"
+            android:layout_marginTop="3dp"
+            android:paddingRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:visibility="visible" />
     </LinearLayout>
-
-</FrameLayout>
+</androidx.core.widget.NestedScrollView>

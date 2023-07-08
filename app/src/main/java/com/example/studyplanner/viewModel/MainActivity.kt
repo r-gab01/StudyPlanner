@@ -2,7 +2,6 @@ package com.example.studyplanner.viewModel
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.StrictMode
@@ -13,6 +12,7 @@ import com.example.studyplanner.R
 import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.ActivityMainBinding
 import com.example.studyplanner.model.DataSingleton
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,15 +32,39 @@ class MainActivity : AppCompatActivity() {
         var sharedPreferences= this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         var loggedIn: Boolean = sharedPreferences.getBoolean("isLoggedIn", false)
 
-        if (!loggedIn){                 //se l'utente non è loggato, lancio la schermata di login
-            val i = Intent(this, LoginActivity::class.java)
-            startActivity(i)
+        if(loggedIn){
+            val nomeU: String? = sharedPreferences.getString("Nome Utente", "")
+            val singleton= DataSingleton.ottieniIstanza()
+            singleton.nomeUtente=nomeU
+            Log.d("CALENDAR", "Dati ricevuti: $nomeU")
+
+            ApiClient.selectStudente(nomeU){ data, error ->
+                if (error != null) {
+                    // Gestisci l'errore
+                    Log.e("MAINACTIVITY", "Si è verificato un errore: $error")
+                }else if (data != null) {
+                    // Utilizza i dati restituiti
+                    Log.d("MAINACTIVITY", "Dati ricevuti: $data")
+                    //salvo i dati dello studente nel Sigleton
+                    val singleton= DataSingleton.ottieniIstanza()
+                    singleton.nome=data.nome
+                    singleton.cognome=data.cognome
+                    singleton.universita=data.universita
+                    singleton.foto=data.foto
+                    singleton.dataNascita=data.dataNascita
+                    selectCorso(data.idCorso)
+                }else{
+                    Log.d("SELECTSTUDENTE", "Dati ricevuti: $data")
+                }
+            }
         }
 
-        val nomeU: String? = sharedPreferences.getString("Nome Utente", "")
-        val singleton= DataSingleton.ottieniIstanza()
+     //   val nomeU: String? = sharedPreferences.getString("Nome Utente", "")
+      // val singleton= DataSingleton.ottieniIstanza()
+       // singleton.nomeUtente=nomeU
 
-        ApiClient.selectStudente(nomeU){ data, error ->
+
+      /*  ApiClient.selectStudente(nomeU){ data, error ->
             if (error != null) {
                 // Gestisci l'errore
                 Log.e("MAINACTIVITY", "Si è verificato un errore: $error")
@@ -57,13 +81,13 @@ class MainActivity : AppCompatActivity() {
             }else{
                 Log.d("SELECTSTUDENTE", "Dati ricevuti: $data")
             }
-        }
+        } */
 
 
 
         val calendarTag = "CalendarFragment"
         //Di default avvio il fragment del calendario
-        if (savedInstanceState == null) {
+       if (savedInstanceState == null) {
             val manager = supportFragmentManager
             val transaction = manager.beginTransaction()
 

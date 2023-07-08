@@ -34,9 +34,12 @@
     <string name="AddExam">AGGIUNGI ESAME</string>
     <string name="NomeEsame">Nome esame</string>
     <string name="ScegliNome">Scegli il nome della materia</string>
+    <string name="Type">Tipo</string>
+    <string name="NameEsame">Nome esame</string>
+    <string name="InserisciNome">Inserisci nome </string>
     <string name="Date">Data </string>
     <string name="Cfu">Cfu</string>
-    <string name="InserisciDate">Inserisci data esame </string>
+    <string name="InserisciDate">Data esame</string>
     <string name="NameBook">Nome Libro </string>
     <string name="InserisciNameBook">Nome del libro </string>
     <string name="totPage">Totale pagine</string>
@@ -45,6 +48,7 @@
 
     <string name="titleProfile">PROFILO</string>
     <string name="descriptionProfile">Visualizza in questa schermata le informazioni relative al tuo Profilo. L\'app ti permetterà, se necessario di modificarle. </string>
+    <string name="Name">Nome</string>
     <string name="cognome">Cognome</string>
     <string name="universita">Università</string>
     <string name="corso_studi">Corso di studi</string>
@@ -62,6 +66,9 @@
     <string name="Sunday">Dom</string>
     <string name="orariStudio">8-13</string>
     <string name="orariStudio2">15-18</string>
+    <string name="SubTitle">Pianifica al meglio la tua settimana di studio grazie a StudyPlanner!</string>
+    <string name="insName">Inserisci nome</string>
+    <string name="insSurname">Inserisci cognome</string>
 
     <string name="TitleLegend">Legenda</string>
     <string name="DescriptionLegend">Nel riquadro sottostante trovi la tua routine di studio, che puoi modificare a seconda delle tue esigenze. Per ogni giorno della settimana puoi impostare l\'icona del libro  altrimenti cliccando su di essa comparirà l\'icona della batteria. Inoltre, al di sotto delle icone trovi dei campi modificabili dove puoi inserire i tuoi orari di studio.  </string>
@@ -76,24 +83,27 @@
     <string name="title_media_aritmetica">MEDIA ARITMETICA</string>
     <string name="title_media_ponderata">MEDIA PONDERATA</string>
     <string name="title_media_pagine_studiate">MEDIA PAGINE STUDIATE</string>
-    <string name="pagine_al_giorno">Al giorno:</string>
-    <string name="pagine_all_ora"> All\'ora:</string>
+    <string name="pagine_al_giorno">Al giorno</string>
+    <string name="pagine_all_ora"> All\'ora</string>
     <string name="title_preparazione"> PREPARAZIONE</string>
     <string name="title_giorno_dell_esame">GIORNO DELL\'ESAME</string>
     <string name="title_giorni_rimanenti">GIORNI RIMANENTI</string>
     <string name="title_pagine_totali">PAGINE TOTALI</string>
-    <string name="title_pagine_rimanenti">PAGINE RIMANENTI</string>
+    <string name="title_pagine_studiate">PAGINE STUDIATE</string>
     <string name="title_pagine_consigliate_giornalmente">PAGINE GIORNALIERE CONSIGLIATE</string>
     <string name="title_chip_Info">INFO GENERALI</string>
     <string name="title_chip_Materiale">MATERIALE</string>
-
-
+    <string name="nameDocente">Docente</string>
+    <string name="title_argomenti">ARGOMENTI</string>
+    <string name="title_titolo_libro">TITOLO LIBRO</string>
+    <string name="errore_NoArgomenti">Nessun argomento da mostrare.</string>
+    <string name="errore_ConnessioneServer">Nessuna connessione al server</string>
 
     <!-- MICHELE -->
     <string name="tagArgumentsEventFragment">Data</string>
 
-    <string name="title_exams_fragment">I MIEI ESAMI ED ESERCIZI</string>
-    <string name="description_exams_fragment">Elenco di tutti i miei esami e compiti da svolgere</string>
+    <string name="title_exams_fragment">I TUOI ESAMI</string>
+    <string name="description_exams_fragment">Elenco di tutti i tuoi esami in programma.\nAggiungi un esame per iniziare, poi cliccalo per avere una panoramica completa.</string>
 
     <string name="title_study_fragment">SESSIONE DI STUDIO</string>
     <string name="description_study_fragment">Qui puoi tenere traccia del tempo trascorso nello studio tramite la funzionalità timer.</string>
@@ -104,7 +114,7 @@
 
 
     <string name="title_session_fragment">Inserisci quante pagine hai studiato oggi.</string>
-    <string name="description_session_fragment">L\'app provvederà ad aggiornare le statistiche e le previsioni.</string>
+    <string name="description_session_fragment">L\'app provvederà ad aggiornare le statistiche.</string>
     <string name="buttonConfirm">CONFERMA</string>
     <string name="buttonAggiungi">AGGIUNGI</string>
 
@@ -116,4 +126,5 @@
     <string name="erroreConfPassword">Password e conferma password non corrispondono</string>
 
     <string name="default_notification_channel_id">channel_id</string>
+
 </resources>

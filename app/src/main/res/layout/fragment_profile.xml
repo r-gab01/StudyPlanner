@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileFragment"
-    android:layout_marginLeft="6dp"
-    android:layout_marginRight="6dp"
-    android:layout_marginTop="35dp">
+    >
 
 <LinearLayout
     android:id="@+id/linearLayoutProfile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
    >
 
 <TextView
@@ -22,16 +22,16 @@
     android:layout_height="wrap_content"
     android:text="@string/titleProfile"
     android:fontFamily="@font/montserrat_medium"
-    android:textSize="30dp"
+    android:textSize="26sp"
     android:textColor="@color/black"
-    android:layout_marginLeft="10dp" />
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="14dp" />
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginTop="5dp"
         android:isScrollContainer="false">
 
         <LinearLayout
@@ -48,12 +48,13 @@
         android:text="@string/descriptionProfile"
         android:fontFamily="@font/montserrat_light"
         android:textColor="@color/black"
-        android:layout_marginTop="10dp" />
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="10dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_below="@id/descriptionProfile">
 
 
@@ -72,14 +73,15 @@
 
                 <ImageView
                     android:id="@+id/imageProfile"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_centerInParent="false"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
                     android:background="@drawable/background_rounded"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_foreground"
-                   />
+                    android:src="@drawable/ic_launcher_foreground" />
 
                 <ImageView
                     android:id="@+id/editIcon"
@@ -87,10 +89,10 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_button"
                     android:src="@drawable/baseline_edit_24"
-                    android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
+                    android:layout_alignEnd="@id/imageProfile"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
+
                     android:clickable="true"
                     android:focusable="true"
                     android:contentDescription="Permette di cambiare l'immagine"/>
@@ -99,12 +101,13 @@
                     android:id="@+id/logoutButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
                     android:layout_below="@id/imageProfile"
-                    android:text="@string/button_logout"
+                    android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/montserrat_light"
-                    android:textSize="13sp"
-                    android:textStyle="bold"/>
+                    android:layout_centerInParent="true"
+                    android:text="@string/button_logout"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
@@ -124,7 +127,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/Name"
-                        android:layout_weight="1"
+                        android:layout_weight="4"
                         android:paddingLeft="10dp"
                         android:fontFamily="@font/montserrat_light"
                         android:textColor="@color/black"
@@ -134,15 +137,15 @@
                         android:id="@+id/editName"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
-                        android:layout_weight="1"
+                        android:layout_weight="6"
                         android:background="@drawable/transparent_background"
                         android:enabled="false"
                         android:fontFamily="@font/montserrat_light"
-                        android:text=""
+                        android:hint="@string/insName"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="14.5dp" />
 
                 </LinearLayout>
 
@@ -155,7 +158,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/cognome"
-                        android:layout_weight="1"
+                        android:layout_weight="4"
                         android:paddingLeft="10dp"
                         android:fontFamily="@font/montserrat_light"
                         android:textColor="@color/black"
@@ -165,13 +168,13 @@
                         android:id="@+id/editSurname"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
-                        android:text=""
-                        android:layout_weight="1"
+                        android:hint="@string/insSurname"
+                        android:layout_weight="6"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:fontFamily="@font/montserrat_light"
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="14.5sp"
                         android:enabled="false"
                         android:background="@drawable/transparent_background" />
 
@@ -186,7 +189,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/universita"
-                        android:layout_weight="1"
+                        android:layout_weight="4"
                         android:paddingLeft="10dp"
                         android:fontFamily="@font/montserrat_light"
                         android:textColor="@color/black"
@@ -197,7 +200,7 @@
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:text=""
-                        android:layout_weight="1"
+                        android:layout_weight="6"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:fontFamily="@font/montserrat_light"
@@ -210,44 +213,48 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/corso_studi"
-                        android:layout_weight="1"
+                        android:layout_weight="4"
                         android:layout_gravity="center"
                         android:paddingLeft="10dp"
+                        android:gravity="center_vertical"
                         android:fontFamily="@font/montserrat_light"
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="15sp" />
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/container"
                         android:layout_width="0dp"
-                        android:layout_height="80dp"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
                         android:layout_gravity="center"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         app:boxCornerRadiusTopEnd="30dp"
                         app:boxCornerRadiusBottomEnd="30dp"
                         app:boxCornerRadiusTopStart="30dp"
                         app:boxCornerRadiusBottomStart="30dp"
+                        android:enabled="false"
                         >
 
                         <AutoCompleteTextView
                             android:id="@+id/editCorso"
                             android:layout_width="match_parent"
-                            android:layout_height="80dp"
+                            android:layout_height="wrap_content"
                             android:text=""
                             android:inputType="none"
                             android:layout_weight="1"
+                            android:gravity="center_vertical"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:fontFamily="@font/montserrat_light"
                             android:textColor="@color/black"
-                            android:textSize="12sp"
+                            android:textSize="11.5sp"
                             android:enabled="false"
                             android:maxLines="3"
                             android:background="@drawable/transparent_background" />
@@ -286,7 +293,7 @@
         android:textStyle="bold"
         android:textSize="25dp"
         android:textColor="@color/black"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp" />
 
 
@@ -295,6 +302,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_border"
+                android:layout_marginTop="5dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -411,8 +419,8 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/baseline_info_24"
                     android:background="@drawable/transparent_background"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="18dp"
                     android:contentDescription="clicca questo bottone per avere info sulla routine di studip"
                     />
 
@@ -455,36 +463,11 @@
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_menu_book_24"
                            android:layout_marginBottom="10dp"
-                           android:layout_marginTop="10dp"
+                           android:layout_marginTop="20dp"
                            android:clickable="true"
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
 
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textStyle="bold"
-                           android:textSize="13sp"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
-
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio2"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textSize="13sp"
-                           android:textStyle="bold"
-                          android:inputType="number"
-                            android:background="@drawable/transparent_background" />
 
                    </LinearLayout>
 
@@ -514,36 +497,11 @@
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_menu_book_24"
                            android:layout_marginBottom="10dp"
-                           android:layout_marginTop="10dp"
+                           android:layout_marginTop="20dp"
                            android:clickable="true"
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
 
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textStyle="bold"
-                           android:textSize="13sp"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
-
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio2"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textSize="13sp"
-                           android:textStyle="bold"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
 
                    </LinearLayout>
 
@@ -574,36 +532,11 @@
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_menu_book_24"
                            android:layout_marginBottom="10dp"
-                           android:layout_marginTop="10dp"
+                           android:layout_marginTop="20dp"
                            android:clickable="true"
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
 
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textStyle="bold"
-                           android:textSize="13sp"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
-
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio2"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textSize="13sp"
-                           android:textStyle="bold"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
 
                    </LinearLayout>
 
@@ -633,36 +566,11 @@
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_menu_book_24"
                            android:layout_marginBottom="10dp"
-                           android:layout_marginTop="10dp"
+                           android:layout_marginTop="20dp"
                            android:clickable="true"
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
 
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textStyle="bold"
-                           android:textSize="13sp"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
-
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio2"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textSize="13sp"
-                           android:textStyle="bold"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
 
                    </LinearLayout>
 
@@ -693,36 +601,11 @@
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_menu_book_24"
                            android:layout_marginBottom="10dp"
-                           android:layout_marginTop="10dp"
+                           android:layout_marginTop="20dp"
                            android:clickable="true"
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
 
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textStyle="bold"
-                           android:textSize="13sp"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
-
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio2"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textSize="13sp"
-                           android:textStyle="bold"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
 
                    </LinearLayout>
 
@@ -752,36 +635,11 @@
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_menu_book_24"
                            android:layout_marginBottom="10dp"
-                           android:layout_marginTop="10dp"
+                           android:layout_marginTop="20dp"
                            android:clickable="true"
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
 
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textSize="13sp"
-                           android:textStyle="bold"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
-
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio2"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textSize="13sp"
-                           android:textStyle="bold"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
 
                    </LinearLayout>
 
@@ -811,36 +669,10 @@
                            android:layout_height="wrap_content"
                            android:src="@drawable/baseline_battery_charging_full_24"
                            android:layout_marginBottom="10dp"
-                           android:layout_marginTop="10dp"
+                           android:layout_marginTop="20dp"
                            android:clickable="true"
                            android:focusable="true"
                            android:contentDescription="icona che indica se si studia oppure no"/>
-
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textSize="13sp"
-                           android:textStyle="bold"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
-
-                       <EditText
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="@string/orariStudio2"
-                           android:layout_gravity="center"
-                           android:fontFamily="@font/montserrat_light"
-                           android:textColor="@color/black"
-                           android:layout_marginTop="10dp"
-                           android:textSize="13sp"
-                           android:textStyle="bold"
-                           android:inputType="number"
-                           android:background="@drawable/transparent_background" />
 
                    </LinearLayout>
                </LinearLayout>

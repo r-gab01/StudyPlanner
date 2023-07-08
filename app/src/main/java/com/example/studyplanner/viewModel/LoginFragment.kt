@@ -1,9 +1,11 @@
 package com.example.studyplanner.viewModel
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.Handler
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
@@ -142,6 +144,9 @@ class LoginFragment : Fragment(){
                             saveData(nomeInserito,pwInserita)
                         }
                         requireActivity().finish()
+                        val i = Intent(requireContext(), MainActivity()::class.java)
+                        startActivity(i)
+                        activity?.overridePendingTransition(R.anim.scale_in_animation,R.anim.scale_out_animation)
                     } else {
                         // Nessun risultato trovato
                         Log.e("LOGINFRAGMENT", "Dati Errati")
@@ -251,4 +256,5 @@ class LoginFragment : Fragment(){
             }
         }
     }
+
 }
