@@ -357,8 +357,8 @@ object ApiClient {
         })
     }
 
-    fun selectEsamiSessione(callback: (List<MateriaDBModel?>?, Throwable?) -> Unit) {
-        val data = ArrayList<MateriaDBModel?>()
+    fun selectEsamiSessione(callback: (List<SessioneStudioDBModel?>?, Throwable?) -> Unit) {
+        val data = ArrayList<SessioneStudioDBModel?>()
         val query = "select * from `sessione_studio` where nome_u_ref='${DataSingleton.ottieniIstanza().nomeUtente}';"
         apiService.select(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -367,7 +367,7 @@ object ApiClient {
                     if (res != null && res.size() > 0) {
                         for (i in 0 until res.size()) {
                             val result = res.get(i).asJsonObject
-                            data.add(gson.fromJson(result, MateriaDBModel::class.java))
+                            data.add(gson.fromJson(result, SessioneStudioDBModel::class.java))
                         }
                         Log.d("APICLIENT", data.toString())
                         callback(data.toList(), null)
@@ -390,8 +390,8 @@ object ApiClient {
     fun updatePagineStud(pagineStud: Int, idSessioneMateria: Int?,
                       callback: (Boolean?, Throwable?) -> Unit) {      //sfrutto la callback con un booleano per ottenere conferma sull'inserimento avvenuto
         val query = "UPDATE `sessione_studio` " +
-                 "SET 'pagine_stud' = 'pagine_stud' + $pagineStud " +
-        "WHERE 'id_sessione' = '${idSessioneMateria}';"
+                 "SET pagine_stud = pagine_stud + $pagineStud " +
+        "WHERE id_sessione = '${idSessioneMateria}';"
         Log.d("InsArg",query)
         apiService.update(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {

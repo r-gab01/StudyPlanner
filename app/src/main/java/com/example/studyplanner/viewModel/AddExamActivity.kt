@@ -98,7 +98,7 @@ class AddExamActivity : AppCompatActivity() {
             }
         }
 
-        binding.selMateria.setOnItemClickListener { _, _, position, _ ->
+        selettoreMateria.setOnItemClickListener { _, _, position, _ ->
             materiaSel = nomiMaterie[position].toString()
             cfuSel = cfuMaterie[position]
             posizioneMateria = position

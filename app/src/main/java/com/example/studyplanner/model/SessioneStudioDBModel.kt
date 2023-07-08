@@ -1,8 +1,11 @@
 package com.example.studyplanner.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 import java.sql.Date
 
+@Parcelize
 data class SessioneStudioDBModel(
 
     @SerializedName("id_sessione")
@@ -28,4 +31,4 @@ data class SessioneStudioDBModel(
 
     @SerializedName("pagine_stud")
     var pagineStud: Int? = -1,
-)
+) : Parcelable
