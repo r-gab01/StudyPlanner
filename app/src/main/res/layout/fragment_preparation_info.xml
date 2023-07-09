@@ -35,7 +35,7 @@
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/montserrat_light"
             android:paddingLeft="20dp"
-            android:text="14 Luglio"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -58,7 +58,7 @@
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/montserrat_light"
             android:paddingLeft="20dp"
-            android:text="12"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -81,7 +81,7 @@
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/montserrat_light"
             android:paddingLeft="20dp"
-            android:text="200"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -104,7 +104,7 @@
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/montserrat_light"
             android:paddingLeft="20dp"
-            android:text="125"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -128,7 +128,7 @@
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/montserrat_light"
             android:paddingLeft="20dp"
-            android:text="200"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="18sp" />
 

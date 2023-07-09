@@ -3,6 +3,7 @@ package com.example.studyplanner.viewModel
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.studyplanner.R
 import com.example.studyplanner.database.ApiClient
@@ -11,7 +12,6 @@ import com.example.studyplanner.model.SessioneStudioDBModel
 
 class PreparationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPreparationBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         binding= ActivityPreparationBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -40,11 +40,30 @@ class PreparationActivity : AppCompatActivity() {
         //MOSTRA FRAGMENT INFO GENERALI
         val chipInfoGenerali=binding.chipInfoGenerali
         chipInfoGenerali.setOnClickListener {
-            //caricare fragment e passargli come dato:
+            //caricare fragment e passargli come dato: Da activity a fragment
                 //esameSessione
+            val fragment = PreparationFragmentInfo()
+            val bundle = Bundle()
+            fragment.arguments = bundle
+            //arguments di un Fragment è un Bundle che può essere utilizzato per passare dati al Fragment durante la sua creazione.
+
+            val pagineTotali=esameSessione?.pagineTot.toString()
+            bundle.putString("pagineTotali", pagineTotali)
+            Log.d("PASSAGGIO VALORI","valore inviato $pagineTotali")
+
+            val giornoEsame=esameSessione?.dataAppello
+            bundle.putString("giornoEsame", giornoEsame.toString())
+            Log.d("PASSAGGIO VALORI","valore inviato $giornoEsame")
+
+            val pagineStudiate=esameSessione?.pagineStud
+            if (pagineStudiate != null) {
+                bundle.putInt("pagineStudiate", pagineStudiate)
+            }
+            Log.d("PASSAGGIO VALORI","valore inviato $pagineStudiate")
+
             val manager=supportFragmentManager
             val transaction=manager.beginTransaction()
-            transaction.replace(R.id.fragmentContainerView,PreparationFragmentInfo())
+            transaction.replace(R.id.fragmentContainerView,fragment)
             transaction.commit()
         }
 
@@ -59,4 +78,5 @@ class PreparationActivity : AppCompatActivity() {
             transaction.commit()
         }
     }
+
 }

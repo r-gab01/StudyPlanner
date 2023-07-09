@@ -17,12 +17,12 @@
         <TextView
             android:id="@+id/textArgomenti"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:fontFamily="@font/montserrat_light"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="12sp" />
+            android:textSize="15sp" />
 
         <Space
             android:layout_width="0dp"
@@ -38,7 +38,7 @@
             android:elevation="10dp"
             android:focusable="true"
             android:src="@drawable/baseline_language_24"
-            android:backgroundTint="#00FFFFFF"
+            android:background="@android:color/transparent"
             />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

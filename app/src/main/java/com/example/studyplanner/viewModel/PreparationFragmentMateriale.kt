@@ -29,7 +29,7 @@ class PreparationFragmentMateriale : Fragment() {
 
         //Creazione della lista con il contenuto da mostrare
         val argomenti=ArrayList<String>()
-        /*ApiClient.selectArgomenti() { data, error->
+        /*ApiClient.selectArgomenti(id) { data, error->
             if(error!=null){
                 Log.e("PREPARAZIONE", "Si è verificato un errore: $error")
                 try {
