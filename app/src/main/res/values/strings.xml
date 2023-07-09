@@ -4,7 +4,7 @@
     <!-- SALVATORE -->
     <string name="title_calendar_fragment">CALENDARIO DIDATTICO</string>
     <string name="nomeUtente">  | Inserisci Nome Utente</string>
-    <string name="Password">Inserisci Password</string>
+    <string name="Password"> | Inserisci Password</string>
     <string name="testoCheckBoxRicordami">Ricordami</string>
     <string name="testoPassDim"> Hai dimenticato la password?</string>
     <string name="tastoLogin">Login</string>
