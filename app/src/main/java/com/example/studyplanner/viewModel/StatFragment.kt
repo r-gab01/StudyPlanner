@@ -77,14 +77,25 @@ class StatFragment : Fragment() {
                                 binding.cfuTotali.setText("${cfuTotali}")
 
                             }
+
                             //mediaAritmetica
                             mediaAr= (totVoti)/numMaterie
                             val primaDueCifre = String.format("%.2f", mediaAr)//Stampo solo le prime due cifre decimali
-                            binding.numMediaAritmetica.setText("${primaDueCifre}")
+                            if(primaDueCifre != "NaN") {
+                                binding.numMediaAritmetica.setText("${primaDueCifre}")
+                            }else{
+                                binding.numMediaAritmetica.setText("-")
+                            }
+
                             //Media Ponderata
                             mediaPo=((temp)/cfuTotali.toDouble())
                             val mediaFinale = String.format("%.2f", mediaPo)
-                            binding.numMediaPonderata.setText("${mediaFinale}")
+                            if(mediaFinale != "NaN") {
+                                binding.numMediaPonderata.setText("${mediaFinale}")
+                            }else{
+                                binding.numMediaPonderata.setText("-")
+                            }
+
                             //CALCOLO LA PERCENTUALE
                             percentualeM = ((numMaterie.toFloat()/totMaterie.toFloat())) * 100
                             percentualeF = percentualeM.toInt()

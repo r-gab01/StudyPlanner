@@ -500,26 +500,18 @@ object ApiClient {
         })
     }
 
-    fun selectArgomenti(idSessione:Int?, callback: (List<ArgomentoDBModel?>?, Throwable?) -> Unit) {
-        var data = ArrayList<ArgomentoDBModel?>()
-        val query = "select * from argomento where id_sess_ref='$idSessione';"
-        apiService.select(query).enqueue(object : Callback<JsonObject> {
+    fun deletCarriera(nomeU:String?, idC: Int?, callback: (Boolean?, Throwable?) -> Unit) {
+        val query = "delete from carriera c  where c.nome_u_ref= '${nomeU}' and c.id_c_ref= '${idC}';"
+        apiService.remove(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
-                    val res = response.body()?.getAsJsonArray("queryset")
-                    if (res != null && res.size() > 0) {
-                        for (i in 0 until res.size()) {
-                            val result = res.get(i).asJsonObject
-                            data.add(gson.fromJson(result, ArgomentoDBModel::class.java))
-                        }
-                        Log.d("APICLIENT", data.toString())
-                        callback(data.toList(), null)
-                    } else {
-                        callback(null, null) // Nessun risultato trovato
-                    }
+                    val res = response.body()
+                    Log.d("APICLIENT", res.toString())
+                    callback(true, null)
                 } else {
-                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
-                    callback(null, error)
+                    Log.e("APICLIENT", response.message())
+                    val error = Exception("Dati non eliminati correttamente nel Database")
+                    callback(false, error)
                 }
             }
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
@@ -582,29 +574,6 @@ object ApiClient {
             }
         })
     }
-
-    fun updateCarriera(nomeU: String?, newPass:String?, callback: (Boolean?, Throwable?) -> Unit){        //sfrutto callback per gestire metodo post asincrono
-        val query = "update autenticazione a set a.password = '${newPass}' where a.nome_u_ref = '${nomeU}';"
-        apiService.update(query).enqueue(object : Callback<JsonObject> {
-            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                if (response.isSuccessful) {
-                    val res = response.body()
-                    Log.d("APICLIENT", res.toString())
-                    callback(true, null)
-                } else {
-                    Log.e("APLICLIENT", response.message())
-                    val error = Exception("La chiamata API non è stata eseguita correttamente.")
-                    callback(false, error) // Nessun risultato trovato
-                }
-            }
-            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                Log.e("OnFailure", "${t.message}")
-                val error = Exception("La chiamata API non è stata eseguita correttamente.")
-                callback(false, error) // Nessun risultato trovato
-            }
-        })
-    }
-
 
 
     /*
