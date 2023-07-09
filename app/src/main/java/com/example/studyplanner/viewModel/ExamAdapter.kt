@@ -2,10 +2,16 @@ package com.example.studyplanner.viewModel
 
 import android.content.Intent
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.studyplanner.R
+import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.ExamsCardViewBinding
 import com.example.studyplanner.model.SessioneStudioDBModel
 import java.time.LocalDate
@@ -50,6 +56,87 @@ class ExamAdapter(private val examsList: ArrayList<SessioneStudioDBModel>) : Rec
             val intent = Intent(context, PreparationActivity::class.java)
             intent.putExtra("EsameCliccato", examsList[position])
             context.startActivity(intent)
+        }
+        //Gestione fine esame, tenendo premuto apro un dialog personalizzato dove inserisce il voto
+        holder.cardView.setOnLongClickListener {
+            val context = it.context
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Esame superato?")
+            val view = LayoutInflater.from(context).inflate(R.layout.dialog_insert_page, null)
+            builder.setView(view)
+
+            val votoIns = view.findViewById<EditText>(R.id.insVoto)
+            builder.setPositiveButton("Conferma") { dialog, _ ->
+                val lode = view.findViewById<CheckBox>(R.id.lodeCheckBox).isChecked
+                if(votoIns.text.isNullOrEmpty()){
+                    Toast.makeText(context,"Inserire un voto", Toast.LENGTH_LONG).show()
+                }else if((votoIns.text.toString().toInt() in 18..30 && (!lode)) ||
+                    (votoIns.text.toString().toInt() == 30 && lode) ) {
+                    Log.d("PRova", "lode: $lode")
+                        val voto = votoIns.text.toString().toInt()
+                        ApiClient.updateCarriera(
+                            examsList[position].nomeMateria, voto, lode) { response, error ->
+                            if (error != null) {
+                                Log.e("CompletaEsame", "questo errore")
+                                try {
+                                    Toast.makeText(
+                                        context,
+                                        "Errore durante la connessione al server",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                } catch (_: Exception) {
+                                }
+                            } else if (response != null) {
+                                ApiClient.rimuoviEsame(examsList[position].idSessione){ response, error ->
+                                    if (error!= null){
+                                        Toast.makeText(
+                                            context,
+                                            "Errore durante la connessione al server",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    } else if (response!= null){
+                                        val builder = android.app.AlertDialog.Builder(context)
+                                        builder.setTitle("Congratulazioni")
+                                        builder.setIcon(R.drawable.round_check_circle_24)
+                                        builder.setMessage("Esame correttamente inserito nella carriera accademica")
+                                        builder.setPositiveButton("OK") { _, _ ->
+                                            Toast.makeText(
+                                                context,
+                                                "Si prega di aggiornare per visualizzare i cambiamenti",
+                                                Toast.LENGTH_LONG).show()
+                                        }
+                                        builder.create().show()
+                                    } else{
+                                        Toast.makeText(
+                                            context,
+                                            "Errore durante la rimozione dell'esame dalla sessione",
+                                            Toast.LENGTH_LONG).show()
+                                    }
+                                }
+
+                            } else {
+                                Log.e("CompletaEsame", "Errore")
+                                try {
+                                    Toast.makeText(
+                                        context,
+                                        "Inserire voto valido",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                } catch (_: Exception) {
+                                }
+                            }
+                        }
+                }else {
+                        Toast.makeText(context, "Inserire un voto valido", Toast.LENGTH_LONG).show()
+                    }
+            }
+            builder.setNegativeButton("Annulla") { dialog, _ ->
+                dialog.dismiss()
+            }
+            val dialog = builder.create()
+            dialog.show()
+
+            true
         }
     }
 

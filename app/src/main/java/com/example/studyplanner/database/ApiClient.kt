@@ -529,6 +529,63 @@ object ApiClient {
         })
     }
 
+    fun updateCarriera(nomeMateria: String?, voto: Int?, lode: Boolean,
+                        callback: (Boolean?, Throwable?) -> Unit) {
+        val lodeIns: Int
+        if (lode){
+            lodeIns = 1
+        } else{
+            lodeIns = 0
+        }
+        val query = "update `carriera` set voto=${voto}, lode='$lodeIns' " +
+                "where nome_u_ref='${DataSingleton.ottieniIstanza().nomeUtente}' and nome_m_ref ='$nomeMateria';"
+        Log.d("ApiClientCompletaEsame", query)
+        apiService.update(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()
+                    Log.d("APICLIENT", res.toString())
+                    callback(true, null)
+                } else{
+                    Log.e("APICLIENT", response.message())
+                    val error = Exception("Dati non inseriti correttamente nel Database")
+                    callback(false , error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(false, error)
+            }
+        })
+    }
+
+    fun rimuoviEsame(idSessione: Int?, callback: (Boolean?, Throwable?) -> Unit) {
+        val query = "delete from argomento where id_sess_ref='$idSessione'; " +
+                "delete from sessione_studio where id_sessione='$idSessione';"
+        Log.d("ApiClientCompletaEsame", query)
+        apiService.remove(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val res = response.body()
+                    Log.d("APICLIENT", res.toString())
+                    callback(true, null)
+                } else{
+                    Log.e("APICLIENT", response.message())
+                    val error = Exception("Dati non inseriti correttamente nel Database")
+                    callback(false , error)
+                }
+            }
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.e("OnFailure", "${t.message}")
+                val error = Exception("La chiamata API non è stata eseguita correttamente.")
+                callback(false, error)
+            }
+        })
+    }
+
+
+
 
     /*
        val accountData: MutableLiveData<AccountDBModel> = MutableLiveData()

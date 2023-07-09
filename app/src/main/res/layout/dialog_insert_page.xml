@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Inserisci il voto ottenuto:"
+        android:fontFamily="@font/montserrat_medium"
+        android:textSize="18sp"
+        android:layout_marginStart="5dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp">
+
+        <EditText
+            android:id="@+id/insVoto"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:background="@drawable/border_element"/>
+        <!--
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            app:boxCornerRadiusTopEnd="30dp"
+            app:boxCornerRadiusBottomEnd="30dp"
+            app:boxCornerRadiusTopStart="30dp"
+            app:boxCornerRadiusBottomStart="30dp">
+            <AutoCompleteTextView
+                android:id="@+id/insVotoPreso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/scegliVoto"
+                android:inputType="none"
+                android:padding="5dp"
+                android:textSize="17sp"
+                android:layout_gravity="center_vertical"
+                />
+        </com.google.android.material.textfield.TextInputLayout> -->
+
+        <CheckBox
+            android:id="@+id/lodeCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lode"
+            android:layout_gravity="center_vertical"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat_extralight"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+</LinearLayout>

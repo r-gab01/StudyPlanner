@@ -48,8 +48,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     //countodownView
     implementation 'com.github.iwgang:countdownview:2.1.2'
-    //calendarView
-
     //timePicker
 
     //connessione al server
