@@ -14,7 +14,7 @@ import com.example.studyplanner.model.SessioneStudioDBModel
 
 class PreparationFragmentInfo : Fragment() {
     private lateinit var binding: FragmentPreparationInfoBinding
-    private var esameSessione: SessioneStudioDBModel? = null
+    //private var esameSessione: SessioneStudioDBModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
