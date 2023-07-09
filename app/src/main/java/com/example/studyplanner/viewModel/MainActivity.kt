@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.StrictMode
 import android.util.Log
+import androidx.fragment.app.FragmentManager
 import com.example.studyplanner.BuildConfig
 import com.example.studyplanner.ProfileFragment
 import com.example.studyplanner.R
@@ -17,6 +18,7 @@ import com.example.studyplanner.model.DataSingleton
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var fragmentManager: FragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (BuildConfig.DEBUG) {
@@ -28,6 +30,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        fragmentManager = supportFragmentManager
 
         var sharedPreferences= this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         var loggedIn: Boolean = sharedPreferences.getBoolean("isLoggedIn", false)
@@ -103,7 +107,9 @@ class MainActivity : AppCompatActivity() {
                     val transaction = fragmentManager.beginTransaction()
                     if (!fragmentExist(calendarTag)) {  //verifico se già il fragment è stato aperto tramite questa funzione definita sotto
                         transaction.replace(R.id.fragmentContainerView, CalendarFragment(), calendarTag)
+
                         transaction.commit()
+
                     }
                     true
                 }
@@ -112,8 +118,11 @@ class MainActivity : AppCompatActivity() {
                     val transaction = fragmentManager.beginTransaction()
                     val examsTag = "ExamsFragment"
                     if (!fragmentExist(examsTag)) {  //verifico se già il fragment è stato aperto tramite questa funzione definita sotto
+
                         transaction.replace(R.id.fragmentContainerView, ExamsFragment(), examsTag)
                         transaction.commit()
+
+
                     }
                     true
                 }
@@ -123,7 +132,9 @@ class MainActivity : AppCompatActivity() {
                     val statsTag = "StatsFragment"
                     if (!fragmentExist(statsTag)) {  //verifico se già il fragment è stato aperto tramite questa funzione definita sotto
                         transaction.replace(R.id.fragmentContainerView, StatFragment(), statsTag)
+
                         transaction.commit()
+
                     }
                     true
                 }
@@ -133,7 +144,9 @@ class MainActivity : AppCompatActivity() {
                     val studyTag = "studioFragment"
                     if (!fragmentExist(studyTag)) {  //verifico se già il fragment è stato aperto tramite questa funzione definita sotto
                         transaction.replace(R.id.fragmentContainerView, StudyFragment(), studyTag)
+
                         transaction.commit()
+
                     }
                     true
                 }
@@ -144,6 +157,7 @@ class MainActivity : AppCompatActivity() {
                     if (!fragmentExist(profileTag)) {  //verifico se già il fragment è stato aperto tramite questa funzione definita sotto
                         transaction.replace(R.id.fragmentContainerView, ProfileFragment(), profileTag)
                         transaction.commit()
+
                     }
                     true
                 }
@@ -152,10 +166,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun fragmentExist(tag: String): Boolean {       //funzione che mi permette di trovare se un fragment è presente tramite il uso tag
+   fun fragmentExist(tag: String): Boolean {       //funzione che mi permette di trovare se un fragment è presente tramite il uso tag
         val fragmentManager = supportFragmentManager
         return (fragmentManager.findFragmentByTag(tag) != null)         //scrittura compatta che restituisce true o false se quella condizione si verifica o meno
     }
+
+
 
     override fun onBackPressed() {
         val manager= supportFragmentManager
@@ -208,5 +224,10 @@ class MainActivity : AppCompatActivity() {
                 Log.d("CORSO", "Dati ricevuti: $data")
             }
         }
+    }
+
+    private fun printBackStack(showFragments: String, numEntryInBackStack: Int) {
+        Log.d("CALENDAR", "Dati ricevuti: $showFragments")
+        Log.d("CALENDAR", "Numero di voci nello stack di ritorno: $numEntryInBackStack")
     }
 }
