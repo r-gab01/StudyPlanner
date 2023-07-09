@@ -27,6 +27,10 @@ class PreparationFragmentMateriale : Fragment() {
         //LAYOUT MANAGER
         binding.recyclerview.layoutManager=LinearLayoutManager(this.context)
 
+        /*val = arguments?.getInt("pagineStudiate")
+        binding.numPagineStudiate.text = pagineStudiate.toString()
+        Log.d("PASSAGGIO VALORI","valore ricevuto $pagineStudiate")*/
+
         //Creazione della lista con il contenuto da mostrare
         val argomenti=ArrayList<String>()
         /*ApiClient.selectArgomenti(id) { data, error->

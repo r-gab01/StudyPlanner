@@ -41,8 +41,7 @@ class PreparationActivity : AppCompatActivity() {
         //MOSTRA FRAGMENT INFO GENERALI
         val chipInfoGenerali=binding.chipInfoGenerali
         chipInfoGenerali.setOnClickListener {
-            //caricare fragment e passargli come dato: Da activity a fragment
-                //esameSessione
+
             val fragment = PreparationFragmentInfo()
             val bundle = Bundle()
             fragment.arguments = bundle
@@ -73,9 +72,19 @@ class PreparationActivity : AppCompatActivity() {
         chipMateriale.setOnClickListener {
             //caricare fragment e passargli come dato:
                     //esameSessione?.idSessione
+            val fragment=PreparationFragmentMateriale()
+            val bundle=Bundle()
+            fragment.arguments=bundle
+
+            val idSessione=esameSessione?.idSessione
+            if (idSessione != null) {
+                bundle.putInt("pagineStudiate", idSessione)
+            }
+            Log.d("PASSAGGIO VALORI","valore inviato $idSessione")
+
             val manager = supportFragmentManager
             val transaction = manager.beginTransaction()
-            transaction.replace(R.id.fragmentContainerView, PreparationFragmentMateriale())
+            transaction.replace(R.id.fragmentContainerView, fragment)
             transaction.commit()
         }
     }
