@@ -68,6 +68,7 @@
             android:fontFamily="@font/montserrat_light"
             android:paddingLeft="15dp"
             android:paddingTop="10dp"
+            android:textStyle="bold"
             android:text="@string/title_esami_superati"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -90,6 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/title_media_aritmetica"
+            android:textStyle="bold"
             android:fontFamily="@font/montserrat_light"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -111,6 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/title_media_ponderata"
+            android:textStyle="bold"
             android:fontFamily="@font/montserrat_light"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -122,23 +125,36 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textSize="18sp"
+            android:textStyle="bold"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/montserrat_light"
             android:textColor="@color/black"
             android:paddingLeft="15dp"/>
 
+        <TextView
+            android:id="@+id/numPercentuale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bungee"
+            android:gravity="center_horizontal"
+            android:paddingLeft="15dp"
+            android:text=" "
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-        
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+
         <ProgressBar
             android:id="@+id/barPercentualeLaurea"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:progressDrawable="@drawable/progress_bar_style"
+            style="@style/CustomProgressBar"
             android:padding="15dp"
             android:progress="0"
             android:max="100"/>
@@ -153,17 +169,6 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textIncoraggia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Non mollare! "
-            android:textSize="18sp"
-            android:gravity="center"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/montserrat_light"
-            android:textColor="@color/black"
-            android:paddingLeft="15dp"/>
 
     </LinearLayout>
         </LinearLayout>

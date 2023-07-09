@@ -14,7 +14,7 @@ data class CarrieraDBModel(
     var idCorso: Int?= -1,
 
     @SerializedName("voto")
-    var voto: Int? =-1,
+    var voto: Int =-1,
 
     @SerializedName("lode")
     var lode: Int = -1,

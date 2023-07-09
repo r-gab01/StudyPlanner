@@ -41,6 +41,16 @@ class StatFragment : Fragment() {
                     val layoutManager = LinearLayoutManager(requireContext())
                     recyclerMaterie.layoutManager = layoutManager
                     var cfuTotali:Int=0
+                    var totVoti=0.00
+                    var totMaterie=0 //Numero totali di materie presenti nel libretto
+                    var numMaterie=0 //Numero di materie date in quel momento
+                    var mediaAr: Double=0.00
+                    var prodotto=0 //prodotto tra voto e cfu che mi serve per calcolare la media ponderata
+                    var temp=0
+                    var mediaPo: Double=0.00
+                    var percentualeM:Float=0f //Percentuale mancante alla laurea
+                    var percentualeF:Int=0
+
 
                     //faccio la query che mi serve per riempire la recycler view
                     ApiClient.selectCarriera(DataSingleton.ottieniIstanza().nomeUtente){ data, error ->
@@ -55,11 +65,32 @@ class StatFragment : Fragment() {
                             for (i in data) {
                                 Log.d("STATFRAGMENT", i.toString())
                                 materie.add(MateriaModel(i?.cfu,i?.nomeMateria,i?.voto))
+                                totMaterie++
                                 if(i?.voto != -1 ){
                                     cfuTotali+= i!!.cfu
+                                    totVoti+= i!!.voto
+                                    numMaterie++
+                                    //I prossimi due calcoli mi servono nel calcolo della media ponderata
+                                    prodotto = if (i?.voto != null) i.voto * i.cfu else 0
+                                     temp+= prodotto
                                 }
                                 binding.cfuTotali.setText("${cfuTotali}")
+
                             }
+                            //mediaAritmetica
+                            mediaAr= (totVoti)/numMaterie
+                            val primaDueCifre = String.format("%.2f", mediaAr)//Stampo solo le prime due cifre decimali
+                            binding.numMediaAritmetica.setText("${primaDueCifre}")
+                            //Media Ponderata
+                            mediaPo=((temp)/cfuTotali.toDouble())
+                            val mediaFinale = String.format("%.2f", mediaPo)
+                            binding.numMediaPonderata.setText("${mediaFinale}")
+                            //CALCOLO LA PERCENTUALE
+                            percentualeM = ((numMaterie.toFloat()/totMaterie.toFloat())) * 100
+                            percentualeF = percentualeM.toInt()
+                            binding.numPercentuale.setText("${percentualeF} %")
+                            binding.barPercentualeLaurea.progress=percentualeF.toInt()
+
                             val adapter = MateriaAdapter(materie,requireContext())
                             recyclerMaterie.adapter = adapter
                         } else {
