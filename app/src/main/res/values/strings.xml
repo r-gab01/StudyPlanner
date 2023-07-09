@@ -104,6 +104,8 @@
     <string name="title_titolo_libro">TITOLO LIBRO</string>
     <string name="errore_NoArgomenti">Nessun argomento da mostrare.</string>
     <string name="errore_ConnessioneServer">Nessuna connessione al server</string>
+    <string name="title_dialog_timer">Inserisci nuovo timer</string>
+    <string name="text_dialog_timer">Inserisci minuti</string>
 
     <!-- MICHELE -->
     <string name="tagArgumentsEventFragment">Data</string>
