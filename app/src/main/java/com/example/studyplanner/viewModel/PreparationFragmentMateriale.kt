@@ -17,6 +17,7 @@ import com.example.studyplanner.databinding.MaterialCardViewBinding
 class PreparationFragmentMateriale : Fragment() {
     private lateinit var binding: FragmentPreparationMaterialeBinding
     private lateinit var recyclerView: RecyclerView
+    private lateinit var cardViewBinding: MaterialCardViewBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,13 +28,20 @@ class PreparationFragmentMateriale : Fragment() {
         //LAYOUT MANAGER
         binding.recyclerview.layoutManager=LinearLayoutManager(this.context)
 
+        val libroTesto= arguments?.getString("fonteStudio")
+        Log.d("PASSAGGIO VALORI","valore ricevuto $libroTesto")
+        binding.textTitoloLibro.text=libroTesto
+
+        val idSessione= arguments?.getInt("idSessione")
+        Log.d("PASSAGGIO VALORI","valore ricevuto $idSessione")
+
         //Creazione della lista con il contenuto da mostrare
         val argomenti=ArrayList<String>()
-        /*ApiClient.selectArgomenti(id) { data, error->
+        ApiClient.selectArgomenti(idSessione) { data, error->
             if(error!=null){
                 Log.e("PREPARAZIONE", "Si è verificato un errore: $error")
                 try {
-                    Toast.makeText(requireContext(),R.string.errore_ConnessioneServer.toString(), Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(),resources.getString(R.string.errore_ConnessioneServer), Toast.LENGTH_LONG).show()
                 } catch (_: Exception){
 
                 }
@@ -41,14 +49,17 @@ class PreparationFragmentMateriale : Fragment() {
                 for (i in data){
                     if(i!=null){
                         argomenti.add(i.argomento.toString())
+                        Log.e("PREPARAZIONE","Risultato query ${i.argomento.toString()}")
+                        argomenti.add(i.argomento.toString())
                     }
                 }
+                val adapter = PreparationAdapter(argomenti)
+                recyclerView.adapter=adapter
             } else {
-                binding.textError.text= R.string.errore_NoArgomenti.toString()
+                //binding.textError.text= R.string.errore_NoArgomenti.toString()
+                binding.textError.text=resources.getString(R.string.errore_NoArgomenti)
             }
-
-        }*/
-
+        }
 
         recyclerView = binding.recyclerview
         //Configurazione dell’Adapter con la sorgente dati
