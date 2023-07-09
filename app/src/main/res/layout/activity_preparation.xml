@@ -1,167 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".viewModel.PreparationActivity"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".viewModel.PreparationActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:id="@+id/title_preparation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="@string/title_preparazione"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/horizzontalBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="title_preparation"
+        app:layout_constraintBottom_toTopOf="@id/cardViewTitleExam"
+        app:layout_constraintTop_toBottomOf="@id/title_preparation" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardViewTitleExam"
+        android:clickable="true"
+        android:focusable="true"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".viewModel.PreparationActivity">
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="30dp"
+        app:strokeColor="@color/colorPrimary"
+        app:strokeWidth="3dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_preparation">
 
-        <TextView
-            android:id="@+id/title_preparation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="@string/title_preparazione"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/horizzontalBarrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="title_preparation"
-            app:layout_constraintBottom_toTopOf="@id/cardViewTitleExam"
-            app:layout_constraintTop_toBottomOf="@id/title_preparation" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewTitleExam"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_preparation">
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageview_card"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/baseline_menu_book_24" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/titleCardView"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/imageview_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/sfondo_libri" />
+
+                <TextView
+                    android:id="@+id/titleCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/bungee_inline"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:fontFamily="@font/montserrat_light"
-                android:text="TITOLO ESAME"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:orientation="horizontal"
+                android:paddingTop="5dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
 
-            <TextView
-                android:id="@+id/Cfu"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/Cfu"
+                    android:text="@string/Cfu"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserrat_medium" />
+
+                <TextView
+                    android:id="@+id/numCfu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:text=""
+                    android:fontFamily="@font/montserrat_light"
+                    android:textSize="16sp"
+                    android:layout_weight="1"
+                    android:gravity="right"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="35dp"
-                android:layout_marginEnd="20dp"
-                android:fontFamily="@font/montserrat_light"
-                android:text="@string/Cfu"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:orientation="horizontal"
+                android:paddingTop="5dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="10dp">
 
-            <TextView
-                android:id="@+id/numCfu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="150dp"
-                android:layout_marginTop="35dp"
-                android:layout_marginEnd="20dp"
-                android:fontFamily="@font/montserrat_light"
-                android:text=""
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:layout_gravity="right"/>
+                <TextView
+                    android:id="@+id/docente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:text="@string/nameDocente"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_medium" />
 
-            <TextView
-                android:id="@+id/docente"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
-                android:layout_marginTop="58dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/montserrat_light"
-                android:text="@string/nameDocente"
-                android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/nomeDocente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserrat_light"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:gravity="right"
+                    android:textSize="16sp"/>
 
-            <TextView
-                android:id="@+id/nomeDocente"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="150dp"
-                android:layout_marginTop="58dp"
-                android:layout_marginEnd="20dp"
-                android:layout_gravity="right"
-                android:fontFamily="@font/montserrat_light"
-                android:text=""
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+            </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/menuChip"
-            android:layout_width="wrap_content"
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/menuChip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardViewTitleExam"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipInfoGenerali"
+            style="@style/CustomChipStyle"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardViewTitleExam"
-            app:singleSelection="true">
+            android:fontFamily="@font/montserrat_light"
+            android:textAlignment="center"
+            android:text="@string/title_chip_Info" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipInfoGenerali"
-                style="@style/CustomChipStyle"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_light"
-                android:textAlignment="center"
-                android:text="@string/title_chip_Info" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipMateriale"
-                style="@style/CustomChipStyle"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_light"
-                android:textAlignment="center"
-                android:text="@string/title_chip_Materiale" />
-        </com.google.android.material.chip.ChipGroup>
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView"
-            android:layout_width="match_parent"
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipMateriale"
+            style="@style/CustomChipStyle"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/menuChip"
-            android:paddingBottom="10dp">
-        </androidx.fragment.app.FragmentContainerView>
+            android:fontFamily="@font/montserrat_light"
+            android:textAlignment="center"
+            android:text="@string/title_chip_Materiale" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/cardViewTitleExam"
+        app:layout_constraintStart_toStartOf="@+id/cardViewTitleExam"
+        app:layout_constraintTop_toBottomOf="@id/menuChip"></androidx.fragment.app.FragmentContainerView>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.core.widget.NestedScrollView>
-
+</androidx.constraintlayout.widget.ConstraintLayout>

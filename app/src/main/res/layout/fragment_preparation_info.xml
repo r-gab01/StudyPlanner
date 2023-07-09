@@ -10,22 +10,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/edit_text_border"
-        android:orientation="vertical">
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/border_element"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="5dp">
 
         <TextView
             android:id="@+id/textGiornoEsame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_light"
-            android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:text="@string/title_giorno_dell_esame"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -34,7 +36,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/montserrat_light"
-            android:paddingLeft="20dp"
             android:text=""
             android:textColor="@color/black"
             android:textSize="18sp" />
@@ -44,11 +45,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_light"
-            android:paddingLeft="20dp"
             android:paddingTop="7dp"
             android:text="@string/title_giorni_rimanenti"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -57,21 +57,19 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/montserrat_light"
-            android:paddingLeft="20dp"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/textPagineTotali"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_light"
-            android:paddingLeft="20dp"
             android:paddingTop="7dp"
             android:text="@string/title_pagine_totali"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -80,21 +78,19 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/montserrat_light"
-            android:paddingLeft="20dp"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/textPagineStudiate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_light"
-            android:paddingLeft="20dp"
             android:paddingTop="7dp"
             android:text="@string/title_pagine_studiate"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -103,34 +99,31 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/montserrat_light"
-            android:paddingLeft="20dp"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/textPagineConsigliate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_light"
-            android:paddingLeft="20dp"
             android:paddingTop="7dp"
             android:text="@string/title_pagine_consigliate_giornalmente"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/numPagineConsigliate"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/montserrat_light"
-            android:paddingLeft="20dp"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/progressoPagine"

@@ -39,9 +39,9 @@ class ExamAdapter(private val examsList: ArrayList<SessioneStudioDBModel>) : Rec
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val examViewModel = examsList[position]     //variabile contenente una examList ( ossia lista di examViewModel)
         //prendo i valori dalla lista e li passo al viewHolder che li inserisce nelle CardView
-        holder.image.setImageResource(R.drawable.baseline_library_books_24)
         holder.date.text = examViewModel.dataAppello.toString()
         holder.title.text = examViewModel.nomeMateria
+        //confronto data esame con quella attuale, se minore di 10 giorni la evidenzio in rosso
         val today = LocalDate.now()
         val examDate: LocalDate = examViewModel.dataAppello.toInstant().atZone(ZoneId.systemDefault()).toLocalDate() //converto in LocalDate il tipo Date del mio esame
         val diff = ChronoUnit.DAYS.between(today, examDate)

@@ -46,19 +46,7 @@ class PreparationActivity : AppCompatActivity() {
             fragment.arguments = bundle
             //arguments di un Fragment è un Bundle che può essere utilizzato per passare dati al Fragment durante la sua creazione.
 
-            val pagineTotali=esameSessione?.pagineTot.toString()
-            bundle.putString("pagineTotali", pagineTotali)
-            Log.d("PASSAGGIO VALORI","valore inviato $pagineTotali")
-
-            val giornoEsame=esameSessione?.dataAppello
-            bundle.putString("giornoEsame", giornoEsame.toString())
-            Log.d("PASSAGGIO VALORI","valore inviato $giornoEsame")
-
-            val pagineStudiate=esameSessione?.pagineStud
-            if (pagineStudiate != null) {
-                bundle.putInt("pagineStudiate", pagineStudiate)
-            }
-            Log.d("PASSAGGIO VALORI","valore inviato $pagineStudiate")
+            bundle.putParcelable("arguments", esameSessione)
 
             val manager=supportFragmentManager
             val transaction=manager.beginTransaction()

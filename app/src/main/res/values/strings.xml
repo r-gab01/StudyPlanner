@@ -91,7 +91,7 @@
     <string name="title_giorni_rimanenti">GIORNI RIMANENTI</string>
     <string name="title_pagine_totali">PAGINE TOTALI</string>
     <string name="title_pagine_studiate">PAGINE STUDIATE</string>
-    <string name="title_pagine_consigliate_giornalmente">PAGINE GIORNALIERE CONSIGLIATE</string>
+    <string name="title_pagine_consigliate_giornalmente">PAGINE CONSIGLIATE OGGI</string>
     <string name="title_chip_Info">DETTAGLI</string>
     <string name="title_chip_Materiale">MATERIALE</string>
     <string name="nameDocente">Docente</string>
