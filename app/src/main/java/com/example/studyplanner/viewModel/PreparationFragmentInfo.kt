@@ -1,5 +1,6 @@
 package com.example.studyplanner.viewModel
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,26 +12,10 @@ import android.widget.TextView
 import com.example.studyplanner.databinding.FragmentPreparationInfoBinding
 import com.example.studyplanner.model.SessioneStudioDBModel
 
-
-@Suppress("DEPRECATION")
 class PreparationFragmentInfo : Fragment() {
     private lateinit var binding: FragmentPreparationInfoBinding
     private var esameSessione: SessioneStudioDBModel? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        //1
-        // Recupera i dati passati dall'Activity tramite il Bundle
-        /*esamiSessione = arguments?.getParcelable("EsameCliccato")*/
-
-        //2
-        // Recupera i dati passati dall'Activity tramite il Bundle
-        arguments?.let { bundle ->
-            esameSessione = bundle.getParcelable("EsameCliccato")
-        }
-        Log.d("PASSAGGIO VALORI","valori rivecuti")
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,12 +25,17 @@ class PreparationFragmentInfo : Fragment() {
         val progressBar:ProgressBar=binding.progressBar
         val progressText:TextView=binding.progressoPagine //mostra la percentuale
 
-        // Utilizzo i valori di esameSessione
-        if (esameSessione != null) {
-            binding.giornoEsame.text= esameSessione?.dataAppello.toString()
-            binding.numPagineTotali.text= esameSessione?.pagineTot.toString().toInt().toString()
-            binding.numPagineTotali.text= esameSessione?.pagineTot?.toString()?.toInt().toString()
-        }
+        val pagineTotali=arguments?.getString("pagineTotali").toString()
+        binding.numPagineTotali.text=pagineTotali
+        Log.d("PASSAGGIO VALORI","valore ricevuto $pagineTotali")
+
+        val giornoEsame=arguments?.getString("giornoEsame").toString()
+        binding.giornoEsame.text=giornoEsame
+        Log.d("PASSAGGIO VALORI","valore ricevuto $giornoEsame")
+
+        val pagineStudiate= arguments?.getInt("pagineStudiate")
+        binding.numPagineStudiate.text = pagineStudiate.toString()
+        Log.d("PASSAGGIO VALORI","valore ricevuto $pagineStudiate")
 
         //dopo aver preso i dati dal db
         /*val numeroPagineTotali=binding.numPagineTotali.text.toString()
@@ -56,5 +46,4 @@ class PreparationFragmentInfo : Fragment() {
 
         return binding.root
     }
-
 }

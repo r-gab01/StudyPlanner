@@ -13,8 +13,6 @@ import com.example.studyplanner.model.SessioneStudioDBModel
 
 class PreparationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPreparationBinding
-    private lateinit var fragmentInfo: PreparationFragmentInfo
-
     override fun onCreate(savedInstanceState: Bundle?) {
         binding= ActivityPreparationBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -45,18 +43,28 @@ class PreparationActivity : AppCompatActivity() {
         chipInfoGenerali.setOnClickListener {
             //caricare fragment e passargli come dato: Da activity a fragment
                 //esameSessione
-
-            fragmentInfo = PreparationFragmentInfo()
-            // Creare un Bundle per i dati presi dal database
+            val fragment = PreparationFragmentInfo()
             val bundle = Bundle()
-            bundle.putParcelable("EsameCliccato", esameSessione)
-            // Imposta il bundle come argomento del fragment
-            fragmentInfo.arguments = bundle
-            Log.d("PASSAGGIO VALORI","valori inviati")
+            fragment.arguments = bundle
+            //arguments di un Fragment è un Bundle che può essere utilizzato per passare dati al Fragment durante la sua creazione.
+
+            val pagineTotali=esameSessione?.pagineTot.toString()
+            bundle.putString("pagineTotali", pagineTotali)
+            Log.d("PASSAGGIO VALORI","valore inviato $pagineTotali")
+
+            val giornoEsame=esameSessione?.dataAppello
+            bundle.putString("giornoEsame", giornoEsame.toString())
+            Log.d("PASSAGGIO VALORI","valore inviato $giornoEsame")
+
+            val pagineStudiate=esameSessione?.pagineStud
+            if (pagineStudiate != null) {
+                bundle.putInt("pagineStudiate", pagineStudiate)
+            }
+            Log.d("PASSAGGIO VALORI","valore inviato $pagineStudiate")
 
             val manager=supportFragmentManager
             val transaction=manager.beginTransaction()
-            transaction.replace(R.id.fragmentContainerView,PreparationFragmentInfo())
+            transaction.replace(R.id.fragmentContainerView,fragment)
             transaction.commit()
         }
 

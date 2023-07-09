@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
                 .commit()
         }
 
-        var sharedPreferences= this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        var sharedPreferences= this.getSharedPreferences("MyPrefs", MODE_PRIVATE)
         var loggedIn: Boolean = sharedPreferences.getBoolean("isLoggedIn", false)
 
         if (loggedIn){                 //se l'utente non è loggato, lancio la schermata di login
