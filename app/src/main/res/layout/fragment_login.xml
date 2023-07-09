@@ -133,7 +133,7 @@
         android:layout_height="48dp"
         android:text="@string/textRegistrazione"
         android:layout_marginTop="5dp"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textNonAncoraReg"
@@ -142,22 +142,34 @@
         android:clickable="true"/>
 
     <TextView
+        android:id="@+id/textProduced"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="Produced by MadoTech"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textRegistrazione"
+        android:textColor="#9A9A9A"
+        android:fontFamily="@font/montserrat_light"
+        />
+
+    <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/nomeApp"
-        android:textSize="23dp"
-        android:gravity="center"
-        android:textStyle="italic"
-        android:fontFamily="@font/montserrat_medium"
-        android:textColor="#06344C"
         android:layout_marginLeft="30dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="30dp"
+        android:fontFamily="@font/bungee"
+        android:gravity="center"
+        android:text="@string/nomeApp"
+        android:textColor="#06344C"
+        android:textSize="23sp"
+        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

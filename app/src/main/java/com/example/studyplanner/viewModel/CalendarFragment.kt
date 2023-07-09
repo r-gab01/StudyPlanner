@@ -54,7 +54,7 @@ class CalendarFragment : Fragment() {
        // val data = ArrayList<ExamModel>()
         //val adapter = ExamAdapter(data)
         //recyclerView.adapter = adapter
-       // calendar.setDateTextAppearance(R.style.CustomCalendarViewStyle)
+
         calendar.dateTextAppearance = R.style.CustomCalendarViewStyle
 
 
@@ -95,10 +95,7 @@ class CalendarFragment : Fragment() {
                 }else if (data != null) {
                     // Utilizza i dati restituiti
                     Log.d("CALENDAR", "Dati ricevuti: $data")
-                    val leftPadding = 20
-                    val topPadding = 3
-                    val rightPadding = 20
-                    val bottomPadding = 3
+
                    var giorniRimanenti:Int =day - currentDay
 
 
@@ -132,5 +129,6 @@ class CalendarFragment : Fragment() {
             startActivity(i)
         }
     }
+
 
 }

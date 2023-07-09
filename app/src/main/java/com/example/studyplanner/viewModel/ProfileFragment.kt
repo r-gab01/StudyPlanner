@@ -164,6 +164,58 @@ class ProfileFragment : Fragment() {
                         singleton.nome= newNome
                         singleton.cognome= newCognome
                         singleton.universita= newUni
+                        //Eliminiamo la vecchia carriera dello studente
+                        ApiClient.deletCarriera(nomeU,singleton.idCorso){boolean,error ->
+                            if (error != null) {
+                                // Gestisco l'errore
+                                Log.e("UPDATESTUD", "Si è verificato un errore: $error")
+                            } else if (boolean==true){
+                                Log.d("UPDATESTUD", "Carriera eliminata correttamente!")
+
+                                //Ricreiamo la nuova carriera con le nuove materie del nuovo corso di studi
+                                ApiClient.selectMaterieCorso(idCorsoSelected) { data, error ->
+                                    if (error != null) {
+                                        Log.e("REGISTRAZIONEFRAGMENT", "Si è verificato un errore: $error")
+                                        try {
+                                            Toast.makeText(requireContext(), "Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                                        } catch (_: Exception) {
+                                        }
+                                    } else if (data != null) {
+                                        for (i in data) {
+                                            ApiClient.insCarriera(nomeU,i?.nomeMateria, idCorsoSelected, -1, 0){ response, error->   //insert nella table Carriera
+                                                if (error!=null){
+                                                    Log.e("REGISTRAZIONEFRAGMENT", "Si è verificato un errore: $error")
+                                                    try {
+                                                        Toast.makeText(requireContext(),"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                                                    } catch (_: Exception){
+                                                    }
+                                                }else if (response != null){
+                                                    Log.d("REGISTRAZONEFRAGMENT", "Registrazione effettuata")
+                                                } else{
+                                                    Log.e("REGISTRAZIONEFRAGMENT", "Errore in registra studente")
+                                                    try {
+                                                        Toast.makeText(requireContext(),"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                                                    } catch (_: Exception){
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        Log.e("REGISTRAZIONEFRAGMENT", "Errore")
+                                        try {
+                                            Toast.makeText(
+                                                requireContext(), "Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                                        } catch (_: Exception) {
+
+                                        }
+                                    }
+                                }
+
+                            }
+                            else{
+                                Log.d("UPDATESTUD", "Dati ricevuti: $boolean")
+                            }
+                        }
                         singleton.idCorso=idCorsoSelected
                         singleton.corsoStudi=binding.editCorso.text.toString()
                         Log.d("UPDATESTUD", "Utente ricevuto: $newNome")
@@ -280,6 +332,5 @@ class ProfileFragment : Fragment() {
         val fragmentManager = parentFragmentManager
         return (fragmentManager.findFragmentByTag(tag) != null)         //scrittura compatta che restituisce true o false se quella condizione si verifica o meno
     }
-
 
 }

@@ -18,177 +18,159 @@
         android:textColor="@color/black"/>
 
     <ScrollView
-        android:id="@+id/scrollView"
+        android:id="@+id/scrollViewmATERIE"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp">
+        android:isScrollContainer="false"
+        android:contentDescription="Permette di scrollare le materie e il resto">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/descriptionFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/montserrat_light"
+        android:text="@string/descripionStatistiche"
+        android:textSize="16sp"
+        android:textColor="@color/black"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerMateria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="3dp"
+        android:background="@drawable/libretto_border"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/libretto_border"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+
+
+        <TextView
+            android:id="@+id/textEsamiSuperati"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_light"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:textStyle="bold"
+            android:text="@string/title_esami_superati"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:id="@+id/cfuTotali"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/montserrat_light"
+            android:paddingLeft="15dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/mediaAritmetica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_media_aritmetica"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_light"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:paddingLeft="15dp"/>
+
+        <TextView
+            android:id="@+id/numMediaAritmetica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="18sp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/montserrat_light"
+            android:textColor="@color/black"
+            android:paddingLeft="15dp"/>
+
+        <TextView
+            android:id="@+id/mediaPonderata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_media_ponderata"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_light"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:paddingLeft="15dp"/>
+
+        <TextView
+            android:id="@+id/numMediaPonderata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/montserrat_light"
+            android:textColor="@color/black"
+            android:paddingLeft="15dp"/>
+
+        <TextView
+            android:id="@+id/numPercentuale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bungee"
+            android:gravity="center_horizontal"
+            android:paddingLeft="15dp"
+            android:text=" "
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/edit_text_border"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
 
-            <TextView
-                android:id="@+id/textEsamiSuperati"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
-                android:text="@string/title_esami_superati"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/numEsamiSuperati"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/montserrat_light"
-                android:paddingLeft="20dp"
-                android:text=""
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+        <ProgressBar
+            android:id="@+id/barPercentualeLaurea"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            style="@style/CustomProgressBar"
+            android:padding="15dp"
+            android:progress="0"
+            android:max="100"/>
 
-            <TextView
-                android:id="@+id/textCompitiSvolti"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingLeft="20dp"
-                android:text="@string/title_compiti_svolti"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/numCompitiSvolti"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/montserrat_light"
-                android:paddingLeft="20dp"
-                android:text=""
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/mediaAritmetica"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingLeft="20dp"
-                android:text="@string/title_media_aritmetica"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/numMediaAritmetica"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/montserrat_light"
-                android:paddingLeft="20dp"
-                android:text=""
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/mediaPonderata"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingLeft="20dp"
-                android:text="@string/title_media_ponderata"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/numMediaPonderata"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/montserrat_light"
-                android:paddingLeft="20dp"
-                android:text="55"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/mediaPagineStudiate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_medium"
-                android:paddingLeft="20dp"
-                android:text="@string/title_media_pagine_studiate"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <LinearLayout
+            <ImageView
+                android:id="@+id/iconImageView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="5dp">
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:foreground="@drawable/education_graduation"
+                android:layout_weight="0.15"/>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/numMediaPagineStudiateAlGiorno"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_light"
-                        android:paddingLeft="20dp"
-                        android:text="55"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_light"
-                        android:paddingLeft="5dp"
-                        android:text="@string/pagine_al_giorno"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/numMediaPagineStudiateAlOra"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_light"
-                        android:paddingLeft="20dp"
-                        android:text="55"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_light"
-                        android:paddingLeft="5dp"
-                        android:paddingBottom="10dp"
-                        android:text="@string/pagine_all_ora"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
 
+
+    </LinearLayout>
+        </LinearLayout>
     </ScrollView>
-
-
-</LinearLayout>
+    </LinearLayout>
