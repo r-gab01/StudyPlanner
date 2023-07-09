@@ -45,7 +45,7 @@
             android:layout_marginTop="15dp"
             android:text="@string/compilaCampi"
             android:textColor="#2E2E2E"
-            android:textSize="19dp" />
+            android:textSize="19sp" />
 
         <!-- Qua metteremo eventuali errori per campi non compilati o compilati non correttamente -->
 
@@ -164,9 +164,9 @@
             android:id="@+id/mostraErrori"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:text=""
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textColor="#FF0000"
             android:layout_gravity="center"
             />

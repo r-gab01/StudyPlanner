@@ -282,17 +282,26 @@ class AddExamActivity : AppCompatActivity() {
         }
     }
 
-    //Sovrascrivo il metodo onSaveInstanceState() per salvare solo l'indice dell'ultimo elemento aggiunto
     override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putInt("lastElementIndex", lastElementIndex)
+        super.onSaveInstanceState(outState) //Chiamo l'implementazione del metodo nella classe base per eseguire le operazioni di salvataggio dello stato di base.
+        // Salvo lo stato del Fragment corrente
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.containerView_login)
+        if (currentFragment != null) {
+            supportFragmentManager.putFragment(outState, "currentFragment", currentFragment) //Se il fragment corrente non è nullo, utilizza il putFragment del FragmentManager per salvare il fragment nel Bundle
+        }
     }
 
-    //Sovrascrivo il metodo onRestoreInstanceState() per ripristinare lo stato dell'elementList utilizzando l'indice salvato
+    //Il metodo onRestoreInstanceState viene chiamato dopo che l'activity è stata ricreata a seguito di un cambio di configurazione o di un ripristino dello stato.
+    // Questo metodo ti consente di ripristinare lo stato salvato in precedenza.
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        lastElementIndex = savedInstanceState.getInt("lastElementIndex")
-        recreateElements()
+        super.onRestoreInstanceState(savedInstanceState) //ripristino dello stato
+        // Ripristina lo stato del Fragment corrente
+        val currentFragment = supportFragmentManager.getFragment(savedInstanceState, "currentFragment")
+        if (currentFragment != null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.containerView_login, currentFragment) // sostituisco il contenuto del containerView_login con il fragment ripristinato.
+                .commit()
+        }
     }
 
     // Nel metodo recreateElements(), itero sull'elementList e ricreo gli elementi nell'interfaccia utente a partire dall'indice salvato

@@ -13,5 +13,6 @@
     <color name="Red">#FF0000</color>
     <color name="yellow_light">#fdf5e6</color>
     <color name="grey">#F1F1F1</color>
+    <color name="green">#00FF00</color>
 
 </resources>

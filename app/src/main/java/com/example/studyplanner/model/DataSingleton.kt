@@ -24,6 +24,7 @@ class DataSingleton private constructor() {
         universita=""
         idCorso=-1
         corsoStudi=""
+        isStudyMode
     }
 
 
@@ -38,5 +39,6 @@ class DataSingleton private constructor() {
         var universita: String? = ""
         var idCorso: Int? = -1
         var corsoStudi: String? = ""
+        var isStudyMode: Unit = Unit
 
 }

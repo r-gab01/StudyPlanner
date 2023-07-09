@@ -17,6 +17,9 @@ import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.FragmentCalendarBinding
 import com.example.studyplanner.model.DataSingleton
 import com.example.studyplanner.model.ExamModel
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.temporal.ChronoUnit
 import java.util.*
 
 
@@ -51,9 +54,7 @@ class CalendarFragment : Fragment() {
         // Configura la RecyclerView che ci servirà per mostrare gli esami quando clicchiamo un giorno del calendario
         val layoutManager = LinearLayoutManager(requireContext())
         recyclerView.layoutManager = layoutManager
-       // val data = ArrayList<ExamModel>()
-        //val adapter = ExamAdapter(data)
-        //recyclerView.adapter = adapter
+
 
         calendar.dateTextAppearance = R.style.CustomCalendarViewStyle
 
@@ -67,7 +68,6 @@ class CalendarFragment : Fragment() {
 
         val nomeU= DataSingleton.ottieniIstanza().nomeUtente
         var sharedPreferences= requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        //   val nomeU: String? = sharedPreferences.getString("Nome Utente", "")
 
         calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
             // Ottiengo la data selezionata
@@ -85,9 +85,6 @@ class CalendarFragment : Fragment() {
             Log.d("CALENDAR", "Dati ricevuti: $nomeU")
             val esami = ArrayList<ExamModel>()
 
-
-
-
             ApiClient.selectSessioneStudio(nomeU,formattedDate){ data, error ->
                 if (error != null) {
                     // Gestisci l'errore
@@ -97,13 +94,23 @@ class CalendarFragment : Fragment() {
                     Log.d("CALENDAR", "Dati ricevuti: $data")
 
                    var giorniRimanenti:Int =day - currentDay
+                    Log.d("prova", "${giorniRimanenti}")
 
-
-                    infoSeEsame.text= "Esami a cui sei prenotato:"
-                    infoSeEsame.setTextColor(ContextCompat.getColor(requireContext(), R.color.purple_700))
-                 //   binding.mostraEsame.setPadding(leftPadding, topPadding, rightPadding, bottomPadding)
-                 //   binding.mostraEsame.text=data.dataAppello.toString()
                     binding.recyclerViewMostraEsame.visibility = View.VISIBLE
+
+                    if(giorniRimanenti==0){
+                        infoSeEsame.text= "Esame in data odierna:"
+                        infoSeEsame.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
+                    } else{  if(giorniRimanenti<0){
+                        infoSeEsame.text= "Esami già sostenuti in data ${formattedDate}:"
+                        infoSeEsame.setTextColor(ContextCompat.getColor(requireContext(), R.color.Red))
+                    }else {
+                        infoSeEsame.text = "Esami a cui sei prenotato:"
+                        infoSeEsame.setTextColor(
+                            ContextCompat.getColor(requireContext(), R.color.purple_700))
+                    }
+                        }
+
                     for (i in data){
                         nomiMaterie.add(i?.nomeMateria)
                         esami.add(ExamModel(i?.nomeMateria,formattedDate,giorniRimanenti,0))
