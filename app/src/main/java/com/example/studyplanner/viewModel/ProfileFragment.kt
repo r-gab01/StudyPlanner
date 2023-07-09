@@ -1,32 +1,42 @@
 package com.example.studyplanner
 
+import android.Manifest
+import android.app.Activity
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.method.ReplacementTransformationMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.bumptech.glide.Glide
 import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.FragmentProfileBinding
 import com.example.studyplanner.model.DataSingleton
 import com.example.studyplanner.viewModel.LegendFragment
 import com.example.studyplanner.viewModel.LoginActivity
 import com.example.studyplanner.viewModel.MainActivity
+import java.util.*
+import kotlin.collections.ArrayList
 
 
+@Suppress("DEPRECATION")
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
     private lateinit var sharedPreferences: SharedPreferences //ci serve per effettuare il logout
+    private lateinit var imageViewProfile: ImageView
+    private lateinit var imageButtonChangeImage: ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -300,7 +310,81 @@ class ProfileFragment : Fragment() {
         var sunday= binding.iconSunday
         setOnClickImageChange(sunday)
 
+        imageViewProfile=binding.imageProfile
+        imageButtonChangeImage= binding.editIcon
+
+        imageButtonChangeImage.setOnClickListener {
+
+            // Verifica se il permesso di accesso alla galleria è stato già concesso
+            if (isGalleryPermissionGranted()) {
+                openGallery()
+            } else {
+                // Richiedi il permesso di accesso alla galleria
+                requestGalleryPermission()
+            }
+        }
+
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
+            val selectedImageUri = data.data
+            if (selectedImageUri != null) {
+                // Carica l'immagine selezionata nell'ImageView
+                Glide.with(this)
+                    .load(selectedImageUri)
+                    .into(imageViewProfile)
+            }
+        }
+    }
+
+    companion object {
+        private const val REQUEST_PERMISSION_GALLERY = 1
+        private const val REQUEST_IMAGE_PICK = 2
+
+    }
+
+    private fun isGalleryPermissionGranted(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestGalleryPermission() {
+        Locale.setDefault(Locale("it"))
+        requestPermissions(
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+            REQUEST_PERMISSION_GALLERY
+        )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            REQUEST_PERMISSION_GALLERY -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openGallery()
+                } else {
+                    // Il permesso è stato negato dall'utente
+                    Toast.makeText(requireContext(), "Permesso negato", Toast.LENGTH_SHORT).show()
+                    requireFragmentManager().popBackStack()
+                }
+            }
+        }
+    }
+
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, REQUEST_IMAGE_PICK)
+    }
+
+
 
     fun convertToAsterisks(editText: EditText) {
         val text = editText.text.toString()
