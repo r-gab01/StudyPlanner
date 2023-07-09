@@ -107,12 +107,11 @@ class AddExamActivity : AppCompatActivity() {
 
 
         editTextDate.isFocusable = false
+        /*
         editTextDate.setOnClickListener {
-
             val year: Int
             val month: Int
             val dayOfMonth: Int
-
             val calendar = Calendar.getInstance()
             if (dataSel.isNullOrEmpty()) {
                 //Se la data salvata non esiste, utilizziamo la data attuale
@@ -121,29 +120,50 @@ class AddExamActivity : AppCompatActivity() {
                 dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
             } else {
                 // La data salvata esiste, la convertiamo in valori interi
-                val selectedDateParts =
-                    dataSel!!.split("-") // la stringa dataSelezionata viene suddivisa utilizzando il separatore "/" tramite il metodo split("/"). Questo crea un array di stringhe selectedDateParts, contenente le parti della data (giorno, mese, anno) come elementi separati.
-                year =
-                    selectedDateParts[0].toInt() //assegniamo il valore convertito dell'anno a year
-                month =
-                    selectedDateParts[1].toInt() - 1 // Sottraiamo 1 al mese perché Calendar.MONTH parte da 0
+                val selectedDateParts = dataSel!!.split("-") // la stringa dataSelezionata viene suddivisa utilizzando il separatore "/" tramite il metodo split("/"). Questo crea un array di stringhe selectedDateParts, contenente le parti della data (giorno, mese, anno) come elementi separati.
+                year = selectedDateParts[0].toInt() //assegniamo il valore convertito dell'anno a year
+                month = selectedDateParts[1].toInt() - 1 // Sottraiamo 1 al mese perché Calendar.MONTH parte da 0
                 dayOfMonth = selectedDateParts[2].toInt()
             }
-
-
             //Mostriamo un date picker che inizialmente è settato alla data attuale
             val datePickerDialog =
                 DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDayOfMonth ->
                     val newSelectedDate = "$selectedYear-${selectedMonth + 1}-$selectedDayOfMonth"
-
                     editTextDate.setText(newSelectedDate)
-
                     // Memorizziamo la nuova data selezionata
                     dataSel = newSelectedDate
                 }, year, month, dayOfMonth)
-
             datePickerDialog.show()
         }
+
+         */
+        editTextDate.setOnClickListener {
+            val year: Int
+            val month: Int
+            val dayOfMonth: Int
+            var calendar = Calendar.getInstance()
+            var today = Calendar.getInstance()
+            year = calendar.get(Calendar.YEAR)
+            month = calendar.get(Calendar.MONTH)
+            dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+            val datePickerDialog =
+                DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDayOfMonth ->
+                    calendar.set(selectedYear, selectedMonth, selectedDayOfMonth)
+                    val selected = Calendar.getInstance()
+                    selected.set(selectedYear, selectedMonth, selectedDayOfMonth)
+
+                    if (selected.before(today)) {
+                        // La data selezionata è precedente a oggi
+                        Toast.makeText(this, "Seleziona una data valida", Toast.LENGTH_SHORT).show()
+                    } else {
+                        // La data selezionata è valida
+                        dataSel = "$selectedYear-${selectedMonth + 1}-$selectedDayOfMonth"
+                        editTextDate.setText(dataSel)
+                    }
+                }, year, month, dayOfMonth)
+            datePickerDialog.show()
+        }
+
 
 
         val container = binding.linearLayout
@@ -214,7 +234,7 @@ class AddExamActivity : AppCompatActivity() {
                 builder.setMessage("Inserire correttamente tutti i campi")
                 builder.setPositiveButton("OK") { _, _ -> }
                 builder.create().show()
-            } else {    // effettuo caricamento sul server
+            }else {    // effettuo caricamento sul server
                 idSessione = generateUniqueId(dataSel.toString(),posizioneMateria)
                 ApiClient.insInSessione(
                     idSessione,
