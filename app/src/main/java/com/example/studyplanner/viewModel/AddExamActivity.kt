@@ -105,8 +105,6 @@ class AddExamActivity : AppCompatActivity() {
             binding.textCfu.text = Editable.Factory.getInstance().newEditable(cfuSel.toString())
         }
 
-
-        editTextDate.isFocusable = false
         /*
         editTextDate.setOnClickListener {
             val year: Int
@@ -135,8 +133,9 @@ class AddExamActivity : AppCompatActivity() {
                 }, year, month, dayOfMonth)
             datePickerDialog.show()
         }
-
          */
+
+        editTextDate.isFocusable = false
         editTextDate.setOnClickListener {
             val year: Int
             val month: Int
@@ -163,7 +162,6 @@ class AddExamActivity : AppCompatActivity() {
                 }, year, month, dayOfMonth)
             datePickerDialog.show()
         }
-
 
 
         val container = binding.linearLayout
