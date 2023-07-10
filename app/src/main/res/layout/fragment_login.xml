@@ -11,7 +11,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginFragment"
-    android:paddingBottom="10dp"
     >
 
     <ImageView
@@ -108,8 +107,8 @@
         android:text="@string/tastoLogin"
         android:fontFamily="@font/montserrat_medium"
         android:backgroundTint="#4CAF50"
-        android:layout_marginTop="20dp"
-        android:textSize="20dp"
+        android:layout_marginTop="30dp"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPasswordDimenticata" />
@@ -131,7 +130,7 @@
     <TextView
         android:id="@+id/textRegistrazione"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:text="@string/textRegistrazione"
         android:layout_marginTop="5dp"
         android:textSize="18sp"
@@ -146,14 +145,15 @@
         android:id="@+id/textProduced"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_light"
         android:text="Produced by MadoTech"
-        android:textColor="#9A9A9A"
+        android:layout_marginTop="10dp"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textRegistrazione" />
+        app:layout_constraintTop_toBottomOf="@id/textRegistrazione"
+        android:textColor="#9A9A9A"
+        android:fontFamily="@font/montserrat_light"
+        />
 
     <TextView
         android:id="@+id/textView"

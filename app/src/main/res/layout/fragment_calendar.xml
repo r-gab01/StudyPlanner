@@ -6,10 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".viewModel.CalendarFragment">
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    tools:context=".viewModel.CalendarFragment">
+
 
     <TextView
         android:id="@+id/descriptionCalendar"
@@ -100,6 +102,8 @@
             app:layout_constraintHeight_percent="0.25"
            />
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
+
 

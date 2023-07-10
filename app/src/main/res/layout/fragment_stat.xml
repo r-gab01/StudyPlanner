@@ -37,7 +37,7 @@
         android:layout_marginLeft="20dp"
         android:fontFamily="@font/montserrat_light"
         android:text="@string/descripionStatistiche"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textColor="@color/black"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -125,7 +125,6 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textSize="18sp"
-            android:textStyle="bold"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/montserrat_light"
             android:textColor="@color/black"
@@ -140,7 +139,8 @@
             android:paddingLeft="15dp"
             android:text=" "
             android:textColor="@color/colorPrimary"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:contentDescription="Segui il tuo percorso di laurea"/>
 
         <LinearLayout
             android:layout_width="match_parent"

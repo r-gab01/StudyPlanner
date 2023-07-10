@@ -24,6 +24,7 @@ class DataSingleton private constructor() {
         universita=""
         idCorso=-1
         corsoStudi=""
+
     }
 
 
