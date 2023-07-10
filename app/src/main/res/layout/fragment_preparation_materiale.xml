@@ -8,11 +8,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_text_border"
+        android:background="@drawable/border_element"
         android:orientation="vertical"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp">
 
         <TextView
             android:id="@+id/title_TitoloLibro"
@@ -21,6 +22,7 @@
             android:text="@string/title_titolo_libro"
             android:textStyle="bold"
             android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:paddingTop="10dp"
             android:textSize="20sp"
             android:textColor="@color/black"
@@ -41,11 +43,13 @@
 
 
         <TextView
+            android:id="@+id/titleArgomenti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/title_argomenti"
             android:textSize="20sp"
             android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:textStyle="bold"
             android:fontFamily="@font/montserrat_light"
             android:textColor="@color/black"/>
@@ -54,20 +58,20 @@
             android:id="@+id/textError"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
             android:layout_marginBottom="10dp"
-            android:textColor="@color/black"
             android:fontFamily="@font/montserrat_light"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp"/>
+            android:paddingRight="20dp"
+            android:text=""
+            android:textColor="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:paddingBottom="10dp">
+            android:paddingBottom="20dp">
 
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
