@@ -51,6 +51,8 @@ class RecuperoPassFragment : Fragment() {
                         binding.mostraPass2.text = data.password.toString()
                     } else{
                         Toast.makeText(activity,"Dati errati", Toast.LENGTH_LONG).show()
+                        Log.e("RECUPEROPW", domandaInserita)
+                        Log.e("RECUPEROPW", rispostaInserita)
                         binding.nomeUtenteTextEdit.setBackgroundResource(R.drawable.error_border_element)
                         binding.campoInserisciDomanda.setBackgroundResource(R.drawable.error_border_element)
                         binding.campoInserisciRisposta.setBackgroundResource(R.drawable.error_border_element)

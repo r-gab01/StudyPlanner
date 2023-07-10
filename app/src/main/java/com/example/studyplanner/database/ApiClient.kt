@@ -60,7 +60,7 @@ object ApiClient {
         })
     }
 
-    fun recuperoPW(nome: String, domanda: String, risposta: String, callback: (AccountDBModel?, Throwable?) -> Unit) {
+    fun recuperoPW(nome: String, risposta: String, domanda: String, callback: (AccountDBModel?, Throwable?) -> Unit) {
         var data: AccountDBModel?
         val query = "select * " +
                 "from autenticazione" +
