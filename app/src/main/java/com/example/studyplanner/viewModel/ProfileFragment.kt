@@ -350,7 +350,10 @@ class ProfileFragment : Fragment() {
     private fun galleryPermissionGranted(): Boolean {
         val permission= ContextCompat.checkSelfPermission(requireContext(),Manifest.permission.READ_EXTERNAL_STORAGE)
         if(permission!=PackageManager.PERMISSION_GRANTED){
-            Log.d("PERMISSION", "Permesso di accedere alla galleria negato")
+            //PackageManager.PERMISSION_GRANTED:
+            //valore costante che indica che un determinato permesso è stato concesso
+            //da confronare con il valore restituito dal metodo checkSelfPermission()
+            Log.d("PERMISSION", "Permesso di accesso alla galleria negato")
         }
        return permission == PackageManager.PERMISSION_GRANTED
     }
