@@ -130,7 +130,7 @@
     <TextView
         android:id="@+id/textRegistrazione"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:text="@string/textRegistrazione"
         android:layout_marginTop="5dp"
         android:textSize="18sp"
@@ -144,8 +144,9 @@
     <TextView
         android:id="@+id/textProduced"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:text="Produced by MadoTech"
+        android:layout_marginTop="10dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

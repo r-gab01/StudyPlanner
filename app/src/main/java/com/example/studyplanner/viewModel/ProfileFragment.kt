@@ -14,6 +14,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.studyplanner.database.ApiClient
@@ -51,8 +52,8 @@ class ProfileFragment : Fragment() {
         sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         //Implemento il Logout
         bottoneLogout.setOnClickListener{
-            builder.setTitle("Conferma Eliminazione Account")
-            builder.setMessage("Sei sicuro di volere eliminare il tuo Account?")
+            builder.setTitle("Conferma Logout")
+            builder.setMessage("Sei sicuro di voler disconnettere il tuo Account?")
             builder.setIcon(R.drawable.baseline_info_24)
             builder.setPositiveButton("Conferma") { dialog, which ->
 
@@ -154,12 +155,6 @@ class ProfileFragment : Fragment() {
                 binding.editUniversity.isEnabled=false
                 binding.container.isEnabled=false
                 editProfile.setImageResource(R.drawable.baseline_edit_24)
-
-
-                //ottengo elemento selezionato nei 2 'spinner'
-         /*       binding.editCorso.setOnItemClickListener { _, _, position, _ ->
-                    idCorsoSelected = idCorsi[position]
-                } */
 
 
                 builder.setTitle("Conferma modificche")
@@ -322,51 +317,97 @@ class ProfileFragment : Fragment() {
             }
         }
 
+        //prendo i valori delle stringhe salvate sulle sharedPreferences utili per la routine di studio
+        val lun= sharedPreferences.getString("isStudyLun"," ")
+        val mar= sharedPreferences.getString("isStudyMar"," ")
+        val mer= sharedPreferences.getString("isStudyMer"," ")
+        val gio= sharedPreferences.getString("isStudyGio"," ")
+        val ven= sharedPreferences.getString("isStudyVen"," ")
+        val sab= sharedPreferences.getString("isStudySab"," ")
+        val dom= sharedPreferences.getString("isStudyDom"," ")
+
+     /*   if(lun=="yes"){
+            binding.iconMonday.setImageResource(R.drawable.baseline_menu_book_24)
+            binding.iconMonday.setOnClickListener{
+                binding.iconMonday.setImageResource(R.drawable.baseline_battery_charging_full_24)
+                val editor = sharedPreferences.edit()
+                editor.putString("isStudyLun","no")
+                editor.apply()
+            }
+        }else{
+            binding.iconMonday.setImageResource(R.drawable.baseline_battery_charging_full_24)
+            binding.iconMonday.setOnClickListener{
+                binding.iconMonday.setImageResource(R.drawable.baseline_menu_book_24)
+                val editor = sharedPreferences.edit()
+                editor.putString("isStudyLun","yes")
+                editor.apply()
+            }
+        }
+
+        Log.d("prova","${mar}")
+        if(mar=="yes"){
+            binding.iconTuesday.setImageResource(R.drawable.baseline_menu_book_24)
+            binding.iconTuesday.setOnClickListener{
+                binding.iconTuesday.setImageResource(R.drawable.baseline_battery_charging_full_24)
+                val editor = sharedPreferences.edit()
+                editor.putString("isStudyMar","no")
+                editor.apply()
+            }
+        }else{
+            binding.iconTuesday.setImageResource(R.drawable.baseline_battery_charging_full_24)
+            binding.iconTuesday.setOnClickListener{
+                binding.iconTuesday.setImageResource(R.drawable.baseline_menu_book_24)
+                val editor = sharedPreferences.edit()
+                editor.putString("isStudyMar","yes")
+                editor.apply()
+            }
+        }  */
+        //Assegno una variabile per ogni icona relativo ad ogni giorno della settimana e chiamo la funzione per settare la routine di studio
         val monday= binding.iconMonday
-        setOnClickImageChange(monday)
+        setOnClickImageChange(lun,monday,"isStudyLun")
 
         val tuesday= binding.iconTuesday
-        setOnClickImageChange(tuesday)
+        setOnClickImageChange(mar,tuesday,"isStudyMar")
 
         val wednesday= binding.iconWednesday
-        setOnClickImageChange(wednesday)
+        setOnClickImageChange(mer,wednesday,"isStudyMer")
 
         val thursday= binding.iconThursday
-        setOnClickImageChange(thursday)
+        setOnClickImageChange(gio,thursday,"isStudyGio")
 
         val friday= binding.iconFriday
-        setOnClickImageChange(friday)
+        setOnClickImageChange(ven,friday,"isStudyVen")
 
         val saturday= binding.iconSaturday
-        setOnClickImageChange(saturday)
+        setOnClickImageChange(sab,saturday,"isStudySab")
 
         val sunday= binding.iconSunday
-        setOnClickImageChange(sunday)
-
+        setOnClickImageChange(dom,sunday,"isStudyDom")
 
     }
-
-
 
     fun fragmentExist(tag: String): Boolean {       //funzione che mi permette di trovare se un fragment è presente tramite il uso tag
         val fragmentManager = parentFragmentManager
         return (fragmentManager.findFragmentByTag(tag) != null)         //scrittura compatta che restituisce true o false se quella condizione si verifica o meno
     }
 
-    fun setOnClickImageChange(imageView: ImageView){
-        val singleton= DataSingleton.ottieniIstanza()
-        var isStudy=true
-        var temp=singleton.isStudyMode
-
-        imageView.setOnClickListener {
-            if (isStudy) {
-                temp=imageView.setImageResource(R.drawable.baseline_battery_charging_full_24)
-                isStudy=false
-            } else {
-                temp=imageView.setImageResource(R.drawable.baseline_menu_book_24)
-                isStudy=true
+    fun setOnClickImageChange(giorno: String?, icona: ImageView, isStudy: String?){
+        if(giorno=="yes"){
+            icona.setImageResource(R.drawable.baseline_menu_book_24)
+            icona.setOnClickListener{
+                icona.setImageResource(R.drawable.baseline_battery_charging_full_24)
+                val editor = sharedPreferences.edit()
+                editor.putString(isStudy,"no")
+                editor.apply()
+            }
+        }else{
+            icona.setImageResource(R.drawable.baseline_battery_charging_full_24)
+            icona.setOnClickListener{
+                icona.setImageResource(R.drawable.baseline_menu_book_24)
+                val editor = sharedPreferences.edit()
+                editor.putString(isStudy,"yes")
+                editor.apply()
             }
         }
     }
-
 }

@@ -20,6 +20,10 @@ import java.util.*
 class AddExamActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddExamBinding
+    private   var TextList: MutableList<View> = mutableListOf()
+
+
+
     private val elementList: MutableList<View> =
         mutableListOf() //Variabile di istanza per memorizzare lo stato degli elementi.
 
@@ -27,7 +31,12 @@ class AddExamActivity : AppCompatActivity() {
     private var lastElementIndex: Int =
         0 //variabile di istanza per tenere traccia dell'indice dell'elemento aggiunto più recente
 
+    private lateinit var containerLayout: LinearLayout
+    private var editTextCounter = 0
+    private val editTextValues: MutableList<String> = mutableListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
 
         super.onCreate(savedInstanceState)
         binding = ActivityAddExamBinding.inflate(layoutInflater)
@@ -49,20 +58,9 @@ class AddExamActivity : AppCompatActivity() {
         val nomiMaterie = ArrayList<String?>()
         val cfuMaterie = ArrayList<Int?>()
 
-        // Verifico se esiste uno stato salvato
-        if (savedInstanceState != null) {
-            // Ripristina lo stato degli elementi
-            val savedElementList =
-                savedInstanceState.getSparseParcelableArray<Parcelable>("elementList")
-            savedElementList?.let {
-                for (i in 0 until it.size()) {
-                    val view = it.valueAt(i) as View
-                    elementList.add(view)
-                }
-            }
-            // Ricostruisco gli elementi nell'interfaccia utente
-            recreateElements()
-        }
+
+        val container = binding.linearLayout
+
 
         ApiClient.selectMaterieCorso(DataSingleton.ottieniIstanza().idCorso) { data, error ->
             if (error != null) {
@@ -96,6 +94,10 @@ class AddExamActivity : AppCompatActivity() {
 
                 }
             }
+        }
+        if (savedInstanceState != null) {
+            editTextValues.addAll(savedInstanceState.getStringArrayList("edit_text_values") ?: emptyList())
+            restoreEditTexts()
         }
 
         selettoreMateria.setOnItemClickListener { _, _, position, _ ->
@@ -164,10 +166,14 @@ class AddExamActivity : AppCompatActivity() {
         }
 
 
-        val container = binding.linearLayout
+
 
         //gestisco l'aggiunta di argomenti della materia
         addButton.setOnClickListener {
+
+            editTextValues.add("") // Aggiungiamo un valore vuoto alla lista
+            editTextCounter++
+
             val layout = LinearLayout(this)
             layout.orientation = LinearLayout.HORIZONTAL
 
@@ -208,6 +214,7 @@ class AddExamActivity : AppCompatActivity() {
             editTextList.add(newEditText)
 
             container.addView(layout)
+
 
         }
 
@@ -282,36 +289,30 @@ class AddExamActivity : AppCompatActivity() {
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState) //Chiamo l'implementazione del metodo nella classe base per eseguire le operazioni di salvataggio dello stato di base.
-        // Salvo lo stato del Fragment corrente
-        val currentFragment = supportFragmentManager.findFragmentById(R.id.containerView_login)
-        if (currentFragment != null) {
-            supportFragmentManager.putFragment(outState, "currentFragment", currentFragment) //Se il fragment corrente non è nullo, utilizza il putFragment del FragmentManager per salvare il fragment nel Bundle
-        }
-    }
+override fun onSaveInstanceState(outState: Bundle) {
+    super.onSaveInstanceState(outState)
+    outState.putStringArrayList("edit_text_values", ArrayList(editTextValues))
+}
 
     //Il metodo onRestoreInstanceState viene chiamato dopo che l'activity è stata ricreata a seguito di un cambio di configurazione o di un ripristino dello stato.
     // Questo metodo ti consente di ripristinare lo stato salvato in precedenza.
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState) //ripristino dello stato
-        // Ripristina lo stato del Fragment corrente
-        val currentFragment = supportFragmentManager.getFragment(savedInstanceState, "currentFragment")
-        if (currentFragment != null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.containerView_login, currentFragment) // sostituisco il contenuto del containerView_login con il fragment ripristinato.
-                .commit()
+        super.onRestoreInstanceState(savedInstanceState)
+        val editTextValues = savedInstanceState.getStringArrayList("editTextValues")
+        var container=binding.linearLayout
+        if (editTextValues != null) {
+            for (i in editTextValues.indices) {
+                val editText = EditText(this)
+                editText.setText(editTextValues[i])
+                // ... Aggiungi le impostazioni necessarie per l'editText
+                container.addView(editText)
+                TextList.add(editText)
+            }
         }
     }
 
-    // Nel metodo recreateElements(), itero sull'elementList e ricreo gli elementi nell'interfaccia utente a partire dall'indice salvato
-    fun recreateElements() {
-        binding.linearLayout.removeAllViews()
-        for (i in 0..lastElementIndex) {
-            val element = elementList[i]
-            binding.linearLayout.addView(element)
-        }
-    }
+
+
 
     fun generateUniqueId(date: String, position: Int): Int { //funzione hash che sfrutta SHA-256 per ottenere un id univoco per la materia
                                                             // della sessione tramite la posizione della materia nell'array e data esame
@@ -324,6 +325,16 @@ class AddExamActivity : AppCompatActivity() {
         // Conversione dell'hash in un valore intero
         val uniqueId = hashBytes.fold(0) { acc, byte -> (acc shl 8) + (byte.toInt() and 0xFF) }
         return uniqueId
+    }
+
+    private fun restoreEditTexts() {
+        val container = binding.linearLayout
+        for (textValue in editTextValues) {
+            val editText = EditText(this)
+            editText.hint = "Aggiungi un argomento"
+            editText.setText(textValue)
+            container.addView(editText)
+        }
     }
 
 

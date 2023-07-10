@@ -140,6 +140,7 @@ class LoginFragment : Fragment(){
                         }
                         if (rememberMeCheckBox.isChecked) { //Solo se la check box è stata checkata
                             saveLoginData(nomeInserito,pwInserita)
+                            saveRoutine()
                         }else{
                             saveData(nomeInserito,pwInserita)
                         }
@@ -155,41 +156,7 @@ class LoginFragment : Fragment(){
                     }
                 }
             }
-            /*
-            val nomeInserito = binding.EditTextNomeUtente.text.toString().trim()
-            val pwInserita = binding.EditTextPassword.text.toString().trim()
-            if (nomeInserito.isEmpty())
-                binding.EditTextNomeUtente.setBackgroundResource(R.drawable.error_border_element)
-            if (pwInserita.isEmpty())
-                binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
-            else {
-                //VERIFICO LE CREDENZIALI TRAMITE METODO POSTSELECT AL SERVER
 
-                val query = "select * from autenticazione where nome_u_ref = '${nomeInserito}' and password = '${pwInserita}';"
-                ApiClient.login(query)
-
-                //Poichè il metodo postSelect al server è asincrono uso un observer su un LiveData
-                val accountLiveData: LiveData<AccountDBModel> = ApiClient.accountData
-                accountLiveData.observe(viewLifecycleOwner, Observer { accountModel ->
-                    //Logica per verificare il risultato della query in accordo col metodo login di ApiCLient
-                    if(accountModel != null) {
-                        if (!accountModel.nomeUtente.isNullOrEmpty()) {
-                            //Dati inseriti dall'utente corretti
-                            Log.d("LOGINFRAGMENT", accountModel.nomeUtente.toString())
-                            if (rememberMeCheckBox.isChecked) { //Solo se la check box è stata checkata
-                                saveLoginData()
-                            }
-                            requireActivity().finish()
-                        }
-                    }else {
-                    // Dati inseriti dall utente errati
-                    Log.e("LOGINFRAGMENT", "Dati Errati")
-                    binding.EditTextNomeUtente.setBackgroundResource(R.drawable.error_border_element)
-                    binding.EditTextPassword.setBackgroundResource(R.drawable.error_border_element)
-                    }
-                })
-            }
-             */
         }
 
         return binding.root
@@ -211,6 +178,19 @@ class LoginFragment : Fragment(){
         val singleton= DataSingleton.ottieniIstanza()
         singleton.nomeUtente= nomeU
         singleton.password= pass
+    }
+
+    private fun saveRoutine(){
+        val editor = sharedPreferences.edit()
+        //Per ogni giorno della settimana setto una stringa che indica: yes=Prevista routine di studio per quel giorno. no= Nessuna sessione di studio prevista
+        editor.putString("isStudyLun","yes")
+        editor.putString("isStudyMar","yes")
+        editor.putString("isStudyMer","yes")
+        editor.putString("isStudyGio","yes")
+        editor.putString("isStudyVen","yes")
+        editor.putString("isStudySab","yes")
+        editor.putString("isStudyDom","no")
+        editor.apply()
     }
 
     private fun fragmentExists(manager: FragmentManager, tag: String ): Boolean {
