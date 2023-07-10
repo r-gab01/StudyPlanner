@@ -107,7 +107,7 @@ class CalendarFragment : Fragment() {
                     }else {
                         infoSeEsame.text = "Esami a cui sei prenotato:"
                         infoSeEsame.setTextColor(
-                            ContextCompat.getColor(requireContext(), R.color.purple_700))
+                            ContextCompat.getColor(requireContext(), R.color.colorPrimary))
                     }
                         }
 
@@ -121,7 +121,7 @@ class CalendarFragment : Fragment() {
                 }else{
                     binding.recyclerViewMostraEsame.visibility = View.INVISIBLE
                     infoSeEsame.text= "Nessun esame fissato in questo giorno!"
-                    infoSeEsame.setTextColor(ContextCompat.getColor(requireContext(), R.color.purple_700))
+                    infoSeEsame.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
                     Log.d("CALENDAR", "Dati ricevuti: $data")
                 }
             }

@@ -34,7 +34,7 @@ import kotlin.collections.ArrayList
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
-    private lateinit var sharedPreferences: SharedPreferences //ci serve per effettuare il logout
+    private lateinit var sharedPreferences: SharedPreferences //ci serve per effettuare il logout e per la routine di studio
     private lateinit var imageViewProfile: ImageView
     private lateinit var imageButtonChangeImage: ImageButton
 
@@ -42,7 +42,7 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentProfileBinding.inflate(inflater)
+        binding = FragmentProfileBinding.inflate(inflater)
 
 
         return binding.root
@@ -52,18 +52,18 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bottoneLogout= binding.logoutButton
+        val bottoneLogout = binding.logoutButton
 
         sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         //Implemento il Logout
-        bottoneLogout.setOnClickListener{
+        bottoneLogout.setOnClickListener {
             val editor = sharedPreferences.edit()
             editor.remove("Nome Utente")
             editor.remove("password")
             editor.remove("isLoggedIn")
             editor.apply()
 
-            val singleton= DataSingleton.ottieniIstanza()
+            val singleton = DataSingleton.ottieniIstanza()
             singleton.reset()
             // Reindirizziamo l'utente alla schermata di accesso
             val i = Intent(requireContext(), LoginActivity::class.java)
@@ -74,13 +74,13 @@ class ProfileFragment : Fragment() {
 
         //Se l'utente ha checkato la checkbox allora sfrutto i dati salvati nelle sharedPreferences
         var loggedIn: Boolean = sharedPreferences.getBoolean("isLoggedIn", false)
-        val singleton= DataSingleton.ottieniIstanza()
+        val singleton = DataSingleton.ottieniIstanza()
 
-        if(!loggedIn){
+        if (!loggedIn) {
             //Mostro nel riquadro nome utente e password dell'utente che ha fatto login. Uso il singleton "DataSingleton". Questo se l'utente non ha checkato la checkboc
             binding.editUsername.setText(singleton.nomeUtente)
             binding.textPass.setText(singleton.password)
-        }else{
+        } else {
             val savedUsername = sharedPreferences.getString("Nome Utente", "")
             val savedPassword = sharedPreferences.getString("password", "")
             binding.editUsername.setText(savedUsername)
@@ -93,7 +93,7 @@ class ProfileFragment : Fragment() {
         binding.editUniversity.setText(singleton.universita)
         binding.editCorso.setText(singleton.corsoStudi)
 
-        val editProfile= binding.editProfileIcon
+        val editProfile = binding.editProfileIcon
         var isEditMode = true
 
         val nomeCorsi = ArrayList<String?>()
@@ -114,7 +114,8 @@ class ProfileFragment : Fragment() {
                     nomeCorsi.add(i?.nomeCorso)
                     idCorsi.add(i?.idCorso)
                 }
-                val arrayAdapterCorso = ArrayAdapter(requireContext(), R.layout.dropdown_item_profile, nomeCorsi)
+                val arrayAdapterCorso =
+                    ArrayAdapter(requireContext(), R.layout.dropdown_item_profile, nomeCorsi)
                 binding.editCorso.setAdapter(arrayAdapterCorso)
             } else {
                 Log.e("RECUPEROCORSI", "Errore")
@@ -131,81 +132,111 @@ class ProfileFragment : Fragment() {
             idCorsoSelected = idCorsi[position]
         }
 
-
-        editProfile.setOnClickListener{
-            if(isEditMode){ //Abilitiamo le modifiche
-                binding.editName.isEnabled=true
-                binding.editSurname.isEnabled=true
-                binding.editCorso.isEnabled=true
-                binding.editUniversity.isEnabled=true
-                binding.container.isEnabled=true
+        editProfile.setOnClickListener {
+            if (isEditMode) { //Abilitiamo le modifiche
+                binding.editName.isEnabled = true
+                binding.editSurname.isEnabled = true
+                binding.editCorso.isEnabled = true
+                binding.editUniversity.isEnabled = true
+                binding.container.isEnabled = true
 
                 editProfile.setImageResource(R.drawable.baseline_check_24)
-                isEditMode=false
-            } else{
-                binding.editName.isEnabled=false
-                binding.editSurname.isEnabled=false
-                binding.editCorso.isEnabled=false
-                binding.editUniversity.isEnabled=false
-                binding.container.isEnabled=false
+                isEditMode = false
+            } else {
+                binding.editName.isEnabled = false
+                binding.editSurname.isEnabled = false
+                binding.editCorso.isEnabled = false
+                binding.editUniversity.isEnabled = false
+                binding.container.isEnabled = false
                 editProfile.setImageResource(R.drawable.baseline_edit_24)
 
 
-                //ottengo elemento selezionato nei 2 'spinner'
-         /*       binding.editCorso.setOnItemClickListener { _, _, position, _ ->
-                    idCorsoSelected = idCorsi[position]
-                } */
-
                 //Prendiamo i nuovi dati scritti dall'utente
-                val newNome= binding.editName.text.toString()
-                val newCognome= binding.editSurname.text.toString()
-                val newUni=binding.editUniversity.text.toString()
+                val newNome = binding.editName.text.toString()
+                val newCognome = binding.editSurname.text.toString()
+                val newUni = binding.editUniversity.text.toString()
                 //Prendiamo il nome utente che ci serve per fare la query
-                val nomeU= binding.editUsername.text.toString()
+                val nomeU = binding.editUsername.text.toString()
                 //Facciamo l'update dei dati anche nel DB
                 Log.d("UPDATESTUD", "Utente ricevuto: $newNome")
                 Log.d("UPDATESTUD", "Id ricevuto: $idCorsoSelected")
-                ApiClient.updateStudente(newNome,newCognome,newUni,idCorsoSelected,nomeU){boolean,error ->
+                ApiClient.updateStudente(
+                    newNome,
+                    newCognome,
+                    newUni,
+                    idCorsoSelected,
+                    nomeU
+                ) { boolean, error ->
                     if (error != null) {
                         // Gestisco l'errore
                         Log.e("UPDATESTUD", "Si è verificato un errore: $error")
-                    }else if (boolean==true) {
+                    } else if (boolean == true) {
                         // Utilizzo i dati restituiti e aggiorno il singleton
-                        singleton.nome= newNome
-                        singleton.cognome= newCognome
-                        singleton.universita= newUni
+                        singleton.nome = newNome
+                        singleton.cognome = newCognome
+                        singleton.universita = newUni
                         //Eliminiamo la vecchia carriera dello studente
-                        ApiClient.deletCarriera(nomeU,singleton.idCorso){boolean,error ->
+                        ApiClient.deletCarriera(nomeU, singleton.idCorso) { boolean, error ->
                             if (error != null) {
                                 // Gestisco l'errore
                                 Log.e("UPDATESTUD", "Si è verificato un errore: $error")
-                            } else if (boolean==true){
+                            } else if (boolean == true) {
                                 Log.d("UPDATESTUD", "Carriera eliminata correttamente!")
 
                                 //Ricreiamo la nuova carriera con le nuove materie del nuovo corso di studi
                                 ApiClient.selectMaterieCorso(idCorsoSelected) { data, error ->
                                     if (error != null) {
-                                        Log.e("REGISTRAZIONEFRAGMENT", "Si è verificato un errore: $error")
+                                        Log.e(
+                                            "REGISTRAZIONEFRAGMENT",
+                                            "Si è verificato un errore: $error"
+                                        )
                                         try {
-                                            Toast.makeText(requireContext(), "Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                                            Toast.makeText(
+                                                requireContext(),
+                                                "Errore durante la connessione al server",
+                                                Toast.LENGTH_LONG
+                                            ).show()
                                         } catch (_: Exception) {
                                         }
                                     } else if (data != null) {
                                         for (i in data) {
-                                            ApiClient.insCarriera(nomeU,i?.nomeMateria, idCorsoSelected, -1, 0){ response, error->   //insert nella table Carriera
-                                                if (error!=null){
-                                                    Log.e("REGISTRAZIONEFRAGMENT", "Si è verificato un errore: $error")
+                                            ApiClient.insCarriera(
+                                                nomeU,
+                                                i?.nomeMateria,
+                                                idCorsoSelected,
+                                                -1,
+                                                0
+                                            ) { response, error ->   //insert nella table Carriera
+                                                if (error != null) {
+                                                    Log.e(
+                                                        "REGISTRAZIONEFRAGMENT",
+                                                        "Si è verificato un errore: $error"
+                                                    )
                                                     try {
-                                                        Toast.makeText(requireContext(),"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
-                                                    } catch (_: Exception){
+                                                        Toast.makeText(
+                                                            requireContext(),
+                                                            "Errore durante la connessione al server",
+                                                            Toast.LENGTH_LONG
+                                                        ).show()
+                                                    } catch (_: Exception) {
                                                     }
-                                                }else if (response != null){
-                                                    Log.d("REGISTRAZONEFRAGMENT", "Registrazione effettuata")
-                                                } else{
-                                                    Log.e("REGISTRAZIONEFRAGMENT", "Errore in registra studente")
+                                                } else if (response != null) {
+                                                    Log.d(
+                                                        "REGISTRAZONEFRAGMENT",
+                                                        "Registrazione effettuata"
+                                                    )
+                                                } else {
+                                                    Log.e(
+                                                        "REGISTRAZIONEFRAGMENT",
+                                                        "Errore in registra studente"
+                                                    )
                                                     try {
-                                                        Toast.makeText(requireContext(),"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
-                                                    } catch (_: Exception){
+                                                        Toast.makeText(
+                                                            requireContext(),
+                                                            "Errore durante la connessione al server",
+                                                            Toast.LENGTH_LONG
+                                                        ).show()
+                                                    } catch (_: Exception) {
                                                     }
                                                 }
                                             }
@@ -214,73 +245,75 @@ class ProfileFragment : Fragment() {
                                         Log.e("REGISTRAZIONEFRAGMENT", "Errore")
                                         try {
                                             Toast.makeText(
-                                                requireContext(), "Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                                                requireContext(),
+                                                "Errore durante la connessione al server",
+                                                Toast.LENGTH_LONG
+                                            ).show()
                                         } catch (_: Exception) {
 
                                         }
                                     }
                                 }
 
-                            }
-                            else{
+                            } else {
                                 Log.d("UPDATESTUD", "Dati ricevuti: $boolean")
                             }
                         }
-                        singleton.idCorso=idCorsoSelected
-                        singleton.corsoStudi=binding.editCorso.text.toString()
+                        singleton.idCorso = idCorsoSelected
+                        singleton.corsoStudi = binding.editCorso.text.toString()
                         Log.d("UPDATESTUD", "Utente ricevuto: $newNome")
                         Log.d("UPDATESTUD", "Id ricevuto: $idCorsoSelected")
-                    }else{
+                    } else {
                         Log.d("UPDATESTUD", "Dati ricevuti: $boolean")
                     }
                 }
-                isEditMode=true
+                isEditMode = true
             }
         }
 
-        val editAccountButton= binding.modCred
+        val editAccountButton = binding.modCred
         var isEditAccount = true
 
-        editAccountButton.setOnClickListener{
-            if(isEditAccount){
+        editAccountButton.setOnClickListener {
+            if (isEditAccount) {
                 //  binding.editUsername.isEnabled=true
-                binding.textPass.isEnabled=true
+                binding.textPass.isEnabled = true
 
-                editAccountButton.text= "Conferma modifiche"
-                isEditAccount=false
-            }else{
+                editAccountButton.text = "Conferma modifiche"
+                isEditAccount = false
+            } else {
                 // binding.editUsername.isEnabled=false
-                binding.textPass.isEnabled=false
-                editAccountButton.text= "Modifica credenziali"
+                binding.textPass.isEnabled = false
+                editAccountButton.text = "Modifica credenziali"
 
-                val newPassword= binding.textPass.text.toString()
-                val nomeU= binding.editUsername.text.toString()
+                val newPassword = binding.textPass.text.toString()
+                val nomeU = binding.editUsername.text.toString()
                 //Facciamo l'update della pass anche nel DB
-                ApiClient.updatePass(nomeU,newPassword){boolean,error ->
+                ApiClient.updatePass(nomeU, newPassword) { boolean, error ->
                     if (error != null) {
                         // Gestisco l'errore
                         Log.e("UPDATEPASS", "Si è verificato un errore: $error")
-                    }else if (boolean==true) {
+                    } else if (boolean == true) {
                         // Utilizzo i dati restituiti e aggiorno le sharedPreferences
-                        val editor=sharedPreferences.edit()
+                        val editor = sharedPreferences.edit()
                         editor.putString("password", newPassword)
                         editor.apply()
                         //aggiorno anche il singleton
-                        singleton.password= newPassword
+                        singleton.password = newPassword
                         Log.d("UPDATEPASS", "Boolean ricevuti: $boolean")
-                    }else{
+                    } else {
                         Log.d("UPDATEPASS", "Dati ricevuti: $boolean")
                     }
                 }
-                isEditAccount=true
+                isEditAccount = true
             }
         }
 
-        var buttonLegend= binding.legendButton
+        var buttonLegend = binding.legendButton
 
         val legendTag = "LegendFragment"
 
-        buttonLegend.setOnClickListener{
+        buttonLegend.setOnClickListener {
             val manager = parentFragmentManager
             val transaction = manager.beginTransaction()
             if (!fragmentExist(legendTag)) {  //verifico se già il fragment è stato aperto tramite questa funzione definita sotto
@@ -289,29 +322,40 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        var monday= binding.iconMonday
-        setOnClickImageChange(monday)
+        //prendo i valori delle stringhe salvate sulle sharedPreferences utili per la routine di studio
+        val lun = sharedPreferences.getString("isStudyLun", " ")
+        val mar = sharedPreferences.getString("isStudyMar", " ")
+        val mer = sharedPreferences.getString("isStudyMer", " ")
+        val gio = sharedPreferences.getString("isStudyGio", " ")
+        val ven = sharedPreferences.getString("isStudyVen", " ")
+        val sab = sharedPreferences.getString("isStudySab", " ")
+        val dom = sharedPreferences.getString("isStudyDom", " ")
 
-        var tuesday= binding.iconTuesday
-        setOnClickImageChange(tuesday)
 
-        var wednesday= binding.iconWednesday
-        setOnClickImageChange(wednesday)
+        //Assegno una variabile per ogni icona relativo ad ogni giorno della settimana e chiamo la funzione per settare la routine di studio
+        val monday = binding.iconMonday
+        setOnClickImageChange(lun, monday, "isStudyLun")
 
-        var thursday= binding.iconThursday
-        setOnClickImageChange(thursday)
+        val tuesday = binding.iconTuesday
+        setOnClickImageChange(mar, tuesday, "isStudyMar")
 
-        var friday= binding.iconFriday
-        setOnClickImageChange(friday)
+        val wednesday = binding.iconWednesday
+        setOnClickImageChange(mer, wednesday, "isStudyMer")
 
-        var saturday= binding.iconSaturday
-        setOnClickImageChange(saturday)
+        val thursday = binding.iconThursday
+        setOnClickImageChange(gio, thursday, "isStudyGio")
 
-        var sunday= binding.iconSunday
-        setOnClickImageChange(sunday)
+        val friday = binding.iconFriday
+        setOnClickImageChange(ven, friday, "isStudyVen")
 
-        imageViewProfile=binding.imageProfile
-        imageButtonChangeImage= binding.editIcon
+        val saturday = binding.iconSaturday
+        setOnClickImageChange(sab, saturday, "isStudySab")
+
+        val sunday = binding.iconSunday
+        setOnClickImageChange(dom, sunday, "isStudyDom")
+
+        imageViewProfile = binding.imageProfile
+        imageButtonChangeImage = binding.editIcon
 
         imageButtonChangeImage.setOnClickListener {
 
@@ -325,6 +369,7 @@ class ProfileFragment : Fragment() {
         }
 
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -385,36 +430,30 @@ class ProfileFragment : Fragment() {
     }
 
 
-
-    fun convertToAsterisks(editText: EditText) {
-        val text = editText.text.toString()
-        val asterisks = StringBuilder()
-
-        for (i in 0 until text.length) {
-            asterisks.append("*")
-        }
-
-        editText.setText(asterisks)
-        editText.setSelection(asterisks.length)
-    }
-
-    fun setOnClickImageChange(imageView: ImageView) {
-        var isStudyMode = true
-
-        imageView.setOnClickListener {
-            if (isStudyMode) {
-                imageView.setImageResource(R.drawable.baseline_battery_charging_full_24)
-                isStudyMode= false
-            } else {
-                imageView.setImageResource(R.drawable.baseline_menu_book_24)
-                isStudyMode=true
+    fun setOnClickImageChange(giorno: String?, icona: ImageView, isStudy: String?) {
+        if (giorno == "yes") {
+            icona.setImageResource(R.drawable.baseline_menu_book_24)
+            icona.setOnClickListener {
+                icona.setImageResource(R.drawable.baseline_battery_charging_full_24)
+                val editor = sharedPreferences.edit()
+                editor.putString(isStudy, "no")
+                editor.apply()
+            }
+        } else {
+            icona.setImageResource(R.drawable.baseline_battery_charging_full_24)
+            icona.setOnClickListener {
+                icona.setImageResource(R.drawable.baseline_menu_book_24)
+                val editor = sharedPreferences.edit()
+                editor.putString(isStudy, "yes")
+                editor.apply()
             }
         }
     }
+
 
     fun fragmentExist(tag: String): Boolean {       //funzione che mi permette di trovare se un fragment è presente tramite il uso tag
         val fragmentManager = parentFragmentManager
         return (fragmentManager.findFragmentByTag(tag) != null)         //scrittura compatta che restituisce true o false se quella condizione si verifica o meno
     }
-
 }
+
