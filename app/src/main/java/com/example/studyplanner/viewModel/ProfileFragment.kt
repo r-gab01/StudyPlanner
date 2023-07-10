@@ -329,12 +329,13 @@ class ProfileFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, datoIntent)
 
         if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && datoIntent != null) {
-            val selectedImageUri = datoIntent.data
+            val selectedImageUri = datoIntent.data //accedo a MediaStore.Images.Media.EXTERNAL_CONTENT_URI
             if (selectedImageUri != null) {
                 // Carica l'immagine selezionata nell'ImageView
+                //utilizzo questa libreria di gestione delle immagini
                 Glide.with(this)
-                    .load(selectedImageUri)
-                    .into(imageViewProfile)
+                    .load(selectedImageUri) //Uri dell'immagine da caricare
+                    .into(imageViewProfile) //specifico dove caricarla
             }
         }
     }
@@ -378,6 +379,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun openGallery() {
+        //MediaStore.Images.Media.EXTERNAL_CONTENT_URI rappresenta le immagini memorizzate nel dispositivo
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, REQUEST_IMAGE_PICK)
     }
