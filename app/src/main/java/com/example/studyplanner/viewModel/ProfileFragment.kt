@@ -482,55 +482,69 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        imageViewProfile = binding.imageProfile
-        imageButtonChangeImage = binding.editIcon
+        imageViewProfile=binding.imageProfile
+        imageButtonChangeImage= binding.editIcon
 
         imageButtonChangeImage.setOnClickListener {
 
             // Verifica se il permesso di accesso alla galleria è stato già concesso
-            if (isGalleryPermissionGranted()) {
+            if (galleryPermissionGranted()) {
                 openGallery()
             } else {
                 // Richiedi il permesso di accesso alla galleria
                 requestGalleryPermission()
             }
+
         }
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, datoIntent: Intent?) {
+        super.onActivityResult(requestCode, resultCode, datoIntent)
 
-        if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
-            val selectedImageUri = data.data
+        if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && datoIntent != null) {
+            val selectedImageUri = datoIntent.data //accedo a MediaStore.Images.Media.EXTERNAL_CONTENT_URI
             if (selectedImageUri != null) {
                 // Carica l'immagine selezionata nell'ImageView
+                //utilizzo questa libreria di gestione delle immagini
                 Glide.with(this)
-                    .load(selectedImageUri)
-                    .into(imageViewProfile)
+                    .load(selectedImageUri) //Uri dell'immagine da caricare
+                    .into(imageViewProfile) //specifico dove caricarla
             }
         }
     }
 
     companion object {
+        //valori univoci per identidicare le richieste
         private const val REQUEST_PERMISSION_GALLERY = 1
         private const val REQUEST_IMAGE_PICK = 2
-
     }
 
-    private fun isGalleryPermissionGranted(): Boolean {
-        return ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+
+    private fun galleryPermissionGranted(): Boolean {
+        val permission= ContextCompat.checkSelfPermission(requireContext(),Manifest.permission.READ_EXTERNAL_STORAGE)
+        if(permission!=PackageManager.PERMISSION_GRANTED){
+            //PackageManager.PERMISSION_GRANTED:
+            //valore costante che indica che un determinato permesso è stato concesso
+            //da confronare con il valore restituito dal metodo checkSelfPermission()
+            Log.d("PERMISSION", "Permesso di accesso alla galleria negato")
+        }
+        return permission == PackageManager.PERMISSION_GRANTED
     }
 
     private fun requestGalleryPermission() {
-        Locale.setDefault(Locale("it"))
-        requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_PERMISSION_GALLERY)
+        //richiedo il permesso di accedere alla memoria
+        requestPermissions(
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+            REQUEST_PERMISSION_GALLERY
+        )
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, permissionResults: IntArray) {
         when (requestCode) {
             REQUEST_PERMISSION_GALLERY -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (permissionResults.isNotEmpty() && permissionResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //permesso concesso dall'utente
                     openGallery()
                 } else {
                     // Il permesso è stato negato dall'utente
@@ -542,6 +556,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun openGallery() {
+        //MediaStore.Images.Media.EXTERNAL_CONTENT_URI rappresenta le immagini memorizzate nel dispositivo
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, REQUEST_IMAGE_PICK)
     }
