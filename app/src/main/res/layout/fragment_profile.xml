@@ -13,8 +13,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_marginLeft="12dp"
-    android:layout_marginRight="12dp"
-   >
+    android:layout_marginRight="12dp">
 
 <TextView
     android:id="@+id/titleProfilo"
@@ -84,7 +83,7 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_launcher_foreground" />
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/editIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -93,10 +92,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignEnd="@id/imageProfile"
                     android:layout_marginTop="10dp"
-
                     android:clickable="true"
-                    android:focusable="true"
-                    android:contentDescription="Permette di cambiare l'immagine"/>
+                    android:focusable="true" />
 
                 <Button
                     android:id="@+id/logoutButton"
@@ -117,7 +114,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_weight="0.8"
-                android:background="@drawable/edit_text_border">
+                android:background="@drawable/border_element">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -302,7 +299,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_border"
+                android:background="@drawable/border_element"
                 android:layout_marginTop="5dp"
                 android:padding="3dp"
                 android:orientation="vertical">

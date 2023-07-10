@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.StrictMode
 import android.util.Log
+import android.widget.Button
 import androidx.fragment.app.FragmentManager
 import com.example.studyplanner.BuildConfig
 import com.example.studyplanner.ProfileFragment
@@ -32,6 +33,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         fragmentManager = supportFragmentManager
+
+
+
 
         var sharedPreferences= this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         var loggedIn: Boolean = sharedPreferences.getBoolean("isLoggedIn", false)
@@ -63,32 +67,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-     //   val nomeU: String? = sharedPreferences.getString("Nome Utente", "")
-      // val singleton= DataSingleton.ottieniIstanza()
-       // singleton.nomeUtente=nomeU
-
-
-      /*  ApiClient.selectStudente(nomeU){ data, error ->
-            if (error != null) {
-                // Gestisci l'errore
-                Log.e("MAINACTIVITY", "Si è verificato un errore: $error")
-            }else if (data != null) {
-                // Utilizza i dati restituiti
-                Log.d("MAINACTIVITY", "Dati ricevuti: $data")
-                //salvo i dati dello studente nel Sigleton
-                singleton.nome=data.nome
-                singleton.cognome=data.cognome
-                singleton.universita=data.universita
-                singleton.foto=data.foto
-                singleton.dataNascita=data.dataNascita
-                selectCorso(data.idCorso)
-            }else{
-                Log.d("SELECTSTUDENTE", "Dati ricevuti: $data")
-            }
-        } */
-
-
-
         val calendarTag = "CalendarFragment"
         //Di default avvio il fragment del calendario
        if (savedInstanceState == null) {
@@ -99,30 +77,55 @@ class MainActivity : AppCompatActivity() {
             transaction.commit()
         }
 
+        var tastiPremuti = ArrayList<Int>()
+        tastiPremuti.add(0, 1)
+        tastiPremuti.add(1, 0)
+        tastiPremuti.add(2, 0)
+        tastiPremuti.add(3, 0)
+        tastiPremuti.add(4, 0)
+
+
 
         binding.bottomBar.setOnItemSelectedListener { item ->
             when (item.itemId){
                 R.id.calendar_button -> {
+
                     val fragmentManager = supportFragmentManager
                     val transaction = fragmentManager.beginTransaction()
                     if (!fragmentExist(calendarTag)) {  //verifico se già il fragment è stato aperto tramite questa funzione definita sotto
+                        //transizione verso sinistra
+                        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
                         transaction.replace(R.id.fragmentContainerView, CalendarFragment(), calendarTag)
-
                         transaction.commit()
-
+                        for (i in 0..4){
+                            tastiPremuti[i] = 0
+                        }
+                        tastiPremuti[0] = 1
                     }
                     true
                 }
                 R.id.exams_button ->{
+
                     val fragmentManager = supportFragmentManager
                     val transaction = fragmentManager.beginTransaction()
                     val examsTag = "ExamsFragment"
                     if (!fragmentExist(examsTag)) {  //verifico se già il fragment è stato aperto tramite questa funzione definita sotto
 
-                        transaction.replace(R.id.fragmentContainerView, ExamsFragment(), examsTag)
+                        if(tastiPremuti[0]==1){
+                            //trasizione verso destra
+                            transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                            transaction.replace(R.id.fragmentContainerView, ExamsFragment(), examsTag)
+                        }
+                        else if(tastiPremuti[2]==1 || tastiPremuti[3]==1 || tastiPremuti[4]==1){
+                            //transazione verso sinistra
+                            transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                            transaction.replace(R.id.fragmentContainerView, ExamsFragment(), examsTag)
+                        }
                         transaction.commit()
-
-
+                        for (i in 0..4){
+                            tastiPremuti[i] = 0
+                        }
+                        tastiPremuti[1] = 1
                     }
                     true
                 }
@@ -131,9 +134,21 @@ class MainActivity : AppCompatActivity() {
                     val transaction = fragmentManager.beginTransaction()
                     val statsTag = "StatsFragment"
                     if (!fragmentExist(statsTag)) {  //verifico se già il fragment è stato aperto tramite questa funzione definita sotto
-                        transaction.replace(R.id.fragmentContainerView, StatFragment(), statsTag)
-
+                        if(tastiPremuti[0]==1 || tastiPremuti[1]==1 ){
+                            //transizione verso destra
+                            transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                            transaction.replace(R.id.fragmentContainerView, StatFragment(), statsTag)
+                        }
+                        else if( tastiPremuti[3]==1 || tastiPremuti[4]==1){
+                            //transazione verso sinistra
+                            transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                            transaction.replace(R.id.fragmentContainerView, StatFragment(), statsTag)
+                        }
                         transaction.commit()
+                        for (i in 0..4){
+                            tastiPremuti[i] = 0
+                        }
+                        tastiPremuti[2] = 1
 
                     }
                     true
@@ -143,20 +158,39 @@ class MainActivity : AppCompatActivity() {
                     val transaction = fragmentManager.beginTransaction()
                     val studyTag = "studioFragment"
                     if (!fragmentExist(studyTag)) {  //verifico se già il fragment è stato aperto tramite questa funzione definita sotto
-                        transaction.replace(R.id.fragmentContainerView, StudyFragment(), studyTag)
 
+                        if(tastiPremuti[0]==1 || tastiPremuti[1]==1 || tastiPremuti[2]==1){
+                            //trasizione verso destra
+                            transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                            transaction.replace(R.id.fragmentContainerView, StudyFragment(), studyTag)
+                        }
+                        else if(tastiPremuti[4]==1){
+                            //transazione verso sinistra
+                            transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                            transaction.replace(R.id.fragmentContainerView, StudyFragment(), studyTag)
+                        }
                         transaction.commit()
-
+                        for (i in 0..4){
+                            tastiPremuti[i] = 0
+                        }
+                        tastiPremuti[3] = 1
                     }
                     true
                 }
                 R.id.profile_button ->{
+
                     val fragmentManager = supportFragmentManager
                     val transaction = fragmentManager.beginTransaction()
                     val profileTag = "ProfileFragment"
                     if (!fragmentExist(profileTag)) {  //verifico se già il fragment è stato aperto tramite questa funzione definita sotto
+                        transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
                         transaction.replace(R.id.fragmentContainerView, ProfileFragment(), profileTag)
+                        //transizione verso destra
                         transaction.commit()
+                        for (i in 0..4){
+                            tastiPremuti[i] = 0
+                        }
+                        tastiPremuti[4] = 1
 
                     }
                     true

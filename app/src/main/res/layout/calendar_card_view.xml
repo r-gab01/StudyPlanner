@@ -1,4 +1,4 @@
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     android:clickable="true"
     android:focusable="true"
     android:id="@+id/cardViewCalendar"
@@ -10,6 +10,8 @@
     app:cardCornerRadius="30dp"
     android:layout_margin="10dp"
     app:cardBackgroundColor="#f0ffff"
+    app:strokeWidth="2dp"
+    app:strokeColor="@color/colorPrimary"
    >
 
     <LinearLayout
@@ -73,4 +75,4 @@
         </LinearLayout>
 
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

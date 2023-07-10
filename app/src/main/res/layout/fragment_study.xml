@@ -1,165 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".viewModel.StudyFragment">
 
-    <TextView
-        android:id="@+id/title_study_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/montserrat_medium"
-        android:text="@string/title_study_fragment"
-        android:textColor="@color/black"
-        android:textSize="26sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/description_study_fragment1"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
-        android:textSize="14sp"
-        android:fontFamily="@font/montserrat_light"
-        android:text="@string/description_study_fragment"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/title_study_fragment"
-        app:layout_constraintTop_toBottomOf="@+id/title_study_fragment" />
+        android:layout_height="match_parent"
+        tools:context=".viewModel.StudyFragment">
 
-    <TextView
-        android:id="@+id/description_study_fragment2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:fontFamily="@font/montserrat_light"
-        android:textSize="14sp"
-        android:text="@string/description_study_fragment2"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/title_study_fragment"
-        app:layout_constraintTop_toBottomOf="@+id/description_study_fragment1" />
-
-    <TextView
-        android:id="@+id/timerTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_medium"
-        android:text="@string/titleTimer"
-        android:textColor="@color/black"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description_study_fragment2" />
-
-    <FrameLayout
-        android:id="@+id/frameLayoutTimer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/border_element"
-        android:padding="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/timerTitle">
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/title_study_fragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/title_study_fragment"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <cn.iwgang.countdownview.CountdownView
-                android:id="@+id/countdownView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                app:isShowHour="true"
-                app:suffixTextSize="30dp"
-                app:timeTextSize="40sp"/>
+        <TextView
+            android:id="@+id/description_study_fragment1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/montserrat_light"
+            android:text="@string/description_study_fragment"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/title_study_fragment"
+            app:layout_constraintTop_toBottomOf="@+id/title_study_fragment" />
 
+        <TextView
+            android:id="@+id/description_study_fragment2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/montserrat_light"
+            android:text="@string/description_study_fragment2"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/title_study_fragment"
+            app:layout_constraintTop_toBottomOf="@+id/description_study_fragment1" />
+
+        <TextView
+            android:id="@+id/timerTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/titleTimer"
+            android:textColor="@color/black"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description_study_fragment2" />
+
+        <FrameLayout
+            android:id="@+id/frameLayoutTimer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/border_element"
+            android:padding="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/timerTitle">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/stopTimerButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                <cn.iwgang.countdownview.CountdownView
+                    android:id="@+id/countdownView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="@drawable/rounded_button"
-                    android:contentDescription="Stoppa il timer"
-                    android:src="@drawable/baseline_stop_24" />
+                    app:isShowHour="true"
+                    app:suffixTextSize="30dp"
+                    app:timeTextSize="40sp"/>
 
-                <ImageButton
-                    android:id="@+id/playTimerButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/rounded_button"
-                    android:contentDescription="Avvia il timer"
-                    android:src="@drawable/baseline_play_arrow_24" />
 
-                <ImageButton
-                    android:id="@+id/editTimerButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/rounded_button"
-                    android:contentDescription="Modifica il timer"
-                    android:src="@drawable/baseline_edit_note_24_white" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
 
+                    <ImageButton
+                        android:id="@+id/stopTimerButton"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/rounded_button"
+                        android:contentDescription="Stoppa il timer"
+                        android:src="@drawable/baseline_stop_24" />
+
+                    <ImageButton
+                        android:id="@+id/playTimerButton"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/rounded_button"
+                        android:contentDescription="Avvia il timer"
+                        android:src="@drawable/baseline_play_arrow_24" />
+
+                    <ImageButton
+                        android:id="@+id/editTimerButton"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/rounded_button"
+                        android:contentDescription="Modifica il timer"
+                        android:src="@drawable/baseline_edit_note_24_white" />
+
+                </LinearLayout>
             </LinearLayout>
+        </FrameLayout>
 
+        <Button
+            android:id="@+id/buttonTermina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:text="@string/TerminaSessioneButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frameLayoutTimer"
+            app:layout_constraintVertical_bias="0.04" />
 
-        </LinearLayout>
-
-
-    </FrameLayout>
-
-    <Button
-        android:id="@+id/buttonTermina"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_button"
-        android:text="@string/TerminaSessioneButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frameLayoutTimer"
-        app:layout_constraintVertical_bias="0.04" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/sessionContainerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/border_element"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonTermina"
-        app:layout_constraintVertical_bias="0.03" />
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/sessionContainerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/border_element"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/buttonTermina"
+            app:layout_constraintVertical_bias="0.03" />
 
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
