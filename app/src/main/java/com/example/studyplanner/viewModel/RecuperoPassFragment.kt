@@ -24,9 +24,9 @@ class RecuperoPassFragment : Fragment() {
 
         binding.buttonRecupero.setOnClickListener {
 
-            val nomeInserito = binding.nomeUtenteTextEdit.text.trim().toString()
-            val domandaInserita = binding.campoInserisciDomanda.text.trim().toString()
-            val rispostaInserita = binding.campoInserisciRisposta.text.trim().toString()
+            val nomeInserito = binding.nomeUtenteTextEdit.text.toString()
+            val domandaInserita = binding.campoInserisciDomanda.text.toString()
+            val rispostaInserita = binding.campoInserisciRisposta.text.toString()
             if (nomeInserito.isEmpty())
                 binding.nomeUtenteTextEdit.setBackgroundResource(R.drawable.error_border_element)
             if (domandaInserita.isEmpty())
@@ -42,6 +42,8 @@ class RecuperoPassFragment : Fragment() {
                     if (error != null) {
                         // Gestisci l'errore
                         Log.e("RECUPEROPW", "Si è verificato un errore: $error")
+                        Log.e("RECUPEROPW", domandaInserita)
+                        Log.e("RECUPEROPW", rispostaInserita)
                     } else if (data != null) {
                         // Utilizza i dati restituiti
                         Log.d("RECUPEROPW", "Dati ricevuti: $data")
