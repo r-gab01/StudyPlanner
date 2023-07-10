@@ -36,7 +36,7 @@
             android:background="@drawable/border_element"
             android:layout_gravity="center"
             android:inputType="none"
-            android:padding="5dp"
+            android:padding="2dp"
             android:textSize="17sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -47,7 +47,7 @@
         android:inputType="number"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="5dp"/>
     <Button
         android:id="@+id/confirmPageButton"
         android:layout_width="wrap_content"

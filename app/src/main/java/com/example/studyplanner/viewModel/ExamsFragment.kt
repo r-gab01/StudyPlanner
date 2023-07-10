@@ -31,7 +31,9 @@ class ExamsFragment : Fragment() {
         val esami = ArrayList<SessioneStudioDBModel>()
         ApiClient.selectEsamiSessione { data, error ->
             if (error != null){
+                try{
                 Toast.makeText(requireContext(),"Errore durante la connessione al server", Toast.LENGTH_LONG).show()
+                } catch (_ : Exception){}
             }
             else if(data != null){
                 for (i in data){

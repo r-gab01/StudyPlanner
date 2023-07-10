@@ -74,7 +74,7 @@
             android:background="@drawable/border_white_filled"
             android:layout_gravity="center_vertical"
             android:textSize="18sp"
-            android:fontFamily="@font/montserrat_extralight"
+            android:fontFamily="@font/montserrat_light"
             android:layout_weight="1"/>
 
     </LinearLayout>
