@@ -47,7 +47,7 @@
         android:text="@string/descriptionProfile"
         android:fontFamily="@font/montserrat_light"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="15sp"
         android:layout_marginStart="14dp"
         android:layout_marginEnd="10dp"/>
 
@@ -81,7 +81,7 @@
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/background_rounded"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_foreground" />
+                    android:src="@drawable/uomo_avatar" />
 
                 <ImageButton
                     android:id="@+id/editIcon"

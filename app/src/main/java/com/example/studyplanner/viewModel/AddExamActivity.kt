@@ -2,6 +2,7 @@ package com.example.studyplanner.viewModel
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcelable
@@ -22,8 +23,6 @@ class AddExamActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddExamBinding
     private   var TextList: MutableList<View> = mutableListOf()
 
-
-
     private val elementList: MutableList<View> =
         mutableListOf() //Variabile di istanza per memorizzare lo stato degli elementi.
 
@@ -40,6 +39,7 @@ class AddExamActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         binding = ActivityAddExamBinding.inflate(layoutInflater)
+        requestedOrientation=ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContentView(binding.root)
 
         var idSessione: Int
@@ -164,8 +164,6 @@ class AddExamActivity : AppCompatActivity() {
                 }, year, month, dayOfMonth)
             datePickerDialog.show()
         }
-
-
 
 
         //gestisco l'aggiunta di argomenti della materia

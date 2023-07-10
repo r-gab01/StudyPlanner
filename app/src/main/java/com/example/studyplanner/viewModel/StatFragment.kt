@@ -64,7 +64,7 @@ class StatFragment : Fragment() {
                         } else if (data != null) {
                             for (i in data) {
                                 Log.d("STATFRAGMENT", i.toString())
-                                materie.add(MateriaModel(i?.cfu,i?.nomeMateria,i?.voto))
+                                materie.add(MateriaModel(i?.cfu,i?.nomeMateria,i?.voto,i?.lode))
                                 totMaterie++
                                 if(i?.voto != -1 ){
                                     cfuTotali+= i!!.cfu

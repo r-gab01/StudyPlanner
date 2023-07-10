@@ -58,7 +58,6 @@ class CalendarFragment : Fragment() {
 
         calendar.dateTextAppearance = R.style.CustomCalendarViewStyle
 
-
         val nomiMaterie = ArrayList<String?>()
         //per ottenere il giorno attuale
         val Calendario = Calendar.getInstance()
@@ -127,8 +126,6 @@ class CalendarFragment : Fragment() {
             }
         }
 
-
-
         val ExamButton=binding.addExamButton
 
         ExamButton.setOnClickListener{
@@ -136,6 +133,4 @@ class CalendarFragment : Fragment() {
             startActivity(i)
         }
     }
-
-
 }

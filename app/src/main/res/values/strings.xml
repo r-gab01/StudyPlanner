@@ -111,7 +111,7 @@
     <string name="tagArgumentsEventFragment">Data</string>
 
     <string name="title_exams_fragment">I TUOI ESAMI</string>
-    <string name="description_exams_fragment">Elenco dei tuoi esami in programma.\nAggiungi un esame per iniziare, poi cliccalo per avere una panoramica completa.Tieni premuto sull\'icona dell esame per inserire il voto.</string>
+    <string name="description_exams_fragment">Elenco dei tuoi esami in programma.\nAggiungi un esame per iniziare, poi cliccalo per avere una panoramica completa.\nTieni premuto sull\'icona dell esame per inserire il voto.</string>
 
     <string name="title_study_fragment">SESSIONE DI STUDIO</string>
     <string name="description_study_fragment">Qui puoi tenere traccia del tempo trascorso nello studio tramite la funzionalità timer.</string>

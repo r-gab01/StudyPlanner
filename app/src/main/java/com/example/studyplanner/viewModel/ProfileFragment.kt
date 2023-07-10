@@ -48,7 +48,6 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -70,7 +69,6 @@ class ProfileFragment : Fragment() {
             startActivity(i)
             requireActivity().finish() //Per terminare l'attività ospitante e tornare alla schermata di accesso.
         }
-
 
         //Se l'utente ha checkato la checkbox allora sfrutto i dati salvati nelle sharedPreferences
         var loggedIn: Boolean = sharedPreferences.getBoolean("isLoggedIn", false)
@@ -149,7 +147,6 @@ class ProfileFragment : Fragment() {
                 binding.editUniversity.isEnabled = false
                 binding.container.isEnabled = false
                 editProfile.setImageResource(R.drawable.baseline_edit_24)
-
 
                 //Prendiamo i nuovi dati scritti dall'utente
                 val newNome = binding.editName.text.toString()
@@ -323,36 +320,167 @@ class ProfileFragment : Fragment() {
         }
 
         //prendo i valori delle stringhe salvate sulle sharedPreferences utili per la routine di studio
-        val lun = sharedPreferences.getString("isStudyLun", " ")
-        val mar = sharedPreferences.getString("isStudyMar", " ")
-        val mer = sharedPreferences.getString("isStudyMer", " ")
-        val gio = sharedPreferences.getString("isStudyGio", " ")
-        val ven = sharedPreferences.getString("isStudyVen", " ")
-        val sab = sharedPreferences.getString("isStudySab", " ")
-        val dom = sharedPreferences.getString("isStudyDom", " ")
-
+        var lun = sharedPreferences.getString("isStudyLun", " ")
+        var mar = sharedPreferences.getString("isStudyMar", " ")
+        var mer = sharedPreferences.getString("isStudyMer", " ")
+        var gio = sharedPreferences.getString("isStudyGio", " ")
+        var ven = sharedPreferences.getString("isStudyVen", " ")
+        var sab = sharedPreferences.getString("isStudySab", " ")
+        var dom = sharedPreferences.getString("isStudyDom", " ")
 
         //Assegno una variabile per ogni icona relativo ad ogni giorno della settimana e chiamo la funzione per settare la routine di studio
-        val monday = binding.iconMonday
-        setOnClickImageChange(lun, monday, "isStudyLun")
 
-        val tuesday = binding.iconTuesday
-        setOnClickImageChange(mar, tuesday, "isStudyMar")
+        var giorni = ArrayList<String>()
+        giorni.add(lun.toString())
+        giorni.add(mar.toString())
+        giorni.add(mer.toString())
+        giorni.add(gio.toString())
+        giorni.add(ven.toString())
+        giorni.add(sab.toString())
+        giorni.add(dom.toString())
 
-        val wednesday = binding.iconWednesday
-        setOnClickImageChange(mer, wednesday, "isStudyMer")
+        val editor = sharedPreferences.edit()
+        //LUNEDI
+        var monday = binding.iconMonday
+        if(giorni[0] == "yes"){
+            monday.setImageResource(R.drawable.baseline_menu_book_24)
+        } else{
+            monday.setImageResource(R.drawable.baseline_battery_charging_full_24)
+        }
+        monday.setOnClickListener {
+            if (giorni[0] == "no") {
+                monday.setImageResource(R.drawable.baseline_menu_book_24)
+                giorni[0] = "yes"
+                editor.putString("isStudyLun", "yes")
+                editor.apply()
+            } else {
+                monday.setImageResource(R.drawable.baseline_battery_charging_full_24)
+                giorni[0] = "no"
+                editor.putString("isStudyLun", "no")
+                editor.apply()
+            }
+        }
+        //MARTEDI
+        var tuesday = binding.iconTuesday
+        if(giorni[1] == "yes"){
+            tuesday.setImageResource(R.drawable.baseline_menu_book_24)
+        } else{
+            tuesday.setImageResource(R.drawable.baseline_battery_charging_full_24)
+        }
+        tuesday.setOnClickListener {
+            if (giorni[1] == "no") {
+                tuesday.setImageResource(R.drawable.baseline_menu_book_24)
+                giorni[1] = "yes"
+                editor.putString("isStudyMar", "yes")
+                editor.apply()
+            } else {
+                tuesday.setImageResource(R.drawable.baseline_battery_charging_full_24)
+                giorni[1] = "no"
+                editor.putString("isStudyMar", "no")
+                editor.apply()
+            }
+        }
+        //MERCOLEDI
+        var wednesday = binding.iconWednesday
+        if(giorni[2] == "yes"){
+            wednesday.setImageResource(R.drawable.baseline_menu_book_24)
+        } else{
+            wednesday.setImageResource(R.drawable.baseline_battery_charging_full_24)
+        }
+        wednesday.setOnClickListener {
+            if (giorni[2] == "no") {
+                wednesday.setImageResource(R.drawable.baseline_menu_book_24)
+                giorni[2] = "yes"
+                editor.putString("isStudyMer", "yes")
+                editor.apply()
+            } else {
+                wednesday.setImageResource(R.drawable.baseline_battery_charging_full_24)
+                giorni[2] = "no"
+                editor.putString("isStudyMer", "no")
+                editor.apply()
+            }
+        }
+        //GIOVEDI
+        var thursday = binding.iconThursday
+        if(giorni[3] == "yes"){
+            thursday.setImageResource(R.drawable.baseline_menu_book_24)
+        } else{
+            thursday.setImageResource(R.drawable.baseline_battery_charging_full_24)
+        }
+        thursday.setOnClickListener {
+            if (giorni[3] == "no") {
+                thursday.setImageResource(R.drawable.baseline_menu_book_24)
+                giorni[3] = "yes"
+                editor.putString("isStudyGio", "yes")
+                editor.apply()
+            } else {
+                thursday.setImageResource(R.drawable.baseline_battery_charging_full_24)
+                giorni[3] = "no"
+                editor.putString("isStudyGio", "no")
+                editor.apply()
+            }
+        }
 
-        val thursday = binding.iconThursday
-        setOnClickImageChange(gio, thursday, "isStudyGio")
-
-        val friday = binding.iconFriday
-        setOnClickImageChange(ven, friday, "isStudyVen")
-
-        val saturday = binding.iconSaturday
-        setOnClickImageChange(sab, saturday, "isStudySab")
-
-        val sunday = binding.iconSunday
-        setOnClickImageChange(dom, sunday, "isStudyDom")
+        //VENERDI
+        var friday = binding.iconFriday
+        if(giorni[4] == "yes"){
+            friday.setImageResource(R.drawable.baseline_menu_book_24)
+        } else{
+            friday.setImageResource(R.drawable.baseline_battery_charging_full_24)
+        }
+        friday.setOnClickListener {
+            if (giorni[4] == "no") {
+                friday.setImageResource(R.drawable.baseline_menu_book_24)
+                giorni[4] = "yes"
+                editor.putString("isStudyVen", "yes")
+                editor.apply()
+            } else {
+                friday.setImageResource(R.drawable.baseline_battery_charging_full_24)
+                giorni[4] = "no"
+                editor.putString("isStudyVen", "no")
+                editor.apply()
+            }
+        }
+        //SABATO
+        var saturday = binding.iconSaturday
+        if(giorni[5] == "yes"){
+            saturday.setImageResource(R.drawable.baseline_menu_book_24)
+        } else{
+            saturday.setImageResource(R.drawable.baseline_battery_charging_full_24)
+        }
+        saturday.setOnClickListener {
+            if (giorni[5] == "no") {
+                saturday.setImageResource(R.drawable.baseline_menu_book_24)
+                giorni[5] = "yes"
+                editor.putString("isStudySab", "yes")
+                editor.apply()
+            } else {
+                saturday.setImageResource(R.drawable.baseline_battery_charging_full_24)
+                giorni[5] = "no"
+                editor.putString("isStudySab", "no")
+                editor.apply()
+            }
+        }
+        //DOMENICA
+        var sunday = binding.iconSunday
+        if(giorni[6] == "yes"){
+            sunday.setImageResource(R.drawable.baseline_menu_book_24)
+        } else{
+            sunday.setImageResource(R.drawable.baseline_battery_charging_full_24)
+        }
+        sunday.setOnClickListener {
+            if (giorni[6] == "no") {
+                sunday.setImageResource(R.drawable.baseline_menu_book_24)
+                giorni[6] = "yes"
+                editor.putString("isStudyDom", "yes")
+                editor.apply()
+            } else {
+                sunday.setImageResource(R.drawable.baseline_battery_charging_full_24)
+                giorni[6] = "no"
+                editor.putString("isStudyDom", "no")
+                editor.apply()
+            }
+        }
 
         imageViewProfile = binding.imageProfile
         imageButtonChangeImage = binding.editIcon
@@ -369,7 +497,6 @@ class ProfileFragment : Fragment() {
         }
 
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -392,25 +519,15 @@ class ProfileFragment : Fragment() {
     }
 
     private fun isGalleryPermissionGranted(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            requireContext(),
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        ) == PackageManager.PERMISSION_GRANTED
+        return ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun requestGalleryPermission() {
         Locale.setDefault(Locale("it"))
-        requestPermissions(
-            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-            REQUEST_PERMISSION_GALLERY
-        )
+        requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_PERMISSION_GALLERY)
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
             REQUEST_PERMISSION_GALLERY -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -428,28 +545,6 @@ class ProfileFragment : Fragment() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, REQUEST_IMAGE_PICK)
     }
-
-
-    fun setOnClickImageChange(giorno: String?, icona: ImageView, isStudy: String?) {
-        if (giorno == "yes") {
-            icona.setImageResource(R.drawable.baseline_menu_book_24)
-            icona.setOnClickListener {
-                icona.setImageResource(R.drawable.baseline_battery_charging_full_24)
-                val editor = sharedPreferences.edit()
-                editor.putString(isStudy, "no")
-                editor.apply()
-            }
-        } else {
-            icona.setImageResource(R.drawable.baseline_battery_charging_full_24)
-            icona.setOnClickListener {
-                icona.setImageResource(R.drawable.baseline_menu_book_24)
-                val editor = sharedPreferences.edit()
-                editor.putString(isStudy, "yes")
-                editor.apply()
-            }
-        }
-    }
-
 
     fun fragmentExist(tag: String): Boolean {       //funzione che mi permette di trovare se un fragment è presente tramite il uso tag
         val fragmentManager = parentFragmentManager

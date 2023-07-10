@@ -78,23 +78,7 @@ class StudyFragment : Fragment() {
                 tempo = countdownView.remainTime
             }
 
-            /*
-        countdownView.setOnCountdownEndListener {
-            val notificationBuilder = NotificationCompat.Builder(requireContext(), resources.getString(R.string.default_notification_channel_id))
-                .setSmallIcon(R.drawable.logoapp)
-                .setContentTitle("Ora della pausa")
-                .setContentText("La tua sessione di studio è terminata")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setAutoCancel(true)
 
-            // Azione da eseguire quando l'utente tocca la notifica (opzionale)
-            val intent = Intent(context, MainActivity::class.java)
-            val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-            notificationBuilder.setContentIntent(pendingIntent)
-
-            val notificationManager = NotificationManagerCompat.from(requireContext())
-            notificationManager.notify(notificationId, notificationBuilder.build())
-            */
 
             //GESTISCO IL BOTTONE TERMINA SESSIONE
             binding.buttonTermina.setOnClickListener {

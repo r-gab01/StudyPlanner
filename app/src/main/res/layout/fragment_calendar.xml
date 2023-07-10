@@ -22,7 +22,7 @@
         android:fontFamily="@font/montserrat_light"
         android:text="@string/descriptionCalendar"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/frameLayout"
         app:layout_constraintStart_toStartOf="@+id/title_calendar_fragment"
         app:layout_constraintTop_toBottomOf="@+id/title_calendar_fragment" />
@@ -54,7 +54,7 @@
         android:fontFamily="@font/montserrat_medium"
         android:text="@string/title_calendar_fragment"
         android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,7 +62,7 @@
         android:id="@+id/addExamButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="40dp"
         android:clickable="true"
         android:src="@drawable/baseline_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -81,9 +81,7 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:fontFamily="@font/montserrat_medium"
-        android:layout_marginBottom="3dp"
         app:layout_constraintBottom_toTopOf="@id/recyclerViewMostraEsame"
-
         app:layout_constraintStart_toStartOf="@id/frameLayout"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 
@@ -91,7 +89,7 @@
             android:id="@+id/recyclerViewMostraEsame"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/frameLayout"
             app:layout_constraintStart_toStartOf="@id/frameLayout"

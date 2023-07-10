@@ -3,6 +3,7 @@ package com.example.studyplanner.viewModel
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.ActivityInfo
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
@@ -34,6 +35,7 @@ class LoginFragment : Fragment(){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
 
         binding= FragmentLoginBinding.inflate(inflater)
 

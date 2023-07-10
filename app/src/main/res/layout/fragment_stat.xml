@@ -14,7 +14,7 @@
         android:layout_marginLeft="20dp"
         android:fontFamily="@font/montserrat_medium"
         android:text="@string/title_stat_fragment"
-        android:textSize="24sp"
+        android:textSize="26sp"
         android:textColor="@color/black"/>
 
     <ScrollView
@@ -37,7 +37,7 @@
         android:layout_marginLeft="20dp"
         android:fontFamily="@font/montserrat_light"
         android:text="@string/descripionStatistiche"
-        android:textSize="14sp"
+        android:textSize="15sp"
         android:textColor="@color/black"/>
 
     <androidx.recyclerview.widget.RecyclerView

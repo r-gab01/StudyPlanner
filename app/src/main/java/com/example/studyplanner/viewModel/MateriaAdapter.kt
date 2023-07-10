@@ -40,7 +40,11 @@ class MateriaAdapter(private val materieList: List<MateriaModel>,  private val c
         //prendo i valori dalla lista e li passo al viewHolder che li inserisce nelle CardView
         holder.cfu.text = materieList[position].cfu.toString()
         holder.nomeMateria.text = materieList[position].nomeMateria.toString()
-        holder.voto.text = materieList[position].voto.toString()
+        val votoNum = materieList[position].voto.toString()
+        if (materieList[position].lode == 1)
+            holder.voto.text = "${votoNum}L"
+        else
+            holder.voto.text = "${votoNum}"
 
         // Assegna un ID alla CardView
         val generatedId = View.generateViewId()
@@ -53,8 +57,8 @@ class MateriaAdapter(private val materieList: List<MateriaModel>,  private val c
         if(holder.voto.text.toString()=="-1"){
             holder.cardView.setCardBackgroundColor(color)
             holder.voto.setText("")
-
         }
+
 
 
     }
