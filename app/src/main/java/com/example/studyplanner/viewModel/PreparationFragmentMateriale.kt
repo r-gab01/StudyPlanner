@@ -49,7 +49,6 @@ class PreparationFragmentMateriale : Fragment() {
                 for (i in data){
                     if(i!=null){
                         argomenti.add(i.argomento.toString())
-                        argomenti.add(i.argomento.toString())
                     }
                 }
                 val adapter = PreparationAdapter(argomenti)

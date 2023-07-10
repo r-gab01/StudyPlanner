@@ -100,9 +100,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/imageProfile"
+                    android:layout_centerInParent="true"
                     android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/montserrat_light"
-                    android:layout_centerInParent="true"
                     android:text="@string/button_logout"
                     android:textSize="11sp"
                     android:textStyle="bold" />
@@ -114,7 +114,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_weight="0.8"
-                android:background="@drawable/border_element">
+                android:background="@drawable/calendar_style">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -127,7 +127,7 @@
                         android:text="@string/Name"
                         android:layout_weight="4"
                         android:paddingLeft="10dp"
-                        android:fontFamily="@font/montserrat_light"
+                        android:fontFamily="@font/montserrat_medium"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -158,7 +158,7 @@
                         android:text="@string/cognome"
                         android:layout_weight="4"
                         android:paddingLeft="10dp"
-                        android:fontFamily="@font/montserrat_light"
+                        android:fontFamily="@font/montserrat_medium"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -189,7 +189,7 @@
                         android:text="@string/universita"
                         android:layout_weight="4"
                         android:paddingLeft="10dp"
-                        android:fontFamily="@font/montserrat_light"
+                        android:fontFamily="@font/montserrat_medium"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -222,7 +222,7 @@
                         android:layout_gravity="center"
                         android:paddingLeft="10dp"
                         android:gravity="center_vertical"
-                        android:fontFamily="@font/montserrat_light"
+                        android:fontFamily="@font/montserrat_medium"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
@@ -299,10 +299,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/border_element"
                 android:layout_marginTop="5dp"
                 android:padding="3dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@drawable/calendar_style">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -313,7 +313,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/montserrat_light"
+                        android:fontFamily="@font/montserrat_medium"
                         android:paddingLeft="10dp"
                         android:text="@string/Username"
                         android:textColor="@color/black"
@@ -344,7 +344,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/montserrat_light"
+                        android:fontFamily="@font/montserrat_medium"
                         android:paddingLeft="10dp"
                         android:text="@string/textPass"
                         android:textColor="@color/black"
@@ -427,13 +427,14 @@
             </LinearLayout>
 
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@drawable/border_element"
+                android:background="@drawable/calendar_style"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="5dp"
                 tools:context=".viewModel.RoutineFragment">

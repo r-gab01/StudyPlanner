@@ -2,6 +2,7 @@ package com.example.studyplanner.viewModel
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcelable
@@ -20,10 +21,6 @@ import java.util.*
 class AddExamActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddExamBinding
-    private   var TextList: MutableList<View> = mutableListOf()
-
-
-
     private val elementList: MutableList<View> =
         mutableListOf() //Variabile di istanza per memorizzare lo stato degli elementi.
 
@@ -31,15 +28,11 @@ class AddExamActivity : AppCompatActivity() {
     private var lastElementIndex: Int =
         0 //variabile di istanza per tenere traccia dell'indice dell'elemento aggiunto più recente
 
-    private lateinit var containerLayout: LinearLayout
-    private var editTextCounter = 0
-    private val editTextValues: MutableList<String> = mutableListOf()
-
     override fun onCreate(savedInstanceState: Bundle?) {
-
 
         super.onCreate(savedInstanceState)
         binding = ActivityAddExamBinding.inflate(layoutInflater)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContentView(binding.root)
 
         var idSessione: Int
@@ -57,9 +50,6 @@ class AddExamActivity : AppCompatActivity() {
         val editTextDate = binding.insDate
         val nomiMaterie = ArrayList<String?>()
         val cfuMaterie = ArrayList<Int?>()
-
-
-        val container = binding.linearLayout
 
 
         ApiClient.selectMaterieCorso(DataSingleton.ottieniIstanza().idCorso) { data, error ->
@@ -95,23 +85,22 @@ class AddExamActivity : AppCompatActivity() {
                 }
             }
         }
-        if (savedInstanceState != null) {
-            editTextValues.addAll(savedInstanceState.getStringArrayList("edit_text_values") ?: emptyList())
-            restoreEditTexts()
-        }
 
-        selettoreMateria.setOnItemClickListener { _, _, position, _ ->
+        binding.selMateria.setOnItemClickListener { _, _, position, _ ->
             materiaSel = nomiMaterie[position].toString()
             cfuSel = cfuMaterie[position]
             posizioneMateria = position
             binding.textCfu.text = Editable.Factory.getInstance().newEditable(cfuSel.toString())
         }
 
-        /*
+
+        editTextDate.isFocusable = false
         editTextDate.setOnClickListener {
+
             val year: Int
             val month: Int
             val dayOfMonth: Int
+
             val calendar = Calendar.getInstance()
             if (dataSel.isNullOrEmpty()) {
                 //Se la data salvata non esiste, utilizziamo la data attuale
@@ -120,60 +109,35 @@ class AddExamActivity : AppCompatActivity() {
                 dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
             } else {
                 // La data salvata esiste, la convertiamo in valori interi
-                val selectedDateParts = dataSel!!.split("-") // la stringa dataSelezionata viene suddivisa utilizzando il separatore "/" tramite il metodo split("/"). Questo crea un array di stringhe selectedDateParts, contenente le parti della data (giorno, mese, anno) come elementi separati.
-                year = selectedDateParts[0].toInt() //assegniamo il valore convertito dell'anno a year
-                month = selectedDateParts[1].toInt() - 1 // Sottraiamo 1 al mese perché Calendar.MONTH parte da 0
+                val selectedDateParts =
+                    dataSel!!.split("-") // la stringa dataSelezionata viene suddivisa utilizzando il separatore "/" tramite il metodo split("/"). Questo crea un array di stringhe selectedDateParts, contenente le parti della data (giorno, mese, anno) come elementi separati.
+                year =
+                    selectedDateParts[0].toInt() //assegniamo il valore convertito dell'anno a year
+                month =
+                    selectedDateParts[1].toInt() - 1 // Sottraiamo 1 al mese perché Calendar.MONTH parte da 0
                 dayOfMonth = selectedDateParts[2].toInt()
             }
+
+
             //Mostriamo un date picker che inizialmente è settato alla data attuale
             val datePickerDialog =
                 DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDayOfMonth ->
                     val newSelectedDate = "$selectedYear-${selectedMonth + 1}-$selectedDayOfMonth"
+
                     editTextDate.setText(newSelectedDate)
+
                     // Memorizziamo la nuova data selezionata
                     dataSel = newSelectedDate
                 }, year, month, dayOfMonth)
-            datePickerDialog.show()
-        }
-         */
 
-        editTextDate.isFocusable = false
-        editTextDate.setOnClickListener {
-            val year: Int
-            val month: Int
-            val dayOfMonth: Int
-            var calendar = Calendar.getInstance()
-            var today = Calendar.getInstance()
-            year = calendar.get(Calendar.YEAR)
-            month = calendar.get(Calendar.MONTH)
-            dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
-            val datePickerDialog =
-                DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDayOfMonth ->
-                    calendar.set(selectedYear, selectedMonth, selectedDayOfMonth)
-                    val selected = Calendar.getInstance()
-                    selected.set(selectedYear, selectedMonth, selectedDayOfMonth)
-
-                    if (selected.before(today)) {
-                        // La data selezionata è precedente a oggi
-                        Toast.makeText(this, "Seleziona una data valida", Toast.LENGTH_SHORT).show()
-                    } else {
-                        // La data selezionata è valida
-                        dataSel = "$selectedYear-${selectedMonth + 1}-$selectedDayOfMonth"
-                        editTextDate.setText(dataSel)
-                    }
-                }, year, month, dayOfMonth)
             datePickerDialog.show()
         }
 
 
-
+        val container = binding.linearLayout
 
         //gestisco l'aggiunta di argomenti della materia
         addButton.setOnClickListener {
-
-            editTextValues.add("") // Aggiungiamo un valore vuoto alla lista
-            editTextCounter++
-
             val layout = LinearLayout(this)
             layout.orientation = LinearLayout.HORIZONTAL
 
@@ -215,7 +179,6 @@ class AddExamActivity : AppCompatActivity() {
 
             container.addView(layout)
 
-
         }
 
         binding.buttonConferma.setOnClickListener {
@@ -239,7 +202,7 @@ class AddExamActivity : AppCompatActivity() {
                 builder.setMessage("Inserire correttamente tutti i campi")
                 builder.setPositiveButton("OK") { _, _ -> }
                 builder.create().show()
-            }else {    // effettuo caricamento sul server
+            } else {    // effettuo caricamento sul server
                 idSessione = generateUniqueId(dataSel.toString(),posizioneMateria)
                 ApiClient.insInSessione(
                     idSessione,
@@ -289,33 +252,30 @@ class AddExamActivity : AppCompatActivity() {
         }
     }
 
-override fun onSaveInstanceState(outState: Bundle) {
-    super.onSaveInstanceState(outState)
-    outState.putStringArrayList("edit_text_values", ArrayList(editTextValues))
-}
+    //Sovrascrivo il metodo onSaveInstanceState() per salvare solo l'indice dell'ultimo elemento aggiunto
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("lastElementIndex", lastElementIndex)
+    }
 
-    //Il metodo onRestoreInstanceState viene chiamato dopo che l'activity è stata ricreata a seguito di un cambio di configurazione o di un ripristino dello stato.
-    // Questo metodo ti consente di ripristinare lo stato salvato in precedenza.
+    //Sovrascrivo il metodo onRestoreInstanceState() per ripristinare lo stato dell'elementList utilizzando l'indice salvato
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        val editTextValues = savedInstanceState.getStringArrayList("editTextValues")
-        var container=binding.linearLayout
-        if (editTextValues != null) {
-            for (i in editTextValues.indices) {
-                val editText = EditText(this)
-                editText.setText(editTextValues[i])
-                // ... Aggiungi le impostazioni necessarie per l'editText
-                container.addView(editText)
-                TextList.add(editText)
-            }
+        lastElementIndex = savedInstanceState.getInt("lastElementIndex")
+        recreateElements()
+    }
+
+    // Nel metodo recreateElements(), itero sull'elementList e ricreo gli elementi nell'interfaccia utente a partire dall'indice salvato
+    fun recreateElements() {
+        binding.linearLayout.removeAllViews()
+        for (i in 0..lastElementIndex) {
+            val element = elementList[i]
+            binding.linearLayout.addView(element)
         }
     }
 
-
-
-
     fun generateUniqueId(date: String, position: Int): Int { //funzione hash che sfrutta SHA-256 per ottenere un id univoco per la materia
-                                                            // della sessione tramite la posizione della materia nell'array e data esame
+        // della sessione tramite la posizione della materia nell'array e data esame
         // Concatenazione della data e del valore intero in una stringa
         val inputString = "$date$position"
         // Creazione dell'oggetto MessageDigest utilizzando SHA-256
@@ -325,16 +285,6 @@ override fun onSaveInstanceState(outState: Bundle) {
         // Conversione dell'hash in un valore intero
         val uniqueId = hashBytes.fold(0) { acc, byte -> (acc shl 8) + (byte.toInt() and 0xFF) }
         return uniqueId
-    }
-
-    private fun restoreEditTexts() {
-        val container = binding.linearLayout
-        for (textValue in editTextValues) {
-            val editText = EditText(this)
-            editText.hint = "Aggiungi un argomento"
-            editText.setText(textValue)
-            container.addView(editText)
-        }
     }
 
 
