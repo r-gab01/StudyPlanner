@@ -64,7 +64,8 @@ object ApiClient {
         var data: AccountDBModel?
         val query = "select * " +
                 "from autenticazione" +
-                " where nome_u_ref = '${nome}' and domanda_s = '${domanda}' and recupero_s = '${risposta}';"
+                " where nome_u_ref = '${nome}' and domanda_s = '${domanda}' and risposta_s = '${risposta}';"
+        Log.d("recuperoPW", query)
         apiService.select(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {

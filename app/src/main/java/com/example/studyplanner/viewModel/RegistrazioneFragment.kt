@@ -27,6 +27,15 @@ class RegistrazioneFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        //riempio il selettore di domande di sicurezza
+        val domandaIns = binding.insDomanda
+        val domande = resources.getStringArray(R.array.spinner_domanda_s_items)
+        val arrayAdapterDomanda = ArrayAdapter(requireContext(), R.layout.dropdown_item, domande)
+        domandaIns.setAdapter(arrayAdapterDomanda)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -69,10 +78,7 @@ class RegistrazioneFragment : Fragment() {
                 }
             }
         }
-        //riempio il selettore di domande di sicurezza
-        val domande = resources.getStringArray(R.array.spinner_domanda_s_items)
-        val arrayAdapterDomanda = ArrayAdapter(requireContext(), R.layout.dropdown_item, domande)
-        domandaIns.setAdapter(arrayAdapterDomanda)
+
 
         //ottengo elemento selezionato nei 2 'spinner'
         binding.insCorso.setOnItemClickListener { _, _, position, _ ->
