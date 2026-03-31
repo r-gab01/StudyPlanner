@@ -24,13 +24,6 @@
 * **Image Loading:** Glide
 * **Other Libraries:** CountdownView (for the study timer)
 
-## 📸 Screenshots
-*(Add screenshots or GIFs of the app here to showcase the UI!)*
-
-|<img src="placeholder1.png" width="250"/>|<img src="placeholder2.png" width="250"/>|<img src="placeholder3.png" width="250"/>|
-|:---:|:---:|:---:|
-| Login Screen | Dashboard | Study Timer |
-
 ## 🚀 How to Run Locally
 1. Clone the repository: `git clone https://github.com/yourusername/StudyPlanner.git`
 2. Open the project in **Android Studio**.
