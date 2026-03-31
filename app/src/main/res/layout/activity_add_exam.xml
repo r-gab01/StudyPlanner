@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".viewModel.AddExamActivity">
+    tools:context=".ui.AddExamActivity">
 
     <TextView
         android:id="@+id/scrittaAdd"

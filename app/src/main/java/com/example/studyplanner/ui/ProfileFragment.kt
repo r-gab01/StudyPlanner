@@ -23,9 +23,9 @@ import com.bumptech.glide.Glide
 import com.example.studyplanner.database.ApiClient
 import com.example.studyplanner.databinding.FragmentProfileBinding
 import com.example.studyplanner.model.DataSingleton
-import com.example.studyplanner.viewModel.LegendFragment
-import com.example.studyplanner.viewModel.LoginActivity
-import com.example.studyplanner.viewModel.MainActivity
+import com.example.studyplanner.ui.LegendFragment
+import com.example.studyplanner.ui.LoginActivity
+import com.example.studyplanner.ui.MainActivity
 import java.util.*
 import kotlin.collections.ArrayList
 

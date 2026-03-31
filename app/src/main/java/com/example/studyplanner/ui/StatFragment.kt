@@ -1,4 +1,4 @@
-package com.example.studyplanner.viewModel
+package com.example.studyplanner.ui
 
 import android.os.Bundle
 import android.util.Log

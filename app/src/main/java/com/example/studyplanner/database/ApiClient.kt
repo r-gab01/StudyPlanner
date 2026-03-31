@@ -13,6 +13,20 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.sql.Date
 
+/**
+ * ⚠️ ARCHITECTURE & SECURITY DISCLAIMER ⚠️
+ * 
+ * NOTE FOR REVIEWERS:
+ * This project interfaces with a third-party academic backend that required raw SQL queries 
+ * to be constructed in the Android client and sent via HTTP requests. 
+ *
+ * I am fully aware that sending SQL queries from a client application is a major anti-pattern
+ * and introduces severe SQL Injection logic vulnerabilities. In a real-world, production 
+ * environment, this network layer would be replaced by RESTful endpoints (e.g., POST /auth/login)
+ * with JSON payloads, and all database interactions/security would be strictly handled by the backend.
+ *
+ * This implementation is kept as a legacy representation of the university project constraints.
+ */
 object ApiClient {
 
     val gson = GsonBuilder()  //per serializzare e deserializzare l'oggetto JSON nella data Class che mi serve

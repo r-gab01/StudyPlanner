@@ -1,4 +1,4 @@
-package com.example.studyplanner.viewModel
+package com.example.studyplanner.ui
 
 import android.content.Context
 import android.content.Intent
